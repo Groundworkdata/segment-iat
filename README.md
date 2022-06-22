@@ -11,7 +11,7 @@ This repo is the parcel database. It contains directories of parcel data and pro
 The sub-folders of `parcel_database/` are described below.
 
 #### `parcel_database/data_explore`
-This repo contains scripts and files for exploration of the data. It is only meant for prototyping
+This repo contains scripts and files for exploration of the data. It is only meant for prototyping. See `parcel_database/data_explore/README.md` for more.
 
 #### `parcel_database/database`
 The core database. Raw input files are saved here, along with scripts for creating "enriched" datasets.

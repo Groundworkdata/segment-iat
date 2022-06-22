@@ -1,0 +1,9 @@
+name: ttt-test
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - geopandas=0.10.2=pyhd8ed1ab_1
+  - jupyter=1.0.0=py310h2ec42d9_7
+  - pandas=1.4.2=py310h3099161_2
+  - python=3.10.5=hdaaf3db_0_cpython

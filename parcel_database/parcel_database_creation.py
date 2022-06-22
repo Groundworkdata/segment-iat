@@ -11,6 +11,10 @@ FLOOR_AREA_LABEL = "FLA"
 NUM_KITCHENS_LABEL = "KITCHENS"
 
 
+# TODO: Check some of the database cleaning... ZIP code in Wakefield in 01880, but leading 0 has
+# been removed, probably through a Python way of handling this value as an int
+
+
 def create_decade_built_data(db_df: pd.DataFrame) -> pd.Series:
     """
     Create a column for the database that gives the decade the building was built
@@ -166,8 +170,11 @@ def main():
     df["Use Class"] = create_use_class_data(df, CITY)
 
     # OUTPUT_FILEPATH = "./parcel_database/database/holyoke_final_parcel_data.csv"
-    OUTPUT_FILEPATH = "./parcel_database/database/wakefield_final_parcel_data.csv"
-    df.to_csv(OUTPUT_FILEPATH, index=False)
+    OUTPUT_FILEPATH_CSV = "./parcel_database/database/wakefield_final_parcel_data.csv"
+    df.to_csv(OUTPUT_FILEPATH_CSV, index=False)
+
+    OUTPUT_FILEPATH_JSON = "./parcel_database/database/wakefield_final_parcel_data.json"
+    df.to_json(OUTPUT_FILEPATH_JSON, orient="index")
 
 if __name__ == "__main__":
     main()

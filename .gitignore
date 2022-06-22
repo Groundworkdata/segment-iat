@@ -2,7 +2,7 @@
 .ipynb_checkpoints/
 
 # OS Artifacts
-.DS_Store/
+.DS_Store
 
 # IDE files
 .vscode/
