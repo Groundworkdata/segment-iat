@@ -4,3 +4,5 @@
 # OS Artifacts
 .DS_Store/
 
+# IDE files
+.vscode/

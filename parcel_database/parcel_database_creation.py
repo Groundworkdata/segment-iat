@@ -1,7 +1,6 @@
 """
 Creates enriched parcel database based on cleaned raw data
 """
-from sre_parse import FLAGS
 import pandas as pd
 import numpy as np
 
@@ -117,7 +116,7 @@ def set_building_type(_x, mapping_dict) -> str:
     return mapping_dict.get(_x["DESC"])
 
 def create_building_type_data(db_df: pd.DataFrame) -> pd.Series:
-    building_type_map_filepath = "./database/mappings/full_building_type_mappings.csv"
+    building_type_map_filepath = "./parcel_database/database/mappings/full_building_type_mappings.csv"
     full_mapping = pd.read_csv(building_type_map_filepath).set_index("DESC")
     full_mapping = full_mapping.to_dict()["Building Type"]
 
@@ -133,14 +132,14 @@ def _map_use_class_wakefield(_x, mapping):
 
 def create_use_class_data(db_df: pd.DataFrame, city: str) -> pd.Series:
     if city == "WAKEFIELD":
-        filepath = "./database/mappings/map_wakefield_UseClass.csv"
+        filepath = "./parcel_database/database/mappings/map_wakefield_UseClass.csv"
         mapping_func = _map_use_class_wakefield
         map_df = pd.read_csv(filepath)
 
         mapping_dict = map_df.set_index("DESC").to_dict()["Classification"]
 
     else:
-        filepath = "./database/mappings/map_LUCandDESC_UseClass.csv"
+        filepath = "./parcel_database/database/mappings/map_LUCandDESC_UseClass.csv"
         mapping_func = _map_use_class
 
         map_df = pd.read_csv(filepath)
@@ -153,9 +152,10 @@ def create_use_class_data(db_df: pd.DataFrame, city: str) -> pd.Series:
 
 
 def main():
-    # FILEPATH = "./wakefield/parcel_wakefield_raw_cleaned.csv"
-    FILEPATH = "./database/raw_parcel_data.csv"
-    CITY = "HOLYOKE"
+    # FILEPATH = "./parcel_database/database/raw_parcel_data/raw_parcel_data.csv"
+    # CITY = "HOLYOKE"
+    FILEPATH = "./parcel_database/database/raw_parcel_data/parcel_wakefield_raw_cleaned.csv"
+    CITY = "WAKEFIELD"
     df = pd.read_csv(FILEPATH)
 
     df["Decade Built"] = create_decade_built_data(df)
@@ -165,7 +165,8 @@ def main():
     df["Building Type"] = create_building_type_data(df)
     df["Use Class"] = create_use_class_data(df, CITY)
 
-    OUTPUT_FILEPATH = "./database/holyoke_final_parcel_data.csv"
+    # OUTPUT_FILEPATH = "./parcel_database/database/holyoke_final_parcel_data.csv"
+    OUTPUT_FILEPATH = "./parcel_database/database/wakefield_final_parcel_data.csv"
     df.to_csv(OUTPUT_FILEPATH, index=False)
 
 if __name__ == "__main__":
