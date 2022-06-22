@@ -1,0 +1,164 @@
+DESC,Building Type
+PMP/VLV HS,Office
+2 FAMILY,Small Multifamily
+4-8 FAM,Large Residential
+3 FAMILY,Small Multifamily
+APRTMNT-GN,Large Residential
+APRTMNT-HR,Large Residential
+DUPLEX,Small Multifamily
+STORE,Retail
+REPAIR GAR,Garage
+BAR,Resturant
+COMM BLOCK,Warehouse
+ROW HOUSE,Small Multifamily
+COLONIAL,Single Family
+CONVEN MKT,Supermarket
+GOVT BLDG,Office
+OFFICE-PRO,Office
+WAREHOUSE,Warehouse
+CHURCH/SYN,Assembly
+MX USE APT,Large Residential
+MX USE < 9,Large Residential
+SCHOOL,School
+OLD STYLE,Single Family
+RANCH,Single Family
+SPLIT LEVL,Single Family
+CAPE,Single Family
+SPLIT ENT,Single Family
+CONTEMP`RY,Single Family
+VICTORIAN,Single Family
+CONVENT`NL,Single Family
+TUDOR,Single Family
+ANTIQUE,Single Family
+DORMITORY,Large Residential
+BUNGALOW,Single Family
+SHOP CTR,Retail
+OFFICE,Office
+BANK,Retail
+SERVICE ST,Garage
+FIRE STAT,Garage
+RESTAURANT,Resturant
+FAST FOOD,Resturant
+R/M SHOP,Garage
+TAKE OUT,Resturant
+GARAGE,Warehouse
+UTIL BLDG,Warehouse
+PARKING,Garage
+LODGE,Resturant
+RELAY BLDG,Garage
+CONDO-GRDN,Large Residential
+CONDO-TNHS,Large Residential
+4-8 FAMILY,Medium Multifamily
+CONDO-OFC,Large Residential
+HOSPITAL,Hospital
+FUNERAL HM,Retail
+INDUST-LT,Industrial
+AUTO DEALR,Retail
+CAR WASH,Other
+GYMNASIUM,Assembly
+APRTMNT-TH,Large Residential
+SHOP PLAZA,Retail
+NURSING HM,Large Residential
+AUDITORIUM,Assembly
+TOWER,Other
+APT ASSIT,Large Residential
+HEALTH CLB,Assembly
+TRUCK TERM,Garage
+INDUSTRIAL,Industrial
+HOTEL,Hotel
+CONDO-RTL,Retail
+SHOP MALL,Retail
+DEPT STORE,Retail
+MILL,Industrial
+INDUST-HVY,Industrial
+SPLIT CAPE,Single Family
+BANQUET,Resturant
+MOTEL,Hotel
+"CAMP,SEAS",Retail
+PROCESSING,Industrial
+WHSE-MINI,Warehouse
+INN,Hotel
+SUPER MKT,Supermarket
+NIGHT CLUB,Resturant
+BOWLING AL,Assembly
+RINK,Assembly
+POST OFF,Retail
+FAMILY FLAT,Small Multifamily
+DUTCH COLON,Single Family
+N E COLONIAL,Single Family
+CAPE COD,Single Family
+COLONIAL,Single Family
+RAISED RNCH,Single Family
+FAM CONV,Small Multifamily
+CLB/LDG/HALL,Assembly
+SPLIT/BI LEV,Single Family
+RANCH,Single Family
+MODERN,Single Family
+FAM DUPLEX,Small Multifamily
+SPLIT CAPE,Single Family
+BUNGALOW,Small Multifamily
+PUB SCHOOL,School
+ANTIQUE,Single Family
+APT 4-8,Large Residential
+CONDEX CONDO,Small Multifamily
+SPLIT GAMBRE,Single Family
+AUTO SA/RPR,Garage
+SER SHOPS,Retail
+STORE,Retail
+OFC BLDG,Office
+OTH MUNCPL,Office
+WAREHOUSE,Garage
+HEALTH CLUB,Assembly
+STORE/APT C,Retail
+QUONST BLD,Office
+LT INDUSTRL,Industrial
+CHURCH,Assembly
+SER STA 2BY,Small Multifamily
+FUNERAL HM,Office
+CTY/TN HALL,Assembly
+CONVER CONDO,Small Multifamily
+GARDEN CONDO,Small Multifamily
+OTH FEDERAL,Office
+LIBRARY,Assembly
+DWNTWN OFC,Office
+COMM BLOCK,Office
+RESTAURANT,Restaurant
+APARTMENTS,Large Residential
+PARKING GAR,Garage
+BRNCH BANK,Office
+FINCL INST,Office
+FFD REST,Resturant
+RETAIL CONDO,Retail
+SER STA 3BY,Office
+OFC CONDO,Office
+TWNHSE CONDO,Small Multifamily
+DRY CLN/LND,Retail
+OTHER STATE,Office
+SHP CNTR LO,Retail
+MILL,Warehouse
+ELDERLY HM,Large Residential
+PRE ENG WH,Warehouse
+GAR/OFC,Garage
+COMMERCIAL,Retail
+CAMPS,Office
+POLICE STA,Office
+SUPERMRKT,Retail
+BOWLING AL,Assembly
+TRCK TERMNL,Other
+TELEPH BLDG,Industry
+HVY INDSTRL,Industry
+SER STA 1BY,Small Multifamily
+NRSING HM,Large Residential
+SINGLE CONDO,Small Multifamily
+HOTEL,Hotel
+PROF BLDG,Office
+OFC A,Office
+FIRE STATION,Garage
+COIN-OP CAR,Garage
+OUTBUILDINGS,Garage
+RESRCH&DEV,Laboratory
+MOBL HOME,Single Family
+DORMITORY,Large Residential
+INDUST CONDO,Industrial
+PRE ENG MF,Warehouse
+CONDO,Large Residential

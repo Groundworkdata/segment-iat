@@ -1,0 +1,6 @@
+# Notebooks
+.ipynb_checkpoints/
+
+# OS Artifacts
+.DS_Store/
+
