@@ -1,4 +1,4 @@
-name: ttt-test
+name: ttt
 channels:
   - conda-forge
   - defaults

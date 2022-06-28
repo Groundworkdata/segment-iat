@@ -174,7 +174,7 @@ def main():
     df.to_csv(OUTPUT_FILEPATH_CSV, index=False)
 
     OUTPUT_FILEPATH_JSON = "./parcel_database/database/wakefield_final_parcel_data.json"
-    df.to_json(OUTPUT_FILEPATH_JSON, orient="index")
+    df.set_index("PCL ID").to_json(OUTPUT_FILEPATH_JSON, orient="index")
 
 if __name__ == "__main__":
     main()
