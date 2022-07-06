@@ -1,7 +1,16 @@
 # Tactical Thermal Transition
 This repo contains scripts and database prototyping for the Tactical Thermal Transition (TTT) team
 
+## Scenario Creator
+The main function of this repository is to create input data for simulation scenarios. An example of this process can be found in the script `example.py`.
+
 ## Repo structure
+### `scenario_creator/`
+Contains the main entry point for creating input data, `create_scenario.py`.
+
+### `end_uses/`
+Contains classes that define different end uses in a parcel. These include appliances such as stoves and HVAC equipment.
+
 ### `parcel_database/`
 This repo is the parcel database. It contains directories of parcel data and prototyping scripts. Additionally, it contains a handful of top-level python files of note:
 * `example.py` - An example file for the final JSON structure of the parcel database

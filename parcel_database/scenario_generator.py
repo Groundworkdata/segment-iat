@@ -18,6 +18,12 @@ class ScenarioGenerator:
     Args:
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year
+
+    Attributes:
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year
+        parcel_data (pd.DataFrame): A DataFrame of the parcel database
+        scenario_data (pd.DataFrame): A DataFrame of all scenario data
     """
     def __init__(self, sim_start_year: int, sim_end_year: int):
         self.sim_start_year: int = sim_start_year
