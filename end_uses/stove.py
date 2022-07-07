@@ -19,7 +19,8 @@ class Stove(EndUse):
             install_year,
             install_cost,
             lifetime,
-            energy_consump,
+            elec_consump,
+            gas_consump,
             sim_start_year,
             sim_end_year,
             energy_source: str,
@@ -30,7 +31,8 @@ class Stove(EndUse):
             install_year,
             install_cost,
             lifetime,
-            energy_consump,
+            elec_consump,
+            gas_consump,
             sim_start_year,
             sim_end_year,
             replacement_year
@@ -61,28 +63,20 @@ class Stove(EndUse):
         return (total_labor + total_material) * escalation_factor
 
     def get_elec_consump(self) -> list:
-        if self.energy_source != "ELEC":
-            return np.zeros(len(self.operational_vector)).tolist()
-
-        annual_elec_consump = 100
         elec_consump_esc = 0.01
 
         elec_consump = np.array([
-            annual_elec_consump * ((1 + elec_consump_esc) ** (i - self.years_vector[0]))
+            self.elec_consump * ((1 + elec_consump_esc) ** (i - self.years_vector[0]))
             for i in self.years_vector
         ])
 
         return (elec_consump * np.array(self.operational_vector)).tolist()
 
     def get_gas_consump(self) -> list:
-        if self.energy_source != "GAS":
-            return np.zeros(len(self.operational_vector)).tolist()
-
-        annual_gas_consump = 50
         gas_consump_esc = 0.01
 
         gas_consump = np.array([
-            annual_gas_consump * ((1 + gas_consump_esc) ** (i - self.years_vector[0]))
+            self.gas_consump * ((1 + gas_consump_esc) ** (i - self.years_vector[0]))
             for i in self.years_vector
         ])
 

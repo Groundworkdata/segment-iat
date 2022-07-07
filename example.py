@@ -10,6 +10,7 @@ def main():
     install_cost = 100
     lifetime = 10
     energy_consump = 400
+    gas_consump = 1
     sim_start_year = 2021
     sim_end_year = 2035
     replacement_year = 2031
@@ -20,6 +21,7 @@ def main():
         install_cost,
         lifetime,
         energy_consump,
+        gas_consump,
         sim_start_year,
         sim_end_year,
         replacement_year
@@ -27,7 +29,8 @@ def main():
 
     scenario.create_scenario()
 
-    print(scenario.total_elec_consump)
+    print(scenario.meters[0].total_energy_use)
+    print(scenario.meters[1].total_energy_use)
 
 if __name__ == "__main__":
     main()
