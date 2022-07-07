@@ -4,6 +4,8 @@ Creates a scenario based on input values
 import numpy as np
 
 from end_uses.stove import Stove
+from meters.elec_meter import ElecMeter
+from meters.gas_meter import GasMeter
 
 
 class ScenarioCreator:
@@ -16,7 +18,8 @@ class ScenarioCreator:
             install_year: int,
             install_cost: float,
             lifetime: int,
-            energy_consump: float,
+            elec_consump: float,
+            gas_consump: float,
             sim_start_year: int,
             sim_end_year: int,
             replacement_year: int
@@ -25,7 +28,8 @@ class ScenarioCreator:
         self.install_year = install_year
         self.install_cost = install_cost
         self.lifetime = lifetime
-        self.energy_consump = energy_consump
+        self.elec_consump = elec_consump
+        self.gas_consump = gas_consump
         self.sim_start_year = sim_start_year
         self.sim_end_year = sim_end_year
         self.replacement_year = replacement_year
@@ -33,13 +37,11 @@ class ScenarioCreator:
         self.stove_type = "INDUCTION"
 
         self.end_uses: list = []
-        self.total_elec_consump: list = []
-        self.total_gas_consump: list = []
+        self.meters: list = []
 
     def create_scenario(self):
         self.get_end_uses()
-        self.total_elec_consump = self.get_elec_consump()
-        self.total_gas_consump = self.get_gas_consump()
+        self.get_meters()
 
     def get_end_uses(self):
         self.get_stoves()
@@ -50,7 +52,8 @@ class ScenarioCreator:
             self.install_year,
             self.install_cost,
             self.lifetime,
-            self.energy_consump,
+            self.elec_consump,
+            self.gas_consump,
             self.sim_start_year,
             self.sim_end_year,
             self.energy_source,
@@ -62,10 +65,16 @@ class ScenarioCreator:
 
         self.end_uses.append(stove)
 
-    def get_elec_consump(self):
-        elec_consumps = [i.elec_consump for i in self.end_uses]
-        return np.array(elec_consumps).sum(axis=0).tolist()
+    def get_meters(self):
+        self.get_elec_meter()
+        self.get_gas_meter()
 
-    def get_gas_consump(self):
-        gas_consumps = [i.gas_consump for i in self.end_uses]
-        return np.array(gas_consumps).sum(axis=0).tolist()
+    def get_elec_meter(self):
+        elec_meter = ElecMeter(self.end_uses)
+        elec_meter.initialize_meter()
+        self.meters.append(elec_meter)
+
+    def get_gas_meter(self):
+        gas_meter = GasMeter(self.end_uses)
+        gas_meter.initialize_meter()
+        self.meters.append(gas_meter)

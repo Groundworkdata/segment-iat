@@ -23,7 +23,8 @@ class EndUse:
             install_year: int,
             install_cost: float,
             lifetime: int,
-            energy_consump: dict,
+            elec_consump: float,
+            gas_consump: float,
             sim_start_year: int,
             sim_end_year: int,
             replacement_year: int
@@ -31,22 +32,23 @@ class EndUse:
         self.install_year = install_year
         self.install_cost: float = install_cost
         self.lifetime = lifetime
-        self.energy_consump = energy_consump
+        self.elec_consump = elec_consump
+        self.gas_consump = gas_consump
         self.sim_start_year = sim_start_year
         self.sim_end_year = sim_end_year
         self.replacement_year = replacement_year
 
         self.operational_vector: list = []
         self.years_vector: list = []
-        self.elec_consump: list = []
-        self.gas_consump: list = []
+        self.total_elec_consump: list = []
+        self.total_gas_consump: list = []
 
     def initialize_end_use(self) -> None:
         self.install_cost = self.get_install_cost()
         self.operational_vector = self.get_operational_vector()
         self.years_vector = self.get_years_vector()
-        self.elec_consump = self.get_elec_consump()
-        self.gas_consump = self.get_gas_consump()
+        self.elec_consump_total = self.get_elec_consump()
+        self.gas_consump_total = self.get_gas_consump()
 
     def get_install_cost(self) -> float:
         return 1.
