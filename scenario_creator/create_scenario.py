@@ -56,9 +56,9 @@ class ScenarioCreator:
             self.gas_consump,
             self.sim_start_year,
             self.sim_end_year,
+            self.replacement_year,
             self.energy_source,
             self.stove_type,
-            self.replacement_year
         )
 
         stove.initialize_end_use()
