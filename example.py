@@ -13,7 +13,7 @@ def main():
     gas_consump = 1
     sim_start_year = 2021
     sim_end_year = 2035
-    replacement_year = 2031
+    replacement_year = 2028
 
     scenario = ScenarioCreator(
         parcel_id,
@@ -31,6 +31,7 @@ def main():
 
     print(scenario.meters[0].total_energy_use)
     print(scenario.meters[1].total_energy_use)
+    print(scenario.end_uses[0].depreciation_vector)
 
 if __name__ == "__main__":
     main()
