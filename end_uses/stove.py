@@ -88,7 +88,7 @@ class Stove(EndUse):
 
         TODO: Replace annual consumption with a more granular timeseries
         """
-        # TODO: Make the electric consumption escalation an input
+        # TODO: Remove escalation
         elec_consump_esc = 0.01
 
         elec_consump = np.array([
@@ -107,7 +107,7 @@ class Stove(EndUse):
 
         TODO: Replace annual consumption with a more granular timeseries
         """
-        # TODO: Make the gas consumption escalation an input
+        # TODO: Remove escalation
         gas_consump_esc = 0.01
 
         gas_consump = np.array([
@@ -128,9 +128,9 @@ class Stove(EndUse):
         """
         Uses straight line depreciation and assumes no salvage value at end-of-life. Overwrites
         parent method
+
+        Vector represents depreciated end use value at year-beginning
         """
-        # TODO: Will need to better account for assets that are installed prior to the simulation
-        # start year
         salvage_value = 0
         depreciation_rate = (self.end_use_cost - salvage_value) / self.lifetime
 
@@ -138,7 +138,7 @@ class Stove(EndUse):
 
         depreciated_value = np.array([
             self.end_use_cost - depreciation_rate * i
-            for i in range(operational_lifetime)
+            for i in range(operational_lifetime+1)
         ])
 
         start_zeros_vec = np.zeros(max(self.install_year - self.sim_start_year, 0))
@@ -148,7 +148,36 @@ class Stove(EndUse):
             max(operational_lifetime-(self.replacement_year-self.sim_end_year), 0)
         ]
 
-        end_zeros_vec = np.zeros(max(self.sim_end_year-self.replacement_year, 0))
+        end_zeros_vec = np.zeros(max(self.sim_end_year-self.replacement_year-1, 0))
 
         depreciation_vec = np.concatenate([start_zeros_vec, clipped_dep_vec, end_zeros_vec])
-        return (depreciation_vec * np.array(self.operational_vector)).tolist()
+        return depreciation_vec.tolist()
+
+    def get_stranded_value(self) -> list:
+        """
+        Calculates the stranded value based on the depreciation vector. Overwrites parent method
+
+        Depreciation value and replacement is year-beginning, so references depreciated value at the
+        replacement year
+
+        Stranded value is 0 if the replacement year is outside of the sim timeframe
+        """
+        replacement_ref = self.replacement_year - self.sim_start_year
+        operational_lifetime = self.replacement_year - self.install_year
+
+        stranded_val = np.zeros(len(self.operational_vector))
+
+        # Handle when the replacement year is beyond the simulation end year
+        if self.replacement_year > self.sim_end_year:
+            return stranded_val.tolist()
+
+        # Handle if replacement in final year and not fully depreciated
+        elif self.replacement_year == self.sim_end_year and operational_lifetime != self.lifetime:
+            replacement_ref = -1
+
+        # Handle if replacement in final year and fully depreciated
+        elif self.replacement_year == self.sim_end_year and operational_lifetime == self.lifetime:
+            return stranded_val.tolist()
+
+        stranded_val[replacement_ref] = self.depreciation_vector[replacement_ref]
+        return stranded_val.tolist()

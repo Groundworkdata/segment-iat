@@ -1,7 +1,6 @@
 """
 EndUse parent class
 """
-from dataclasses import replace
 import numpy as np
 
 
@@ -34,7 +33,8 @@ class EndUse:
         total_elec_consump (list): The total annual elec consump of the end use, in kWh
         total_gas_consump (list): The total annual gas consump of the end use, in kWh
         gas_leakage (list): List of annual gas leakage from end use, in kWh
-        depreciation_vector (list): List of depreciated value of end use each year, in $
+        depreciation_vector (list): List of depreciated value of end use at start of each year, in $
+        stranded_value (list): Vector of the stranded value of the end use, in $
 
     Methods:
         initialize_end_use (None): Performs all calculations for the end use
@@ -70,6 +70,7 @@ class EndUse:
         self.total_gas_consump: list = []
         self.gas_leakage: list = []
         self.depreciation_vector: list = []
+        self.stranded_value: list = []
 
     def initialize_end_use(self) -> None:
         self.install_cost = self.get_install_cost()
@@ -79,19 +80,23 @@ class EndUse:
         self.gas_consump_total = self.get_gas_consump()
         self.gas_leakage = self.get_gas_leakage()
         self.depreciation_vector = self.get_depreciation()
+        self.stranded_value = self.get_stranded_value()
 
     def get_install_cost(self) -> float:
         return 1.
 
     def get_operational_vector(self) -> list:
         """
-        Operational vector of 1s and 0s
+        Operational vector of 1s and 0s. 1 means end use is in operation that year, 0 otherwise
         """
-        # TODO: Need to include the retrofit year in this calc
-        return np.concatenate([
-            np.ones(self.replacement_year-self.sim_start_year, dtype=int),
-            np.zeros(self.sim_end_year-self.replacement_year, dtype=int)
-        ]).tolist()
+        sim_length = self.sim_end_year - self.sim_start_year
+        sim_years = [self.sim_start_year + i for i in range(sim_length)]
+
+        return [
+            1 if self.install_year <= i and self.replacement_year > i
+            else 0
+            for i in sim_years
+        ]
 
     def get_years_vector(self) -> list:
         return [
@@ -114,5 +119,13 @@ class EndUse:
         return np.zeros(len(self.operational_vector)).tolist()
 
     def get_depreciation(self) -> list:
-        # TODO: Start with linear depreciation curve
-        return (np.ones(len(self.operational_vector)) * np.array(self.operational_vector)).tolist()
+        """
+        Assume depreciated value of 0 by default
+        """
+        return np.zeros(len(self.operational_vector)).tolist()
+
+    def get_stranded_value(self) -> list:
+        """
+        Assume no stranded value by default
+        """
+        return np.zeros(len(self.operational_vector)).tolist()
