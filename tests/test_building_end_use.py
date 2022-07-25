@@ -18,14 +18,14 @@ class TestBuildingEndUse(unittest.TestCase):
         replacement_year = 2035
 
         self.end_use = BuildingEndUse(
-            install_year,
-            end_use_cost,
-            lifetime,
-            elec_consump,
-            gas_consump,
-            sim_start_year,
-            sim_end_year,
-            replacement_year
+            install_year=install_year,
+            end_use_cost=end_use_cost,
+            lifetime=lifetime,
+            elec_consump=elec_consump,
+            gas_consump=gas_consump,
+            sim_start_year=sim_start_year,
+            sim_end_year=sim_end_year,
+            replacement_year=replacement_year
         )
 
     def test_operational_vec_replace_within(self):
