@@ -23,6 +23,7 @@ class Meter:
     def __init__(self, end_uses: list, meter_type: str):
         self.end_uses: list = end_uses
         self.meter_type: str = meter_type
+        
 
         self.total_energy_use: list = []
 
