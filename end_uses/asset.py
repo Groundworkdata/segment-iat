@@ -76,16 +76,19 @@ class Asset:
         """
         Assume install cost of 0 by default
         """
+        #TODO: Come up with generalized cost function for all assets (based on an input cost)
         return np.zeros(len(self.operational_vector)).tolist()
 
     def get_depreciation(self) -> list:
         """
         Assume depreciated value of 0 by default
         """
+        #TODO: Update to a straight-line depreciation calculation (see Stove)
         return np.zeros(len(self.operational_vector)).tolist()
 
     def get_stranded_value(self) -> list:
         """
         Assume no stranded value by default
         """
+        #TODO: Update to the stranded value calculation seen in Stove
         return np.zeros(len(self.operational_vector)).tolist()

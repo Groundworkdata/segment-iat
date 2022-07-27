@@ -22,11 +22,12 @@ class GasService(NetworkEndUse):
     """
     def __init__(
             self,
-            id, 
-            parent_id,
-            type,
-            operation: List,
             install_year,
+            replacement_year: int,
+            sim_start_year,
+            sim_end_year,
+            asset_id,
+            parent_id,
             install_cost,
             length: int,
             diameter: int,
@@ -34,29 +35,23 @@ class GasService(NetworkEndUse):
             safety_ratings,
             leak_rate,
             end_of_life,
-            sim_start_year,
-            sim_end_year,
-            replacement_year: int,
     ):
         super().__init__(
-            id, 
-            parent_id,
-            operation,
             install_year,
-            install_cost,
+            replacement_year,
             sim_start_year,
             sim_end_year,
-            replacement_year
+            asset_id,
+            parent_id
         )
 
-    def set_operational_status(self, status = 1):
-        """
-        Stores operational status to the list. 
-        Status is 1 when the service line is operational, 0 when no longer operational.
-
-        Returns nothing
-        """
-        self.operation.append(status)
+        self.install_cost = install_cost
+        self.length = length
+        self.diameter = diameter
+        self.material = material
+        self.safety_ratings = safety_ratings
+        self.leak_rate = leak_rate
+        self.end_of_life = end_of_life
 
     def get_install_cost(self) -> float:
         """
