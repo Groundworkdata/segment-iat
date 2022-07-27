@@ -3,12 +3,12 @@ Defines Stove end use
 """
 import numpy as np
 
-from end_uses.end_use import EndUse
+from end_uses.building_end_use import BuildingEndUse
 
 
-class Stove(EndUse):
+class Stove(BuildingEndUse):
     """
-    Stove end use. Inherits parent EndUse class
+    Stove end use. Inherits parent BuildingEndUse class
 
     Args:
         energy_source (str): In ["ELEC", "GAS", "PROPANE"]
@@ -179,5 +179,5 @@ class Stove(EndUse):
         elif self.replacement_year == self.sim_end_year and operational_lifetime == self.lifetime:
             return stranded_val.tolist()
 
-        stranded_val[replacement_ref] = self.depreciation_vector[replacement_ref]
+        stranded_val[replacement_ref] = self.depreciation[replacement_ref]
         return stranded_val.tolist()
