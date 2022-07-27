@@ -3,7 +3,7 @@ Unit tests for BuildingEndUse
 """
 import unittest
 
-from end_uses.building_end_use import BuildingEndUse
+from end_uses.building_end_uses.building_end_use import BuildingEndUse
 
 
 class TestBuildingEndUse(unittest.TestCase):

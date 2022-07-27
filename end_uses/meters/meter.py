@@ -3,7 +3,7 @@ Defines meter parent class
 """
 import numpy as np
 
-from end_uses.utility_end_use import UtilityEndUse
+from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 
 
 class Meter(UtilityEndUse):

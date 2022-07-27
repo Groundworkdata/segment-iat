@@ -1,14 +1,15 @@
 """
-Defines Stove end use
+Defines Gas Service end use
 """
 import numpy as np
+from typing import List
 
-from end_uses.building_end_use import BuildingEndUse
+from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 
 
-class Stove(BuildingEndUse):
+class GasService(UtilityEndUse):
     """
-    Stove end use. Inherits parent BuildingEndUse class
+    Gas main end use. Inherits parent EndUse class
 
     Args:
         energy_source (str): In ["ELEC", "GAS", "PROPANE"]
@@ -22,29 +23,35 @@ class Stove(BuildingEndUse):
     def __init__(
             self,
             install_year,
-            install_cost,
-            lifetime,
-            elec_consump,
-            gas_consump,
+            replacement_year: int,
             sim_start_year,
             sim_end_year,
-            replacement_year: int,
-            energy_source: str,
-            stove_type: str,
+            asset_id,
+            parent_id,
+            install_cost,
+            length: int,
+            diameter: int,
+            material,
+            safety_ratings,
+            leak_rate,
+            end_of_life,
     ):
         super().__init__(
             install_year,
-            install_cost,
-            lifetime,
-            elec_consump,
-            gas_consump,
+            replacement_year,
             sim_start_year,
             sim_end_year,
-            replacement_year
+            asset_id,
+            parent_id
         )
 
-        self.energy_source: str = energy_source
-        self.stove_type: str = stove_type
+        self.install_cost = install_cost
+        self.length = length
+        self.diameter = diameter
+        self.material = material
+        self.safety_ratings = safety_ratings
+        self.leak_rate = leak_rate
+        self.end_of_life = end_of_life
 
     def get_install_cost(self) -> float:
         """
@@ -78,44 +85,6 @@ class Stove(BuildingEndUse):
         escalation_factor = (1 + escalator) ** (self.install_year - self.sim_start_year)
 
         return (total_labor + total_material) * escalation_factor
-
-    def get_elec_consump(self) -> list:
-        """
-        Calculates the elctric consumption for the stove. Overwrites parent method
-
-        Electric consumption is based on an input annual consumption and then escalated by some
-        factor for each year of operation.
-
-        TODO: Replace annual consumption with a more granular timeseries
-        """
-        # TODO: Remove escalation
-        elec_consump_esc = 0.01
-
-        elec_consump = np.array([
-            self.elec_consump * ((1 + elec_consump_esc) ** (i - self.years_vector[0]))
-            for i in self.years_vector
-        ])
-
-        return (elec_consump * np.array(self.operational_vector)).tolist()
-
-    def get_gas_consump(self) -> list:
-        """
-        Calculates the gas consumption for the stove. Overwrites parent method
-
-        Gas consumption is based on an input annual consumption and then escalated by some
-        factor for each year of operation.
-
-        TODO: Replace annual consumption with a more granular timeseries
-        """
-        # TODO: Remove escalation
-        gas_consump_esc = 0.01
-
-        gas_consump = np.array([
-            self.gas_consump * ((1 + gas_consump_esc) ** (i - self.years_vector[0]))
-            for i in self.years_vector
-        ])
-
-        return (gas_consump * np.array(self.operational_vector)).tolist()
 
     def get_gas_leakage(self) -> list:
         """
@@ -179,5 +148,5 @@ class Stove(BuildingEndUse):
         elif self.replacement_year == self.sim_end_year and operational_lifetime == self.lifetime:
             return stranded_val.tolist()
 
-        stranded_val[replacement_ref] = self.depreciation[replacement_ref]
+        stranded_val[replacement_ref] = self.depreciation_vector[replacement_ref]
         return stranded_val.tolist()

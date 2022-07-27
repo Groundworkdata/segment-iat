@@ -4,7 +4,7 @@ Defines Mains end use
 import numpy as np
 from typing import List
 
-from end_uses.utility_end_use import UtilityEndUse
+from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 
 
 class GasMain(UtilityEndUse):

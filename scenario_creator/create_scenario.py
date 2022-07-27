@@ -3,9 +3,9 @@ Creates a scenario based on input values
 """
 import numpy as np
 
-from end_uses.stove import Stove
-from meters.elec_meter import ElecMeter
-from meters.gas_meter import GasMeter
+from end_uses.building_end_uses.stove import Stove
+from end_uses.meters.elec_meter import ElecMeter
+from end_uses.meters.gas_meter import GasMeter
 
 
 class ScenarioCreator:
