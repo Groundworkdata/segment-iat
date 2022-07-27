@@ -70,11 +70,29 @@ class ScenarioCreator:
         self.get_gas_meter()
 
     def get_elec_meter(self):
-        elec_meter = ElecMeter(self.end_uses)
+        elec_meter = ElecMeter(
+            self.sim_start_year,
+            self.replacement_year,
+            self.sim_start_year,
+            self.sim_end_year,
+            "asset_id",
+            "parent_id",
+            self.end_uses
+        )
+
         elec_meter.initialize_meter()
         self.meters.append(elec_meter)
 
     def get_gas_meter(self):
-        gas_meter = GasMeter(self.end_uses)
+        gas_meter = GasMeter(
+            self.sim_start_year,
+            self.replacement_year,
+            self.sim_start_year,
+            self.sim_end_year,
+            "asset_id",
+            "parent_id",
+            self.end_uses
+        )
+
         gas_meter.initialize_meter()
         self.meters.append(gas_meter)

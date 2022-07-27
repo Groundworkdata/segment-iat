@@ -31,7 +31,7 @@ def main():
 
     print(scenario.meters[0].total_energy_use)
     print(scenario.meters[1].total_energy_use)
-    print(scenario.end_uses[0].depreciation_vector)
+    print(scenario.end_uses[0].depreciation)
     print(scenario.end_uses[0].stranded_value)
 
 if __name__ == "__main__":
