@@ -1,12 +1,12 @@
 """
-Unit tests for EndUse
+Unit tests for BuildingEndUse
 """
 import unittest
 
-from end_uses.end_use import EndUse
+from end_uses.building_end_uses.building_end_use import BuildingEndUse
 
 
-class TestEndUse(unittest.TestCase):
+class TestBuildingEndUse(unittest.TestCase):
     def setUp(self):
         install_year = 2020
         end_use_cost = 1000
@@ -17,7 +17,7 @@ class TestEndUse(unittest.TestCase):
         sim_end_year = 2040
         replacement_year = 2035
 
-        self.end_use = EndUse(
+        self.end_use = BuildingEndUse(
             install_year,
             end_use_cost,
             lifetime,

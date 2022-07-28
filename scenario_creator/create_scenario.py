@@ -3,9 +3,9 @@ Creates a scenario based on input values
 """
 import numpy as np
 
-from end_uses.stove import Stove
-from meters.elec_meter import ElecMeter
-from meters.gas_meter import GasMeter
+from end_uses.building_end_uses.stove import Stove
+from end_uses.meters.elec_meter import ElecMeter
+from end_uses.meters.gas_meter import GasMeter
 
 
 class ScenarioCreator:
@@ -70,11 +70,29 @@ class ScenarioCreator:
         self.get_gas_meter()
 
     def get_elec_meter(self):
-        elec_meter = ElecMeter(self.end_uses)
+        elec_meter = ElecMeter(
+            self.sim_start_year,
+            self.replacement_year,
+            self.sim_start_year,
+            self.sim_end_year,
+            "asset_id",
+            "parent_id",
+            self.end_uses
+        )
+
         elec_meter.initialize_meter()
         self.meters.append(elec_meter)
 
     def get_gas_meter(self):
-        gas_meter = GasMeter(self.end_uses)
+        gas_meter = GasMeter(
+            self.sim_start_year,
+            self.replacement_year,
+            self.sim_start_year,
+            self.sim_end_year,
+            "asset_id",
+            "parent_id",
+            self.end_uses
+        )
+
         gas_meter.initialize_meter()
         self.meters.append(gas_meter)

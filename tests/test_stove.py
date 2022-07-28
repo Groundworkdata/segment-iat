@@ -3,7 +3,7 @@ Unit tests for the Stove methods
 """
 import unittest
 
-from end_uses.stove import Stove
+from end_uses.building_end_uses.stove import Stove
 
 
 class TestStove(unittest.TestCase):
