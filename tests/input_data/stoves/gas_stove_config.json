@@ -1,0 +1,8 @@
+{
+    "energy_source": "GAS",
+    "stove_type": "GAS",
+    "elec_consump": 10,
+    "gas_consump": 500,
+    "asset_cost": 1000,
+    "lifetime": 10
+}

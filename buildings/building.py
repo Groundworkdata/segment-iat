@@ -1,0 +1,104 @@
+"""
+Defines a building. A bucket for all end uses
+"""
+import json
+
+import numpy as np
+
+from end_uses.building_end_uses.stove import Stove
+
+
+class Building:
+    """
+    A bucket for all end uses at a parcel. Currently assuming one building/one unit per parcel
+
+    Args:
+        building_id (str): The ID of the building
+        building_config (str): Filepath of a config file for the building's end uses
+
+    Attributes:
+        building_id (str): The ID of the building
+        building_params (dict): Dict of building input parameters from config file
+        end_uses (dict): Dict of building end use class instances
+
+    Methods:
+        populate_building (None): Creates building end use class instances
+        aggregate (list): Aggregate attributes across all end-uses at the building
+            (Currently just sums install costs for stoves)
+        sum_install_costs (list): Sum all install cost vectors across stove end uses
+    """
+    def __init__(self, building_id: str, building_config_path: str):
+        self.building_id: str = building_id
+        self._building_config_path: str = building_config_path
+
+        self.building_params: dict = {}
+        self.end_uses: dict = {}
+
+        #TODO: Add simulation settings config
+
+    def populate_building(self) -> None:
+        """
+        Creates instances of all assets for a given building based on the config file
+        """
+        self._get_building_params()
+        self._create_end_uses()
+
+    def _get_building_params(self):
+        """
+        Parse the building config file and store to building_params attribute
+        """
+        with open(self._building_config_path) as f:
+            building_data = json.load(f)
+
+        self.building_params = building_data
+
+    def _create_end_uses(self):
+        """
+        Create the end uses for the building
+        """
+        for end_use_type, end_uses in self.building_params.items():
+            if end_use_type not in self.end_uses:
+                self.end_uses[end_use_type] = {}
+
+            for end_use in end_uses:
+                end_use_id = end_use.get("end_use_id")
+                self.end_uses[end_use_type][end_use_id] = self._get_single_end_use(end_use)
+
+    @staticmethod
+    def _get_single_end_use(params: dict):
+        config_filepath = params.pop("end_use_config")
+
+        with open(config_filepath) as f:
+            data = json.load(f)
+
+        end_use_params = data
+
+        if params.get("end_use_type") == "stove":
+            stove = Stove(
+                **params,
+                **end_use_params,
+                sim_start_year=2020,
+                sim_end_year=2040
+            )
+
+            stove.initialize_end_use()
+
+            return stove
+
+        return None
+
+    def aggregate(self) -> list:
+        """
+        Aggregate cost and energy uses across all end-uses at the building
+        """
+        return self.sum_install_costs()
+
+    def sum_install_costs(self) -> list:
+        """
+        Sum all install cost vectors across stove end uses
+        """
+        install_costs = np.zeros(20)
+        for stove in self.end_uses["stove"].values():
+            install_costs += np.array(stove.install_cost)
+
+        return install_costs.tolist()

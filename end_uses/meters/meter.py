@@ -25,7 +25,9 @@ class Meter(UtilityEndUse):
     def __init__(
             self,
             install_year,
+            asset_cost,
             replacement_year,
+            lifetime,
             sim_start_year,
             sim_end_year,
             asset_id,
@@ -35,7 +37,9 @@ class Meter(UtilityEndUse):
     ):
         super().__init__(
             install_year,
+            asset_cost,
             replacement_year,
+            lifetime,
             sim_start_year,
             sim_end_year,
             asset_id,

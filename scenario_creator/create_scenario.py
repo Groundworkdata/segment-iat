@@ -2,8 +2,9 @@
 Creates a scenario based on input values
 """
 import numpy as np
+import pandas as pd
 
-from end_uses.building_end_uses.stove import Stove
+from buildings.building import Building
 from end_uses.meters.elec_meter import ElecMeter
 from end_uses.meters.gas_meter import GasMeter
 
@@ -14,67 +15,42 @@ class ScenarioCreator:
     """
     def __init__(
             self,
-            parcel_id: str,
-            install_year: int,
-            install_cost: float,
-            lifetime: int,
-            elec_consump: float,
-            gas_consump: float,
-            sim_start_year: int,
-            sim_end_year: int,
-            replacement_year: int
+            building_config_filepath: str
     ):
-        self.parcel_id = parcel_id
-        self.install_year = install_year
-        self.install_cost = install_cost
-        self.lifetime = lifetime
-        self.elec_consump = elec_consump
-        self.gas_consump = gas_consump
-        self.sim_start_year = sim_start_year
-        self.sim_end_year = sim_end_year
-        self.replacement_year = replacement_year
-        self.energy_source = "ELEC"
-        self.stove_type = "INDUCTION"
+        self._building_config_filepath = building_config_filepath
 
+        self.building_config: dict = {}
+        self.buildings: list = []
         self.end_uses: list = []
         self.meters: list = []
 
     def create_scenario(self):
-        self.get_end_uses()
+        self.create_building()
         self.get_meters()
 
-    def get_end_uses(self):
-        self.get_stoves()
-        # Get other end uses: HVAC, washer/dryer, etc...
+    def read_building_config(self) -> None:
+        building_df = pd.read_json(self._building_config_filepath)
+        self.building_config = building_df.to_dict()
 
-    def get_stoves(self):
-        stove = Stove(
-            self.install_year,
-            self.install_cost,
-            self.lifetime,
-            self.elec_consump,
-            self.gas_consump,
-            self.sim_start_year,
-            self.sim_end_year,
-            self.replacement_year,
-            self.energy_source,
-            self.stove_type,
-        )
-
-        stove.initialize_end_use()
-
-        self.end_uses.append(stove)
+    def create_building(self) -> None:
+        # building = Building("building1", self.building_config)
+        building = Building("building1", self._building_config_filepath)
+        building.populate_building()
+        self.buildings.append(building)
 
     def get_meters(self):
         self.get_elec_meter()
         self.get_gas_meter()
 
     def get_elec_meter(self):
+        # TODO: Config files for utility assets (meters, etc)
         elec_meter = ElecMeter(
-            self.sim_start_year,
-            self.replacement_year,
-            self.sim_start_year,
-            self.sim_end_year,
+            2020,
+            100,
+            2050,
+            30,
+            2020,
+            2040,
             "asset_id",
             "parent_id",
             self.end_uses
@@ -85,10 +61,12 @@ class ScenarioCreator:
 
     def get_gas_meter(self):
         gas_meter = GasMeter(
-            self.sim_start_year,
-            self.replacement_year,
-            self.sim_start_year,
-            self.sim_end_year,
+            2020,
+            100,
+            2050,
+            30,
+            2020,
+            2040,
             "asset_id",
             "parent_id",
             self.end_uses

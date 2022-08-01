@@ -11,6 +11,43 @@ class Stove(BuildingEndUse):
     Stove end use. Inherits parent BuildingEndUse class
 
     Args:
+        None
+
+    Keyword Args:
+        install_year (int): The install year of the asset
+        asset_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        replacement_year (int): The replacement year of the asset
+        lifetime (int): The asset lifetime in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        elec_consump (float): The total annual elec consump, in kWh
+        gas_consump (float): The total annual gas consump, in kWh
+        building_id (str): Identifies the building where the end use is located
+        energy_source (str): In ["ELEC", "GAS", "PROPANE"]
+        stove_type (str): In ["ELEC", "GAS", "INDUCTION"]
+
+    Attributes:
+        install_year (int): The install year of the asset
+        asset_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        replacement_year (int): The replacement year of the asset
+        lifetime (int): The asset lifetime in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        years_vector (list): List of all years for the simulation
+        operational_vector (list): Boolean vals for years of the simulation when asset in operation
+        install_cost (list): Install cost during the simulation years
+        depreciation (list): Depreciated val during the simulation years
+            (val is depreciated val at beginning of each year)
+        stranded_value (list): Stranded asset val for early replacement during the simulation years
+            (equal to the depreciated val at the replacement year)
+        elec_consump (float): The total annual elec consump, in kWh
+        gas_consump (float): The total annual gas consump, in kWh
+        total_elec_consump (list): The total annual elec consump of the end use, in kWh
+        total_gas_consump (list): The total annual gas consump of the end use, in kWh
+        gas_leakage (list): List of annual gas leakage from end use, in kWh
+        building_id (str): Identifies the building where the end use is located
         energy_source (str): In ["ELEC", "GAS", "PROPANE"]
         stove_type (str): In ["ELEC", "GAS", "INDUCTION"]
 
@@ -19,32 +56,11 @@ class Stove(BuildingEndUse):
         get_elec_consump (list): Calculates the stove elec consumption. Overwrites parent method
         get_gas_cost (list): Calculates the stove gas consumption. Overwrites parent method
     """
-    def __init__(
-            self,
-            install_year,
-            install_cost,
-            lifetime,
-            elec_consump,
-            gas_consump,
-            sim_start_year,
-            sim_end_year,
-            replacement_year: int,
-            energy_source: str,
-            stove_type: str,
-    ):
-        super().__init__(
-            install_year,
-            install_cost,
-            lifetime,
-            elec_consump,
-            gas_consump,
-            sim_start_year,
-            sim_end_year,
-            replacement_year
-        )
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
-        self.energy_source: str = energy_source
-        self.stove_type: str = stove_type
+        self.energy_source: str = kwargs.get("energy_source")
+        self.stove_type: str = kwargs.get("stove_type")
 
     def get_install_cost(self) -> float:
         """
@@ -77,7 +93,14 @@ class Stove(BuildingEndUse):
         escalator = 0.01 # percent
         escalation_factor = (1 + escalator) ** (self.install_year - self.sim_start_year)
 
-        return (total_labor + total_material) * escalation_factor
+        total_cost = (total_labor + total_material) * escalation_factor
+
+        install_cost = np.zeros(len(self.operational_vector)).tolist()
+        # If the install is outside of the sim years, then we ignore the install cost
+        if self.sim_start_year <= self.install_year <= self.sim_end_year:
+            install_cost[self.install_year - self.sim_start_year] = total_cost
+
+        return install_cost
 
     def get_elec_consump(self) -> list:
         """
@@ -123,61 +146,3 @@ class Stove(BuildingEndUse):
         """
         # TODO: Will need to input a leakage rate and include any escalation
         return np.repeat(50, len(self.operational_vector))
-
-    def get_depreciation(self) -> list:
-        """
-        Uses straight line depreciation and assumes no salvage value at end-of-life. Overwrites
-        parent method
-
-        Vector represents depreciated end use value at year-beginning
-        """
-        salvage_value = 0
-        depreciation_rate = (self.end_use_cost - salvage_value) / self.lifetime
-
-        operational_lifetime = self.replacement_year - self.install_year
-
-        depreciated_value = np.array([
-            self.end_use_cost - depreciation_rate * i
-            for i in range(operational_lifetime+1)
-        ])
-
-        start_zeros_vec = np.zeros(max(self.install_year - self.sim_start_year, 0))
-
-        clipped_dep_vec = depreciated_value[
-            max(self.sim_start_year - self.install_year, 0):
-            max(operational_lifetime-(self.replacement_year-self.sim_end_year), 0)
-        ]
-
-        end_zeros_vec = np.zeros(max(self.sim_end_year-self.replacement_year-1, 0))
-
-        depreciation_vec = np.concatenate([start_zeros_vec, clipped_dep_vec, end_zeros_vec])
-        return depreciation_vec.tolist()
-
-    def get_stranded_value(self) -> list:
-        """
-        Calculates the stranded value based on the depreciation vector. Overwrites parent method
-
-        Depreciation value and replacement is year-beginning, so references depreciated value at the
-        replacement year
-
-        Stranded value is 0 if the replacement year is outside of the sim timeframe
-        """
-        replacement_ref = self.replacement_year - self.sim_start_year
-        operational_lifetime = self.replacement_year - self.install_year
-
-        stranded_val = np.zeros(len(self.operational_vector))
-
-        # Handle when the replacement year is beyond the simulation end year
-        if self.replacement_year > self.sim_end_year:
-            return stranded_val.tolist()
-
-        # Handle if replacement in final year and not fully depreciated
-        elif self.replacement_year == self.sim_end_year and operational_lifetime != self.lifetime:
-            replacement_ref = -1
-
-        # Handle if replacement in final year and fully depreciated
-        elif self.replacement_year == self.sim_end_year and operational_lifetime == self.lifetime:
-            return stranded_val.tolist()
-
-        stranded_val[replacement_ref] = self.depreciation[replacement_ref]
-        return stranded_val.tolist()
