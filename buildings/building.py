@@ -15,9 +15,14 @@ class Building:
     Args:
         building_id (str): The ID of the building
         building_config (str): Filepath of a config file for the building's end uses
+        sim_settings (dict): Dict of simulation settings -- {
+            sim_`start_`year (int): The simulation start year
+            sim_end_year (int): The simulation end year (exclusive)
+        }
 
     Attributes:
         building_id (str): The ID of the building
+        sim_settings (dict): Dict of simulation settings
         building_params (dict): Dict of building input parameters from config file
         end_uses (dict): Dict of building end use class instances
 
@@ -27,14 +32,13 @@ class Building:
             (Currently just sums install costs for stoves)
         sum_install_costs (list): Sum all install cost vectors across stove end uses
     """
-    def __init__(self, building_id: str, building_config_path: str):
+    def __init__(self, building_id: str, building_config_path: str, sim_settings: dict):
         self.building_id: str = building_id
         self._building_config_path: str = building_config_path
 
+        self.sim_settings: dict = sim_settings
         self.building_params: dict = {}
         self.end_uses: dict = {}
-
-        #TODO: Add simulation settings config
 
     def populate_building(self) -> None:
         """
@@ -64,8 +68,7 @@ class Building:
                 end_use_id = end_use.get("end_use_id")
                 self.end_uses[end_use_type][end_use_id] = self._get_single_end_use(end_use)
 
-    @staticmethod
-    def _get_single_end_use(params: dict):
+    def _get_single_end_use(self, params: dict):
         config_filepath = params.pop("end_use_config")
 
         with open(config_filepath) as f:
@@ -77,8 +80,7 @@ class Building:
             stove = Stove(
                 **params,
                 **end_use_params,
-                sim_start_year=2020,
-                sim_end_year=2040
+                **self.sim_settings
             )
 
             stove.initialize_end_use()

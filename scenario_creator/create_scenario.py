@@ -1,8 +1,7 @@
 """
 Creates a scenario based on input values
 """
-import numpy as np
-import pandas as pd
+import json
 
 from buildings.building import Building
 from end_uses.meters.elec_meter import ElecMeter
@@ -15,26 +14,38 @@ class ScenarioCreator:
     """
     def __init__(
             self,
+            sim_settings_filepath: str,
             building_config_filepath: str
     ):
+        self._sim_settings_filepath = sim_settings_filepath
         self._building_config_filepath = building_config_filepath
 
+        self.sim_config: dict = {}
         self.building_config: dict = {}
         self.buildings: list = []
         self.end_uses: list = []
         self.meters: list = []
 
     def create_scenario(self):
+        self.get_sim_settings()
         self.create_building()
         self.get_meters()
 
-    def read_building_config(self) -> None:
-        building_df = pd.read_json(self._building_config_filepath)
-        self.building_config = building_df.to_dict()
+    def get_sim_settings(self) -> None:
+        """
+        Read in simulation settings
+        """
+        with open(self._sim_settings_filepath) as f:
+            data = json.load(f)
+        self.sim_config = data
 
     def create_building(self) -> None:
-        # building = Building("building1", self.building_config)
-        building = Building("building1", self._building_config_filepath)
+        building = Building(
+            "building1",
+            self._building_config_filepath,
+            self.sim_config
+        )
+
         building.populate_building()
         self.buildings.append(building)
 
