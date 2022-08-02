@@ -10,8 +10,17 @@ from end_uses.building_end_uses.stove import Stove
 
 class TestBuilding(unittest.TestCase):
     def setUp(self):
-        self.input_filepath = "tests/input_data/building_config.json"
-        self.building = Building("Wakefield_01", self.input_filepath)
+        self.building_config_filepath = "tests/input_data/building_config.json"
+        self.sim_settings = {
+            "sim_start_year": 2020,
+            "sim_end_year": 2040
+        }
+
+        self.building = Building(
+            "Wakefield_01",
+            self.building_config_filepath,
+            self.sim_settings
+        )
 
     def test_populate_building(self):
         self.building.populate_building()
