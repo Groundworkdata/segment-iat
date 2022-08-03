@@ -3,6 +3,7 @@ Defines meter parent class
 """
 import numpy as np
 
+from buildings.building import Building
 from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 
 
@@ -11,12 +12,24 @@ class Meter(UtilityEndUse):
     Defines a meter parent class. A Meter sums energy consumptions of all end uses
 
     Args:
-        end_uses (list): List of end use instances (Stove, etc)
+        install_year (int): The install year of the asset
+        asset_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        replacement_year (int): The replacement year of the asset
+        lifetime (int): The asset lifetime in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        asset_id (str): The ID for the given asset
+        parent_id (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        building_id (str): The ID of the associated building for the meter
+        building (Building): Instance of the associated Building object
         meter_type (str): The type of meter (ELEC, GAS)
 
     Attributes:
-        end_uses (list): List of end use instances (Stove, etc)
+        building_id (str): The ID of the associated building for the meter
+        building (Building): Instance of the associated Building object
         meter_type (str): The type of meter (ELEC, GAS)
+        total_energy_use (list): Total annual energy use behind the meter
 
     Methods:
         get_total_energy_use (np.array): Gets the total energy use for the meter
@@ -24,15 +37,16 @@ class Meter(UtilityEndUse):
     """
     def __init__(
             self,
-            install_year,
-            asset_cost,
-            replacement_year,
-            lifetime,
-            sim_start_year,
-            sim_end_year,
-            asset_id,
-            parent_id,
-            end_uses: list,
+            install_year: int,
+            asset_cost: float,
+            replacement_year: int,
+            lifetime: int,
+            sim_start_year: int,
+            sim_end_year: int,
+            asset_id: str,
+            parent_id: str,
+            building_id: str,
+            building: Building,
             meter_type: str
     ):
         super().__init__(
@@ -46,18 +60,29 @@ class Meter(UtilityEndUse):
             parent_id
         )
 
-        self.end_uses: list = end_uses
+        self.building_id: list = building_id
+        self.building: Building = building
         self.meter_type: str = meter_type
-        
 
         self.total_energy_use: list = []
 
     def initialize_meter(self) -> None:
-        self.total_energy_use = self.get_total_energy_use()
+        """
+        Calculates aggregate consumption values behind the meter
+        """
+        if self.building:
+            self.total_energy_use = self.get_total_energy_use()
 
-    def get_total_energy_use(self) -> np.array:
+    def get_total_energy_use(self) -> list:
+        """
+        Get the total energy use behind the meter
+
+        Returns:
+            list: List of annual energy consumption
+        """
         energy_attr = self.meter_type.lower() + "_consump_total"
-        energy_consumps = [getattr(i, energy_attr) for i in self.end_uses]
+        end_uses = list(self.building.end_uses.get("stove").values())
+        energy_consumps = [getattr(i, energy_attr) for i in end_uses]
         return np.array(energy_consumps).sum(axis=0).tolist()
 
     #TODO: Implement after getting example timeseries data

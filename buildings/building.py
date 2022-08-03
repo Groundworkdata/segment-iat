@@ -16,7 +16,7 @@ class Building:
         building_id (str): The ID of the building
         building_config (str): Filepath of a config file for the building's end uses
         sim_settings (dict): Dict of simulation settings -- {
-            sim_`start_`year (int): The simulation start year
+            sim_start_year (int): The simulation start year
             sim_end_year (int): The simulation end year (exclusive)
         }
 
