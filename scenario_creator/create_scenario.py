@@ -4,8 +4,7 @@ Creates a scenario based on input values
 import json
 
 from buildings.building import Building
-from end_uses.meters.elec_meter import ElecMeter
-from end_uses.meters.gas_meter import GasMeter
+from utility_network.utility_network import UtilityNetwork
 
 
 class ScenarioCreator:
@@ -15,21 +14,22 @@ class ScenarioCreator:
     def __init__(
             self,
             sim_settings_filepath: str,
-            building_config_filepath: str
+            building_config_filepath: str,
+            utility_network_config_filepath: str
     ):
         self._sim_settings_filepath = sim_settings_filepath
         self._building_config_filepath = building_config_filepath
+        self._utility_network_config_filepath = utility_network_config_filepath
 
         self.sim_config: dict = {}
         self.building_config: dict = {}
-        self.buildings: list = []
-        self.end_uses: list = []
-        self.meters: list = []
+        self.buildings: dict = {}
+        self.utility_network: UtilityNetwork = None
 
     def create_scenario(self):
         self.get_sim_settings()
         self.create_building()
-        self.get_meters()
+        self.get_utility_network()
 
     def get_sim_settings(self) -> None:
         """
@@ -40,48 +40,24 @@ class ScenarioCreator:
         self.sim_config = data
 
     def create_building(self) -> None:
+        # TODO: Add ability for multiple buildings
         building = Building(
-            "building1",
+            "building001",
             self._building_config_filepath,
             self.sim_config
         )
 
         building.populate_building()
-        self.buildings.append(building)
+        self.buildings[building.building_id] = building
 
-    def get_meters(self):
-        self.get_elec_meter()
-        self.get_gas_meter()
-
-    def get_elec_meter(self):
-        # TODO: Config files for utility assets (meters, etc)
-        elec_meter = ElecMeter(
-            2020,
-            100,
-            2050,
-            30,
-            2020,
-            2040,
-            "asset_id",
-            "parent_id",
-            self.end_uses
+    def get_utility_network(self):
+        """
+        Create the utility network based on the input config
+        """
+        self.utility_network = UtilityNetwork(
+            self._utility_network_config_filepath,
+            self.sim_config,
+            self.buildings
         )
 
-        elec_meter.initialize_meter()
-        self.meters.append(elec_meter)
-
-    def get_gas_meter(self):
-        gas_meter = GasMeter(
-            2020,
-            100,
-            2050,
-            30,
-            2020,
-            2040,
-            "asset_id",
-            "parent_id",
-            self.end_uses
-        )
-
-        gas_meter.initialize_meter()
-        self.meters.append(gas_meter)
+        self.utility_network.create_utility_network()
