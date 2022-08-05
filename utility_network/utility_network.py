@@ -100,7 +100,7 @@ class UtilityNetwork:
             building = self.buildings.get(building_id)
 
             gas_meter = GasMeter(**meter_config, **self.sim_settings, building=building)
-            gas_meter.initialize_meter()
+            gas_meter.initialize_end_use()
             self.gas_meters.append(gas_meter)
 
     def _get_elec_meters(self) -> None:
@@ -113,5 +113,5 @@ class UtilityNetwork:
             building = self.buildings.get(building_id)
 
             elec_meter = ElecMeter(**meter_config, **self.sim_settings, building=building)
-            elec_meter.initialize_meter()
+            elec_meter.initialize_end_use()
             self.elec_meters.append(elec_meter)

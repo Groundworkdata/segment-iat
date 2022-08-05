@@ -1,6 +1,8 @@
 """
 Defines Stove end use
 """
+from typing import List
+
 import numpy as np
 
 from end_uses.building_end_uses.building_end_use import BuildingEndUse
@@ -59,10 +61,11 @@ class Stove(BuildingEndUse):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self._kwargs = kwargs
         self.energy_source: str = kwargs.get("energy_source")
         self.stove_type: str = kwargs.get("stove_type")
 
-    def get_install_cost(self) -> float:
+    def get_install_cost(self) -> List[float]:
         """
         Calculates installation cost for a stove. Overwrites parent method
 
@@ -74,26 +77,25 @@ class Stove(BuildingEndUse):
         All rates are in today's dollars. Total stove installation cost is multiplied by an annual
         escalation factor to get cost for the corresponding installation year
         """
-        # TODO: Abstract inputs so we are not using the defaults here
-        removal_labor_time = 2 # hr
-        labor_rate = 50 # 2019$ / hr
+        removal_labor_time = self._kwargs.get("removal_labor_time") # hr
+        labor_rate = self._kwargs.get("labor_rate") # $ / hr
         existing_removal_labor = removal_labor_time * labor_rate
 
-        new_stove_price = 900 # 2019$
-        misc_supplies_price = 100 # 2019$
-        retail_markup = 0.18 # percent
-        new_stove_material = (new_stove_price + misc_supplies_price) * (1 + retail_markup)
+        misc_supplies_price = self._kwargs.get("misc_supplies_price") # $
+        retail_markup = self._kwargs.get("retail_markup") # percent
+        new_stove_material = (self.asset_cost + misc_supplies_price) * (1 + retail_markup)
 
-        installation_labor_time = 2 # hr
+        installation_labor_time = self._kwargs.get("installation_labor_time") # hr
         installation_labor = installation_labor_time * labor_rate
 
         total_labor = existing_removal_labor + installation_labor
         total_material = new_stove_material
 
-        escalator = 0.01 # percent
+        escalator = self._kwargs.get("annual_cost_escalation") # percent
         escalation_factor = (1 + escalator) ** (self.install_year - self.sim_start_year)
 
         total_cost = (total_labor + total_material) * escalation_factor
+        total_cost = round(total_cost, 2)
 
         install_cost = np.zeros(len(self.operational_vector)).tolist()
         # If the install is outside of the sim years, then we ignore the install cost

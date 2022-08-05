@@ -1,6 +1,8 @@
 """
 Parent _Asset class
 """
+from typing import List
+
 import numpy as np
 
 
@@ -54,7 +56,7 @@ class Asset:
 
         self.years_vector: list = []
         self.operational_vector: list = []
-        self.install_cost: list = []
+        self.install_cost: List[float] = []
         self.depreciation: list = []
         self.stranded_value: list = []
 
@@ -84,14 +86,17 @@ class Asset:
             for i in sim_years
         ]
 
-    def get_install_cost(self) -> list:
+    def get_install_cost(self) -> List[float]:
         """
-        Assume install cost of 0 by default
+        Assume install cost equal to the asset_cost input by default. Does not account for price
+        escalation or inflation
         """
-        #TODO: Come up with generalized cost function for all assets (based on an input cost)
-        # Default should be to return a list of 0s where the self.asset_cost is inserted based on
-        # the input self.install_year
-        return np.zeros(len(self.operational_vector)).tolist()
+        install_cost = np.zeros(len(self.operational_vector)).tolist()
+
+        if self.sim_start_year <= self.install_year <= self.sim_end_year:
+            install_cost[self.install_year - self.sim_start_year] = self.asset_cost
+
+        return install_cost
 
     def get_depreciation(self) -> list:
         """

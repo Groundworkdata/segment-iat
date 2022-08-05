@@ -41,6 +41,7 @@ class GasService(UtilityEndUse):
         sim_end_year (int): The simulation end year (exclusive)
         years_vector (list): List of all years for the simulation
         operational_vector (list): Boolean vals for years of the simulation when asset in operation
+        install_cost (list): Install cost during the simulation years
         depreciation (list): Depreciated val during the simulation years
             (val is depreciated val at beginning of each year)
         stranded_value (list): Stranded asset val for early replacement during the simulation years

@@ -60,11 +60,6 @@ class BuildingEndUse(Asset):
             kwargs.get("sim_end_year")
         )
 
-        #TODO: Need to decide what to do with install cost
-        # If it is an existing end-use, then we should intake the install cost total and no calc needed
-        # If new end-use, then we intake multiple cost factors (current sticker price, labor rate, escalator) and calc total cost
-        self.asset_cost: float = kwargs.get("asset_cost")
-        self.lifetime: int = kwargs.get("lifetime")
         self.elec_consump = kwargs.get("elec_consump")
         self.gas_consump = kwargs.get("gas_consump")
         self.building_id: str = kwargs.get("building_id")
