@@ -26,6 +26,22 @@ class Meter(UtilityEndUse):
         meter_type (str): The type of meter (ELEC, GAS)
 
     Attributes:
+        install_year (int): The install year of the asset
+        asset_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        replacement_year (int): The replacement year of the asset
+        lifetime (int): The asset lifetime in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        years_vector (list): List of all years for the simulation
+        operational_vector (list): Boolean vals for years of the simulation when asset in operation
+        install_cost (list): Install cost during the simulation years
+        depreciation (list): Depreciated val during the simulation years
+            (val is depreciated val at beginning of each year)
+        stranded_value (list): Stranded asset val for early replacement during the simulation years
+            (equal to the depreciated val at the replacement year)
+        asset_id (str): The ID for the given asset
+        parent_id (str): The ID for the parent of the asset (if applicable, otherwise empty)
         building_id (str): The ID of the associated building for the meter
         building (Building): Instance of the associated Building object
         meter_type (str): The type of meter (ELEC, GAS)
@@ -66,10 +82,11 @@ class Meter(UtilityEndUse):
 
         self.total_energy_use: list = []
 
-    def initialize_meter(self) -> None:
+    def initialize_end_use(self) -> None:
         """
         Calculates aggregate consumption values behind the meter
         """
+        super().initialize_end_use()
         if self.building:
             self.total_energy_use = self.get_total_energy_use()
 

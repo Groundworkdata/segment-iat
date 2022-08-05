@@ -9,19 +9,20 @@ class GasMeter(Meter):
     Defines a gas meter, which inherits Meter class
 
     Args:
-        end_uses (list): List of end use instances (Stove, etc)
+        None
 
     Keyword Args:
-        install_year (int): Installation year
-        asset_cost (float): Cost of the meter
-        replacement_year (int): Replacement year
-        lifetime (int): Asset lifetime in years
-        sim_start_year (int): Simulation start year
-        sim_end_year (int): Simulation end year (exclusive)
-        asset_id (str): ID of the meter asset
-        parent_id (str): ID of the meter's parent in the utility network
-        building_id (str)
-        building (Building)
+        install_year (int): The install year of the asset
+        asset_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        replacement_year (int): The replacement year of the asset
+        lifetime (int): The asset lifetime in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        asset_id (str): The ID for the given asset
+        parent_id (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        building_id (str): The ID of the associated building for the meter
+        building (Building): Instance of the associated Building object
 
     Methods:
         None
