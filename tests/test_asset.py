@@ -226,3 +226,28 @@ class TestAsset(unittest.TestCase):
             ],
             self.asset.get_stranded_value()
         )
+
+    def test_depreciation_extended_life(self):
+        """
+        Test the depreciation vector when the asset is replaced after its lifetime (i.e. asset use
+        continues after it has fully depreciated)
+        """
+        self.asset.install_year = 2021
+        self.asset.replacement_year = 2035
+        self.asset.initialize_end_use()
+
+        self.assertListEqual(
+            [
+                0.0, 1000.0, 900.0, 800.0, 700.0, 600.0, 500.0, 400.0, 300.0, 200.0,
+                100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
+            ],
+            self.asset.get_depreciation()
+        )
+
+        self.assertListEqual(
+            [
+                0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+            ],
+            self.asset.get_stranded_value()
+        )
