@@ -1,6 +1,7 @@
 """
 Unit tests for the Building module
 """
+import json
 import unittest
 from unittest.mock import Mock
 
@@ -10,15 +11,19 @@ from end_uses.building_end_uses.stove import Stove
 
 class TestBuilding(unittest.TestCase):
     def setUp(self):
-        self.building_config_filepath = "tests/input_data/building_config.json"
+        self._building_config_filepath = "tests/input_data/building_config.json"
+
+        with open(self._building_config_filepath) as f:
+            data = json.load(f)
+        self.building_params = data
+
         self.sim_settings = {
             "sim_start_year": 2020,
             "sim_end_year": 2040
         }
 
         self.building = Building(
-            "Wakefield_01",
-            self.building_config_filepath,
+            self.building_params[0],
             self.sim_settings
         )
 

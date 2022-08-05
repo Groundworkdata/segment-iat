@@ -1,18 +1,23 @@
-{
-    "stove": [
-        {
-            "end_use_type": "stove",
-            "end_use_id": "stove1",
-            "end_use_config": "./tests/input_data/stoves/gas_stove_config.json",
-            "install_year": 2020,
-            "replacement_year": 2027
-        },
-        {
-            "end_use_type": "stove",
-            "end_use_id": "stove2",
-            "end_use_config": "./tests/input_data/stoves/elec_stove_config.json",
-            "install_year": 2027,
-            "replacement_year": 2040
+[
+    {
+        "building_id": "building001",
+        "end_uses": {
+            "stove": [
+                {
+                    "end_use_type": "stove",
+                    "end_use_id": "stove1",
+                    "end_use_config": "./tests/input_data/stoves/gas_stove_config.json",
+                    "install_year": 2020,
+                    "replacement_year": 2027
+                },
+                {
+                    "end_use_type": "stove",
+                    "end_use_id": "stove2",
+                    "end_use_config": "./tests/input_data/stoves/elec_stove_config.json",
+                    "install_year": 2027,
+                    "replacement_year": 2040
+                }
+            ]
         }
-    ]
-}
+    }
+]

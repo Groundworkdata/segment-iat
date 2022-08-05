@@ -32,35 +32,30 @@ class Building:
             (Currently just sums install costs for stoves)
         sum_install_costs (list): Sum all install cost vectors across stove end uses
     """
-    def __init__(self, building_id: str, building_config_path: str, sim_settings: dict):
-        self.building_id: str = building_id
-        self._building_config_path: str = building_config_path
-
+    def __init__(self, building_params: dict, sim_settings: dict):
+        self.building_params: dict = building_params
         self.sim_settings: dict = sim_settings
-        self.building_params: dict = {}
+
+        self.building_id: str = ""
         self.end_uses: dict = {}
 
     def populate_building(self) -> None:
         """
         Creates instances of all assets for a given building based on the config file
         """
-        self._get_building_params()
+        self._get_building_id()
         self._create_end_uses()
 
-    def _get_building_params(self):
-        """
-        Parse the building config file and store to building_params attribute
-        """
-        with open(self._building_config_path) as f:
-            building_data = json.load(f)
-
-        self.building_params = building_data
+    def _get_building_id(self):
+        self.building_id = self.building_params.get("building_id")
 
     def _create_end_uses(self):
         """
         Create the end uses for the building
         """
-        for end_use_type, end_uses in self.building_params.items():
+        end_use_params = self.building_params.get("end_uses")
+
+        for end_use_type, end_uses in end_use_params.items():
             if end_use_type not in self.end_uses:
                 self.end_uses[end_use_type] = {}
 
