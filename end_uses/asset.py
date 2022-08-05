@@ -98,33 +98,37 @@ class Asset:
 
         return install_cost
 
-    def get_depreciation(self) -> list:
+    def get_depreciation(self) -> List[float]:
         """
         Uses straight line depreciation and assumes no salvage value at end-of-life
 
         Vector represents depreciated end use value at year-beginning
         """
-        # TODO: Check on posibility of negative depreciation -- should not be possible!
+        depreciation_vec = np.zeros(len(self.operational_vector))
         salvage_value = 0
         depreciation_rate = (self.asset_cost - salvage_value) / self.lifetime
 
-        operational_lifetime = self.replacement_year - self.install_year
+        operational_lifetime = min(self.replacement_year - self.install_year, self.lifetime)
+        operations_end = self.install_year + operational_lifetime
 
         depreciated_value = np.array([
             self.asset_cost - depreciation_rate * i
             for i in range(operational_lifetime+1)
         ])
 
-        start_zeros_vec = np.zeros(max(self.install_year - self.sim_start_year, 0))
+        if operations_end > self.sim_end_year:
+            depreciated_value = depreciated_value[:self.sim_end_year - operations_end - 1]
 
-        clipped_dep_vec = depreciated_value[
-            max(self.sim_start_year - self.install_year, 0):
-            max(operational_lifetime-(self.replacement_year-self.sim_end_year), 0)
-        ]
+        depreciated_value = depreciated_value[max(0, self.sim_start_year - self.install_year):]
 
-        end_zeros_vec = np.zeros(max(self.sim_end_year-self.replacement_year-1, 0))
+        depreciation_start_index = max(self.install_year - self.sim_start_year, 0)
+        depreciation_end_index = min(
+            max(self.install_year - self.sim_start_year, 0) + len(depreciated_value),
+            len(depreciation_vec)
+        )
 
-        depreciation_vec = np.concatenate([start_zeros_vec, clipped_dep_vec, end_zeros_vec])
+        depreciation_vec[depreciation_start_index: depreciation_end_index] = depreciated_value
+
         return depreciation_vec.tolist()
 
     def get_stranded_value(self) -> list:
