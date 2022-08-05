@@ -1,6 +1,7 @@
 """
 Creates a scenario based on input values
 """
+from distutils.command.build import build
 import json
 
 from buildings.building import Building
@@ -22,7 +23,7 @@ class ScenarioCreator:
         self._utility_network_config_filepath = utility_network_config_filepath
 
         self.sim_config: dict = {}
-        self.building_config: dict = {}
+        self.buildings_config: dict = {}
         self.buildings: dict = {}
         self.utility_network: UtilityNetwork = None
 
@@ -40,15 +41,19 @@ class ScenarioCreator:
         self.sim_config = data
 
     def create_building(self) -> None:
-        # TODO: Add ability for multiple buildings
-        building = Building(
-            "building001",
-            self._building_config_filepath,
-            self.sim_config
-        )
+        with open(self._building_config_filepath) as f:
+            data = json.load(f)
+        self.buildings_config = data
 
-        building.populate_building()
-        self.buildings[building.building_id] = building
+        for building_params in self.buildings_config:
+            building = Building(
+                building_params,
+                self.sim_config
+            )
+
+            building.populate_building()
+
+            self.buildings[building.building_id] = building
 
     def get_utility_network(self):
         """
