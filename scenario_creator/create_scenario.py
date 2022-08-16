@@ -1,7 +1,6 @@
 """
 Creates a scenario based on input values
 """
-from distutils.command.build import build
 import json
 
 from buildings.building import Building
@@ -52,6 +51,8 @@ class ScenarioCreator:
             )
 
             building.populate_building()
+            building.write_building_cost_info()
+            building.write_building_energy_info()
 
             self.buildings[building.building_id] = building
 

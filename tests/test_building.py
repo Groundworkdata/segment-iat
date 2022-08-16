@@ -5,6 +5,8 @@ import json
 import unittest
 from unittest.mock import Mock
 
+import pandas as pd
+
 from buildings.building import Building
 from end_uses.building_end_uses.stove import Stove
 
@@ -43,18 +45,12 @@ class TestBuilding(unittest.TestCase):
         self.assertEqual(type(self.building.end_uses["stove"]["stove1"]), Stove)
         self.assertEqual(type(self.building.end_uses["stove"]["stove2"]), Stove)
 
-    def test_sum_install_costs(self):
+    def test_sum_end_use_figures(self):
         mock_stove_1 = Mock()
-        mock_stove_1.install_cost = [
-            100, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        ]
+        mock_stove_1.install_cost = [100, 0, 0, 0, 0]
 
         mock_stove_2 = Mock()
-        mock_stove_2.install_cost = [
-            0, 0, 0, 0, 0, 0, 70, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        ]
+        mock_stove_2.install_cost = [0, 0, 70, 0, 0]
 
         self.building.end_uses = {
             "stove": {
@@ -63,10 +59,31 @@ class TestBuilding(unittest.TestCase):
             }
         }
 
-        self.assertListEqual(
-            self.building.sum_install_costs(),
-            [
-                100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 70.0, 0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-            ]
+        self.building.years_vec = list(range(2025, 2030))
+
+        pd.testing.assert_frame_equal(
+            pd.DataFrame({
+                "stove1_install_cost": {
+                    2025: 100,
+                    2026: 0,
+                    2027: 0,
+                    2028: 0,
+                    2029: 0
+                },
+                "stove2_install_cost": {
+                    2025: 0,
+                    2026: 0,
+                    2027: 70,
+                    2028: 0,
+                    2029: 0
+                },
+                "total_install_cost": {
+                    2025: 100,
+                    2026: 0,
+                    2027: 70,
+                    2028: 0,
+                    2029: 0
+                }
+            }),
+            self.building._sum_end_use_figures("install_cost")
         )
