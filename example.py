@@ -35,8 +35,15 @@ def main():
     print("==================")
 
     print("********Utility network********")
-    print("Gas meter 1 energy use: {}".format(scenario.utility_network.gas_meters[0].total_energy_use))
-    print("Elec meter 1 energy use: {}".format(scenario.utility_network.elec_meters[0].total_energy_use))
+    print("Gas meter 1 energy use: {}".format(scenario.utility_network.gas_meters[0].total_annual_energy_use))
+    print("Elec meter 1 energy use: {}".format(scenario.utility_network.elec_meters[0].total_annual_energy_use))
+    print("Gas meter 1 peak use: {}".format(scenario.utility_network.gas_meters[0].total_annual_peak_use))
+    print("Elec meter 1 peak use: {}".format(scenario.utility_network.elec_meters[0].total_annual_peak_use))
+    print("------------------")
+    print("Gas meter 2 energy use: {}".format(scenario.utility_network.gas_meters[1].total_annual_energy_use))
+    print("Elec meter 2 energy use: {}".format(scenario.utility_network.elec_meters[1].total_annual_energy_use))
+    print("Gas meter 2 peak use: {}".format(scenario.utility_network.gas_meters[1].total_annual_peak_use))
+    print("Elec meter 2 peak use: {}".format(scenario.utility_network.elec_meters[1].total_annual_peak_use))
 
 if __name__ == "__main__":
     main()

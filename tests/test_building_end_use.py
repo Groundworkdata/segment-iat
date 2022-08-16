@@ -11,8 +11,6 @@ class TestBuildingEndUse(unittest.TestCase):
         install_year = 2020
         end_use_cost = 1000
         lifetime = 15
-        elec_consump = 1
-        gas_consump = 1
         sim_start_year = 2020
         sim_end_year = 2040
         replacement_year = 2035
@@ -21,8 +19,8 @@ class TestBuildingEndUse(unittest.TestCase):
             install_year=install_year,
             end_use_cost=end_use_cost,
             lifetime=lifetime,
-            elec_consump=elec_consump,
-            gas_consump=gas_consump,
+            elec_consump="./tests/input_data/stoves/elec_stove_elec_consump.json",
+            gas_consump="./tests/input_data/stoves/elec_stove_gas_consump.json",
             sim_start_year=sim_start_year,
             sim_end_year=sim_end_year,
             replacement_year=replacement_year
@@ -68,4 +66,86 @@ class TestBuildingEndUse(unittest.TestCase):
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             ],
             self.end_use.get_operational_vector()
+        )
+
+    def test_read_elec_consump(self):
+        """
+        Test that the electrical consumption is read properly
+        """
+        self.assertDictEqual(
+            {
+                "2018-01-01T00:00:00": 0.0,
+                "2018-01-01T01:00:00": 10.0,
+                "2018-01-01T02:00:00": 5.0
+            },
+            self.end_use.read_elec_consump()
+        )
+
+    def test_get_elec_consump(self):
+        self.end_use.elec_consump = {
+            "2018-01-01T00:00:00": 0.0,
+            "2018-01-01T01:00:00": 10.0,
+            "2018-01-01T02:00:00": 5.0,
+        }
+
+        self.end_use.operational_vector = [0, 0, 1, 1, 1, 0]
+
+        self.assertListEqual(
+            [0.0, 0.0, 15.0, 15.0, 15.0, 0.0],
+            self.end_use.get_elec_consump()
+        )
+
+    def test_get_elec_peak_annual(self):
+        self.end_use.elec_consump = {
+            "2018-01-01T00:00:00": 0.0,
+            "2018-01-01T01:00:00": 10.0,
+            "2018-01-01T02:00:00": 5.0,
+        }
+
+        self.end_use.operational_vector = [0, 0, 1, 1, 1, 0]
+
+        self.assertListEqual(
+            [0.0, 0.0, 10.0, 10.0, 10.0, 0.0],
+            self.end_use.get_elec_peak_annual()
+        )
+
+    def test_read_gas_consump(self):
+        """
+        Test that the electrical consumption is read properly
+        """
+        self.assertDictEqual(
+            {
+                "2018-01-01T00:00:00": 50.0,
+                "2018-01-01T01:00:00": 0.0,
+                "2018-01-01T02:00:00": 45.0
+            },
+            self.end_use.read_gas_consump()
+        )
+
+    def test_get_gas_consump(self):
+        self.end_use.gas_consump = {
+            "2018-01-01T00:00:00": 30.0,
+            "2018-01-01T01:00:00": 10.0,
+            "2018-01-01T02:00:00": 5.0,
+        }
+
+        self.end_use.operational_vector = [0, 0, 1, 1, 1, 1]
+
+        self.assertListEqual(
+            [0.0, 0.0, 45.0, 45.0, 45.0, 45.0],
+            self.end_use.get_gas_consump()
+        )
+
+    def test_get_gas_peak_annual(self):
+        self.end_use.gas_consump = {
+            "2018-01-01T00:00:00": 30.0,
+            "2018-01-01T01:00:00": 10.0,
+            "2018-01-01T02:00:00": 5.0,
+        }
+
+        self.end_use.operational_vector = [0, 0, 1, 1, 1, 1]
+
+        self.assertListEqual(
+            [0.0, 0.0, 30.0, 30.0, 30.0, 30.0],
+            self.end_use.get_gas_peak_annual()
         )

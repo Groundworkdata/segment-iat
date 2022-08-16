@@ -2,7 +2,9 @@
 This repo contains scripts and database prototyping for the Tactical Thermal Transition (TTT) team
 
 ## Scenario Creator
-The main function of this repository is to create input data for simulation scenarios. An example of this process can be found in the script `example.py`.
+The main function of this repository is to create input data for simulation scenarios. An example of this process can be found in the script `example.py`. The example script makes use of a set of JSON config files that are not tracked by git. See the tests for examples of config file formatting.
+
+**_TODO: Document config file format_**
 
 ## Repo structure
 ### `scenario_creator/`

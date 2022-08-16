@@ -29,7 +29,9 @@ class TestStove(unittest.TestCase):
         }
 
         self.stove = Stove(**inputs)
-        self.stove.initialize_end_use()
+        self.stove.operational_vector = [
+            0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ]
 
     def test_install_cost(self):
         """
