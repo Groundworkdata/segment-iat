@@ -1,8 +1,8 @@
 {
     "energy_source": "GAS",
     "stove_type": "GAS",
-    "elec_consump": 10,
-    "gas_consump": 500,
+    "elec_consump": "./tests/input_data/stoves/gas_stove_elec_consump.json",
+    "gas_consump": "./tests/input_data/stoves/gas_stove_gas_consump.json",
     "asset_cost": 1000,
     "lifetime": 10,
     "removal_labor_time": 2,

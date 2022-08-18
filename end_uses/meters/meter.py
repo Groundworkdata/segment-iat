@@ -45,11 +45,11 @@ class Meter(UtilityEndUse):
         building_id (str): The ID of the associated building for the meter
         building (Building): Instance of the associated Building object
         meter_type (str): The type of meter (ELEC, GAS)
-        total_energy_use (list): Total annual energy use behind the meter
+        total_annual_energy_use (list): Total annual energy use behind the meter
 
     Methods:
-        get_total_energy_use (np.array): Gets the total energy use for the meter
-        get_total_energy_demand (None): Gets the total energy demand for the meter
+        get_total_annual_energy_use (list): Gets the total energy use for the meter
+        get_total_annual_peak_use (list): Gets the total energy demand for the meter
     """
     def __init__(
             self,
@@ -80,7 +80,8 @@ class Meter(UtilityEndUse):
         self.building: Building = building
         self.meter_type: str = meter_type
 
-        self.total_energy_use: list = []
+        self.total_annual_energy_use: list = []
+        self.total_annual_peak_use: list = []
 
     def initialize_end_use(self) -> None:
         """
@@ -88,23 +89,23 @@ class Meter(UtilityEndUse):
         """
         super().initialize_end_use()
         if self.building:
-            self.total_energy_use = self.get_total_energy_use()
+            self.total_annual_energy_use = self.get_total_annual_energy_use()
+            self.total_annual_peak_use = self.get_total_annual_peak_use()
 
-    def get_total_energy_use(self) -> list:
+    def get_total_annual_energy_use(self) -> list:
         """
         Get the total energy use behind the meter
 
         Returns:
             list: List of annual energy consumption
         """
-        energy_attr = self.meter_type.lower() + "_consump_total"
+        energy_attr = self.meter_type.lower() + "_consump_annual"
         end_uses = list(self.building.end_uses.get("stove").values())
         energy_consumps = [getattr(i, energy_attr) for i in end_uses]
         return np.array(energy_consumps).sum(axis=0).tolist()
 
-    #TODO: Implement after getting example timeseries data
-    def get_total_energy_demand(self) -> None:
-        """
-        Need to also calculate the total demand (power) of all end uses
-        """
-        raise NotImplementedError
+    def get_total_annual_peak_use(self) -> list:
+        energy_attr = self.meter_type.lower() + "_peak_annual"
+        end_uses = list(self.building.end_uses.get("stove").values())
+        energy_consumps = [getattr(i, energy_attr) for i in end_uses]
+        return np.array(energy_consumps).sum(axis=0).tolist()
