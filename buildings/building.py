@@ -1,7 +1,9 @@
 """
 Defines a building. A bucket for all end uses
 """
+from fileinput import close
 import json
+from typing import Dict
 
 import numpy as np
 import pandas as pd
@@ -36,6 +38,7 @@ class Building:
         self.building_params: dict = building_params
         self.sim_settings: dict = sim_settings
 
+        self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: list = []
         self.building_id: str = ""
         self.end_uses: dict = {}
@@ -53,6 +56,10 @@ class Building:
             self.sim_settings.get("sim_start_year", 2020),
             self.sim_settings.get("sim_end_year", 2050)
         ))
+
+        self._year_timestamps = pd.date_range(
+            start="2018-01-01", end="2019-01-01", freq="H", closed="left"
+        )
 
     def _get_building_id(self):
         self.building_id = self.building_params.get("building_id")
@@ -122,6 +129,12 @@ class Building:
 
         full_e_df.to_csv("./{}_energy.csv".format(self.building_id), index_label="year")
 
+        total_consump_ts = self.get_total_consumption("elec")
+        total_consump_ts.to_csv(
+            "./{}_total_elec_consump.csv".format(self.building_id),
+            index_label="timestamp"
+        )
+
     def _sum_end_use_figures(self, cost_figure) -> pd.DataFrame:
         """
         cost_figure must be in [
@@ -142,3 +155,26 @@ class Building:
         costs_df["total_{}".format(cost_figure)] = costs_df.sum(axis=1)
 
         return costs_df
+
+    def get_total_consumption(self, e_type) -> pd.DataFrame:
+        """
+        Get the total energy consumption at the building, summing all end uses
+
+        e_type must be in ["elec", "gas"]
+        """
+        total_consump = {}
+
+        stoves = self.end_uses.get("stove")
+
+        # TODO: This wil output the elec timeseries for every asset, regardless of install year
+        # But what we really want to see is the impact the asset replacement has on load
+        # So do we want this to be an 8760 X number of sim years? That becomes a lot more data to
+        # save and track than just 8760 datapoints per building
+
+        for stove_id, stove in stoves.items():
+            total_consump[stove_id] = getattr(stove, "{}_consump".format(e_type))
+
+        total_consump_df = pd.DataFrame(total_consump)
+        total_consump_df.index = self._year_timestamps
+
+        return total_consump_df
