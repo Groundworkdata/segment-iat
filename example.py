@@ -22,14 +22,6 @@ def main():
             building_id,
             list(building.end_uses["stove"].keys()))
         )
-
-        for end_use_id, end_use in building.end_uses["stove"].items():
-            print("{} install cost: {}".format(end_use_id, end_use.install_cost))
-            print("{} depreciation: {}".format(end_use_id, end_use.depreciation))
-            print("{} stranded_value: {}".format(end_use_id, end_use.stranded_value))
-
-        print("{} total end use install cost: {}".format(building_id, building.aggregate()))
-
         print("------------------")
 
     print("==================")

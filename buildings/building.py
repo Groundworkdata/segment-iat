@@ -4,6 +4,7 @@ Defines a building. A bucket for all end uses
 import json
 
 import numpy as np
+import pandas as pd
 
 from end_uses.building_end_uses.stove import Stove
 
@@ -28,14 +29,14 @@ class Building:
 
     Methods:
         populate_building (None): Creates building end use class instances
-        aggregate (list): Aggregate attributes across all end-uses at the building
-            (Currently just sums install costs for stoves)
-        sum_install_costs (list): Sum all install cost vectors across stove end uses
+        write_building_cost_info (None): Write building cost information to a CSV
+        write_building_energy_info (None): Write building energy information to a CSV
     """
     def __init__(self, building_params: dict, sim_settings: dict):
         self.building_params: dict = building_params
         self.sim_settings: dict = sim_settings
 
+        self.years_vec: list = []
         self.building_id: str = ""
         self.end_uses: dict = {}
 
@@ -43,8 +44,15 @@ class Building:
         """
         Creates instances of all assets for a given building based on the config file
         """
+        self._get_years_vec()
         self._get_building_id()
         self._create_end_uses()
+
+    def _get_years_vec(self) -> None:
+        self.years_vec = list(range(
+            self.sim_settings.get("sim_start_year", 2020),
+            self.sim_settings.get("sim_end_year", 2050)
+        ))
 
     def _get_building_id(self):
         self.building_id = self.building_params.get("building_id")
@@ -84,18 +92,53 @@ class Building:
 
         return None
 
-    def aggregate(self) -> list:
+    def write_building_cost_info(self) -> None:
         """
-        Aggregate cost and energy uses across all end-uses at the building
+        Write calculated building information for total costs
         """
-        return self.sum_install_costs()
+        costs_df = self._sum_end_use_figures("install_cost")
+        depreciations_df = self._sum_end_use_figures("depreciation")
+        stranded_value_df = self._sum_end_use_figures("stranded_value")
 
-    def sum_install_costs(self) -> list:
-        """
-        Sum all install cost vectors across stove end uses
-        """
-        install_costs = np.zeros(20)
-        for stove in self.end_uses["stove"].values():
-            install_costs += np.array(stove.install_cost)
+        full_costs_df = pd.merge(costs_df, depreciations_df, left_index=True, right_index=True)
+        full_costs_df = pd.merge(
+            full_costs_df, stranded_value_df, left_index=True, right_index=True
+        )
 
-        return install_costs.tolist()
+        full_costs_df.to_csv("./{}_costs.csv".format(self.building_id), index_label="year")
+
+    def write_building_energy_info(self) -> None:
+        """
+        Write calcualted building information for energy use
+        """
+        elec_consump_df = self._sum_end_use_figures("elec_consump_annual")
+        gas_consump_df = self._sum_end_use_figures("gas_consump_annual")
+        elec_peak_consump_df = self._sum_end_use_figures("elec_peak_annual")
+        gas_peak_consump_df = self._sum_end_use_figures("gas_peak_annual")
+
+        full_e_df = pd.merge(elec_consump_df, gas_consump_df, left_index=True, right_index=True)
+        full_e_df = pd.merge(full_e_df, elec_peak_consump_df, left_index=True, right_index=True)
+        full_e_df = pd.merge(full_e_df, gas_peak_consump_df, left_index=True, right_index=True)
+
+        full_e_df.to_csv("./{}_energy.csv".format(self.building_id), index_label="year")
+
+    def _sum_end_use_figures(self, cost_figure) -> pd.DataFrame:
+        """
+        cost_figure must be in [
+            "install_cost", "depreciation", "stranded_value",
+            "elec_consump_annual", "gas_consump_annual", "elec_peak_annual", "gas_peak_annual"
+        ]
+        """
+        costs = {}
+
+        stoves = self.end_uses.get("stove")
+
+        for stove_id, stove in stoves.items():
+            costs[stove_id + "_{}".format(cost_figure)] = getattr(stove, cost_figure)
+
+        costs_df = pd.DataFrame(costs)
+        costs_df.index = self.years_vec
+
+        costs_df["total_{}".format(cost_figure)] = costs_df.sum(axis=1)
+
+        return costs_df
