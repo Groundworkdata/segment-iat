@@ -109,3 +109,5 @@ class Meter(UtilityEndUse):
         end_uses = list(self.building.end_uses.get("stove").values())
         energy_consumps = [getattr(i, energy_attr) for i in end_uses]
         return np.array(energy_consumps).sum(axis=0).tolist()
+
+    # TODO: Add aggregation of timeseries consumption
