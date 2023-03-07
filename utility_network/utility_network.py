@@ -2,6 +2,8 @@
 Defines a utility network. A bucket for all utility assets
 """
 from typing import List, Dict
+from typing_extensions import assert_type
+import pandas as pd
 
 import json
 
@@ -50,19 +52,23 @@ class UtilityNetwork:
         self.sim_settings = sim_settings
         self.buildings = buildings
         self.network_config: dict = {}
+    
+        self._year_timestamps: pd.DatetimeIndex = None
+        self.years_vec: list = []
 
-        self.gas_main: GasMain = None
+        self.gas_main: List[GasMain] = []
         self.gas_services: List[GasService] = []
         self.gas_meters: List[GasMeter] = []
         self.elec_meters: List[ElecMeter] = []
 
-    def create_utility_network(self) -> None:
+    def populate_utility_network(self) -> None:
         """
         Calls all functions to populate the utility network
         """
         self._read_config()
-        self._get_gas_mains()
-        self._get_gas_services()
+        self._get_years_vec()
+        self._create_gas_mains()
+        self._create_gas_services()
         self._get_gas_meters()
         self._get_elec_meters()
 
@@ -75,14 +81,24 @@ class UtilityNetwork:
 
         self.network_config = data
 
-    def _get_gas_mains(self) -> None:
+    def _get_years_vec(self) -> None:
+        self.years_vec = list(range(
+            self.sim_settings.get("sim_start_year", 2020),
+            self.sim_settings.get("sim_end_year", 2050)
+        ))
+
+        self._year_timestamps = pd.date_range(
+            start="2018-01-01", end="2019-01-01", freq="H", closed="left"
+        )
+
+    def _create_gas_mains(self) -> None:
         """
         Instantiate the GasMain and write to gas_main attr
         """
         main_config = self.network_config.get("gas_main")
         self.gas_main = GasMain(**main_config, **self.sim_settings)
 
-    def _get_gas_services(self) -> None:
+    def _create_gas_services(self) -> None:
         """
         Instantiate all necessary GasService instances and save to gas_services list attr
         """
@@ -115,3 +131,62 @@ class UtilityNetwork:
             elec_meter = ElecMeter(**meter_config, **self.sim_settings, building=building)
             elec_meter.initialize_end_use()
             self.elec_meters.append(elec_meter)
+
+    def write_network_cost_info(self) -> None:
+        """
+        Write calculated network information for total costs
+        """
+
+        asset_type = "main"
+        costs_df = self._sum_end_use_figures("install_cost", asset_type=asset_type)
+        depreciations_df = self._sum_end_use_figures("depreciation", asset_type=asset_type)
+        stranded_value_df = self._sum_end_use_figures("stranded_value", asset_type=asset_type)
+
+        full_costs_df = pd.merge(costs_df, depreciations_df, left_index=True, right_index=True)
+        full_costs_df = pd.merge(
+            full_costs_df, stranded_value_df, left_index=True, right_index=True
+        )
+
+        full_costs_df.to_csv("./{}_costs.csv".format(asset_type), index_label="year")
+
+
+    def write_network_energy_info(self) -> None:
+        """
+        Write calculated network information for total costs
+        """
+        asset_type = "main"
+        consump_df = self._sum_end_use_figures("gas_consump_annual", asset_type=asset_type)
+        peak_df = self._sum_end_use_figures("gas_peak_annual", asset_type=asset_type)
+        leakage_df = self._sum_end_use_figures("gas_leakage_annual", asset_type=asset_type)
+
+        full_info_df = pd.merge(consump_df, peak_df, left_index=True, right_index=True)
+        full_info_df = pd.merge(
+            full_info_df, leakage_df, left_index=True, right_index=True
+        )
+
+        full_info_df.to_csv("./{}_usage_info.csv".format(assert_type), index_label="year")
+
+
+    def _sum_end_use_figures(self, cost_figure, asset_type) -> pd.DataFrame:
+        """
+        cost_figure must be in [
+            "install_cost", "depreciation", "stranded_value",
+            "elec_consump_annual", "gas_consump_annual", "elec_peak_annual", "gas_peak_annual", "gas_leakage_annual"
+        ]
+        """
+        costs = {}
+
+        if asset_type == "main":
+            for asset_id, asset_ in self.gas_main.items():
+                costs[asset_id + "_{}".format(cost_figure)] = getattr(asset_, cost_figure)
+
+        if asset_type == "service":
+            for asset_id, asset_ in self.gas_services.items():
+                costs[asset_id + "_{}".format(cost_figure)] = getattr(asset_, cost_figure)
+
+        costs_df = pd.DataFrame(costs)
+        costs_df.index = self.years_vec
+
+        costs_df["total_{}".format(cost_figure)] = costs_df.sum(axis=1)
+
+        return costs_df
