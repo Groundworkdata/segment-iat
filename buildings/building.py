@@ -79,12 +79,13 @@ class Building:
         self.building_params: dict = building_params
         self.sim_settings: dict = sim_settings
         self.scenario_mapping: List[dict] = scenario_mapping
+        self.resstock_metadata = building_params.get("resstock_metadata")
 
         self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: list = []
         self.building_id: str = ""
         self.end_uses: dict = {}
-        self.resstock_scenarios: dict = {}
+        self.resstock_scenarios: Dict[int, pd.DataFrame] = {}
         self.baseline_consumption: pd.DataFrame = None
         self.retrofit_consumption: pd.DataFrame = None
 
@@ -98,6 +99,8 @@ class Building:
         self._get_baseline_consumptions()
         self._get_retrofit_consumptions()
         self._create_end_uses()
+        self._calc_baseline_energy()
+        self._calc_retrofit_energy()
 
     def _get_years_vec(self) -> None:
         self.years_vec = list(range(
@@ -124,7 +127,7 @@ class Building:
             self.resstock_scenarios[i] = self._get_resstock_scenario(i)
 
     def _get_resstock_scenario(self, i) -> pd.DataFrame:
-        return self.resstock_connector("MA", i, self.building_params.get("resstock_id"))
+        return self.resstock_timeseries_connector("MA", i, self.building_params.get("resstock_id"))
     
     def _get_baseline_consumptions(self) -> None:
         self.baseline_consumption = self.resstock_scenarios[0][RESSTOCK_ENERGY_CONSUMP_KEYS]
@@ -154,15 +157,11 @@ class Building:
         """
         Create the end uses for the building
         """
-        end_use_params = self.building_params.get("end_uses")
+        end_use_params: List[dict] = self.building_params.get("end_uses", [{}])
 
-        for end_use_type, end_uses in end_use_params.items():
-            if end_use_type not in self.end_uses:
-                self.end_uses[end_use_type] = {}
-
-            for end_use in end_uses:
-                end_use_id = end_use.get("end_use_id")
-                self.end_uses[end_use_type][end_use_id] = self._get_single_end_use(end_use)
+        for end_use in end_use_params:
+            end_use_type = end_use.get("end_use")
+            self.end_uses[end_use_type] = self._get_single_end_use(end_use)
 
     def _get_single_end_use(self, params: dict):
         config_filepath = params.pop("end_use_config")
@@ -172,11 +171,14 @@ class Building:
 
         end_use_params = data
 
-        if params.get("end_use_type") == "stove":
+        if params.get("end_use") == "stove":
             stove = Stove(
-                **params,
+                end_use_params.pop("original_energy_source"),
+                self.resstock_scenarios,
+                self.scenario_mapping,
+                self.sim_settings.get("decarb_scenario"),
+                self.resstock_metadata,
                 **end_use_params,
-                **self.sim_settings
             )
 
             stove.initialize_end_use()
@@ -184,6 +186,72 @@ class Building:
             return stove
 
         return None
+    
+    def _calc_baseline_energy(self) -> None:
+        """
+        Steps:
+        1. Get a single asset
+        2. Get all asset energies and add them to the building consumption dataframe with underscore
+            "update"
+        3. Repeat 1 and 2 for all assets
+        4. Get all asset consumptions ("_update") of a given energy type
+        5. Get the building "other" consumption for that energy type
+        6. Calculate the updated total building consumption for that energy type as the sum of 4 & 5
+        7. Repeat 4-6 for all energy types
+        """
+        stove = self.end_uses["stove"]
+
+        baseline_energies_stove = stove.baseline_energy_use
+        self.baseline_consumption = pd.concat(
+            [
+                self.baseline_consumption,
+                baseline_energies_stove.rename(
+                    columns={col: "{}_update".format(col) for col in baseline_energies_stove}
+                )
+            ],
+            axis=1
+        )
+
+        # TODO: Add lines for other assets
+
+        asset_updates = [i for i in self.baseline_consumption.columns if i.endswith("_update")]
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            asset_update_consump_keys = [
+                i for i in asset_updates if i.startswith("out.{}".format(fuel))
+            ]
+            asset_update_consump_keys.append("out.{}.other.energy_consumption".format(fuel))
+
+            self.baseline_consumption["out.{}.total.energy_consumption_update".format(fuel)] = \
+                self.baseline_consumption[asset_update_consump_keys].sum(axis=1)
+
+    def _calc_retrofit_energy(self) -> None:
+        """
+        Steps are same as _calc_baseline_energy
+        """
+        stove = self.end_uses["stove"]
+
+        retrofit_energies_stove = stove.retrofit_energy_use
+        self.retrofit_consumption = pd.concat(
+            [
+                self.retrofit_consumption,
+                retrofit_energies_stove.rename(
+                    columns={col: "{}_update".format(col) for col in retrofit_energies_stove}
+                )
+            ],
+            axis=1
+        )
+
+        asset_updates = [i for i in self.retrofit_consumption.columns if i.endswith("_update")]
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            asset_update_consump_keys = [
+                i for i in asset_updates if i.startswith("out.{}".format(fuel))
+            ]
+            asset_update_consump_keys.append("out.{}.other.energy_consumption".format(fuel))
+
+            self.retrofit_consumption["out.{}.total.energy_consumption_update".format(fuel)] = \
+                self.retrofit_consumption[asset_update_consump_keys].sum(axis=1)
 
     def write_building_cost_info(self) -> None:
         """
@@ -266,9 +334,9 @@ class Building:
         return total_consump_df
 
     @staticmethod
-    def resstock_connector(state: str, scenario: int, building_id: int) -> pd.DataFrame:
+    def resstock_timeseries_connector(state: str, scenario: int, building_id: int) -> pd.DataFrame:
         """
-        ResStock connection for the 2022 release 1.1
+        ResStock connection for the 2022 release 1.1 for timeseries data
 
         Args:
             state (str): The state code
@@ -286,4 +354,5 @@ class Building:
         response = pd.read_parquet(building_url)
 
         return response
-
+    
+    #TODO: Read in metadata so we can get the ResStock input data for scenarios
