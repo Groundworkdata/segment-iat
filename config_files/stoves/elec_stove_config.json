@@ -1,0 +1,14 @@
+{
+    "energy_source": "ELEC",
+    "stove_type": "ELEC",
+    "elec_consump": "./config_files/stoves/elec_stove_elec_consump.json",
+    "gas_consump": "./config_files/stoves/elec_stove_gas_consump.json",
+    "asset_cost": 1500,
+    "lifetime": 10,
+    "removal_labor_time": 2,
+    "labor_rate": 50,
+    "misc_supplies_price": 75,
+    "retail_markup": 0.18,
+    "installation_labor_time": 1,
+    "annual_cost_escalation": 0.01
+}

@@ -1,0 +1,47 @@
+[
+    {
+        "insulation": "none",
+        "heat_pump": "none",
+        "heating_fuel": "existing",
+        "water_heater": "existing",
+        "dryer": "existing",
+        "range": "existing",
+        "resstock_scenarios": [0]
+    },
+    {
+        "insulation": "enhanced",
+        "heat_pump": "high_efficiency",
+        "heating_fuel": "none",
+        "water_heater": "heat_pump",
+        "dryer": "heat_pump",
+        "range": "induction",
+        "resstock_scenarios": [10]
+    },
+    {
+        "insulation": "none",
+        "heat_pump": "min_efficiency",
+        "heating_fuel": "existing",
+        "water_heater": "heat_pump",
+        "dryer": "existing",
+        "range": "existing",
+        "resstock_scenarios": [5, 6]
+    },
+    {
+        "insulation": "none",
+        "heat_pump": "min_efficiency",
+        "heating_fuel": "existing",
+        "water_heater": "heat_pump",
+        "dryer": "existing",
+        "range": "existing",
+        "resstock_scenarios": [5, 6]
+    },
+    {
+        "insulation": "enhanced",
+        "heat_pump": "high_efficiency",
+        "heating_fuel": "none",
+        "water_heater": "heat_pump",
+        "dryer": "heat_pump",
+        "range": "induction",
+        "resstock_scenarios": [10]
+    }
+]

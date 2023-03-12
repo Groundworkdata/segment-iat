@@ -1,14 +1,50 @@
 """
 Defines a building. A bucket for all end uses
 """
-from fileinput import close
 import json
-from typing import Dict
+from typing import Dict, List
 
 import numpy as np
 import pandas as pd
 
 from end_uses.building_end_uses.stove import Stove
+
+
+ASSET_ENERGY_CONSUMP_KEYS = [
+    # stove
+    "out.electricity.range_oven.energy_consumption",
+    "out.natural_gas.range_oven.energy_consumption",
+    "out.propane.range_oven.energy_consumption",
+    # clothes dryer
+    "out.electricity.clothes_dryer.energy_consumption",
+    "out.natural_gas.clothes_dryer.energy_consumption",
+    "out.propane.clothes_dryer.energy_consumption",
+    # DHW
+    "out.electricity.hot_water.energy_consumption",
+    "out.natural_gas.hot_water.energy_consumption",
+    "out.propane.hot_water.energy_consumption",
+    "out.fuel_oil.hot_water.energy_consumption",
+    # HVAC
+    "out.electricity.heating.energy_consumption",
+    "out.electricity.cooling.energy_consumption",
+    "out.natural_gas.heating.energy_consumption",
+    "out.natural_gas.heating_hp_bkup.energy_consumption", # hybrid configuration
+    "out.propane.heating.energy_consumption",
+    "out.propane.heating_hp_bkup.energy_consumption", # hybrid configuration
+    "out.fuel_oil.heating.energy_consumption",
+    "out.fuel_oil.heating_hp_bkup.energy_consumption", #hybrid configuration
+]
+
+
+RESSTOCK_ENERGY_CONSUMP_KEYS = [
+    "out.site_energy.total.energy_consumption",
+    "out.electricity.total.energy_consumption",
+    "out.natural_gas.total.energy_consumption",
+    "out.fuel_oil.total.energy_consumption",
+    "out.propane.total.energy_consumption",
+    # Add assets
+    *ASSET_ENERGY_CONSUMP_KEYS
+]
 
 
 class Building:
@@ -34,14 +70,23 @@ class Building:
         write_building_cost_info (None): Write building cost information to a CSV
         write_building_energy_info (None): Write building energy information to a CSV
     """
-    def __init__(self, building_params: dict, sim_settings: dict):
+    def __init__(
+            self,
+            building_params: dict,
+            sim_settings: dict,
+            scenario_mapping: List[dict],
+    ):
         self.building_params: dict = building_params
         self.sim_settings: dict = sim_settings
+        self.scenario_mapping: List[dict] = scenario_mapping
 
         self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: list = []
         self.building_id: str = ""
         self.end_uses: dict = {}
+        self.resstock_scenarios: dict = {}
+        self.baseline_consumption: pd.DataFrame = None
+        self.retrofit_consumption: pd.DataFrame = None
 
     def populate_building(self) -> None:
         """
@@ -49,6 +94,9 @@ class Building:
         """
         self._get_years_vec()
         self._get_building_id()
+        self._get_resstock_buildings()
+        self._get_baseline_consumptions()
+        self._get_retrofit_consumptions()
         self._create_end_uses()
 
     def _get_years_vec(self) -> None:
@@ -61,8 +109,46 @@ class Building:
             start="2018-01-01", end="2019-01-01", freq="H", closed="left"
         )
 
-    def _get_building_id(self):
+    def _get_building_id(self) -> None:
         self.building_id = self.building_params.get("building_id")
+
+    def _get_resstock_buildings(self) -> None:
+        decarb_scenario = self.sim_settings.get("decarb_scenario")
+        scenario_params = self.scenario_mapping[decarb_scenario]
+
+        resstock_scenarios = scenario_params.get("resstock_scenarios")
+        resstock_scenarios.append(0)
+        resstock_scenarios = list(set(resstock_scenarios))
+
+        for i in resstock_scenarios:
+            self.resstock_scenarios[i] = self._get_resstock_scenario(i)
+
+    def _get_resstock_scenario(self, i) -> pd.DataFrame:
+        return self.resstock_connector("MA", i, self.building_params.get("resstock_id"))
+    
+    def _get_baseline_consumptions(self) -> None:
+        self.baseline_consumption = self.resstock_scenarios[0][RESSTOCK_ENERGY_CONSUMP_KEYS]
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            asset_fuel_keys = [i for i in ASSET_ENERGY_CONSUMP_KEYS if fuel in i]
+            asset_fuel_consumps = self.baseline_consumption[asset_fuel_keys].sum(axis=1)
+
+            self.baseline_consumption["out.{}.other.energy_consumption".format(fuel)] = (
+                self.baseline_consumption["out.{}.total.energy_consumption".format(fuel)]
+                - asset_fuel_consumps
+            )
+
+    def _get_retrofit_consumptions(self, scenario: int) -> None:
+        self.retrofit_consumption = self.resstock_scenarios[scenario][RESSTOCK_ENERGY_CONSUMP_KEYS]
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            asset_fuel_keys = [i for i in ASSET_ENERGY_CONSUMP_KEYS if fuel in i]
+            asset_fuel_consumps = self.retrofit_consumption[asset_fuel_keys].sum(axis=1)
+
+            self.retrofit_consumption["out.{}.other.energy_consumption".format(fuel)] = (
+                self.retrofit_consumption["out.{}.total.energy_consumption".format(fuel)]
+                - asset_fuel_consumps
+            )
 
     def _create_end_uses(self):
         """
@@ -178,3 +264,26 @@ class Building:
         total_consump_df.index = self._year_timestamps
 
         return total_consump_df
+
+    @staticmethod
+    def resstock_connector(state: str, scenario: int, building_id: int) -> pd.DataFrame:
+        """
+        ResStock connection for the 2022 release 1.1
+
+        Args:
+            state (str): The state code
+            scenario (int): The simulation scenario
+            building_id (int): The ID of the individual building
+        """
+        BUILDING_BASE_URL = "https://oedi-data-lake.s3.amazonaws.com/"\
+                    "nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2022/"\
+                    "resstock_amy2018_release_1.1/timeseries_individual_buildings/by_state/"
+
+        building_url = BUILDING_BASE_URL + "upgrade={0}/state={1}/{2}-{0}.parquet".format(
+            scenario, state, building_id
+        )
+
+        response = pd.read_parquet(building_url)
+
+        return response
+

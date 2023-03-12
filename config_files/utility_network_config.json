@@ -1,0 +1,82 @@
+{
+    "gas_main": {
+        "install_year": 2010,
+        "asset_cost": 100,
+        "replacement_year": 2060,
+        "lifetime": 50,
+        "asset_id": "main001",
+        "parent_id": "",
+        "length": 400,
+        "diameter": 6,
+        "material": "cast_iron",
+        "safety_ratings": 1,
+        "leak_rate": 0.1,
+        "end_of_life": 3
+    },
+    "gas_services": [
+        {
+            "install_year": 2010,
+            "replacement_year": 2060,
+            "asset_id": "service001",
+            "parent_id": "main001",
+            "asset_cost": 250,
+            "length": 50,
+            "diameter": 3,
+            "material": "cast_iron",
+            "safety_ratings": 1,
+            "leak_rate": 0.1,
+            "end_of_life": 3
+        },
+        {
+            "install_year": 2010,
+            "replacement_year": 2060,
+            "asset_id": "service002",
+            "parent_id": "main001",
+            "asset_cost": 250,
+            "length": 50,
+            "diameter": 3,
+            "material": "cast_iron",
+            "safety_ratings": 1,
+            "leak_rate": 0.1,
+            "end_of_life": 3
+        }
+    ],
+    "gas_meters": [
+        {
+            "install_year": 2010,
+            "asset_cost": 50,
+            "replacement_year": 2050,
+            "lifetime": 40,
+            "asset_id": "gas_meter001",
+            "parent_id": "service001",
+            "building_id": "building001"
+        },
+        {
+            "install_year": 2010,
+            "asset_cost": 50,
+            "replacement_year": 2050,
+            "lifetime": 40,
+            "asset_id": "gas_meter002",
+            "parent_id": "service002",
+            "building_id": "building002"
+        }
+    ],
+    "elec_meters": [
+        {
+            "install_year": 2010,
+            "asset_cost": 50,
+            "replacement_year": 2050,
+            "lifetime": 40,
+            "asset_id": "elec_meter001",
+            "building_id": "building001"
+        },
+        {
+            "install_year": 2010,
+            "asset_cost": 50,
+            "replacement_year": 2050,
+            "lifetime": 40,
+            "asset_id": "elec_meter002",
+            "building_id": "building002"
+        }
+    ]
+}
