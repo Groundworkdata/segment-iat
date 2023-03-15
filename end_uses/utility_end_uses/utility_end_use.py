@@ -40,25 +40,26 @@ class UtilityEndUse(Asset):
     Methods:
         None
     """
+
     def __init__(
-            self,
-            install_year,
-            asset_cost,
-            replacement_year,
+        self,
+        gisid,
+        parentid,
+        inst_date,
+        inst_cost,
+        lifetime,
+        sim_start_year,
+        sim_end_year,
+        replacement_year,
+    ):
+        super().__init__(
+            inst_date,
+            inst_cost,
             lifetime,
             sim_start_year,
             sim_end_year,
-            asset_id,
-            parent_id
-    ):
-        super().__init__(
-            install_year,
-            asset_cost,
             replacement_year,
-            lifetime,
-            sim_start_year,
-            sim_end_year
         )
 
-        self.asset_id = asset_id
-        self.parent_id = parent_id
+        self.asset_id = gisid
+        self.parent_id = parentid

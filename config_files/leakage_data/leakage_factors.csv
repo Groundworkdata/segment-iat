@@ -1,0 +1,13 @@
+asset,code,value,unit
+gas_main,CI,59715.0528,scf/mile-yr
+gas_main,BS,42254.12161,scf/mile-yr
+gas_main,CS,3758.445451,scf/mile-yr
+gas_main,PL,449.131664,scf/mile-yr
+gas_service,BS,269.9778875,scf/service-yr
+gas_service,CS,116.6281926,scf/service-yr
+gas_service,PL,10.69905174,scf/service-yr
+gas_service,CU,254,scf/service-yr
+gas_service,PE-A,254,scf/service-yr
+gas_meter,Residential,85,sfc/meter-year
+gas_meter,Commercial,437,sfc/meter-year
+gas_meter,Industrial,12024,sfc/meter-year

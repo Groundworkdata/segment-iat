@@ -38,18 +38,19 @@ class Asset:
     Methods:
         initialize_end_use: Initializes the asset by calculating all derived variables
     """
+
     def __init__(
-            self,
-            install_year: int,
-            asset_cost: float,
-            replacement_year: int,
-            lifetime: int,
-            sim_start_year: int,
-            sim_end_year: int
+        self,
+        inst_date: int,
+        inst_cost: float,
+        lifetime: int,
+        sim_start_year: int,
+        sim_end_year: int,
+        replacement_year: int,
     ):
-        self.install_year: int = install_year
-        self.asset_cost: float = asset_cost
-        self.replacement_year: int = replacement_year
+        self.install_year: int = int(inst_date.split("/")[2])
+        self.asset_cost: float = inst_cost
+        self.replacement_year: int = int(replacement_year)
         self.lifetime: int = lifetime
         self.sim_start_year: int = sim_start_year
         self.sim_end_year: int = sim_end_year
@@ -63,14 +64,15 @@ class Asset:
     def initialize_end_use(self) -> None:
         self.years_vector = self.get_years_vector()
         self.operational_vector = self.get_operational_vector()
-        self.install_cost = self.get_install_cost()
-        self.depreciation = self.get_depreciation()
-        self.stranded_value = self.get_stranded_value()
+        self.retrofit_vector: list = [1 - i for i in self.operational_vector]
+        # self.install_cost = self.get_install_cost()
+        # self.depreciation = self.get_depreciation()
+        # self.stranded_value = self.get_stranded_value()
 
     def get_years_vector(self) -> list:
         return [
             self.sim_start_year + i
-            for i in range(self.sim_end_year-self.sim_start_year)
+            for i in range(self.sim_end_year - self.sim_start_year)
         ]
 
     def get_operational_vector(self) -> list:
@@ -81,8 +83,7 @@ class Asset:
         sim_years = [self.sim_start_year + i for i in range(sim_length)]
 
         return [
-            1 if self.install_year <= i and self.replacement_year > i
-            else 0
+            1 if self.install_year <= i and self.replacement_year > i else 0
             for i in sim_years
         ]
 
@@ -108,26 +109,36 @@ class Asset:
         salvage_value = 0
         depreciation_rate = (self.asset_cost - salvage_value) / self.lifetime
 
-        operational_lifetime = min(self.replacement_year - self.install_year, self.lifetime)
+        operational_lifetime = min(
+            self.replacement_year - self.install_year, self.lifetime
+        )
         operations_end = self.install_year + operational_lifetime
 
-        depreciated_value = np.array([
-            self.asset_cost - depreciation_rate * i
-            for i in range(operational_lifetime+1)
-        ])
+        depreciated_value = np.array(
+            [
+                self.asset_cost - depreciation_rate * i
+                for i in range(operational_lifetime + 1)
+            ]
+        )
 
         if operations_end > self.sim_end_year:
-            depreciated_value = depreciated_value[:self.sim_end_year - operations_end - 1]
+            depreciated_value = depreciated_value[
+                : self.sim_end_year - operations_end - 1
+            ]
 
-        depreciated_value = depreciated_value[max(0, self.sim_start_year - self.install_year):]
+        depreciated_value = depreciated_value[
+            max(0, self.sim_start_year - self.install_year) :
+        ]
 
         depreciation_start_index = max(self.install_year - self.sim_start_year, 0)
         depreciation_end_index = min(
             max(self.install_year - self.sim_start_year, 0) + len(depreciated_value),
-            len(depreciation_vec)
+            len(depreciation_vec),
         )
 
-        depreciation_vec[depreciation_start_index: depreciation_end_index] = depreciated_value
+        depreciation_vec[
+            depreciation_start_index:depreciation_end_index
+        ] = depreciated_value
 
         return depreciation_vec.tolist()
 
@@ -150,11 +161,17 @@ class Asset:
             return stranded_val.tolist()
 
         # Handle if replacement in final year and not fully depreciated
-        elif self.replacement_year == self.sim_end_year and operational_lifetime != self.lifetime:
+        elif (
+            self.replacement_year == self.sim_end_year
+            and operational_lifetime != self.lifetime
+        ):
             replacement_ref = -1
 
         # Handle if replacement in final year and fully depreciated
-        elif self.replacement_year == self.sim_end_year and operational_lifetime == self.lifetime:
+        elif (
+            self.replacement_year == self.sim_end_year
+            and operational_lifetime == self.lifetime
+        ):
             return stranded_val.tolist()
 
         stranded_val[replacement_ref] = self.depreciation[replacement_ref]
