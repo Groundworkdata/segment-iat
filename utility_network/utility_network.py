@@ -2,7 +2,6 @@
 Defines a utility network. A bucket for all utility assets
 """
 from typing import List, Dict
-from typing_extensions import assert_type
 import pandas as pd
 
 import json
@@ -164,7 +163,7 @@ class UtilityNetwork:
             full_info_df, leakage_df, left_index=True, right_index=True
         )
 
-        full_info_df.to_csv("./{}_usage_info.csv".format(assert_type), index_label="year")
+        full_info_df.to_csv("./{}_usage_info.csv".format(asset_type), index_label="year")
 
 
     def _sum_end_use_figures(self, cost_figure, asset_type) -> pd.DataFrame:

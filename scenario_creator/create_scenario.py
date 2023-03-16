@@ -2,6 +2,7 @@
 Creates a scenario based on input values
 """
 import json
+from typing import List
 
 from buildings.building import Building
 from utility_network.utility_network import UtilityNetwork
@@ -15,21 +16,26 @@ class ScenarioCreator:
             self,
             sim_settings_filepath: str,
             building_config_filepath: str,
-            utility_network_config_filepath: str
+            utility_network_config_filepath: str,
+            scenario_mapping_filepath: str
     ):
         self._sim_settings_filepath = sim_settings_filepath
         self._building_config_filepath = building_config_filepath
         self._utility_network_config_filepath = utility_network_config_filepath
+        self._scenario_mapping_filepath = scenario_mapping_filepath
 
         self.sim_config: dict = {}
+        self.scenario_mapping: List[dict] = []
         self.buildings_config: dict = {}
         self.buildings: dict = {}
         self.utility_network: UtilityNetwork = None
 
     def create_scenario(self):
         self.get_sim_settings()
+        self.get_scenario_mapping()
         self.create_building()
-        self.get_utility_network()
+        # TODO: Update after utility model changes complete
+        # self.get_utility_network()
 
     def get_sim_settings(self) -> None:
         """
@@ -39,6 +45,14 @@ class ScenarioCreator:
             data = json.load(f)
         self.sim_config = data
 
+    def get_scenario_mapping(self) -> None:
+        """
+        Read in ResStock scenario mapping
+        """
+        with open(self._scenario_mapping_filepath) as f:
+            data = json.load(f)
+        self.scenario_mapping = data
+
     def create_building(self) -> None:
         with open(self._building_config_filepath) as f:
             data = json.load(f)
@@ -47,12 +61,14 @@ class ScenarioCreator:
         for building_params in self.buildings_config:
             building = Building(
                 building_params,
-                self.sim_config
+                self.sim_config,
+                self.scenario_mapping
             )
 
             building.populate_building()
-            building.write_building_cost_info()
             building.write_building_energy_info()
+            #TODO: Update after cost functions updated
+            # building.write_building_cost_info()
 
             self.buildings[building.building_id] = building
 

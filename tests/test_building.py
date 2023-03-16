@@ -3,8 +3,8 @@ Unit tests for the Building module
 """
 
 #TODO: Integration tests
-
 import json
+import os
 import unittest
 from unittest.mock import Mock, patch
 
@@ -100,6 +100,11 @@ class TestBuilding(unittest.TestCase):
             }),
             self.building._sum_end_use_figures("install_cost")
         )
+
+    def test_get_building_id(self):
+        self.building._get_building_id()
+
+        self.assertEqual(self.building.building_id, "building001")
 
     @patch("buildings.building.Building._get_resstock_scenario")
     def test_get_resstock_buildings(self, mock_get_resstock_scenario: Mock):
@@ -200,6 +205,60 @@ class TestBuilding(unittest.TestCase):
     def test_get_retrofit_consumptions(self):
         pass
 
+    @patch("buildings.building.Building._get_single_end_use")
+    def test_create_end_uses(self, mock_get_single_end_use: Mock):
+        mock_get_single_end_use.return_value = "my_stove"
+
+        self.building._create_end_uses()
+
+        self.assertDictEqual(
+            self.building.end_uses,
+            {"stove": "my_stove"}
+        )
+
+        mock_get_single_end_use.assert_called_once_with({
+            "end_use": "stove",
+            "original_energy_source": "gas",
+            "original_config": "./stoves/gas_stove_config.json",
+            "replacement_config": "./stoves/elec_stove_config.json"
+        })
+
+    @patch("buildings.building.Stove")
+    def test_get_single_end_use(self, mock_stove: Mock):
+        initialized_stove = Mock()
+        mock_stove.return_value = initialized_stove
+
+        params = {
+            "end_use": "stove",
+            "replacement_config": "tests/input_data/stoves/elec_stove_config.json",
+            "original_energy_source": "gas",
+        }
+
+        single_end_use_return = self.building._get_single_end_use(params)
+
+        self.assertEqual(
+            single_end_use_return,
+            initialized_stove
+        )
+
+        mock_stove.assert_called_once_with(
+            "gas",
+            {},
+            self.scenario_mapping,
+            3,
+            "resstock_metadata",
+            **{
+                "asset_cost": 1500,
+                "lifetime": 10,
+                "removal_labor_time": 2,
+                "labor_rate": 50,
+                "misc_supplies_price": 75,
+                "retail_markup": 0.18,
+                "installation_labor_time": 1,
+                "annual_cost_escalation": 0.01
+            }
+        )
+
     def test_calc_baseline_energy(self):
         stove = Mock()
         stove.baseline_energy_use = pd.DataFrame({
@@ -283,3 +342,36 @@ class TestBuilding(unittest.TestCase):
                 "out.fuel_oil.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
             }).sort_index(axis=1)
         )
+
+    def test_write_building_energy_info(self):
+        self.building.baseline_consumption = pd.DataFrame({
+            "out.electricity.total.energy_conumption": {0: 1, 1: 2, 3: 2, 4: 0},
+            "out.natural_gas.total.energy_conumption": {0: 1, 1: 2, 3: 2, 4: 0},
+            "out.propane.total.energy_conumption": {0: 1, 1: 2, 3: 2, 4: 0},
+            "out.propane.stove.energy_conumption": {0: 1, 1: 2, 3: 2, 4: 0},
+        })
+
+        self.building.retrofit_consumption = pd.DataFrame({
+            "out.electricity.total.energy_conumption": {0: 1, 1: 2, 3: 2, 4: 50},
+            "out.natural_gas.total.energy_conumption": {0: 0, 1: 2, 3: 2, 4: 0},
+            "out.propane.total.energy_conumption": {0: 1, 1: 6, 3: 2, 4: 0},
+            "out.propane.stove.energy_conumption": {0: 1, 1: 2, 3: 2, 4: 0},
+        })
+
+        self.building._get_building_id()
+        self.building.write_building_energy_info()
+
+        expected_baseline_csv = "./outputs/building001_baseline_consump.csv"
+        expected_retrofit_csv = "./outputs/building001_retrofit_consump.csv"
+
+        self.assertTrue(os.path.exists(expected_baseline_csv))
+        self.assertTrue(os.path.exists(expected_retrofit_csv))
+
+        written_baseline = pd.read_csv(expected_baseline_csv, index_col=0)
+        written_retrofit = pd.read_csv(expected_retrofit_csv, index_col=0)
+
+        pd.testing.assert_frame_equal(self.building.baseline_consumption, written_baseline)
+        pd.testing.assert_frame_equal(self.building.retrofit_consumption, written_retrofit)
+
+        os.remove(expected_baseline_csv)
+        os.remove(expected_retrofit_csv)

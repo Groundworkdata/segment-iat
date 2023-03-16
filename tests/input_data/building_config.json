@@ -3,14 +3,14 @@
         "building_id": "building001",
         "resstock_id": 1,
         "retrofit_year": 2027,
-        "end_uses": {
-            "stove": [
-                {
-                    "end_use": "stove",
-                    "original_config": "./stoves/gas_stove_config.json",
-                    "replacement_config": "./stoves/elec_stove_config.json"
-                }
-            ]
-        }
+        "resstock_metadata": "resstock_metadata",
+        "end_uses": [
+            {
+                "end_use": "stove",
+                "original_energy_source": "gas",
+                "original_config": "./stoves/gas_stove_config.json",
+                "replacement_config": "./stoves/elec_stove_config.json"
+            }
+        ]
     }
 ]

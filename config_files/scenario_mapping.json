@@ -10,6 +10,7 @@
         "range_resstock_scenario": 0,
         "range_retrofit_fuel": "existing",
         "hvac": 0,
+        "main_resstock_retrofit_scenario": 0,
         "resstock_scenarios": [0]
     },
     {
@@ -23,6 +24,7 @@
         "range_resstock_scenario": 10,
         "range_retrofit_fuel": "electricity",
         "hvac": 10,
+        "main_resstock_retrofit_scenario": 10,
         "resstock_scenarios": [10]
     },
     {
@@ -36,6 +38,7 @@
         "range_resstock_scenario": 5,
         "range_retrofit_fuel": "existing",
         "hvac": 10,
+        "main_resstock_retrofit_scenario": 5,
         "resstock_scenarios": [5, 6]
     },
     {
@@ -49,6 +52,7 @@
         "range_resstock_scenario": 5,
         "range_retrofit_fuel": "existing",
         "hvac": 10,
+        "main_resstock_retrofit_scenario": 5,
         "resstock_scenarios": [5, 6]
     },
     {
@@ -62,6 +66,7 @@
         "range_resstock_scenario": 10,
         "range_retrofit_fuel": "electricity",
         "hvac": 10,
+        "main_resstock_retrofit_scenario": 10,
         "resstock_scenarios": [10]
     }
 ]
