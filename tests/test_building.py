@@ -1,6 +1,9 @@
 """
 Unit tests for the Building module
 """
+
+#TODO: Integration tests
+
 import json
 import unittest
 from unittest.mock import Mock, patch
@@ -113,16 +116,16 @@ class TestBuilding(unittest.TestCase):
             }
         )
 
-    @patch("buildings.building.Building.resstock_connector")
-    def test_get_resstock_scenario(self, mock_resstock_connector: Mock):
-        mock_resstock_connector.return_value = "connected"
+    @patch("buildings.building.Building.resstock_timeseries_connector")
+    def test_get_resstock_scenario(self, mock_resstock_timeseries_connector: Mock):
+        mock_resstock_timeseries_connector.return_value = "connected"
 
         self.assertEqual(
             self.building._get_resstock_scenario(30),
             "connected"
         )
 
-        mock_resstock_connector.assert_called_once_with(
+        mock_resstock_timeseries_connector.assert_called_once_with(
             "MA", 30, 1
         )
 
@@ -192,4 +195,91 @@ class TestBuilding(unittest.TestCase):
             expected_baseline_consump,
             self.building.baseline_consumption,
             check_dtype=False
+        )
+
+    def test_get_retrofit_consumptions(self):
+        pass
+
+    def test_calc_baseline_energy(self):
+        stove = Mock()
+        stove.baseline_energy_use = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {1: 0, 2: 10, 3: 10, 4: 0},
+            "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+            "out.propane.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+        })
+
+        self.building.end_uses["stove"] = stove
+
+        self.building.baseline_consumption = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {1: 50, 2: 10, 3: 40, 4: 50},
+            "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 20, 3: 0, 4: 0},
+            "out.propane.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.electricity.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.natural_gas.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.propane.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.fuel_oil.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+        })
+
+        self.building._calc_baseline_energy()
+
+        pd.testing.assert_frame_equal(
+            self.building.baseline_consumption.sort_index(axis=1),
+            pd.DataFrame({
+                "out.electricity.range_oven.energy_consumption": {1: 50, 2: 10, 3: 40, 4: 50},
+                "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 20, 3: 0, 4: 0},
+                "out.propane.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.electricity.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.natural_gas.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.propane.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.fuel_oil.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+                "out.electricity.range_oven.energy_consumption_update": {1: 0, 2: 10, 3: 10, 4: 0},
+                "out.natural_gas.range_oven.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
+                "out.propane.range_oven.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
+                "out.electricity.total.energy_consumption_update": {1: 0, 2: 10, 3: 10, 4: 10},
+                "out.natural_gas.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.propane.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.fuel_oil.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
+            }).sort_index(axis=1)
+        )
+
+    def test_calc_retrofit_energy(self):
+        stove = Mock()
+        stove.retrofit_energy_use = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {1: 20, 2: 30, 3: 10, 4: 0},
+            "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+            "out.propane.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+        })
+
+        self.building.end_uses["stove"] = stove
+
+        self.building.retrofit_consumption = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {1: 50, 2: 10, 3: 40, 4: 50},
+            "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 20, 3: 0, 4: 0},
+            "out.propane.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.electricity.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.natural_gas.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.propane.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+            "out.fuel_oil.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+        })
+
+        self.building._calc_retrofit_energy()
+
+        pd.testing.assert_frame_equal(
+            self.building.retrofit_consumption.sort_index(axis=1),
+            pd.DataFrame({
+                "out.electricity.range_oven.energy_consumption": {1: 50, 2: 10, 3: 40, 4: 50},
+                "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 20, 3: 0, 4: 0},
+                "out.propane.range_oven.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.electricity.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.natural_gas.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.propane.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.fuel_oil.other.energy_consumption": {1: 0, 2: 0, 3: 0, 4: 0},
+                "out.electricity.range_oven.energy_consumption_update": {1: 20, 2: 30, 3: 10, 4: 0},
+                "out.natural_gas.range_oven.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
+                "out.propane.range_oven.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
+                "out.electricity.total.energy_consumption_update": {1: 20, 2: 30, 3: 10, 4: 10},
+                "out.natural_gas.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.propane.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 10},
+                "out.fuel_oil.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
+            }).sort_index(axis=1)
         )

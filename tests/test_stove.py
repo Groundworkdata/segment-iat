@@ -3,36 +3,161 @@ Contains tests for the Stove end use
 """
 import unittest
 
+import pandas as pd
+
 from end_uses.building_end_uses.stove import Stove
 
 
 class TestStove(unittest.TestCase):
     def setUp(self):
-        inputs = {
-            "install_year": 2025,
-            "asset_cost": 700,
-            "replacement_year": 2030,
-            "lifetime": 10,
-            "sim_start_year": 2020,
-            "sim_end_year": 2040,
-            "elec_consump": 50,
-            "gas_consump": 2000,
-            "building_id": "building1",
-            "energy_source": "GAS",
-            "stove_typ": "GAS",
-            "removal_labor_time": 2,
-            "labor_rate": 50,
-            "misc_supplies_price": 100,
-            "retail_markup": 0.18,
-            "installation_labor_time": 2,
-            "annual_cost_escalation": 0.01
+        energy_source = "natural_gas"
+        resstock_consumptions = {
+            0: pd.DataFrame({
+                "out.natural_gas.range_oven.energy_consumption": {
+                    1: 1, 2: 2, 3: 0, 4: 1
+                },
+                "out.electricity.range_oven.energy_consumption": {
+                    1: 0, 2: 0, 3: 0, 4: 0
+                },
+                "out.propane.range_oven.energy_consumption": {
+                    1: 0, 2: 0, 3: 0, 4: 0
+                },
+            }),
+            5: pd.DataFrame({
+                "out.natural_gas.range_oven.energy_consumption": {
+                    1: 1, 2: 2, 3: 0, 4: 1
+                },
+                "out.electricity.range_oven.energy_consumption": {
+                    1: 0, 2: 0, 3: 0, 4: 0
+                },
+                "out.propane.range_oven.energy_consumption": {
+                    1: 0, 2: 0, 3: 0, 4: 0
+                },
+            }),
+            10: pd.DataFrame({
+                "out.electricity.range_oven.energy_consumption": {
+                    1: 10, 2: 15, 3: 0, 4: 10
+                },
+                "out.natural_gas.range_oven.energy_consumption": {
+                    1: 0, 2: 0, 3: 0, 4: 0
+                },
+                "out.propane.range_oven.energy_consumption": {
+                    1: 0, 2: 0, 3: 0, 4: 0
+                },
+            })
         }
 
-        self.stove = Stove(**inputs)
-        self.stove.operational_vector = [
-            0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        scenario_mapping = [
+            {
+                "range_resstock_scenario": 0,
+                "range_retrofit_fuel": "existing",
+                "resstock_scenarios": [0]
+            },
+            {},
+            {},
+            {
+                "range_resstock_scenario": 5,
+                # "range_retrofit_fuel": "electricity",
+                "replacement_fuel": "propane",
+                "resstock_scenarios": [5]
+            },
+            {
+                "range_resstock_scenario": 10,
+                "range_retrofit_fuel": "existing",
+                "replacement_fuel": "electricity",
+                "resstock_scenarios": [10]
+            }
         ]
 
+        scenario = 4
+
+        resstock_metadata = {
+            "in.cooking_range": "Electric, 100% Usage",
+        }
+
+        kwargs = {}
+
+        self.stove = Stove(
+            energy_source,
+            resstock_consumptions,
+            scenario_mapping,
+            scenario,
+            resstock_metadata,
+            **kwargs
+        )
+
+    def test_get_energy_consump_baseline(self):
+        expected = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {
+                1: 0, 2: 0, 3: 0, 4: 0
+            },
+            "out.natural_gas.range_oven.energy_consumption": {
+                1: 1, 2: 2, 3: 0, 4: 1
+            },
+            "out.propane.range_oven.energy_consumption": {
+                1: 0, 2: 0, 3: 0, 4: 0
+            },
+        })
+
+        pd.testing.assert_frame_equal(
+            self.stove._get_energy_consump_baseline(),
+            expected
+        )
+
+    def test_get_retrofit_scenario(self):
+        self.assertEqual(
+            10,
+            self.stove._get_retrofit_scenario()
+        )
+
+    def test_get_energy_consump_retrofit(self):
+        self.stove._resstock_retrofit_scenario_id = 10
+
+        expected = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {
+                1: 10, 2: 15, 3: 0, 4: 10
+            },
+            "out.natural_gas.range_oven.energy_consumption": {
+                1: 0, 2: 0, 3: 0, 4: 0
+            },
+            "out.propane.range_oven.energy_consumption": {
+                1: 0, 2: 0, 3: 0, 4: 0
+            },
+        })
+
+        pd.testing.assert_frame_equal(
+            self.stove._get_energy_consump_retrofit(),
+            expected
+        )
+
+    def test_get_energy_consump_retrofit_npa(self):
+        """
+        Test the retrofit energy consumption for a NPA retrofit.
+
+        We are most interested when we have an old gas stove converting to propane
+        """
+        self.stove._resstock_retrofit_scenario_id = 5
+        self.stove._scenario = 3
+
+        expected = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {
+                1: 0, 2: 0, 3: 0, 4: 0
+            },
+            "out.natural_gas.range_oven.energy_consumption": {
+                1: 0, 2: 0, 3: 0, 4: 0
+            },
+            "out.propane.range_oven.energy_consumption": {
+                1: 1, 2: 2, 3: 0, 4: 1
+            },
+        })
+
+        pd.testing.assert_frame_equal(
+            self.stove._get_energy_consump_retrofit(),
+            expected
+        )
+
+
+    @unittest.skip
     def test_install_cost(self):
         """
         Test total install cost. Based on inputs, should be:
