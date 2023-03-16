@@ -86,6 +86,7 @@ class Building:
         self.building_id: str = ""
         self.end_uses: dict = {}
         self.resstock_scenarios: Dict[int, pd.DataFrame] = {}
+        self._main_resstock_retrofit_scenario: int = None
         self.baseline_consumption: pd.DataFrame = None
         self.retrofit_consumption: pd.DataFrame = None
 
@@ -93,7 +94,7 @@ class Building:
         """
         Creates instances of all assets for a given building based on the config file
         """
-        self._get_years_vec()
+        # self._get_years_vec()
         self._get_building_id()
         self._get_resstock_buildings()
         self._get_baseline_consumptions()
@@ -103,6 +104,9 @@ class Building:
         self._calc_retrofit_energy()
 
     def _get_years_vec(self) -> None:
+        """
+        NOT CURRENTLY IN USE
+        """
         self.years_vec = list(range(
             self.sim_settings.get("sim_start_year", 2020),
             self.sim_settings.get("sim_end_year", 2050)
@@ -118,6 +122,10 @@ class Building:
     def _get_resstock_buildings(self) -> None:
         decarb_scenario = self.sim_settings.get("decarb_scenario")
         scenario_params = self.scenario_mapping[decarb_scenario]
+
+        self._main_resstock_retrofit_scenario = scenario_params.get(
+            "main_resstock_retrofit_scenario"
+        )
 
         resstock_scenarios = scenario_params.get("resstock_scenarios")
         resstock_scenarios.append(0)
@@ -141,8 +149,10 @@ class Building:
                 - asset_fuel_consumps
             )
 
-    def _get_retrofit_consumptions(self, scenario: int) -> None:
-        self.retrofit_consumption = self.resstock_scenarios[scenario][RESSTOCK_ENERGY_CONSUMP_KEYS]
+    def _get_retrofit_consumptions(self) -> None:
+        self.retrofit_consumption = self.resstock_scenarios[
+            self._main_resstock_retrofit_scenario
+        ][RESSTOCK_ENERGY_CONSUMP_KEYS]
 
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             asset_fuel_keys = [i for i in ASSET_ENERGY_CONSUMP_KEYS if fuel in i]
@@ -164,7 +174,7 @@ class Building:
             self.end_uses[end_use_type] = self._get_single_end_use(end_use)
 
     def _get_single_end_use(self, params: dict):
-        config_filepath = params.pop("end_use_config")
+        config_filepath = params.pop("replacement_config")
 
         with open(config_filepath) as f:
             data = json.load(f)
@@ -173,7 +183,7 @@ class Building:
 
         if params.get("end_use") == "stove":
             stove = Stove(
-                end_use_params.pop("original_energy_source"),
+                params.pop("original_energy_source"),
                 self.resstock_scenarios,
                 self.scenario_mapping,
                 self.sim_settings.get("decarb_scenario"),
@@ -253,6 +263,18 @@ class Building:
             self.retrofit_consumption["out.{}.total.energy_consumption_update".format(fuel)] = \
                 self.retrofit_consumption[asset_update_consump_keys].sum(axis=1)
 
+    def write_building_energy_info(self) -> None:
+        """
+        Write calcualted building information for energy use
+        """
+        self.baseline_consumption.to_csv(
+            "./outputs/{}_baseline_consump.csv".format(self.building_id)
+        )
+
+        self.retrofit_consumption.to_csv(
+            "./outputs/{}_retrofit_consump.csv".format(self.building_id)
+        )
+
     def write_building_cost_info(self) -> None:
         """
         Write calculated building information for total costs
@@ -267,27 +289,6 @@ class Building:
         )
 
         full_costs_df.to_csv("./{}_costs.csv".format(self.building_id), index_label="year")
-
-    def write_building_energy_info(self) -> None:
-        """
-        Write calcualted building information for energy use
-        """
-        elec_consump_df = self._sum_end_use_figures("elec_consump_annual")
-        gas_consump_df = self._sum_end_use_figures("gas_consump_annual")
-        elec_peak_consump_df = self._sum_end_use_figures("elec_peak_annual")
-        gas_peak_consump_df = self._sum_end_use_figures("gas_peak_annual")
-
-        full_e_df = pd.merge(elec_consump_df, gas_consump_df, left_index=True, right_index=True)
-        full_e_df = pd.merge(full_e_df, elec_peak_consump_df, left_index=True, right_index=True)
-        full_e_df = pd.merge(full_e_df, gas_peak_consump_df, left_index=True, right_index=True)
-
-        full_e_df.to_csv("./{}_energy.csv".format(self.building_id), index_label="year")
-
-        total_consump_ts = self.get_total_consumption("elec")
-        total_consump_ts.to_csv(
-            "./{}_total_elec_consump.csv".format(self.building_id),
-            index_label="timestamp"
-        )
 
     def _sum_end_use_figures(self, cost_figure) -> pd.DataFrame:
         """
