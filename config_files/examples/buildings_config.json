@@ -27,7 +27,8 @@
             }
         ],
         "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage"
+            "in.cooking_range": "Electric, 100% Usage",
+            "in.clothes_dryer": "Electric, 100% Usage"
         }
     },
     {
