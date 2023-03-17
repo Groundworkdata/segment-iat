@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 from end_uses.building_end_uses.stove import Stove
+from end_uses.building_end_uses.clothes_dryer import ClothesDryer
 
 
 ASSET_ENERGY_CONSUMP_KEYS = [
@@ -194,6 +195,20 @@ class Building:
             stove.initialize_end_use()
 
             return stove
+        
+        if params.get("end_use") == "clothes_dryer":
+            dryer = ClothesDryer(
+                params.pop("original_energy_source"),
+                self.resstock_scenarios,
+                self.scenario_mapping,
+                self.sim_settings.get("decarb_scenario"),
+                self.resstock_metadata,
+                **end_use_params,
+            )
+
+            dryer.initialize_end_use()
+
+            return dryer
 
         return None
     
@@ -209,20 +224,23 @@ class Building:
         6. Calculate the updated total building consumption for that energy type as the sum of 4 & 5
         7. Repeat 4-6 for all energy types
         """
-        stove = self.end_uses["stove"]
+        for asset_type in ["stove", "clothes_dryer"]:
+            if asset_type in self.end_uses:
+                asset = self.end_uses.get(asset_type)
 
-        baseline_energies_stove = stove.baseline_energy_use
-        self.baseline_consumption = pd.concat(
-            [
-                self.baseline_consumption,
-                baseline_energies_stove.rename(
-                    columns={col: "{}_update".format(col) for col in baseline_energies_stove}
+                baseline_energies_asset = asset.baseline_energy_use
+
+                self.baseline_consumption = pd.concat(
+                    [
+                        self.baseline_consumption,
+                        baseline_energies_asset.rename(
+                            columns={
+                                col: "{}_update".format(col) for col in baseline_energies_asset
+                            }
+                        )
+                    ],
+                    axis=1
                 )
-            ],
-            axis=1
-        )
-
-        # TODO: Add lines for other assets
 
         asset_updates = [i for i in self.baseline_consumption.columns if i.endswith("_update")]
 
@@ -239,18 +257,23 @@ class Building:
         """
         Steps are same as _calc_baseline_energy
         """
-        stove = self.end_uses["stove"]
+        for asset_type in ["stove", "clothes_dryer"]:
+            if asset_type in self.end_uses:
+                asset = self.end_uses.get(asset_type)
 
-        retrofit_energies_stove = stove.retrofit_energy_use
-        self.retrofit_consumption = pd.concat(
-            [
-                self.retrofit_consumption,
-                retrofit_energies_stove.rename(
-                    columns={col: "{}_update".format(col) for col in retrofit_energies_stove}
+                retrofit_energies_stove = asset.retrofit_energy_use
+
+                self.retrofit_consumption = pd.concat(
+                    [
+                        self.retrofit_consumption,
+                        retrofit_energies_stove.rename(
+                            columns={
+                                col: "{}_update".format(col) for col in retrofit_energies_stove
+                            }
+                        )
+                    ],
+                    axis=1
                 )
-            ],
-            axis=1
-        )
 
         asset_updates = [i for i in self.retrofit_consumption.columns if i.endswith("_update")]
 

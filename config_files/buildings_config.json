@@ -6,13 +6,20 @@
         "end_uses": [
             {
                 "end_use": "stove",
-                "original_energy_source": "electricity",
+                "original_energy_source": "natural_gas",
                 "original_config": "./config_files/stoves/gas_stove_config.json",
                 "replacement_config": "./config_files/stoves/elec_stove_config.json"
+            },
+            {
+                "end_use": "clothes_dryer",
+                "original_energy_source": "natural_gas",
+                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
+                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
             }
         ],
         "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage"
+            "in.cooking_range": "Electric, 100% Usage",
+            "in.clothes_dryer": "Electric, 100% Usage"
         }
     },
     {
@@ -22,7 +29,7 @@
         "end_uses": [
             {
                 "end_use": "stove",
-                "original_energy_source": "electricity",
+                "original_energy_source": "natural_gas",
                 "original_config": "./config_files/stoves/gas_stove_config.json",
                 "replacement_config": "./config_files/stoves/elec_stove_config.json"
             }
