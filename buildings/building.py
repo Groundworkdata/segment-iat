@@ -7,9 +7,10 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
-from end_uses.building_end_uses.stove import Stove
 from end_uses.building_end_uses.clothes_dryer import ClothesDryer
 from end_uses.building_end_uses.domestic_hot_water import DHW
+from end_uses.building_end_uses.hvac import HVAC
+from end_uses.building_end_uses.stove import Stove
 
 
 ASSET_ENERGY_CONSUMP_KEYS = [
@@ -223,6 +224,20 @@ class Building:
             dhw.initialize_end_use()
 
             return dhw
+        
+        if params.get("end_use") == "hvac":
+            hvac = HVAC(
+                params.pop("original_energy_source"),
+                self.resstock_scenarios,
+                self.scenario_mapping,
+                self.sim_settings.get("decarb_scenario"),
+                self.resstock_metadata,
+                **end_use_params
+            )
+
+            hvac.initialize_end_use()
+
+            return hvac
 
         return None
     
@@ -238,7 +253,7 @@ class Building:
         6. Calculate the updated total building consumption for that energy type as the sum of 4 & 5
         7. Repeat 4-6 for all energy types
         """
-        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water"]:
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
             if asset_type in self.end_uses:
                 asset = self.end_uses.get(asset_type)
 
@@ -271,7 +286,7 @@ class Building:
         """
         Steps are same as _calc_baseline_energy
         """
-        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water"]:
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
             if asset_type in self.end_uses:
                 asset = self.end_uses.get(asset_type)
 
