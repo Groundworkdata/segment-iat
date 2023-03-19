@@ -21,11 +21,18 @@
                 "original_energy_source": "natural_gas",
                 "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
                 "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
+            },
+            {
+                "end_use": "hvac",
+                "original_energy_source": "natural_gas",
+                "original_config": "./config_files/hvac/gas_hvac_config.json",
+                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
             }
         ],
         "resstock_metadata": {
             "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage"
+            "in.clothes_dryer": "Electric, 100% Usage",
+            "in.heating_fuel": "Natural Gas"
         }
     },
     {
@@ -50,11 +57,18 @@
                 "original_energy_source": "natural_gas",
                 "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
                 "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
+            },
+            {
+                "end_use": "hvac",
+                "original_energy_source": "natural_gas",
+                "original_config": "./config_files/hvac/gas_hvac_config.json",
+                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
             }
         ],
         "resstock_metadata": {
             "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage"
+            "in.clothes_dryer": "Electric, 100% Usage",
+            "in.heating_fuel": "Natural Gas"
         }
     }
 ]
