@@ -404,7 +404,7 @@ class Building:
             scenario, state, building_id
         )
 
-        response = pd.read_parquet(building_url)
+        response = pd.read_parquet(building_url).set_index("timestamp")
 
         return response
     
