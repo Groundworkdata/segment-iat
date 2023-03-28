@@ -8,6 +8,7 @@ import pandas as pd
 
 ENERGY_KEYS = [
     "out.electricity.heating.energy_consumption",
+    "out.electricity.heating_hp_bkup.energy_consumption", # hybrid configuration
     "out.electricity.cooling.energy_consumption",
     "out.natural_gas.heating.energy_consumption",
     "out.natural_gas.heating_hp_bkup.energy_consumption", # hybrid configuration
