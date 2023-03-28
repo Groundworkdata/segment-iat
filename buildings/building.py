@@ -323,15 +323,25 @@ class Building:
             self.retrofit_consumption["out.{}.total.energy_consumption_update".format(fuel)] = \
                 self.retrofit_consumption[asset_update_consump_keys].sum(axis=1)
 
-    def write_building_energy_info(self) -> None:
+    def write_building_energy_info(self, freq: int =60) -> None:
         """
         Write calcualted building information for energy use
+
+        Args:
+            freq (int): The frequency of the timeseries output in minutes
         """
-        self.baseline_consumption.to_csv(
+        if freq < 15:
+            print("Unable to resample to under 15 minutes!")
+            print("Outputting in 15 minute frequency...")
+            freq = 15
+
+        resample_string = "{}T".format(freq)
+
+        self.baseline_consumption.resample(resample_string).sum().to_csv(
             "./outputs/{}_baseline_consump.csv".format(self.building_id)
         )
 
-        self.retrofit_consumption.to_csv(
+        self.retrofit_consumption.resample(resample_string).sum().to_csv(
             "./outputs/{}_retrofit_consump.csv".format(self.building_id)
         )
 
@@ -413,6 +423,8 @@ class Building:
         )
 
         response = pd.read_parquet(building_url).set_index("timestamp")
+        # Shift timestamps from time-ending to time-beginning
+        response.index = response.index.shift(-1, "15T")
 
         return response
     
