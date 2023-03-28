@@ -29,6 +29,7 @@ ASSET_ENERGY_CONSUMP_KEYS = [
     "out.fuel_oil.hot_water.energy_consumption",
     # HVAC
     "out.electricity.heating.energy_consumption",
+    "out.electricity.heating_hp_bkup.energy_consumption", # hybrid configuration
     "out.electricity.cooling.energy_consumption",
     "out.natural_gas.heating.energy_consumption",
     "out.natural_gas.heating_hp_bkup.energy_consumption", # hybrid configuration
@@ -305,6 +306,13 @@ class Building:
                 )
 
         asset_updates = [i for i in self.retrofit_consumption.columns if i.endswith("_update")]
+
+        # If NPA, we need to switch all gas "other" to propane
+        if self.sim_settings.get("decarb_scenario") == 3:
+            self.retrofit_consumption.loc[:, "out.propane.other.energy_consumption"] += \
+                self.retrofit_consumption.loc[:, "out.natural_gas.other.energy_consumption"]
+            
+            self.retrofit_consumption.loc[:, "out.natural_gas.other.energy_consumption"] = 0
 
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             asset_update_consump_keys = [
