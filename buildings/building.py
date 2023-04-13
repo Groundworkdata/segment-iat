@@ -86,7 +86,7 @@ class Building:
         self.resstock_metadata = building_params.get("resstock_metadata")
 
         self._year_timestamps: pd.DatetimeIndex = None
-        self.years_vec: list = []
+        self.years_vec: List[int] = []
         self.building_id: str = ""
         self.end_uses: dict = {}
         self.resstock_scenarios: Dict[int, pd.DataFrame] = {}
@@ -98,7 +98,7 @@ class Building:
         """
         Creates instances of all assets for a given building based on the config file
         """
-        # self._get_years_vec()
+        self._get_years_vec()
         self._get_building_id()
         self._get_resstock_buildings()
         self._get_baseline_consumptions()
@@ -109,7 +109,7 @@ class Building:
 
     def _get_years_vec(self) -> None:
         """
-        NOT CURRENTLY IN USE
+        Vector of simulation years
         """
         self.years_vec = list(range(
             self.sim_settings.get("sim_start_year", 2020),
@@ -178,13 +178,6 @@ class Building:
             self.end_uses[end_use_type] = self._get_single_end_use(end_use)
 
     def _get_single_end_use(self, params: dict):
-        config_filepath = params.pop("replacement_config")
-
-        with open(config_filepath) as f:
-            data = json.load(f)
-
-        end_use_params = data
-
         if params.get("end_use") == "stove":
             stove = Stove(
                 params.pop("original_energy_source"),
@@ -192,7 +185,8 @@ class Building:
                 self.scenario_mapping,
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
-                **end_use_params,
+                self.years_vec,
+                **params
             )
 
             stove.initialize_end_use()
@@ -206,7 +200,8 @@ class Building:
                 self.scenario_mapping,
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
-                **end_use_params,
+                self.years_vec,
+                **params,
             )
 
             dryer.initialize_end_use()
@@ -219,7 +214,9 @@ class Building:
                 self.resstock_scenarios,
                 self.scenario_mapping,
                 self.sim_settings.get("decarb_scenario"),
-                **end_use_params
+                self.resstock_metadata,
+                self.years_vec,
+                **params
             )
 
             dhw.initialize_end_use()
@@ -233,7 +230,8 @@ class Building:
                 self.scenario_mapping,
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
-                **end_use_params
+                self.years_vec,
+                **params
             )
 
             hvac.initialize_end_use()
@@ -349,16 +347,16 @@ class Building:
         """
         Write calculated building information for total costs
         """
-        costs_df = self._sum_end_use_figures("install_cost")
-        depreciations_df = self._sum_end_use_figures("depreciation")
-        stranded_value_df = self._sum_end_use_figures("stranded_value")
+        cost_table = pd.DataFrame(index=self.years_vec)
 
-        full_costs_df = pd.merge(costs_df, depreciations_df, left_index=True, right_index=True)
-        full_costs_df = pd.merge(
-            full_costs_df, stranded_value_df, left_index=True, right_index=True
-        )
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
+            asset = self.end_uses.get(asset_type)
 
-        full_costs_df.to_csv("./{}_costs.csv".format(self.building_id), index_label="year")
+            if asset:
+                cost_table = pd.concat([cost_table, asset.cost_table], axis=1)
+
+        cost_table.to_csv("./outputs/{}_costs.csv".format(self.building_id))
+
 
     def _sum_end_use_figures(self, cost_figure) -> pd.DataFrame:
         """

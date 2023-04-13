@@ -75,6 +75,8 @@ class TestStove(unittest.TestCase):
             "in.cooking_range": "Electric, 100% Usage",
         }
 
+        self.years_vec = [2020, 2021, 2022, 2023, 2024]
+
         kwargs = {}
 
         self.stove = Stove(
@@ -83,6 +85,7 @@ class TestStove(unittest.TestCase):
             scenario_mapping,
             scenario,
             resstock_metadata,
+            self.years_vec,
             **kwargs
         )
 
@@ -156,17 +159,61 @@ class TestStove(unittest.TestCase):
             expected
         )
 
+    def test_get_existing_book_val(self):
+        self.stove._kwargs = {
+            "existing_install_year": 2015,
+            "lifetime": 10,
+            "existing_install_cost": 750,
+        }
 
-    @unittest.skip
-    def test_install_cost(self):
-        """
-        Test total install cost. Based on inputs, should be:
-        (50*2 + (700 + 100) * (1.18) + 50 * 2) * (1.01 ** (2025 - 2020)) = $1202.36
-        """
+        expected_book_val = [375., 300., 225., 150., 75.]
+
         self.assertListEqual(
-            self.stove.get_install_cost(),
-            [
-                0.0, 0.0, 0.0, 0.0, 0.0, 1202.36, 0.0, 0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-            ]
+            expected_book_val,
+            self.stove._get_existing_book_val()
+        )
+
+    def test_get_replacement_vec(self):
+        self.stove._kwargs = {"replacement_year": 2023}
+
+        self.assertListEqual(
+            [False, False, False, True, False],
+            self.stove._get_replacement_vec()
+        )
+
+    def test_get_existing_stranded_val(self):
+        self.stove._kwargs = {
+            "replacement_year": 2023,
+        }
+
+        self.stove.existing_book_val = [500, 400, 300, 200, 100]
+        self.stove.replacement_vec = [False, False, False, True, False]
+
+        self.assertListEqual(
+            [0, 0, 0, 200, 0],
+            self.stove._get_existing_stranded_val()
+        )
+
+    def test_get_replacement_cost(self):
+        self.stove._kwargs = {
+            "replacement_cost": 1000,
+            "replacement_year": 2023,
+            "escalator": 0.1,
+        }
+
+        self.assertListEqual(
+            [0, 0, 0, 1100., 0],
+            self.stove._get_replacement_cost()
+        )
+
+    def test_get_replacement_book_value(self):
+        self.stove.replacement_cost = [0, 0, 0, 1200, 0]
+        self.stove._kwargs = {
+            "replacement_year": 2023,
+            "replacement_lifetime": 5,
+        }
+
+        self.assertListEqual(
+            [0, 0, 0, 1200., 960.,],
+            self.stove._get_replacement_book_value()
         )

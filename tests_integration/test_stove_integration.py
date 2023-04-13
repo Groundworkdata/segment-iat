@@ -54,7 +54,15 @@ class TestStoveIntegration(unittest.TestCase):
         scenario_mapping = data
         scenario = 4
         resstock_metadata = {"in.cooking_range": "Gas, 100% Usage"}
-        kwargs = {}
+        kwargs = {
+            "replacement_year": 3,
+            "existing_install_year": 0,
+            "lifetime": 10,
+            "existing_install_cost": 5,
+            "replacement_cost": 6,
+            "replacement_cost_dollars_year": 0,
+            "replacement_lifetime": 10,
+        }
 
         self.stove = Stove(
             self.energy_source,
@@ -62,6 +70,7 @@ class TestStoveIntegration(unittest.TestCase):
             scenario_mapping,
             scenario,
             resstock_metadata,
+            [0, 1, 2, 3],
             **kwargs
         )
 
