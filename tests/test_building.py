@@ -249,15 +249,10 @@ class TestBuilding(unittest.TestCase):
             self.scenario_mapping,
             3,
             "resstock_metadata",
+            [],
             **{
-                "asset_cost": 1500,
-                "lifetime": 10,
-                "removal_labor_time": 2,
-                "labor_rate": 50,
-                "misc_supplies_price": 75,
-                "retail_markup": 0.18,
-                "installation_labor_time": 1,
-                "annual_cost_escalation": 0.01
+                "end_use": "stove",
+                "replacement_config": "tests/input_data/stoves/elec_stove_config.json",
             }
         )
 

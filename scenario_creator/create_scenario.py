@@ -67,8 +67,7 @@ class ScenarioCreator:
 
             building.populate_building()
             building.write_building_energy_info()
-            #TODO: Update after cost functions updated
-            # building.write_building_cost_info()
+            building.write_building_cost_info()
 
             self.buildings[building.building_id] = building
 

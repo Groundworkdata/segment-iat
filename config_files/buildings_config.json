@@ -2,26 +2,41 @@
     {
         "building_id": "062-06-013-1",
         "resstock_id": 338531,
-        "retrofit_year": 2030,
+        "retrofit_year": 2025,
         "parcel_id": "062-06-013-1",
         "end_uses": [
             {
                 "end_use": "stove",
                 "original_energy_source": "natural_gas",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 2000,
+                "replacement_cost": 2000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             },
             {
                 "end_use": "domestic_hot_water",
                 "original_energy_source": "natural_gas",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 10000,
+                "replacement_cost": 12000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             },
             {
                 "end_use": "hvac",
                 "original_energy_source": "natural_gas",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 20000,
+                "replacement_cost": 25000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             }
         ],
         "resstock_metadata": {
@@ -32,469 +47,52 @@
     {
         "building_id": "062-06-015",
         "resstock_id": 209353,
-        "retrofit_year": 2030,
+        "retrofit_year": 2025,
         "parcel_id": "062-06-015",
         "end_uses": [
             {
                 "end_use": "stove",
                 "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 2000,
+                "replacement_cost": 2000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             },
             {
                 "end_use": "clothes_dryer",
                 "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 4000,
+                "replacement_cost": 6000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             },
             {
                 "end_use": "domestic_hot_water",
                 "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 10000,
+                "replacement_cost": 12000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             },
             {
                 "end_use": "hvac",
                 "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-06-016",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-06-016",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-06-017",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-06-017",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-06-018",
-        "resstock_id": 525212,
-        "retrofit_year": 2030,
-        "parcel_id": "062-06-018",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "natural_gas",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Natural Gas"
-        }
-    },
-    {
-        "building_id": "062-06-019",
-        "resstock_id": 525212,
-        "retrofit_year": 2030,
-        "parcel_id": "062-06-019",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "natural_gas",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Natural Gas"
-        }
-    },
-    {
-        "building_id": "062-06-020",
-        "resstock_id": 338531,
-        "retrofit_year": 2030,
-        "parcel_id": "062-06-020",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "natural_gas",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "natural_gas",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "natural_gas",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Gas, 100% Usage",
-            "in.heating_fuel": "Natural Gas"
-        }
-    },
-    {
-        "building_id": "062-07-003",
-        "resstock_id": 525212,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-003",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "natural_gas",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Natural Gas"
-        }
-    },
-    {
-        "building_id": "062-07-004",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-004",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-07-005",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-005",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-07-006",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-006",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-07-007",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-007",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-07-008",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-008",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
-            }
-        ],
-        "resstock_metadata": {
-            "in.cooking_range": "Electric, 100% Usage",
-            "in.clothes_dryer": "Electric, 100% Usage",
-            "in.heating_fuel": "Fuel Oil"
-        }
-    },
-    {
-        "building_id": "062-07-009",
-        "resstock_id": 209353,
-        "retrofit_year": 2030,
-        "parcel_id": "062-07-009",
-        "end_uses": [
-            {
-                "end_use": "stove",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/stoves/gas_stove_config.json",
-                "replacement_config": "./config_files/stoves/elec_stove_config.json"
-            },
-            {
-                "end_use": "clothes_dryer",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/clothes_dryers/gas_clothes_dryer_config.json",
-                "replacement_config": "./config_files/clothes_dryers/elec_clothes_dryer_config.json"
-            },
-            {
-                "end_use": "domestic_hot_water",
-                "original_energy_source": "electricity",
-                "original_config": "./config_files/domestic_hot_water/gas_hot_water_config.json",
-                "replacement_config": "./config_files/domestic_hot_water/heat_pump_hot_water_config.json"
-            },
-            {
-                "end_use": "hvac",
-                "original_energy_source": "fuel_oil",
-                "original_config": "./config_files/hvac/gas_hvac_config.json",
-                "replacement_config": "./config_files/hvac/hybrid_hvac_config.json"
+                "existing_install_year": 2015,
+                "lifetime": 30,
+                "existing_install_cost": 20000,
+                "replacement_cost": 30000,
+                "replacement_year": 2025,
+                "replacement_cost_dollars_year": 2022,
+                "replacement_lifetime": 30
             }
         ],
         "resstock_metadata": {
