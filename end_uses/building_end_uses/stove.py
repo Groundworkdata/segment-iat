@@ -47,6 +47,8 @@ class Stove:
             scenario: int,
             resstock_metadata: dict,
             years_vec: List[int],
+            custom_baseline_energy: pd.DataFrame = pd.DataFrame(),
+            custom_retrofit_energy: pd.DataFrame = pd.DataFrame(),
             **kwargs
     ):
         self._kwargs = kwargs
@@ -57,6 +59,8 @@ class Stove:
         self._scenario: int = scenario
         self._resstock_metadata = resstock_metadata
         self._years_vec: List[int] = years_vec
+        self._custom_baseline_energy: pd.DataFrame = custom_baseline_energy
+        self._custom_retrofit_energy: pd.DataFrame = custom_retrofit_energy
 
         self.existing_book_val: List[float] = []
         self.replacement_vec: List[bool] = []
@@ -79,9 +83,22 @@ class Stove:
         self.replacement_book_val = self._get_replacement_book_value()
         self.cost_table = self._get_cost_table()
 
-        self.baseline_energy_use = self._get_energy_consump_baseline()
-        self._resstock_retrofit_scenario_id = self._get_retrofit_scenario()
-        self.retrofit_energy_use = self._get_energy_consump_retrofit()
+        if not self._custom_baseline_energy.empty and not self._custom_retrofit_energy.empty:
+            self._get_custom_energies()
+
+        else:
+            self.baseline_energy_use = self._get_energy_consump_baseline()
+            self._resstock_retrofit_scenario_id = self._get_retrofit_scenario()
+            self.retrofit_energy_use = self._get_energy_consump_retrofit()
+
+    def _get_custom_energies(self) -> None:
+        self.baseline_energy_use = self._custom_baseline_energy.reindex(
+            ENERGY_KEYS, axis=1, fill_value=0
+        )
+
+        self.retrofit_energy_use = self._custom_retrofit_energy.reindex(
+            ENERGY_KEYS, axis=1, fill_value=0
+        )
 
     def _get_energy_consump_baseline(self) -> pd.DataFrame:
         return self._resstock_consumps[RESSTOCK_BASELINE_SCENARIO_ID][ENERGY_KEYS]

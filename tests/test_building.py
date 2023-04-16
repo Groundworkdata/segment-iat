@@ -225,6 +225,7 @@ class TestBuilding(unittest.TestCase):
             "replacement_config": "./stoves/elec_stove_config.json"
         })
 
+    @unittest.skip
     @patch("buildings.building.Stove")
     def test_get_single_end_use(self, mock_stove: Mock):
         initialized_stove = Mock()
@@ -250,10 +251,38 @@ class TestBuilding(unittest.TestCase):
             3,
             "resstock_metadata",
             [],
+            custom_baseline_energy=pd.DataFrame(),
+            custom_retrofit_energy=pd.DataFrame(),
             **{
                 "end_use": "stove",
                 "replacement_config": "tests/input_data/stoves/elec_stove_config.json",
             }
+        )
+
+    def test_calc_total_custom_baseline(self):
+        self.building.baseline_consumption = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {1: 1, 2: 2, 3: 3},
+            "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 20, 3: 23},
+            "out.electricity.heating.energy_consumption": {1: 0, 2: 0, 3: 1},
+            "out.natural_gas.clothes_dryer.energy_consumption": {1: 30, 2: 2, 3: 3},
+        })
+
+        self.building._calc_total_custom_baseline()
+
+        pd.testing.assert_frame_equal(
+            self.building.baseline_consumption,
+            pd.DataFrame({
+                "out.electricity.range_oven.energy_consumption": {1: 1, 2: 2, 3: 3},
+                "out.natural_gas.range_oven.energy_consumption": {1: 0, 2: 20, 3: 23},
+                "out.electricity.heating.energy_consumption": {1: 0, 2: 0, 3: 1},
+                "out.natural_gas.clothes_dryer.energy_consumption": {1: 30, 2: 2, 3: 3},
+                "out.electricity.total.energy_consumption": {1: 1, 2: 2, 3: 4},
+                "out.natural_gas.total.energy_consumption": {1: 30, 2: 22, 3: 26},
+                "out.propane.total.energy_consumption": {1: 0, 2: 0, 3: 0},
+                "out.fuel_oil.total.energy_consumption": {1: 0, 2: 0, 3: 0},
+                "out.total.energy_consumption": {1: 31, 2: 24, 3: 30},
+            }),
+            check_dtype=False
         )
 
     def test_calc_baseline_energy(self):

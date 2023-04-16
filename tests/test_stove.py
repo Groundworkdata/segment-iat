@@ -89,6 +89,37 @@ class TestStove(unittest.TestCase):
             **kwargs
         )
 
+    def test_get_custom_energies(self):
+        self.stove._custom_baseline_energy = pd.DataFrame({
+            "out.natural_gas.range_oven.energy_consumption": {0: 10, 1: 3},
+            "out.electricity.something": {0: 0, 1: 10},
+        })
+
+        self.stove._custom_retrofit_energy = pd.DataFrame({
+            "out.electricity.range_oven.energy_consumption": {0: 10, 1: 3},
+            "out.electricity.something_else": {0: 0, 1: 10},
+        })
+
+        self.stove._get_custom_energies()
+
+        pd.testing.assert_frame_equal(
+            self.stove.baseline_energy_use,
+            pd.DataFrame({
+                "out.electricity.range_oven.energy_consumption": {0: 0, 1: 0},
+                "out.natural_gas.range_oven.energy_consumption": {0: 10, 1: 3},
+                "out.propane.range_oven.energy_consumption": {0: 0, 1: 0},
+            })
+        )
+
+        pd.testing.assert_frame_equal(
+            self.stove.retrofit_energy_use,
+            pd.DataFrame({
+                "out.electricity.range_oven.energy_consumption": {0: 10, 1: 3},
+                "out.natural_gas.range_oven.energy_consumption": {0: 0, 1: 0},
+                "out.propane.range_oven.energy_consumption": {0: 0, 1: 0},
+            })
+        )
+
     def test_get_energy_consump_baseline(self):
         expected = pd.DataFrame({
             "out.electricity.range_oven.energy_consumption": {
