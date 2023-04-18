@@ -51,6 +51,65 @@ RESSTOCK_ENERGY_CONSUMP_KEYS = [
 ]
 
 
+CUSTOM_ENERGY_CONSUMP_KEYS = [
+    "elec.heating",
+    "elec.cooling",
+    "elec.cooking",
+    "elec.clothes_dryer",
+    "elec.heating_backup",
+    "elec.hot_water",
+    "elec.other",
+    "elec.ev",
+    "gas.cooking",
+    "gas.clothes_dryer",
+    "gas.heating",
+    "gas.heating_backup",
+    "gas.hot_water",
+    "oil.heating",
+    "oil.heating_backup",
+    "oil.hot_water",
+    "lpg.cooking",
+    "lpg.clothes_dryer",
+    "lpg.heating",
+    "lpg.heating_backup",
+    "lpg.hot_water",
+]
+
+
+CUSTOM_RESSTOCK_MAPPING = {
+    # elec
+    'elec.clothes_dryer': 'out.electricity.clothes_dryer.energy_consumption',
+    'elec.cooking': 'out.electricity.range_oven.energy_consumption',
+    'elec.cooling': 'out.electricity.cooling.energy_consumption',
+    'elec.heating': 'out.electricity.heating.energy_consumption',
+    'elec.heating_backup': 'out.electricity.heating_hp_bkup.energy_consumption',
+    'elec.hot_water': 'out.electricity.hot_water.energy_consumption',
+    "elec.other": "out.electricity.other.energy_consumption",
+    "elec.ev": "out.electricity.ev.energy_consumption",
+    # fuel oil
+    'fuel.clothes_dryer': 'out.fuel_oil.clothes_dryer.energy_consumption',
+    'fuel.cooking': 'out.fuel_oil.range_oven.energy_consumpy',
+    'fuel.heating': 'out.fuel_oil.heating.energy_consumption',
+    'fuel.heating_backup': 'out.fuel_oil.heating_hp_bkup.energy_consumption',
+    'fuel.hot_water': 'out.fuel_oil.hot_water.energy_consumption',
+    'oil.heating': 'out.fuel_oil.heating.energy_consumption',
+    'oil.heating_backup': 'out.fuel_oil.heating_hp_bkup.energy_consumption',
+    'oil.hot_water': 'out.fuel_oil.hot_water.energy_consumption',
+    # nat gas
+    'gas.clothes_dryer': 'out.natural_gas.clothes_dryer.energy_consumption',
+    'gas.cooking': 'out.natural_gas.range_oven.energy_consumption',
+    'gas.heating': 'out.natural_gas.heating.energy_consumption',
+    'gas.heating_backup': 'out.natural_gas.heating_hp_bkup.energy_consumption',
+    'gas.hot_water': 'out.natural_gas.hot_water.energy_consumption',
+    # propane
+    'lpg.clothes_dryer': 'out.propane.clothes_dryer.energy_consumption',
+    'lpg.cooking': 'out.propane.range_oven.energy_consumption',
+    'lpg.heating': 'out.propane.heating.energy_consumption',
+    'lpg.heating_backup': 'out.propane.heating_hp_bkup.energy_consumption',
+    'lpg.hot_water': 'out.propane.hot_water.energy_consumption',
+}
+
+
 class Building:
     """
     A bucket for all end uses at a parcel. Currently assuming one building/one unit per parcel
@@ -91,8 +150,8 @@ class Building:
         self.end_uses: dict = {}
         self.resstock_scenarios: Dict[int, pd.DataFrame] = {}
         self._main_resstock_retrofit_scenario: int = None
-        self.baseline_consumption: pd.DataFrame = None
-        self.retrofit_consumption: pd.DataFrame = None
+        self.baseline_consumption: pd.DataFrame = pd.DataFrame()
+        self.retrofit_consumption: pd.DataFrame = pd.DataFrame()
 
     def populate_building(self) -> None:
         """
@@ -100,12 +159,10 @@ class Building:
         """
         self._get_years_vec()
         self._get_building_id()
-        self._get_resstock_buildings()
-        self._get_baseline_consumptions()
-        self._get_retrofit_consumptions()
+        self._get_building_energies()
         self._create_end_uses()
-        self._calc_baseline_energy()
-        self._calc_retrofit_energy()
+        self._calc_total_energy_baseline()
+        self._calc_total_energy_retrofit()
 
     def _get_years_vec(self) -> None:
         """
@@ -122,6 +179,31 @@ class Building:
 
     def _get_building_id(self) -> None:
         self.building_id = self.building_params.get("building_id")
+
+    def _get_building_energies(self) -> None:
+        if self.building_params.get("resstock_overwrite"):
+            self._get_custom_building_energies()
+
+        else:
+            self._get_resstock_buildings()
+            self._get_baseline_consumptions()
+            self._get_retrofit_consumptions()
+
+    def _get_custom_building_energies(self) -> None:
+        reference_consump_filepath = self.building_params.get("reference_consump_filepath")
+        retrofit_consump_filepath = self.building_params.get("retrofit_consump_filepath")
+
+        self.baseline_consumption = self._load_custom_energy(reference_consump_filepath)
+        self.retrofit_consumption = self._load_custom_energy(retrofit_consump_filepath)
+
+    @staticmethod
+    def _load_custom_energy(consump_filepath: str) -> pd.DataFrame:
+        consump_df = pd.read_csv(consump_filepath).set_index("timestamp")
+        consump_df.index = pd.to_datetime(consump_df.index)
+        consump_df.index = consump_df.index.shift(-1, "15T")
+        consump_df = consump_df.rename(mapper=CUSTOM_RESSTOCK_MAPPING, axis=1)
+
+        return consump_df
 
     def _get_resstock_buildings(self) -> None:
         decarb_scenario = self.sim_settings.get("decarb_scenario")
@@ -186,6 +268,8 @@ class Building:
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
                 self.years_vec,
+                custom_baseline_energy=self.baseline_consumption,
+                custom_retrofit_energy=self.retrofit_consumption,
                 **params
             )
 
@@ -201,6 +285,8 @@ class Building:
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
                 self.years_vec,
+                custom_baseline_energy=self.baseline_consumption,
+                custom_retrofit_energy=self.retrofit_consumption,
                 **params,
             )
 
@@ -216,6 +302,8 @@ class Building:
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
                 self.years_vec,
+                custom_baseline_energy=self.baseline_consumption,
+                custom_retrofit_energy=self.retrofit_consumption,
                 **params
             )
 
@@ -231,6 +319,8 @@ class Building:
                 self.sim_settings.get("decarb_scenario"),
                 self.resstock_metadata,
                 self.years_vec,
+                custom_baseline_energy=self.baseline_consumption,
+                custom_retrofit_energy=self.retrofit_consumption,
                 **params
             )
 
@@ -240,6 +330,32 @@ class Building:
 
         return None
     
+    def _calc_total_energy_baseline(self) -> None:
+        """
+        x
+        """
+        if self.building_params.get("resstock_overwrite"):
+            self._calc_total_custom_baseline()
+
+        else:
+            self._calc_baseline_energy()
+
+    def _calc_total_custom_baseline(self) -> None:
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            filter_cols = [
+                col
+                for col in self.baseline_consumption
+                if col.startswith("out.{}".format(fuel))
+            ]
+
+            self.baseline_consumption["out.{}.total.energy_consumption".format(fuel)] = \
+                self.baseline_consumption[filter_cols].sum(axis=1)
+            
+        self.baseline_consumption["out.total.energy_consumption"] = self.baseline_consumption[[
+            "out.{}.total.energy_consumption".format(i)
+            for i in ["electricity", "natural_gas", "propane", "fuel_oil"]
+        ]].sum(axis=1)
+
     def _calc_baseline_energy(self) -> None:
         """
         Steps:
@@ -280,6 +396,32 @@ class Building:
 
             self.baseline_consumption["out.{}.total.energy_consumption_update".format(fuel)] = \
                 self.baseline_consumption[asset_update_consump_keys].sum(axis=1)
+            
+    def _calc_total_energy_retrofit(self) -> None:
+        """
+        x
+        """
+        if self.building_params.get("resstock_overwrite"):
+            self._calc_total_custom_retrofit()
+
+        else:
+            self._calc_retrofit_energy()
+
+    def _calc_total_custom_retrofit(self) -> None:
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            filter_cols = [
+                col
+                for col in self.retrofit_consumption
+                if col.startswith("out.{}".format(fuel))
+            ]
+
+            self.retrofit_consumption["out.{}.total.energy_consumption".format(fuel)] = \
+                self.retrofit_consumption[filter_cols].sum(axis=1)
+            
+        self.retrofit_consumption["out.total.energy_consumption"] = self.retrofit_consumption[[
+            "out.{}.total.energy_consumption".format(i)
+            for i in ["electricity", "natural_gas", "propane", "fuel_oil"]
+        ]].sum(axis=1)
 
     def _calc_retrofit_energy(self) -> None:
         """

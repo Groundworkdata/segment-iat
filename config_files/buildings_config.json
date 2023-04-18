@@ -42,7 +42,10 @@
         "resstock_metadata": {
             "in.cooking_range": "Gas, 100% Usage",
             "in.heating_fuel": "Natural Gas"
-        }
+        },
+        "resstock_overwrite": true,
+        "reference_consump_filepath": "./config_files/buildings/reference_profile.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/retrofit_profile.csv"
     },
     {
         "building_id": "062-06-015",
