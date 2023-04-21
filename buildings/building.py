@@ -117,12 +117,30 @@ METHANE_LEAKS = {
 
 
 EMISSION_FACTORS = {
-    "natural_gas": 0.057,
-    "electricity": 0,
+    "natural_gas": 0.053,
+    "electricity": 0.132,
     "fuel_oil": 0.074,
-    "propane": 0.0171,
-    "hybrid_gas": 0.01,
-    "hybrid_npa": 0.01,
+    "propane": 0.062,
+    "hybrid_gas": 0.053, # Same as natural_gas
+    "hybrid_npa": 0.062, # Same as propane
+}
+
+
+ASSET_COSTS = {
+    'HYBRID.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
+    'HYBRID.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
+    'HYBRID.HVAC': {'LARGE': 23318, 'MEDIUM': 19431, 'SMALL': 16090},
+    'HYBRID.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
+    'HYBRID_NPA.Adder': {'LARGE': 1310, 'MEDIUM': 1101, 'SMALL': 891},
+    'LEGACY.DHW': {'LARGE': 2052, 'MEDIUM': 1616, 'SMALL': 1181},
+    'LEGACY.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
+    'LEGACY.HVAC': {'LARGE': 17723, 'MEDIUM': 14926, 'SMALL': 12129},
+    'LEGACY.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
+    'WHOLE.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
+    'WHOLE.DRYER': {'LARGE': 2115, 'MEDIUM': 2115, 'SMALL': 2115},
+    'WHOLE.HVAC': {'LARGE': 30162, 'MEDIUM': 25186, 'SMALL': 20211},
+    'WHOLE.PANEL': {'LARGE': 3886, 'MEDIUM': 3187, 'SMALL': 2488},
+    'WHOLE.STOVE': {'LARGE': 5210, 'MEDIUM': 3577, 'SMALL': 2488}
 }
 
 
@@ -295,6 +313,18 @@ class Building:
 
         for end_use in end_use_params:
             end_use_type = end_use.get("end_use")
+            end_use["existing_install_cost"] = ASSET_COSTS.get(
+                end_use["existing_type"], {}
+            ).get(
+                end_use["size"], 0
+            )
+
+            end_use["replacement_cost"] = ASSET_COSTS.get(
+                end_use["replacement_type"], {}
+            ).get(
+                end_use["size"], 0
+            )
+
             self.end_uses[end_use_type] = self._get_single_end_use(end_use)
 
     def _get_single_end_use(self, params: dict):
@@ -638,9 +668,21 @@ class Building:
 
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             annual_fuel_consump = self._annual_energy_by_fuel[fuel]
+            emissions_factor = EMISSION_FACTORS.get(fuel, 0)
+
+            if fuel == "electricity":
+                emissions_factor = np.zeros(len(self.years_vec))
+                for i in range(len(self.years_vec)):
+                    year = self.years_vec[i]
+                    if year < 2024:
+                        emissions_factor[i] = EMISSION_FACTORS.get(fuel, 0)
+
+                    else:
+                        emissions_factor[i] = emissions_factor[i-1] * (1 - 0.03)
+
             combusion_emissions[fuel] = (
                 np.array(annual_fuel_consump)
-                * EMISSION_FACTORS.get(fuel, 0)
+                * emissions_factor
             ).tolist()
 
         return combusion_emissions
@@ -683,6 +725,59 @@ class Building:
 
         cost_table.to_csv("./outputs/{}_costs.csv".format(self.building_id))
 
+    def _get_retrofit_cost_vec(self) -> List[float]:
+        """
+        Sum replacement_cost vec from each asset to get total
+        """
+        replacement_costs = pd.DataFrame(index=self.years_vec)
+
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
+            asset = self.end_uses.get(asset_type)
+
+            if asset:
+                replacement_cost = asset.replacement_cost
+                replacement_costs[asset_type] = replacement_cost
+
+        return replacement_costs.sum(axis=1).to_list()
+    
+    def _get_retrofit_book_value_vec(self) -> List[float]:
+        """
+        Sum replacement_book_val vec
+        """
+        replacement_costs = pd.DataFrame(index=self.years_vec)
+
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
+            asset = self.end_uses.get(asset_type)
+
+            if asset:
+                replacement_cost = asset.replacement_book_val
+                replacement_costs[asset_type] = replacement_cost
+
+        return replacement_costs.sum(axis=1).to_list()
+    
+    def _get_exising_book_val_vec(self) -> List[float]:
+        existing_book_val = pd.DataFrame(index=self.years_vec)
+
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
+            asset = self.end_uses.get(asset_type)
+
+            if asset:
+                book_val = asset.existing_book_val
+                existing_book_val[asset_type] = book_val
+
+        return existing_book_val.sum(axis=1).to_list()
+    
+    def _get_exising_stranded_val_vec(self) -> List[float]:
+        existing_stranded = pd.DataFrame(index=self.years_vec)
+
+        for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
+            asset = self.end_uses.get(asset_type)
+
+            if asset:
+                book_val = asset.existing_stranded_val
+                existing_stranded[asset_type] = book_val
+
+        return existing_stranded.sum(axis=1).to_list()
 
     def _sum_end_use_figures(self, cost_figure) -> pd.DataFrame:
         """
