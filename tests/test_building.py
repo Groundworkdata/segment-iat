@@ -8,6 +8,7 @@ import os
 import unittest
 from unittest.mock import Mock, patch
 
+import numpy as np
 import pandas as pd
 
 from buildings.building import Building
@@ -367,6 +368,93 @@ class TestBuilding(unittest.TestCase):
                 "out.propane.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 20},
                 "out.fuel_oil.total.energy_consumption_update": {1: 0, 2: 0, 3: 0, 4: 0},
             }).sort_index(axis=1)
+        )
+
+    def test_calc_building_costs(self):
+        self.building.building_params = {
+            "building_level_costs": {
+                "retrofit_adder": {"small": 10, "medium": 25, "large": 100,},
+            },
+            "retrofit_size": "large",
+        }
+
+        self.building._retrofit_vec = [0, 0, 0, 1, 0]
+
+        self.assertListEqual(
+            self.building._calc_building_costs(),
+            [0, 0, 0, 100, 0]
+        )
+
+    def test_get_replacement_vec(self):
+        self.building.building_params["retrofit_year"] = 2035
+        self.building.years_vec = list(range(2020, 2040))
+
+        expected_vec = [False for i in range(20)]
+        expected_vec[15] = True
+
+        self.assertListEqual(
+            self.building._get_replacement_vec(),
+            expected_vec
+        )
+
+    def test_calc_building_utility_costs(self):
+        years_vec = [2020, 2021, 2022, 2023]
+        self.building.years_vec = years_vec
+
+        utility_costs = {
+            "electricity": [(15/293) * (1 + 0.01) ** (i-2022) for i in years_vec],
+            "natural_gas": [(45/293) * (1 + 0.01) ** (i-2022) for i in years_vec],
+            "fuel_oil": [(20/293) * (1 + 0.01) ** (i-2022) for i in years_vec],
+        }
+
+        utility_costs["propane"] = (
+            np.array(utility_costs["electricity"]) * (0.8 / 3)
+            + np.array(utility_costs["natural_gas"]) * 0.3
+        ).tolist()
+
+        self.building._retrofit_vec = [False, True, False, False]
+
+        timeseries_index = pd.date_range(start="1/1/2018", periods=4, freq="1H")
+
+        self.building.baseline_consumption = pd.DataFrame({
+            "out.electricity.total.energy_consumption": {0: 10, 1: 20, 3: 23, 4: 0},
+            "out.natural_gas.total.energy_consumption": {0: 6, 1: 0, 3: 40, 4: 0},
+            "out.propane.total.energy_consumption": {0: 0, 1: 0, 3: 0, 4: 0},
+            "out.fuel_oil.total.energy_consumption": {0: 0, 1: 0, 3: 0, 4: 0},
+        }).set_index(timeseries_index)
+
+        self.building.retrofit_consumption = pd.DataFrame({
+            "out.electricity.total.energy_consumption": {0: 12, 1: 20, 3: 23, 4: 0},
+            "out.natural_gas.total.energy_consumption": {0: 0, 1: 0, 3: 0, 4: 0},
+            "out.propane.total.energy_consumption": {0: 8, 1: 0, 3: 50, 4: 0},
+            "out.fuel_oil.total.energy_consumption": {0: 0, 1: 0, 3: 0, 4: 0},
+        }).set_index(timeseries_index)
+
+        expected_costs = {
+            "electricity": [
+                53 * utility_costs["electricity"][0],
+                55 * utility_costs["electricity"][1],
+                55 * utility_costs["electricity"][2],
+                55 * utility_costs["electricity"][3]
+            ],
+            "natural_gas": [
+                46 * utility_costs["natural_gas"][0],
+                0.0,
+                0.0,
+                0.0,
+            ],
+            "propane": [
+                0.0,
+                58 * utility_costs["propane"][1],
+                58 * utility_costs["propane"][2],
+                58 * utility_costs["propane"][3],
+            ],
+            "fuel_oil": [0.0, 0.0, 0.0, 0.0]
+        }
+
+        self.assertDictEqual(
+            expected_costs,
+            self.building._calc_building_utility_costs()
         )
 
     def test_write_building_energy_info(self):

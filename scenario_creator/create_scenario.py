@@ -2,7 +2,9 @@
 Creates a scenario based on input values
 """
 import json
-from typing import List
+from typing import Dict, List
+
+import pandas as pd
 
 from buildings.building import Building
 from utility_network.utility_network import UtilityNetwork
@@ -25,15 +27,18 @@ class ScenarioCreator:
         self._scenario_mapping_filepath = scenario_mapping_filepath
 
         self.sim_config: dict = {}
+        self._years_vec: List[int] = []
         self.scenario_mapping: List[dict] = []
         self.buildings_config: dict = {}
-        self.buildings: dict = {}
+        self.buildings: Dict[str, Building] = {}
         self.utility_network: UtilityNetwork = None
 
     def create_scenario(self):
         self.get_sim_settings()
+        self._years_vec = self._get_years_vec()
         self.get_scenario_mapping()
         self.create_building()
+        self._write_buildings_outputs()
         # TODO: Update after utility model changes complete
         # self.get_utility_network()
 
@@ -44,6 +49,12 @@ class ScenarioCreator:
         with open(self._sim_settings_filepath) as f:
             data = json.load(f)
         self.sim_config = data
+
+    def _get_years_vec(self) -> List[int]:
+        return list(range(
+            self.sim_config.get("sim_start_year", 2020),
+            self.sim_config.get("sim_end_year", 2050)
+        ))
 
     def get_scenario_mapping(self) -> None:
         """
@@ -70,6 +81,89 @@ class ScenarioCreator:
             building.write_building_cost_info()
 
             self.buildings[building.building_id] = building
+
+    def _write_buildings_outputs(self) -> None:
+        """
+        Write output tables from all buildings
+        """
+        # Start with _is_retrofit_vec
+        #TODO: What orientation is better? Years are rows or cols (default is rows)?
+        output_index = pd.Index(data=self._years_vec, name="year")
+
+        # ---Is Retrofit Vec---
+        is_retrofit_vec_table = pd.DataFrame(
+            {
+                building_id: building._is_retrofit_vec
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        is_retrofit_vec_table.to_csv("./outputs/is_retrofit_vec_table.csv")
+
+        # ---Building energy use---
+        building_energy_usage = {
+            building_id: building._calc_annual_energy_consump()
+            for building_id, building in self.buildings.items()
+        }
+
+        fuels = ["electricity", "natural_gas", "propane", "fuel_oil"]
+
+        for fuel in fuels:
+            consump_table = pd.DataFrame(
+                {
+                    building_id: usage[fuel]
+                    for building_id, usage in building_energy_usage.items()
+                },
+                index=output_index
+            )
+            consump_table.to_csv("./outputs/{}_consump.csv".format(fuel))
+
+        # ---Building utility costs---
+        building_util_costs = {
+            building_id: building._calc_building_utility_costs()
+            for building_id, building in self.buildings.items()
+        }
+
+        for fuel in fuels:
+            cost_table = pd.DataFrame(
+                {
+                    building_id: costs[fuel]
+                    for building_id, costs in building_util_costs.items()
+                },
+                index=output_index
+            )
+            cost_table.to_csv("./outputs/{}_utility_costs.csv".format(fuel))
+
+        # ---Building fuel---
+        fuel_table = pd.DataFrame(
+            {
+                building_id: building._fuel_type
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        fuel_table.to_csv("./outputs/fuel_type.csv")
+
+        # ---Methane leaks---
+        leaks_table = pd.DataFrame(
+            {
+                building_id: building._methane_leaks
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        leaks_table.to_csv("./outputs/methane_leaks_table.csv")
+
+        # ---Combustion emissions---
+        for fuel in fuels:
+            combustion_emissions = pd.DataFrame(
+                {
+                    building_id: building._combustion_emissions[fuel]
+                    for building_id, building in self.buildings.items()
+                },
+                index=output_index
+            )
+            combustion_emissions.to_csv("./outputs/{}_combustion_emissions.csv".format(fuel))
 
     def get_utility_network(self):
         """

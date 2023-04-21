@@ -110,6 +110,22 @@ CUSTOM_RESSTOCK_MAPPING = {
 }
 
 
+METHANE_LEAKS = {
+    "GAS": 2,
+    "HPL": 1,
+}
+
+
+EMISSION_FACTORS = {
+    "natural_gas": 0.057,
+    "electricity": 0,
+    "fuel_oil": 0.074,
+    "propane": 0.0171,
+    "hybrid_gas": 0.01,
+    "hybrid_npa": 0.01,
+}
+
+
 class Building:
     """
     A bucket for all end uses at a parcel. Currently assuming one building/one unit per parcel
@@ -152,6 +168,12 @@ class Building:
         self._main_resstock_retrofit_scenario: int = None
         self.baseline_consumption: pd.DataFrame = pd.DataFrame()
         self.retrofit_consumption: pd.DataFrame = pd.DataFrame()
+        self._retrofit_vec: List[bool] = []
+        self._is_retrofit_vec: List[bool] = []
+        self._annual_energy_by_fuel: Dict[str, List[float]] = {}
+        self._building_annual_costs_other: List[float] = []
+        self._fuel_type: List[str] = []
+        self._combustion_emissions: Dict[str, List[float]] = {}
 
     def populate_building(self) -> None:
         """
@@ -163,6 +185,13 @@ class Building:
         self._create_end_uses()
         self._calc_total_energy_baseline()
         self._calc_total_energy_retrofit()
+        self._retrofit_vec = self._get_replacement_vec()
+        self._is_retrofit_vec = self._get_is_retrofit_vec()
+        self._annual_energy_by_fuel = self._calc_annual_energy_consump()
+        self._building_annual_costs_other = self._calc_building_costs()
+        self._fuel_type = self._get_fuel_type_vec()
+        self._methane_leaks = self._get_methane_leaks()
+        self._combustion_emissions = self._get_combustion_emissions()
 
     def _get_years_vec(self) -> None:
         """
@@ -195,6 +224,15 @@ class Building:
 
         self.baseline_consumption = self._load_custom_energy(reference_consump_filepath)
         self.retrofit_consumption = self._load_custom_energy(retrofit_consump_filepath)
+
+        load_scaling_factor = self.building_params.get("load_scaling_factor", 1)
+        self.baseline_consumption[
+            self.baseline_consumption.select_dtypes(include=["number"]).columns
+        ]  *= load_scaling_factor
+
+        self.retrofit_consumption[
+            self.retrofit_consumption.select_dtypes(include=["number"]).columns
+        ] *= load_scaling_factor
 
     @staticmethod
     def _load_custom_energy(consump_filepath: str) -> pd.DataFrame:
@@ -462,6 +500,150 @@ class Building:
 
             self.retrofit_consumption["out.{}.total.energy_consumption_update".format(fuel)] = \
                 self.retrofit_consumption[asset_update_consump_keys].sum(axis=1)
+            
+    def _calc_building_costs(self) -> List[float]:
+        """
+        Calculate building-level costs
+        """
+        building_level_costs = self.building_params.get("building_level_costs", {})
+        retrofit_adders = building_level_costs.get("retrofit_adder", {})
+        retrofit_size = self.building_params.get("retrofit_size", "")
+        retrofit_adder = retrofit_adders.get(retrofit_size.lower(), 0)
+
+        return np.multiply(retrofit_adder, self._retrofit_vec).tolist()
+
+    def _get_replacement_vec(self) -> List[bool]:
+        """
+        The replacement vector is a vector of True when the index is the retrofit year, False o/w
+        """
+        replacement_year = self.building_params.get("retrofit_year", self.years_vec[-1])
+        return [True if i==replacement_year else False for i in self.years_vec]
+    
+    def _get_is_retrofit_vec(self) -> List[bool]:
+        """
+        Derived from the retrofit vec; =True in years including and after the retrofit, 0 o/w
+        """
+        return [max(self._retrofit_vec[:i]) for i in range(1, len(self._retrofit_vec) + 1)]
+    
+    def _calc_annual_energy_consump(self) -> Dict[str, List[float]]:
+        """
+        Calculate the total annual energy consumption, by energy type
+        """
+        annual_energy_use = {
+            "electricity": [],
+            "natural_gas": [],
+            "propane": [],
+            "fuel_oil": [],
+        }
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            for replaced in self._is_retrofit_vec:
+                if replaced:
+                    annual_use = self.retrofit_consumption[
+                        "out.{}.total.energy_consumption".format(fuel)
+                    ]
+
+                else:
+                    annual_use = self.baseline_consumption[
+                        "out.{}.total.energy_consumption".format(fuel)
+                    ]
+
+                annual_use = annual_use.resample("AS").sum().values[0]
+                annual_energy_use[fuel].append(annual_use)
+
+        return annual_energy_use
+    
+    def _calc_building_utility_costs(self) -> Dict[str, List[float]]:
+        """
+        Calculate the utility billing metrics for the building, based on total energy consumption
+        """
+        utility_costs = {
+            "electricity": [(15/293) * (1 + 0.01) ** (i-2022) for i in self.years_vec],
+            "natural_gas": [(45/293) * (1 + 0.01) ** (i-2022) for i in self.years_vec],
+            "fuel_oil": [(20/293) * (1 + 0.01) ** (i-2022) for i in self.years_vec],
+        }
+
+        utility_costs["propane"] = (
+            np.array(utility_costs["electricity"]) * (0.8 / 3)
+            + np.array(utility_costs["natural_gas"]) * 0.3
+        ).tolist()
+
+        is_replaced_vec = [
+            max(self._retrofit_vec[:i])
+            for i in range(1, len(self._retrofit_vec) + 1)
+        ]
+
+        annual_utility_costs = {
+            "electricity": [],
+            "natural_gas": [],
+            "propane": [],
+            "fuel_oil": [],
+        }
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            for replaced, cost_rate in zip(is_replaced_vec, utility_costs[fuel]):
+                if replaced:
+                    annual_use = self.retrofit_consumption[
+                        "out.{}.total.energy_consumption".format(fuel)
+                    ]
+
+                else:
+                    annual_use = self.baseline_consumption[
+                        "out.{}.total.energy_consumption".format(fuel)
+                    ]
+
+                annual_use = annual_use.resample("AS").sum().values[0]
+
+                annual_utility_costs[fuel].append(annual_use * cost_rate)
+
+        return annual_utility_costs
+    
+    def _get_fuel_type_vec(self) -> List[str]:
+        """
+        Fuel type vector of dominant fuel in building. Based on inputs original_fuel_type and
+        retrofit_fuel_type
+        """
+        original_fuel = self.building_params.get("original_fuel_type", None)
+        retrofit_fuel = self.building_params.get("retrofit_fuel_type", None)
+
+        fuel_mappings = {
+            "natural_gas": "GAS",
+            "fuel_oil": "OIL",
+            "electricity": "ELEC",
+            "propane": "LPG",
+            "hybrid_gas": "HPL",
+            "hybrid_npa": "NPH",
+        }
+
+        return [
+            fuel_mappings.get(retrofit_fuel) if i
+            else fuel_mappings.get(original_fuel)
+            for i in self._is_retrofit_vec
+        ]
+
+    def _get_methane_leaks(self) -> List[str]:
+        """
+        Get (hardcoded) methane leaks in the building annually
+        """
+        return [
+            METHANE_LEAKS.get(i, 0)
+            for i in self._fuel_type
+        ]
+    
+    def _get_combustion_emissions(self) -> List[str]:
+        """
+        Combustion emissions from energy consumption
+        """
+        combusion_emissions = {}
+
+        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+            annual_fuel_consump = self._annual_energy_by_fuel[fuel]
+            combusion_emissions[fuel] = (
+                np.array(annual_fuel_consump)
+                * EMISSION_FACTORS.get(fuel, 0)
+            ).tolist()
+
+        return combusion_emissions
 
     def write_building_energy_info(self, freq: int =60) -> None:
         """
@@ -490,6 +672,8 @@ class Building:
         Write calculated building information for total costs
         """
         cost_table = pd.DataFrame(index=self.years_vec)
+
+        cost_table["building_other_costs"] = self._building_annual_costs_other
 
         for asset_type in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]:
             asset = self.end_uses.get(asset_type)
