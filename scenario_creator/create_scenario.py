@@ -100,6 +100,46 @@ class ScenarioCreator:
         )
         is_retrofit_vec_table.to_csv("./outputs/is_retrofit_vec_table.csv")
 
+        # ---Asset replacement cost---
+        retrofit_cost_table = pd.DataFrame(
+            {
+                building_id: building._get_retrofit_cost_vec()
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        retrofit_cost_table.to_csv("./outputs/retrofit_cost_table.csv")
+
+        # ---Replacement asset book value---
+        retrofit_book_val_table = pd.DataFrame(
+            {
+                building_id: building._get_retrofit_book_value_vec()
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        retrofit_book_val_table.to_csv("./outputs/retrofit_book_val_table.csv")
+
+        # ---Existing book val
+        existing_book_val_table = pd.DataFrame(
+            {
+                building_id: building._get_exising_book_val_vec()
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        existing_book_val_table.to_csv("./outputs/existing_book_val_table.csv")
+
+        # ---Existing stranded val---
+        existing_stranded_val_table = pd.DataFrame(
+            {
+                building_id: building._get_exising_stranded_val_vec()
+                for building_id, building in self.buildings.items()
+            },
+            index=output_index
+        )
+        existing_stranded_val_table.to_csv("./outputs/existing_stranded_val_table.csv")
+
         # ---Building energy use---
         building_energy_usage = {
             building_id: building._calc_annual_energy_consump()
