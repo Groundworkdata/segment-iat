@@ -587,21 +587,7 @@ class Building:
         """
         Calculate the utility billing metrics for the building, based on total energy consumption
         """
-        utility_costs = {
-            "electricity": [(15/293) * (1 + 0.01) ** (i-2022) for i in self.years_vec],
-            "natural_gas": [(45/293) * (1 + 0.01) ** (i-2022) for i in self.years_vec],
-            "fuel_oil": [(20/293) * (1 + 0.01) ** (i-2022) for i in self.years_vec],
-        }
-
-        utility_costs["propane"] = (
-            np.array(utility_costs["electricity"]) * (0.8 / 3)
-            + np.array(utility_costs["natural_gas"]) * 0.3
-        ).tolist()
-
-        is_replaced_vec = [
-            max(self._retrofit_vec[:i])
-            for i in range(1, len(self._retrofit_vec) + 1)
-        ]
+        utility_rates = pd.read_csv("./config_files/utility_rates.csv", index_col=0)
 
         annual_utility_costs = {
             "electricity": [],
@@ -611,7 +597,7 @@ class Building:
         }
 
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
-            for replaced, cost_rate in zip(is_replaced_vec, utility_costs[fuel]):
+            for replaced, rate in zip(self._is_retrofit_vec, utility_rates[fuel].to_list()):
                 if replaced:
                     annual_use = self.retrofit_consumption[
                         "out.{}.total.energy_consumption".format(fuel)
@@ -624,7 +610,7 @@ class Building:
 
                 annual_use = annual_use.resample("AS").sum().values[0]
 
-                annual_utility_costs[fuel].append(annual_use * cost_rate)
+                annual_utility_costs[fuel].append(annual_use * rate)
 
         return annual_utility_costs
     
