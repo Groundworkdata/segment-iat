@@ -116,13 +116,13 @@ METHANE_LEAKS = {
 }
 
 
-EMISSION_FACTORS = {
-    "natural_gas": 0.053,
-    "electricity": 0.132,
-    "fuel_oil": 0.074,
-    "propane": 0.062,
-    "hybrid_gas": 0.053, # Same as natural_gas
-    "hybrid_npa": 0.062, # Same as propane
+EMISSION_FACTORS = { # tCO2 / kWh
+    "natural_gas": (53 / (293 * 907)), # Input of kgCO2 / MMBtu
+    "electricity": 0.45 / 1000, # Input of tCO2 / MWh
+    "fuel_oil": (73.96 / (293 * 907)), # Input of kgCO2 / MMBtu
+    "propane": (61.71 / (293 * 907)), # Input of kgCO2 / MMBtu
+    "hybrid_gas": (53 / (293 * 907)), # Same as natural_gas
+    "hybrid_npa": (61.71 / (293 * 907)), # Same as propane
 }
 
 
