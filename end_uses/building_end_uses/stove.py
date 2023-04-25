@@ -154,7 +154,7 @@ class Stove:
     def _get_existing_stranded_val(self) -> List[float]:
         stranded_val = np.multiply(self.existing_book_val, self.replacement_vec).tolist()
         return stranded_val
-    
+
     def _get_replacement_cost(self) -> List[float]:
         replacement_cost = self._kwargs.get("replacement_cost", 0)
         replacement_year = self._kwargs.get("replacement_year", self._years_vec[-1])
