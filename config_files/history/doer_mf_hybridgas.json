@@ -5,12 +5,12 @@
         "retrofit_year": 2041,
         "parcel_id": "F_753646_2717355",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -22,7 +22,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -34,7 +34,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -46,7 +46,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -57,15 +57,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
@@ -74,12 +70,12 @@
         "retrofit_year": 2043,
         "parcel_id": "F_753674_2717470",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -91,7 +87,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -103,7 +99,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -115,7 +111,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -126,15 +122,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
@@ -143,12 +135,12 @@
         "retrofit_year": 2032,
         "parcel_id": "F_753569_2717047",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -160,7 +152,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -172,7 +164,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -184,7 +176,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -195,15 +187,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 3.00
     },
     {
@@ -212,12 +200,12 @@
         "retrofit_year": 2038,
         "parcel_id": "F_753629_2717285",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -229,7 +217,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -241,7 +229,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -253,7 +241,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -264,15 +252,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
@@ -281,12 +265,12 @@
         "retrofit_year": 2037,
         "parcel_id": "F_753581_2717093",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -298,7 +282,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -310,7 +294,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -322,7 +306,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -333,15 +317,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
@@ -350,12 +330,12 @@
         "retrofit_year": 2045,
         "parcel_id": "F_753663_2717423",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -367,7 +347,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -379,7 +359,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -391,7 +371,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -402,15 +382,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 1.50
     },
     {
@@ -419,12 +395,12 @@
         "retrofit_year": 2043,
         "parcel_id": "F_753474_2717148",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -436,7 +412,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -448,7 +424,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -460,7 +436,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -471,15 +447,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
@@ -488,12 +460,12 @@
         "retrofit_year": 2035,
         "parcel_id": "F_753492_2717319",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -505,7 +477,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -517,7 +489,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -529,7 +501,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -540,15 +512,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 0.75
     },
     {
@@ -557,12 +525,12 @@
         "retrofit_year": 2026,
         "parcel_id": "F_753421_2717033",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -574,7 +542,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -586,7 +554,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -598,7 +566,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -609,15 +577,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
@@ -626,12 +590,12 @@
         "retrofit_year": 2026,
         "parcel_id": "F_753432_2717080",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -643,7 +607,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -655,7 +619,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -667,7 +631,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -678,15 +642,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
@@ -695,12 +655,12 @@
         "retrofit_year": 2035,
         "parcel_id": "F_753515_2717411",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -712,7 +672,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -724,7 +684,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -736,7 +696,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -747,15 +707,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 4.50
     },
     {
@@ -764,12 +720,12 @@
         "retrofit_year": 2040,
         "parcel_id": "F_753480_2717271",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -781,7 +737,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -793,7 +749,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -805,7 +761,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -816,15 +772,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
@@ -833,12 +785,12 @@
         "retrofit_year": 2042,
         "parcel_id": "F_753409_2716987",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -850,7 +802,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -862,7 +814,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -874,7 +826,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -885,15 +837,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
@@ -902,12 +850,12 @@
         "retrofit_year": 2030,
         "parcel_id": "F_753504_2717366",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -919,7 +867,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -931,7 +879,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -943,7 +891,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -954,15 +902,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
@@ -971,12 +915,12 @@
         "retrofit_year": 2028,
         "parcel_id": "F_753526_2717454",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -988,7 +932,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1000,7 +944,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1012,7 +956,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1023,15 +967,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 1.50
     },
     {
@@ -1040,12 +980,12 @@
         "retrofit_year": 2043,
         "parcel_id": "F_753588_2717245",
         "original_fuel_type": "natural_gas",
-        "retrofit_fuel_type": "electricity",
+        "retrofit_fuel_type": "hybrid_gas",
         "end_uses": [
             {
                 "end_use": "stove",
                 "existing_type": "LEGACY.STOVE",
-                "replacement_type": "WHOLE.STOVE",
+                "replacement_type": "HYBRID.STOVE",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1057,7 +997,7 @@
             {
                 "end_use": "clothes_dryer",
                 "existing_type": "LEGACY.DRYER",
-                "replacement_type": "WHOLE.DRYER",
+                "replacement_type": "HYBRID.DRYER",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1069,7 +1009,7 @@
             {
                 "end_use": "domestic_hot_water",
                 "existing_type": "LEGACY.DHW",
-                "replacement_type": "WHOLE.DHW",
+                "replacement_type": "HYBRID.DHW",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1081,7 +1021,7 @@
             {
                 "end_use": "hvac",
                 "existing_type": "LEGACY.HVAC",
-                "replacement_type": "WHOLE.HVAC",
+                "replacement_type": "HYBRID.HVAC",
                 "size": "SMALL",
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
@@ -1092,15 +1032,11 @@
             }
         ],
         "retrofit_size": "small",
-        "building_level_costs": {
-            "small": 2488,
-            "medium": 3187,
-            "large": 3886
-        },
+        "building_level_costs": {},
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Hybrid_GAS.csv",
         "load_scaling_factor": 0.75
     }
 ]
