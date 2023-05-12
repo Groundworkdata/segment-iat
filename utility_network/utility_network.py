@@ -92,8 +92,6 @@ class UtilityNetwork:
         self._create_elec_transformers()
         self._create_elec_primaries()
 
-        print(self.elec_primaries)
-
     def _read_csv_config(self, config_file_path=None) -> None:
         """
         Read in the utilty network config file and save to network_config attr

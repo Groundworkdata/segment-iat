@@ -40,8 +40,9 @@ class ScenarioCreator:
         self.get_scenario_mapping()
         self.create_building()
         self._write_buildings_outputs()
-        # print("Creating Utility Network")
+        print("Creating Utility Network")
         self.create_utility_network()
+        self._get_utility_network_outputs()
 
     def get_sim_settings(self) -> None:
         """
@@ -214,3 +215,16 @@ class ScenarioCreator:
         )
 
         self.utility_network.populate_utility_network()
+
+    def _get_utility_network_outputs(self):
+        """
+        Printing out some utility network stuff. Will need to write to output tables soon...
+        """
+        print(
+            pd.DataFrame(
+                {
+                    xmfr.asset_id: xmfr.overloading_ratio 
+                    for xmfr in self.utility_network.elec_transformers
+                }
+            )
+        )
