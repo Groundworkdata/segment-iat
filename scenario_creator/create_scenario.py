@@ -14,6 +14,7 @@ class ScenarioCreator:
     """
     Create scenario for a parcel and tally total energy usages
     """
+
     def __init__(
             self,
             sim_settings_filepath: str,
@@ -39,8 +40,8 @@ class ScenarioCreator:
         self.get_scenario_mapping()
         self.create_building()
         self._write_buildings_outputs()
-        # TODO: Update after utility model changes complete
-        # self.get_utility_network()
+        # print("Creating Utility Network")
+        self.create_utility_network()
 
     def get_sim_settings(self) -> None:
         """
@@ -79,7 +80,6 @@ class ScenarioCreator:
             building.populate_building()
             building.write_building_energy_info()
             building.write_building_cost_info()
-
             self.buildings[building.building_id] = building
 
     def _write_buildings_outputs(self) -> None:
@@ -205,14 +205,12 @@ class ScenarioCreator:
             )
             combustion_emissions.to_csv("./outputs/{}_combustion_emissions.csv".format(fuel))
 
-    def get_utility_network(self):
+    def create_utility_network(self):
         """
         Create the utility network based on the input config
         """
         self.utility_network = UtilityNetwork(
-            self._utility_network_config_filepath,
-            self.sim_config,
-            self.buildings
+            self._utility_network_config_filepath, self.sim_config, self.buildings
         )
 
-        self.utility_network.create_utility_network()
+        self.utility_network.populate_utility_network()

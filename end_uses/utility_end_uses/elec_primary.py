@@ -1,13 +1,13 @@
 """
-Defines Gas Service end use
+Defines Elec Service end use
 """
 import numpy as np
 from typing import List
 
-from end_uses.utility_end_uses.pipeline import Pipeline
+from end_uses.utility_end_uses.distribution_lines import DistributionLine
 
 
-class GasService(Pipeline):
+class ElecPrimary(DistributionLine):
     def __init__(self, **kwargs):
         super().__init__(
             kwargs.get("gisid"),
@@ -19,10 +19,12 @@ class GasService(Pipeline):
             kwargs.get("sim_end_year"),
             kwargs.get("replacement_year"),
             kwargs.get("decarb_scenario"),
-            kwargs.get("length_ft"),
-            kwargs.get("pressure"),
-            kwargs.get("diameter"),
-            kwargs.get("material"),
             kwargs.get("connected_assets"),
-            "gas_service",
+            "elec_primary",
         )
+
+        self.circuit: int = kwargs.get("circuit")
+        self.oh_ug: str = kwargs.get("oh_ug")
+        self.phase: str = kwargs.get("phase")
+        self.pwire_size: int = kwargs.get("pwire_size")
+        self.voltage: str = kwargs.get("voltage")

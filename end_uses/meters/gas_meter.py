@@ -27,17 +27,18 @@ class GasMeter(Meter):
     Methods:
         None
     """
+
     def __init__(self, **kwargs):
         super().__init__(
-            kwargs.get("install_year"),
-            kwargs.get("asset_cost"),
-            kwargs.get("replacement_year"),
+            kwargs.get("gisid"),
+            kwargs.get("parentid"),
+            kwargs.get("inst_date"),
+            kwargs.get("inst_cost"),
             kwargs.get("lifetime"),
             kwargs.get("sim_start_year"),
             kwargs.get("sim_end_year"),
-            kwargs.get("asset_id"),
-            kwargs.get("parent_id"),
-            kwargs.get("building_id"),
+            kwargs.get("replacement_year"),
+            kwargs.get("decarb_scenario"),
             kwargs.get("building"),
-            "GAS"
+            "natural_gas",
         )
