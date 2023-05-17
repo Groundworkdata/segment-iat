@@ -102,7 +102,7 @@ class Meter(UtilityEndUse):
         Returns:
             list: List of annual energy consumption
         """
-        energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption.kwh"
+        energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
         annual_total_energy_baseline = np.sum(
             self.building.baseline_consumption[[energy_attr]]
         ).values[0]
@@ -121,7 +121,7 @@ class Meter(UtilityEndUse):
         return dict(zip(self.years_vector, annual_total_energy))
 
     def get_annual_peak_energy_use(self) -> dict:
-        energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption.kwh"
+        energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
         annual_peak_energy_baseline = (
             self.building.baseline_consumption[[energy_attr]].max().values[0]
@@ -141,7 +141,7 @@ class Meter(UtilityEndUse):
         return dict(zip(self.years_vector, annual_peak_energy))
 
     def get_annual_energy_use_timeseries(self) -> list:
-        energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption.kwh"
+        energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
         annual_energy_use_baseline = self.building.baseline_consumption[[energy_attr]]
         annual_energy_use_retrofit = self.building.retrofit_consumption[[energy_attr]]
