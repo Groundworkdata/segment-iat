@@ -2,12 +2,18 @@
 Creates a scenario based on input values
 """
 import json
+import os
 from typing import Dict, List
 
 import pandas as pd
 
 from buildings.building import Building
 from utility_network.utility_network import UtilityNetwork
+
+
+SCENARIO = "natural_elec"
+FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
+OUTPUTS_FILEPATH = "./outputs_combined/scenarios/{}".format(SCENARIO)
 
 
 class ScenarioCreator:
@@ -20,12 +26,14 @@ class ScenarioCreator:
             sim_settings_filepath: str,
             building_config_filepath: str,
             utility_network_config_filepath: str,
-            scenario_mapping_filepath: str
+            scenario_mapping_filepath: str,
+            write_building_energy_timeseries: bool = False
     ):
         self._sim_settings_filepath = sim_settings_filepath
         self._building_config_filepath = building_config_filepath
         self._utility_network_config_filepath = utility_network_config_filepath
         self._scenario_mapping_filepath = scenario_mapping_filepath
+        self.write_building_energy_timeseries: bool = write_building_energy_timeseries
 
         self.sim_config: dict = {}
         self._years_vec: List[int] = []
@@ -79,67 +87,82 @@ class ScenarioCreator:
             )
 
             building.populate_building()
-            building.write_building_energy_info()
             building.write_building_cost_info()
+            if self.write_building_energy_timeseries:
+                building.write_building_energy_info()
             self.buildings[building.building_id] = building
 
     def _write_buildings_outputs(self) -> None:
         """
         Write output tables from all buildings
         """
-        # Start with _is_retrofit_vec
-        #TODO: What orientation is better? Years are rows or cols (default is rows)?
-        output_index = pd.Index(data=self._years_vec, name="year")
+        years_vec = pd.Index(data=self._years_vec, name="year")
 
         # ---Is Retrofit Vec---
-        is_retrofit_vec_table = pd.DataFrame(
-            {
-                building_id: building._is_retrofit_vec
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        is_retrofit_vec_table.to_csv("./outputs/is_retrofit_vec_table.csv")
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({"year": years_vec, "is_retrofit": building._is_retrofit_vec})
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "is_retrofit_vec_table.csv"), index=False)
 
-        # ---Asset replacement cost---
-        retrofit_cost_table = pd.DataFrame(
-            {
-                building_id: building._get_retrofit_cost_vec()
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        retrofit_cost_table.to_csv("./outputs/retrofit_cost_table.csv")
+        # ---Retrofit year---
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({"year": years_vec, "retrofit_year": building._retrofit_vec})
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_year.csv"), index=False)
+
+        # ---Retrofit cost---
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": building._get_retrofit_cost_vec()
+            })
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_cost.csv"), index=False)
 
         # ---Replacement asset book value---
-        retrofit_book_val_table = pd.DataFrame(
-            {
-                building_id: building._get_retrofit_book_value_vec()
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        retrofit_book_val_table.to_csv("./outputs/retrofit_book_val_table.csv")
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_book_val": building._get_retrofit_book_value_vec()
+            })
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_book_val.csv"), index=False)
 
-        # ---Existing book val
-        existing_book_val_table = pd.DataFrame(
-            {
-                building_id: building._get_exising_book_val_vec()
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        existing_book_val_table.to_csv("./outputs/existing_book_val_table.csv")
+        # ---Existing book val---
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({
+                "year": years_vec,
+                "existing_book_val": building._get_exising_book_val_vec()
+            })
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "existing_book_val.csv"), index=False)
 
         # ---Existing stranded val---
-        existing_stranded_val_table = pd.DataFrame(
-            {
-                building_id: building._get_exising_stranded_val_vec()
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        existing_stranded_val_table.to_csv("./outputs/existing_stranded_val_table.csv")
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({
+                "year": years_vec,
+                "existing_stranded_val": building._get_exising_stranded_val_vec()
+            })
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "existing_stranded_val.csv"), index=False)
 
         # ---Building energy use---
         building_energy_usage = {
@@ -147,17 +170,15 @@ class ScenarioCreator:
             for building_id, building in self.buildings.items()
         }
 
-        fuels = ["electricity", "natural_gas", "propane", "fuel_oil"]
-
-        for fuel in fuels:
-            consump_table = pd.DataFrame(
-                {
-                    building_id: usage[fuel]
-                    for building_id, usage in building_energy_usage.items()
-                },
-                index=output_index
-            )
-            consump_table.to_csv("./outputs/{}_consump.csv".format(fuel))
+        all_dfs = []
+        for building_id, building_consumptions in building_energy_usage.items():
+            for fuel in FUELS:
+                df = pd.DataFrame({"year": years_vec, "consumption": building_consumptions[fuel]})
+                df.loc[:, "building_id"] = building_id
+                df.loc[:, "energy_type"] = fuel
+                all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "energy_consumption.csv"), index=False)
 
         # ---Building utility costs---
         building_util_costs = {
@@ -165,46 +186,50 @@ class ScenarioCreator:
             for building_id, building in self.buildings.items()
         }
 
-        for fuel in fuels:
-            cost_table = pd.DataFrame(
-                {
-                    building_id: costs[fuel]
-                    for building_id, costs in building_util_costs.items()
-                },
-                index=output_index
-            )
-            cost_table.to_csv("./outputs/{}_utility_costs.csv".format(fuel))
+        all_dfs = []
+        for building_id, costs in building_util_costs.items():
+            for fuel in FUELS:
+                df = pd.DataFrame({
+                    "year": years_vec,
+                    "consumption_costs": costs[fuel]
+                })
+                df.loc[:, "building_id"] = building_id
+                df.loc[:, "energy_type"] = fuel
+                all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_costs.csv"), index=False)
 
         # ---Building fuel---
-        fuel_table = pd.DataFrame(
-            {
-                building_id: building._fuel_type
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        fuel_table.to_csv("./outputs/fuel_type.csv")
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({"year": years_vec, "fuel_type": building._fuel_type})
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "fuel_type.csv"), index=False)
 
         # ---Methane leaks---
-        leaks_table = pd.DataFrame(
-            {
-                building_id: building._methane_leaks
-                for building_id, building in self.buildings.items()
-            },
-            index=output_index
-        )
-        leaks_table.to_csv("./outputs/methane_leaks_table.csv")
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            df = pd.DataFrame({"year": years_vec, "methane_leaks": building._methane_leaks})
+            df.loc[:, "building_id"] = building_id
+            all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "methane_leaks.csv"), index=False)
 
         # ---Combustion emissions---
-        for fuel in fuels:
-            combustion_emissions = pd.DataFrame(
-                {
-                    building_id: building._combustion_emissions[fuel]
-                    for building_id, building in self.buildings.items()
-                },
-                index=output_index
-            )
-            combustion_emissions.to_csv("./outputs/{}_combustion_emissions.csv".format(fuel))
+        all_dfs = []
+        for building_id, building in self.buildings.items():
+            for fuel in FUELS:
+                df = pd.DataFrame({
+                    "year": years_vec,
+                    "consumption_emissions": building._combustion_emissions[fuel]
+                })
+                df.loc[:, "building_id"] = building_id
+                df.loc[:, "energy_type"] = fuel
+                all_dfs.append(df)
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_emissions.csv"), index=False)
 
     def create_utility_network(self):
         """
@@ -220,6 +245,11 @@ class ScenarioCreator:
         """
         Printing out some utility network stuff. Will need to write to output tables soon...
         """
+        for xmfr in self.utility_network.elec_transformers:
+            print(xmfr.asset_id)
+            print(xmfr.overloading_ratio)
+            print(xmfr.annual_total_energy_use)
+
         print(
             pd.DataFrame(
                 {
