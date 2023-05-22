@@ -80,7 +80,7 @@ class Asset:
     
     def get_year_timestamps(self) -> pd.DatetimeIndex:
         return pd.date_range(
-            start="2018-01-01", end="2019-01-01", freq="H", closed="left"
+            start="2018-01-01", end="2019-01-01", freq="H", inclusive="left"
         )
 
     def get_operational_vector(self) -> list:

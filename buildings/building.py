@@ -1,7 +1,7 @@
 """
 Defines a building. A bucket for all end uses
 """
-import json
+import os
 from typing import Dict, List
 
 import numpy as np
@@ -126,38 +126,41 @@ EMISSION_FACTORS = { # tCO2 / kWh
 }
 
 
-ASSET_COSTS = {
-    # ---Single family---
-    # 'HYBRID.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
-    # 'HYBRID.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
-    # 'HYBRID.HVAC': {'LARGE': 23318, 'MEDIUM': 19431, 'SMALL': 16090},
-    # 'HYBRID.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
-    # 'HYBRID_NPA.Adder': {'LARGE': 1310, 'MEDIUM': 1101, 'SMALL': 891},
-    # 'LEGACY.DHW': {'LARGE': 2052, 'MEDIUM': 1616, 'SMALL': 1181},
-    # 'LEGACY.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
-    # 'LEGACY.HVAC': {'LARGE': 17723, 'MEDIUM': 14926, 'SMALL': 12129},
-    # 'LEGACY.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
-    # 'WHOLE.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
-    # 'WHOLE.DRYER': {'LARGE': 2115, 'MEDIUM': 2115, 'SMALL': 2115},
-    # 'WHOLE.HVAC': {'LARGE': 30162, 'MEDIUM': 25186, 'SMALL': 20211},
-    # 'WHOLE.PANEL': {'LARGE': 3886, 'MEDIUM': 3187, 'SMALL': 2488},
-    # 'WHOLE.STOVE': {'LARGE': 5210, 'MEDIUM': 3577, 'SMALL': 2488}
-    # ---Multi-family---
-    'HYBRID.DHW': {'LARGE': 2923.0, 'MEDIUM': 2488.0, 'SMALL': 1399.0},
-    'HYBRID.DRYER': {'LARGE': 1244.0, 'MEDIUM': 1244.0, 'SMALL': 1244.0},
-    'HYBRID.HVAC': {'LARGE': 23318.0, 'MEDIUM': 19431.0, 'SMALL': 13367.0},
-    'HYBRID.STOVE': {'LARGE': 4276.0, 'MEDIUM': 3032.0, 'SMALL': 1399.0},
-    'HYBRID_NPA.Adder': {'LARGE': 1310.0, 'MEDIUM': 1101.0, 'SMALL': 891.0},
-    'LEGACY.DHW': {'LARGE': 2052.0, 'MEDIUM': 1616.0, 'SMALL': 1181.0},
-    'LEGACY.DRYER': {'LARGE': 1244.0, 'MEDIUM': 1244.0, 'SMALL': 1244.0},
-    'LEGACY.HVAC': {'LARGE': 17723.0, 'MEDIUM': 14926.0, 'SMALL': 9951.0},
-    'LEGACY.STOVE': {'LARGE': 4276.0, 'MEDIUM': 3032.0, 'SMALL': 1399.0},
-    'WHOLE.DHW': {'LARGE': 2923.0, 'MEDIUM': 2488.0, 'SMALL': 2052.0},
-    'WHOLE.DRYER': {'LARGE': 2115.0, 'MEDIUM': 2115.0, 'SMALL': 2115.0},
-    'WHOLE.HVAC': {'LARGE': 21140.0, 'MEDIUM': 18342.0, 'SMALL': 13367.0},
-    'WHOLE.PANEL': {'LARGE': 3886.0, 'MEDIUM': 3187.0, 'SMALL': 2488.0},
-    'WHOLE.STOVE': {'LARGE': 5210.0, 'MEDIUM': 3577.0, 'SMALL': 1943.0}
-}
+# ASSET_COSTS = {
+#     # ---Single family---
+#     # 'HYBRID.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
+#     # 'HYBRID.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
+#     # 'HYBRID.HVAC': {'LARGE': 23318, 'MEDIUM': 19431, 'SMALL': 16090},
+#     # 'HYBRID.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
+#     # 'HYBRID_NPA.Adder': {'LARGE': 1310, 'MEDIUM': 1101, 'SMALL': 891},
+#     # 'LEGACY.DHW': {'LARGE': 2052, 'MEDIUM': 1616, 'SMALL': 1181},
+#     # 'LEGACY.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
+#     # 'LEGACY.HVAC': {'LARGE': 17723, 'MEDIUM': 14926, 'SMALL': 12129},
+#     # 'LEGACY.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
+#     # 'WHOLE.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
+#     # 'WHOLE.DRYER': {'LARGE': 2115, 'MEDIUM': 2115, 'SMALL': 2115},
+#     # 'WHOLE.HVAC': {'LARGE': 30162, 'MEDIUM': 25186, 'SMALL': 20211},
+#     # 'WHOLE.PANEL': {'LARGE': 3886, 'MEDIUM': 3187, 'SMALL': 2488},
+#     # 'WHOLE.STOVE': {'LARGE': 5210, 'MEDIUM': 3577, 'SMALL': 2488}
+#     # ---Multi-family---
+#     'HYBRID.DHW': {'LARGE': 2923.0, 'MEDIUM': 2488.0, 'SMALL': 1399.0},
+#     'HYBRID.DRYER': {'LARGE': 1244.0, 'MEDIUM': 1244.0, 'SMALL': 1244.0},
+#     'HYBRID.HVAC': {'LARGE': 23318.0, 'MEDIUM': 19431.0, 'SMALL': 13367.0},
+#     'HYBRID.STOVE': {'LARGE': 4276.0, 'MEDIUM': 3032.0, 'SMALL': 1399.0},
+#     'HYBRID_NPA.Adder': {'LARGE': 1310.0, 'MEDIUM': 1101.0, 'SMALL': 891.0},
+#     'LEGACY.DHW': {'LARGE': 2052.0, 'MEDIUM': 1616.0, 'SMALL': 1181.0},
+#     'LEGACY.DRYER': {'LARGE': 1244.0, 'MEDIUM': 1244.0, 'SMALL': 1244.0},
+#     'LEGACY.HVAC': {'LARGE': 17723.0, 'MEDIUM': 14926.0, 'SMALL': 9951.0},
+#     'LEGACY.STOVE': {'LARGE': 4276.0, 'MEDIUM': 3032.0, 'SMALL': 1399.0},
+#     'WHOLE.DHW': {'LARGE': 2923.0, 'MEDIUM': 2488.0, 'SMALL': 2052.0},
+#     'WHOLE.DRYER': {'LARGE': 2115.0, 'MEDIUM': 2115.0, 'SMALL': 2115.0},
+#     'WHOLE.HVAC': {'LARGE': 21140.0, 'MEDIUM': 18342.0, 'SMALL': 13367.0},
+#     'WHOLE.PANEL': {'LARGE': 3886.0, 'MEDIUM': 3187.0, 'SMALL': 2488.0},
+#     'WHOLE.STOVE': {'LARGE': 5210.0, 'MEDIUM': 3577.0, 'SMALL': 1943.0}
+# }
+
+
+COST_FILEPATH = "./config_files/retrofit_costs"
 
 
 class Building:
@@ -237,7 +240,7 @@ class Building:
         ))
 
         self._year_timestamps = pd.date_range(
-            start="2018-01-01", end="2019-01-01", freq="H", closed="left"
+            start="2018-01-01", end="2019-01-01", freq="H", inclusive="left"
         )
 
     def _get_building_id(self) -> None:
@@ -327,19 +330,48 @@ class Building:
         """
         end_use_params: List[dict] = self.building_params.get("end_uses", [{}])
 
+        scenario = self.sim_settings.get("decarb_scenario")
+        scenario_string = {
+            0: "continued_gas",
+            1: "natural_electric",
+            2: "hybrid_gas",
+            3: "hybrid_npa",
+            4: "accelerated_electric"
+        }
+
+        original_scenario = scenario_string[0]
+        retrofit_scenario = scenario_string[scenario]
+
+        costs_original = pd.read_csv(
+            os.path.join(COST_FILEPATH, f"COST_{original_scenario.upper()}.csv"),
+            index_col="building_id"
+        ).to_dict(orient="index")
+        costs_retrofit = pd.read_csv(
+            os.path.join(COST_FILEPATH, f"COST_{retrofit_scenario.upper()}.csv"),
+            index_col="building_id"
+        ).to_dict(orient="index")
+
+        building_costs_original = costs_original.get(self.building_id)
+        building_costs_retrofit = costs_retrofit.get(self.building_id)
+
         for end_use in end_use_params:
             end_use_type = end_use.get("end_use")
-            end_use["existing_install_cost"] = ASSET_COSTS.get(
-                end_use["existing_type"], {}
-            ).get(
-                end_use["size"], 0
-            )
 
-            end_use["replacement_cost"] = ASSET_COSTS.get(
-                end_use["replacement_type"], {}
-            ).get(
-                end_use["size"], 0
-            )
+            end_use["existing_install_cost"] = building_costs_original.get(end_use_type.upper())
+            end_use["replacement_cost"] = building_costs_retrofit.get(end_use_type.upper())
+
+            #TODO: Need to standardize cost format
+            # end_use["existing_install_cost"] = ASSET_COSTS.get(
+            #     end_use["existing_type"], {}
+            # ).get(
+            #     end_use["size"], 0
+            # )
+
+            # end_use["replacement_cost"] = ASSET_COSTS.get(
+            #     end_use["replacement_type"], {}
+            # ).get(
+            #     end_use["size"], 0
+            # )
 
             self.end_uses[end_use_type] = self._get_single_end_use(end_use)
 

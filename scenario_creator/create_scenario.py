@@ -11,7 +11,7 @@ from buildings.building import Building
 from utility_network.utility_network import UtilityNetwork
 
 
-SCENARIO = "natural_elec"
+SCENARIO = "continued_gas"
 FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
 OUTPUTS_FILEPATH = "./outputs_combined/scenarios/{}".format(SCENARIO)
 
@@ -81,6 +81,7 @@ class ScenarioCreator:
         self.buildings_config = data
 
         for building_params in self.buildings_config:
+            print("Creating building {}".format(building_params.get("building_id")))
             building = Building(
                 building_params,
                 self.sim_config,
