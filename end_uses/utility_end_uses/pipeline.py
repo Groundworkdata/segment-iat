@@ -41,6 +41,9 @@ class Pipeline(UtilityEndUse):
 
         self.pipeline_type: str = pipeline_type
         self.length: int = length_ft
+        #TODO: What to do when length is None
+        if not self.length:
+            self.length = 1
         self.pressure: str = pressure
         self.diameter: str = diameter
         self.material: str = material
@@ -51,11 +54,10 @@ class Pipeline(UtilityEndUse):
 
         self.leakage_factors: pd.DataFrame = None
 
-        self.annual_total_leakage: dict = {}
+        self.annual_total_leakage: list = []
         self.annual_total_energy_use: dict = {}
         self.annual_peak_energy_use: dict = {}
         self.annual_energy_use_timeseries: dict = {}
-        self.annual_total_leakage: dict = {}
 
     def _read_csv_config(self, config_file_path=None) -> None:
         """
@@ -74,7 +76,7 @@ class Pipeline(UtilityEndUse):
             self.annual_total_energy_use = self.get_annual_total_energy_use()
             self.annual_peak_energy_use = self.get_annual_peak_energy_use()
             self.annual_energy_use_timeseries = self.get_annual_energy_use_timeseries()
-            # self.annual_total_leakage = self.get_annual_total_leakage()
+            self.annual_total_leakage = self.get_annual_total_leakage()
 
     def _load_leakage_factors(self) -> int:
         leakage_factor_file = "./config_files/leakage_data/leakage_factors.csv"
@@ -109,9 +111,7 @@ class Pipeline(UtilityEndUse):
 
         return dict(tmp_counter)
 
-    def get_annual_total_leakage(self) -> dict:
-        # tmp_counter = Counter()
-
+    def get_annual_total_leakage(self) -> list:
         leakage_factor = float(self.leakage_factors[
             (self.leakage_factors["asset"] == self.pipeline_type)
             & (self.leakage_factors["code"] == self.material)
@@ -119,5 +119,5 @@ class Pipeline(UtilityEndUse):
 
         # TODO: check if the units of length and leakage factor match
 
-        return dict(zip(self.years_vector,[i*leakage_factor for i in self.operational_vector]))
+        return [i*leakage_factor for i in self.operational_vector]
 

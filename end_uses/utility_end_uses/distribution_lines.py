@@ -1,6 +1,7 @@
 """
 Defines meter parent class
 """
+import pandas as pd
 import numpy as np
 from typing import List
 
@@ -51,8 +52,8 @@ class DistributionLine(UtilityEndUse):
         super().initialize_end_use()
         if self.connected_assets:
             self.annual_total_energy_use = self.get_annual_total_energy_use()
-            self.annual_peak_energy_use = self.get_annual_peak_energy_use()
             self.annual_energy_use_timeseries = self.get_annual_energy_use_timeseries()
+            self.annual_peak_energy_use = self.get_annual_peak_energy_use()
             self.get_elec_losses()
 
     def get_elec_losses(self) -> list:
@@ -76,17 +77,17 @@ class DistributionLine(UtilityEndUse):
         return dict(tmp_counter)
 
     def get_annual_peak_energy_use(self) -> dict:
-        tmp_counter = Counter()
-        for meter in self.connected_assets:
-            tmp_counter.update(meter.annual_peak_energy_use)
+        annual_peak = []
 
-        return dict(tmp_counter)
+        for i in self.years_vector:
+            annual_peak.append(self.annual_energy_use_timeseries[i].max())
+
+        return annual_peak
 
     def get_annual_energy_use_timeseries(self) -> list:
-        tmp_counter = Counter()
-        # for meter in self.connected_assets:
-        #     print(meter.annual_energy_use_timeseries)
-        # TODO: Add aggregation of timeseries consumption
-        # tmp_counter.update(meter.annual_total_energy_use)
+        energy_timeseries = {i: pd.Series(0, index=self.year_timestamps) for i in self.years_vector}
+        for i in self.years_vector:
+            for meter in self.connected_assets:
+                energy_timeseries[i] += meter.annual_energy_use_timeseries[i]
 
-        return dict(tmp_counter)
+        return energy_timeseries

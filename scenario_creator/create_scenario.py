@@ -46,10 +46,11 @@ class ScenarioCreator:
         self.get_sim_settings()
         self._years_vec = self._get_years_vec()
         self.get_scenario_mapping()
+        print("Creating buildings...")
         self.create_building()
-        self._write_buildings_outputs()
-        print("Creating Utility Network")
+        print("Creatingy utility network...")
         self.create_utility_network()
+        self._write_buildings_outputs()
         self._get_utility_network_outputs()
 
     def get_sim_settings(self) -> None:
@@ -128,29 +129,28 @@ class ScenarioCreator:
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_cost.csv"), index=False)
 
-        # ---Replacement asset book value---
+        # ---Book value---
         all_dfs = []
         for building_id, building in self.buildings.items():
+            # ---Replacement asset book value---
             df = pd.DataFrame({
                 "year": years_vec,
-                "retrofit_book_val": building._get_retrofit_book_value_vec()
+                "book_val": building._get_retrofit_book_value_vec()
             })
             df.loc[:, "building_id"] = building_id
+            df.loc[:, "existing_or_retrofit"] = "retrofit"
             all_dfs.append(df)
-        all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_book_val.csv"), index=False)
 
-        # ---Existing book val---
-        all_dfs = []
-        for building_id, building in self.buildings.items():
+            # ---Existing book val---
             df = pd.DataFrame({
                 "year": years_vec,
-                "existing_book_val": building._get_exising_book_val_vec()
+                "book_val": building._get_exising_book_val_vec()
             })
             df.loc[:, "building_id"] = building_id
+            df.loc[:, "existing_or_retrofit"] = "existing"
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "existing_book_val.csv"), index=False)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "book_val.csv"), index=False)
 
         # ---Existing stranded val---
         all_dfs = []
@@ -164,7 +164,7 @@ class ScenarioCreator:
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "existing_stranded_val.csv"), index=False)
 
-        # ---Building energy use---
+        # ---Energy use---
         building_energy_usage = {
             building_id: building._calc_annual_energy_consump()
             for building_id, building in self.buildings.items()
@@ -174,11 +174,39 @@ class ScenarioCreator:
         for building_id, building_consumptions in building_energy_usage.items():
             for fuel in FUELS:
                 df = pd.DataFrame({"year": years_vec, "consumption": building_consumptions[fuel]})
-                df.loc[:, "building_id"] = building_id
+                df.loc[:, "asset_id"] = building_id
                 df.loc[:, "energy_type"] = fuel
                 all_dfs.append(df)
+
+        xmfr_energy_usage = {
+            xmfr.asset_id: list(xmfr.annual_total_energy_use.values())
+            for xmfr in self.utility_network.elec_transformers
+        }
+
+        for asset_id, elec_consumption in xmfr_energy_usage.items():
+            df = pd.DataFrame({"year": years_vec, "consumption": elec_consumption})
+            df.loc[:, "asset_id"] = asset_id
+            df.loc[:, "energy_type"] = "electricity"
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "energy_consumption.csv"), index=False)
+
+        # ---Peak energy use---
+        all_dfs = []
+        xmfr_peak = {
+            xmfr.asset_id: xmfr.annual_peak_energy_use
+            for xmfr in self.utility_network.elec_transformers
+        }
+
+        for asset_id, peak_consump in xmfr_peak.items():
+            df = pd.DataFrame({"year": years_vec, "peak_consump": peak_consump})
+            df.loc[:, "asset_id"] = asset_id
+            df.loc[:, "energy_type"] = "electricity"
+            all_dfs.append(df)
+
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "peak_consump.csv"), index=False)
 
         # ---Building utility costs---
         building_util_costs = {
@@ -210,9 +238,28 @@ class ScenarioCreator:
 
         # ---Methane leaks---
         all_dfs = []
+        # Building leaks
         for building_id, building in self.buildings.items():
-            df = pd.DataFrame({"year": years_vec, "methane_leaks": building._methane_leaks})
-            df.loc[:, "building_id"] = building_id
+            df = pd.DataFrame({"year": years_vec, "leaks": building._methane_leaks})
+            df.loc[:, "asset_id"] = building_id
+            all_dfs.append(df)
+
+        # Gas service leaks
+        for service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "leaks": service.annual_total_leakage
+            })
+            df.loc[:, "asset_id"] = service.asset_id
+            all_dfs.append(df)
+
+        # Gas main leaks
+        for main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "leaks": main.annual_total_leakage
+            })
+            df.loc[:, "asset_id"] = main.asset_id
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "methane_leaks.csv"), index=False)
@@ -245,16 +292,26 @@ class ScenarioCreator:
         """
         Printing out some utility network stuff. Will need to write to output tables soon...
         """
-        for xmfr in self.utility_network.elec_transformers:
-            print(xmfr.asset_id)
-            print(xmfr.overloading_ratio)
-            print(xmfr.annual_total_energy_use)
-
-        print(
-            pd.DataFrame(
+        print("=====Meters=====")
+        meters = []
+        for meter in self.utility_network.elec_meters:
+            meters.append(
                 {
-                    xmfr.asset_id: xmfr.overloading_ratio 
-                    for xmfr in self.utility_network.elec_transformers
+                    "meter_id": meter.asset_id,
+                    "building_id": meter.building.building_id,
+                    "parent_id": meter.parent_id,
                 }
             )
-        )
+        print(pd.DataFrame(meters))
+
+        print("=====XMFR=====")
+        xmfrs = []
+        for xmfr in self.utility_network.elec_transformers:
+            xmfrs.append(
+                {
+                    "connected_assets": [asset.asset_id for asset in xmfr.connected_assets],
+                    "xmfr_id": xmfr.asset_id,
+                    "parent_id": xmfr.parent_id,
+                }
+            )
+        print(pd.DataFrame(xmfrs))

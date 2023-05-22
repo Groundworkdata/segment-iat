@@ -81,6 +81,10 @@ class Meter(UtilityEndUse):
         self.building: Building = building
         self.meter_type: str = meter_type
 
+        # We want to calculate energy consump at the meter based on the asset retrofits
+        if self.building.building_params.get("retrofit_year"):
+            self.replacement_year = self.building.building_params.get("retrofit_year")
+
         self.annual_total_energy_use: dict = []
         self.annual_peak_energy_use: dict = []
         self.annual_energy_use_timeseries: dict = []
@@ -121,14 +125,19 @@ class Meter(UtilityEndUse):
         return dict(zip(self.years_vector, annual_total_energy))
 
     def get_annual_peak_energy_use(self) -> dict:
+        """
+        Calculate the annual hourly peak consumption
+        """
         energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
-        annual_peak_energy_baseline = (
-            self.building.baseline_consumption[[energy_attr]].max().values[0]
-        )
-        annual_peak_energy_retrofit = (
-            self.building.retrofit_consumption[[energy_attr]].max().values[0]
-        )
+        hourly_baseline_consump = \
+            self.building.baseline_consumption[energy_attr].resample("H").sum()
+        
+        hourly_retrofit_consump = \
+            self.building.retrofit_consumption[energy_attr].resample("H").sum()
+
+        annual_peak_energy_baseline = hourly_baseline_consump.max()
+        annual_peak_energy_retrofit = hourly_retrofit_consump.max()
 
         annual_peak_energy = [
             annual_peak_energy_baseline * operation
@@ -143,8 +152,10 @@ class Meter(UtilityEndUse):
     def get_annual_energy_use_timeseries(self) -> list:
         energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
-        annual_energy_use_baseline = self.building.baseline_consumption[[energy_attr]]
-        annual_energy_use_retrofit = self.building.retrofit_consumption[[energy_attr]]
+        annual_energy_use_baseline = \
+            self.building.baseline_consumption[energy_attr].resample("H").sum()
+        annual_energy_use_retrofit = \
+            self.building.retrofit_consumption[energy_attr].resample("H").sum()
 
         annual_energy_use_timeseries = [
             annual_energy_use_baseline if i == 1 else annual_energy_use_retrofit
@@ -152,5 +163,3 @@ class Meter(UtilityEndUse):
         ]
 
         return dict(zip(self.years_vector, annual_energy_use_timeseries))
-
-    # TODO: Add aggregation of timeseries consumption
