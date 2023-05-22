@@ -173,7 +173,7 @@ class UtilityNetwork:
                 parent_id=main_config["gisid"], all_children=self.gas_services
             )
 
-            gas_main = GasService(
+            gas_main = GasMain(
                 **main_config, **self.sim_settings, connected_assets=connected_services
             )
 

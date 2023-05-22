@@ -4,6 +4,7 @@ Parent _Asset class
 from typing import List
 
 import numpy as np
+import pandas as pd
 
 
 class Asset:
@@ -56,6 +57,7 @@ class Asset:
         self.sim_end_year: int = sim_end_year
 
         self.years_vector: list = []
+        self.year_timestamps: pd.DatetimeIndex = None
         self.operational_vector: list = []
         self.install_cost: List[float] = []
         self.depreciation: list = []
@@ -63,6 +65,7 @@ class Asset:
 
     def initialize_end_use(self) -> None:
         self.years_vector = self.get_years_vector()
+        self.year_timestamps = self.get_year_timestamps()
         self.operational_vector = self.get_operational_vector()
         self.retrofit_vector: list = [1 - i for i in self.operational_vector]
         # self.install_cost = self.get_install_cost()
@@ -74,6 +77,11 @@ class Asset:
             self.sim_start_year + i
             for i in range(self.sim_end_year - self.sim_start_year)
         ]
+    
+    def get_year_timestamps(self) -> pd.DatetimeIndex:
+        return pd.date_range(
+            start="2018-01-01", end="2019-01-01", freq="H", closed="left"
+        )
 
     def get_operational_vector(self) -> list:
         """

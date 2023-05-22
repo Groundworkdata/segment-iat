@@ -1,6 +1,8 @@
 """
 Defines Gas Service end use
 """
+from typing import Dict
+import pandas as pd
 import numpy as np
 
 from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
@@ -30,7 +32,7 @@ class ElecTransformer(UtilityEndUse):
         self.connected_assets: list = kwargs.get("connected_assets")
 
         self.annual_total_energy_use: dict = []
-        self.annual_peak_energy_use: dict = []
+        self.annual_peak_energy_use: list = []
         self.annual_energy_use_timeseries: dict = []
 
         self.overloading_flag: dict = []
@@ -43,8 +45,8 @@ class ElecTransformer(UtilityEndUse):
         super().initialize_end_use()
         if self.connected_assets:
             self.annual_total_energy_use = self.get_annual_total_energy_use()
-            self.annual_peak_energy_use = self.get_annual_peak_energy_use()
             self.annual_energy_use_timeseries = self.get_annual_energy_use_timeseries()
+            self.annual_peak_energy_use = self.get_annual_peak_energy_use()
             self.get_overloading_status()
 
     def get_annual_total_energy_use(self) -> dict:
@@ -60,28 +62,29 @@ class ElecTransformer(UtilityEndUse):
 
         return dict(tmp_counter)
 
-    def get_annual_peak_energy_use(self) -> dict:
-        tmp_counter = Counter()
-        for meter in self.connected_assets:
-            tmp_counter.update(meter.annual_peak_energy_use)
-        return dict(tmp_counter)
+    def get_annual_peak_energy_use(self) -> list:
+        annual_peak = []
+
+        for i in self.years_vector:
+            annual_peak.append(self.annual_energy_use_timeseries[i].max())
+
+        return annual_peak
 
     def get_overloading_status(self) -> dict:
 
         self.overloading_flag = dict(
             (k, 1 if v > self.bank_KVA * 1000 else 0)
-            for k, v in self.annual_peak_energy_use.items()
+            for k, v in zip(self.years_vector, self.annual_peak_energy_use)
         )
         self.overloading_ratio = dict(
             (k, v / (self.bank_KVA * 1000))
-            for k, v in self.annual_peak_energy_use.items()
+            for k, v in zip(self.years_vector, self.annual_peak_energy_use)
         )
 
-    def get_annual_energy_use_timeseries(self) -> list:
-        tmp_counter = Counter()
-        # for meter in self.connected_assets:
-        #     print(meter.annual_energy_use_timeseries)
-        # TODO: Add aggregation of timeseries consumption
-        # tmp_counter.update(meter.annual_total_energy_use)
+    def get_annual_energy_use_timeseries(self) -> Dict[int, pd.Series]:
+        energy_timeseries = {i: pd.Series(0, index=self.year_timestamps) for i in self.years_vector}
+        for i in self.years_vector:
+            for meter in self.connected_assets:
+                energy_timeseries[i] += meter.annual_energy_use_timeseries[i]
 
-        return dict(tmp_counter)
+        return energy_timeseries
