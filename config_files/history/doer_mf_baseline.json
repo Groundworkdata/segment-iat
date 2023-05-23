@@ -2,7 +2,7 @@
     {
         "building_id": "F_753646_2717355",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2041,
         "parcel_id": "F_753646_2717355",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -15,7 +15,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2018,
-                "replacement_year": 2100,
+                "replacement_year": 2041,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -27,7 +27,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2018,
-                "replacement_year": 2100,
+                "replacement_year": 2041,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -39,7 +39,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2018,
-                "replacement_year": 2100,
+                "replacement_year": 2041,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -51,7 +51,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2018,
-                "replacement_year": 2100,
+                "replacement_year": 2041,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -65,13 +65,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
         "building_id": "F_753674_2717470",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2043,
         "parcel_id": "F_753674_2717470",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -84,7 +84,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -96,7 +96,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -108,7 +108,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -120,7 +120,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -134,13 +134,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
         "building_id": "F_753569_2717047",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2032,
         "parcel_id": "F_753569_2717047",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -153,7 +153,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2009,
-                "replacement_year": 2100,
+                "replacement_year": 2032,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -165,7 +165,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2009,
-                "replacement_year": 2100,
+                "replacement_year": 2032,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -177,7 +177,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2009,
-                "replacement_year": 2100,
+                "replacement_year": 2032,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -189,7 +189,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2009,
-                "replacement_year": 2100,
+                "replacement_year": 2032,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -203,13 +203,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 3.00
     },
     {
         "building_id": "F_753629_2717285",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2038,
         "parcel_id": "F_753629_2717285",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -222,7 +222,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2015,
-                "replacement_year": 2100,
+                "replacement_year": 2038,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -234,7 +234,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2015,
-                "replacement_year": 2100,
+                "replacement_year": 2038,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -246,7 +246,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2015,
-                "replacement_year": 2100,
+                "replacement_year": 2038,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -258,7 +258,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2015,
-                "replacement_year": 2100,
+                "replacement_year": 2038,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -272,13 +272,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
         "building_id": "F_753581_2717093",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2037,
         "parcel_id": "F_753581_2717093",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -291,7 +291,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2014,
-                "replacement_year": 2100,
+                "replacement_year": 2037,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -303,7 +303,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2014,
-                "replacement_year": 2100,
+                "replacement_year": 2037,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -315,7 +315,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2014,
-                "replacement_year": 2100,
+                "replacement_year": 2037,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -327,7 +327,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2014,
-                "replacement_year": 2100,
+                "replacement_year": 2037,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -341,13 +341,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
         "building_id": "F_753663_2717423",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2045,
         "parcel_id": "F_753663_2717423",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -360,7 +360,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2022,
-                "replacement_year": 2100,
+                "replacement_year": 2045,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -372,7 +372,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2022,
-                "replacement_year": 2100,
+                "replacement_year": 2045,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -384,7 +384,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2022,
-                "replacement_year": 2100,
+                "replacement_year": 2045,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -396,7 +396,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2022,
-                "replacement_year": 2100,
+                "replacement_year": 2045,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -410,13 +410,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 1.50
     },
     {
         "building_id": "F_753474_2717148",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2043,
         "parcel_id": "F_753474_2717148",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -429,7 +429,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -441,7 +441,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -453,7 +453,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -465,7 +465,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -479,13 +479,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
         "building_id": "F_753492_2717319",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2035,
         "parcel_id": "F_753492_2717319",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -498,7 +498,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -510,7 +510,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -522,7 +522,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -534,7 +534,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -548,13 +548,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 0.75
     },
     {
         "building_id": "F_753421_2717033",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2026,
         "parcel_id": "F_753421_2717033",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -567,7 +567,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -579,7 +579,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -591,7 +591,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -603,7 +603,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -617,13 +617,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
         "building_id": "F_753432_2717080",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2026,
         "parcel_id": "F_753432_2717080",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -636,7 +636,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -648,7 +648,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -660,7 +660,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -672,7 +672,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2003,
-                "replacement_year": 2100,
+                "replacement_year": 2026,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -686,13 +686,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
         "building_id": "F_753515_2717411",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2035,
         "parcel_id": "F_753515_2717411",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -705,7 +705,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -717,7 +717,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -729,7 +729,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -741,7 +741,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2012,
-                "replacement_year": 2100,
+                "replacement_year": 2035,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -755,13 +755,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 4.50
     },
     {
         "building_id": "F_753480_2717271",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2040,
         "parcel_id": "F_753480_2717271",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -774,7 +774,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2017,
-                "replacement_year": 2100,
+                "replacement_year": 2040,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -786,7 +786,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2017,
-                "replacement_year": 2100,
+                "replacement_year": 2040,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -798,7 +798,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2017,
-                "replacement_year": 2100,
+                "replacement_year": 2040,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -810,7 +810,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2017,
-                "replacement_year": 2100,
+                "replacement_year": 2040,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -824,13 +824,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 2.25
     },
     {
         "building_id": "F_753409_2716987",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2042,
         "parcel_id": "F_753409_2716987",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -843,7 +843,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2019,
-                "replacement_year": 2100,
+                "replacement_year": 2042,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -855,7 +855,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2019,
-                "replacement_year": 2100,
+                "replacement_year": 2042,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -867,7 +867,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2019,
-                "replacement_year": 2100,
+                "replacement_year": 2042,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -879,7 +879,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2019,
-                "replacement_year": 2100,
+                "replacement_year": 2042,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -893,13 +893,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
         "building_id": "F_753504_2717366",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2030,
         "parcel_id": "F_753504_2717366",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -912,7 +912,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2007,
-                "replacement_year": 2100,
+                "replacement_year": 2030,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -924,7 +924,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2007,
-                "replacement_year": 2100,
+                "replacement_year": 2030,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -936,7 +936,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2007,
-                "replacement_year": 2100,
+                "replacement_year": 2030,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -948,7 +948,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2007,
-                "replacement_year": 2100,
+                "replacement_year": 2030,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -962,13 +962,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 3.75
     },
     {
         "building_id": "F_753526_2717454",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2028,
         "parcel_id": "F_753526_2717454",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -981,7 +981,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2005,
-                "replacement_year": 2100,
+                "replacement_year": 2028,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -993,7 +993,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2005,
-                "replacement_year": 2100,
+                "replacement_year": 2028,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -1005,7 +1005,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2005,
-                "replacement_year": 2100,
+                "replacement_year": 2028,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -1017,7 +1017,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2005,
-                "replacement_year": 2100,
+                "replacement_year": 2028,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -1031,13 +1031,13 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 1.50
     },
     {
         "building_id": "F_753588_2717245",
         "resstock_id": -1,
-        "retrofit_year": 2100,
+        "retrofit_year": 2043,
         "parcel_id": "F_753588_2717245",
         "original_fuel_type": "natural_gas",
         "retrofit_fuel_type": "natural_gas",
@@ -1050,7 +1050,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -1062,7 +1062,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -1074,7 +1074,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             },
@@ -1086,7 +1086,7 @@
                 "original_energy_source": "",
                 "replacement_cost_dollars_year": 2022,
                 "existing_install_year": 2020,
-                "replacement_year": 2100,
+                "replacement_year": 2043,
                 "lifetime": 30,
                 "replacement_lifetime": 30
             }
@@ -1100,7 +1100,7 @@
         "resstock_metadata": {},
         "resstock_overwrite": true,
         "reference_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
-        "retrofit_consump_filepath": "./config_files/buildings/MF_Whole-HighEff-noEncl_ELEC.csv",
+        "retrofit_consump_filepath": "./config_files/buildings/MF_Existing_GAS.csv",
         "load_scaling_factor": 0.75
     }
 ]

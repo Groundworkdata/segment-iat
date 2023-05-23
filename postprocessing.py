@@ -19,15 +19,15 @@ def main():
     ]
 
     output_files = [
+        "book_val",
         "consumption_costs",
         "consumption_emissions",
         "energy_consumption",
-        "existing_book_val",
         "existing_stranded_val",
         "fuel_type",
         "is_retrofit_vec_table",
         "methane_leaks",
-        "retrofit_book_val",
+        "peak_consump",
         "retrofit_cost",
         "retrofit_year",
     ]
