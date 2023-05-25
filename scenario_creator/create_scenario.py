@@ -16,10 +16,13 @@ DEFAULT_SIM_END_YEAR = 2050
 SCENARIO = "continued_gas"
 FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
 OUTPUTS_FILEPATH = "./outputs_combined/scenarios/{}".format(SCENARIO)
-ASSET_TYPE_BUILDING = "building"
-ASSET_TYPE_ELEC_XMFR = "elec_xmfr"
-ASSET_TYPE_GAS_MAIN = "gas_main"
-ASSET_TYPE_GAS_SERVICE = "gas_service"
+DOMAIN_BUILDING = "building"
+TYPE_BUILDING_AGGREGATE = "building_aggregate"
+DOMAIN_ELEC = "elec_network"
+TYPE_ELEC_XMFR = "elec_xmfr"
+DOMAIN_GAS = "gas_network"
+TYPE_GAS_MAIN = "gas_main"
+TYPE_GAS_SERVICE = "gas_service"
 
 
 class ScenarioCreator:
@@ -111,7 +114,8 @@ class ScenarioCreator:
         for building_id, building in self.buildings.items():
             df = pd.DataFrame({"year": years_vec, "is_retrofit": building._is_retrofit_vec})
             df.loc[:, "asset_id"] = building_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "is_retrofit_vec_table.csv"), index=False)
@@ -121,7 +125,8 @@ class ScenarioCreator:
         for building_id, building in self.buildings.items():
             df = pd.DataFrame({"year": years_vec, "retrofit_year": building._retrofit_vec})
             df.loc[:, "asset_id"] = building_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_year.csv"), index=False)
@@ -134,7 +139,8 @@ class ScenarioCreator:
                 "retrofit_cost": building._get_retrofit_cost_vec()
             })
             df.loc[:, "asset_id"] = building_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_cost.csv"), index=False)
@@ -149,7 +155,8 @@ class ScenarioCreator:
             })
             df.loc[:, "asset_id"] = building_id
             df.loc[:, "existing_or_retrofit"] = "retrofit"
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
 
             # ---Existing book val---
@@ -159,7 +166,8 @@ class ScenarioCreator:
             })
             df.loc[:, "asset_id"] = building_id
             df.loc[:, "existing_or_retrofit"] = "existing"
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "book_val.csv"), index=False)
@@ -172,7 +180,8 @@ class ScenarioCreator:
                 "existing_stranded_val": building._get_exising_stranded_val_vec()
             })
             df.loc[:, "asset_id"] = building_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "existing_stranded_val.csv"), index=False)
@@ -189,7 +198,8 @@ class ScenarioCreator:
                 df = pd.DataFrame({"year": years_vec, "consumption": building_consumptions[fuel]})
                 df.loc[:, "asset_id"] = building_id
                 df.loc[:, "energy_type"] = fuel
-                df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+                df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+                df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
                 all_dfs.append(df)
 
         xmfr_energy_usage = {
@@ -201,7 +211,8 @@ class ScenarioCreator:
             df = pd.DataFrame({"year": years_vec, "consumption": elec_consumption})
             df.loc[:, "asset_id"] = asset_id
             df.loc[:, "energy_type"] = "electricity"
-            df.loc[:, "asset_type"] = ASSET_TYPE_ELEC_XMFR
+            df.loc[:, "asset_domain"] = DOMAIN_ELEC
+            df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
@@ -218,7 +229,8 @@ class ScenarioCreator:
             df = pd.DataFrame({"year": years_vec, "peak_consump": peak_consump})
             df.loc[:, "asset_id"] = asset_id
             df.loc[:, "energy_type"] = "electricity"
-            df.loc[:, "asset_type"] = ASSET_TYPE_ELEC_XMFR
+            df.loc[:, "asset_domain"] = DOMAIN_ELEC
+            df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
@@ -239,7 +251,8 @@ class ScenarioCreator:
                 })
                 df.loc[:, "asset_id"] = building_id
                 df.loc[:, "energy_type"] = fuel
-                df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+                df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+                df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
                 all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_costs.csv"), index=False)
@@ -249,7 +262,8 @@ class ScenarioCreator:
         for building_id, building in self.buildings.items():
             df = pd.DataFrame({"year": years_vec, "fuel_type": building._fuel_type})
             df.loc[:, "asset_id"] = building_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "fuel_type.csv"), index=False)
@@ -260,7 +274,8 @@ class ScenarioCreator:
         for building_id, building in self.buildings.items():
             df = pd.DataFrame({"year": years_vec, "leaks": building._methane_leaks})
             df.loc[:, "asset_id"] = building_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
 
         # Gas service leaks
@@ -270,7 +285,8 @@ class ScenarioCreator:
                 "leaks": service.annual_total_leakage
             })
             df.loc[:, "asset_id"] = service.asset_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_GAS_SERVICE
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
             all_dfs.append(df)
 
         # Gas main leaks
@@ -280,7 +296,8 @@ class ScenarioCreator:
                 "leaks": main.annual_total_leakage
             })
             df.loc[:, "asset_id"] = main.asset_id
-            df.loc[:, "asset_type"] = ASSET_TYPE_GAS_MAIN
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "methane_leaks.csv"), index=False)
@@ -295,7 +312,8 @@ class ScenarioCreator:
                 })
                 df.loc[:, "asset_id"] = building_id
                 df.loc[:, "energy_type"] = fuel
-                df.loc[:, "asset_type"] = ASSET_TYPE_BUILDING
+                df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+                df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
                 all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_emissions.csv"), index=False)
