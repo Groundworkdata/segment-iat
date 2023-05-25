@@ -42,7 +42,7 @@ class Asset:
 
     def __init__(
         self,
-        inst_date: int,
+        inst_date: str,
         inst_cost: float,
         lifetime: int,
         sim_start_year: int,
@@ -59,6 +59,7 @@ class Asset:
         self.years_vector: list = []
         self.year_timestamps: pd.DatetimeIndex = None
         self.operational_vector: list = []
+        self.retrofit_vector: list = []
         self.install_cost: List[float] = []
         self.depreciation: list = []
         self.stranded_value: list = []
@@ -67,17 +68,17 @@ class Asset:
         self.years_vector = self.get_years_vector()
         self.year_timestamps = self.get_year_timestamps()
         self.operational_vector = self.get_operational_vector()
-        self.retrofit_vector: list = [1 - i for i in self.operational_vector]
-        # self.install_cost = self.get_install_cost()
-        # self.depreciation = self.get_depreciation()
-        # self.stranded_value = self.get_stranded_value()
+        self.retrofit_vector = self.get_retrofit_vector()
+        self.install_cost = self.get_install_cost()
+        self.depreciation = self.get_depreciation()
+        self.stranded_value = self.get_stranded_value()
 
     def get_years_vector(self) -> list:
         return [
             self.sim_start_year + i
             for i in range(self.sim_end_year - self.sim_start_year)
         ]
-    
+
     def get_year_timestamps(self) -> pd.DatetimeIndex:
         return pd.date_range(
             start="2018-01-01", end="2019-01-01", freq="H", inclusive="left"
@@ -94,6 +95,9 @@ class Asset:
             1 if self.install_year <= i and self.replacement_year > i else 0
             for i in sim_years
         ]
+    
+    def get_retrofit_vector(self) -> list:
+        return [1 - i for i in self.operational_vector]
 
     def get_install_cost(self) -> List[float]:
         """
