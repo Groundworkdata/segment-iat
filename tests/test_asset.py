@@ -3,12 +3,14 @@ Unit tests for the Asset methods
 """
 import unittest
 
+import pandas as pd
+
 from end_uses.asset import Asset
 
 
 class TestAsset(unittest.TestCase):
     def setUp(self):
-        install_year = 2020
+        install_date = "1/1/2020"
         install_cost = 1000
         lifetime = 10
         sim_start_year = 2020
@@ -16,15 +18,47 @@ class TestAsset(unittest.TestCase):
         replacement_year = 2030
 
         self.asset = Asset(
-            install_year,
+            install_date,
             install_cost,
-            replacement_year,
             lifetime,
             sim_start_year,
-            sim_end_year
+            sim_end_year,
+            replacement_year
         )
 
         self.asset.initialize_end_use()
+
+    def test_install_year(self):
+        self.assertEqual(
+            self.asset.install_year,
+            2020
+        )
+
+    def test_get_years_vector(self):
+        self.assertListEqual(
+            [2020+i for i in range(20)],
+            self.asset.get_years_vector()
+        )
+
+    def test_get_year_timestamps(self):
+        self.assertListEqual(
+            pd.date_range(
+                start="2018-01-01", end="2019-01-01", freq="H", inclusive="left"
+            ).to_list(),
+            self.asset.get_year_timestamps().to_list()
+        )
+
+    def test_get_operational_vector(self):
+        self.assertListEqual(
+            [1] * 10 + [0] * 10,
+            self.asset.get_operational_vector()
+        )
+
+    def test_get_retrofit_vector(self):
+        self.assertListEqual(
+            [0] * 10 + [1] * 10,
+            self.asset.get_retrofit_vector()
+        )
 
     def test_install_cost(self):
         """
