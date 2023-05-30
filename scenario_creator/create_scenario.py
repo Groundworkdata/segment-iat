@@ -59,7 +59,7 @@ class ScenarioCreator:
         self.create_building()
         print("Creatingy utility network...")
         self.create_utility_network()
-        self._write_buildings_outputs()
+        self._write_outputs()
         self._get_utility_network_outputs()
 
     def get_sim_settings(self) -> None:
@@ -103,7 +103,17 @@ class ScenarioCreator:
                 building.write_building_energy_info()
             self.buildings[building.building_id] = building
 
-    def _write_buildings_outputs(self) -> None:
+    def create_utility_network(self):
+        """
+        Create the utility network based on the input config
+        """
+        self.utility_network = UtilityNetwork(
+            self._utility_network_config_filepath, self.sim_config, self.buildings
+        )
+
+        self.utility_network.populate_utility_network()
+
+    def _write_outputs(self) -> None:
         """
         Write output tables from all buildings
         """
@@ -317,16 +327,6 @@ class ScenarioCreator:
                 all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_emissions.csv"), index=False)
-
-    def create_utility_network(self):
-        """
-        Create the utility network based on the input config
-        """
-        self.utility_network = UtilityNetwork(
-            self._utility_network_config_filepath, self.sim_config, self.buildings
-        )
-
-        self.utility_network.populate_utility_network()
 
     def _get_utility_network_outputs(self):
         """

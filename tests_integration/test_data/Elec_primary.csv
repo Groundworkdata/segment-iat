@@ -1,0 +1,2 @@
+﻿id,gisid,parentid,phase,oh_ug,circuit,pwire_size,voltage,inst_date,inst_cost,lifetime
+,PL001,PL000,ABC,oh,101,336,13.8kV,1/1/2000,10000,40

@@ -133,7 +133,7 @@ class Asset:
             ]
         )
 
-        if operations_end > self.sim_end_year:
+        if operations_end >= self.sim_end_year:
             depreciated_value = depreciated_value[
                 : self.sim_end_year - operations_end - 1
             ]

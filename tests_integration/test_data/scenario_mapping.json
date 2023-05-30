@@ -1,0 +1,17 @@
+[
+    {
+        "description": "full_elec_immediate",
+        "insulation": "enhanced",
+        "heat_pump": 10,
+        "heating_fuel": "none",
+        "replacement_fuel": "none",
+        "hvac_resstock_scenario": 10,
+        "dhw_resstock_scenario": 10,
+        "dryer_resstock_scenario": 10,
+        "range_resstock_scenario": 10,
+        "range_retrofit_fuel": "electricity",
+        "hvac": 10,
+        "main_resstock_retrofit_scenario": 10,
+        "resstock_scenarios": [10]
+    }
+]
