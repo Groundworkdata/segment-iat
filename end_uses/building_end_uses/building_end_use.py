@@ -1,6 +1,7 @@
 """
 EndUse parent class
 """
+#TODO: Remove or update and integrate with discrete end uses -- class currently not in use
 import json
 from typing import Dict
 
