@@ -1,0 +1,21 @@
+[
+    {
+        "folder": "tests_integration/test_data",
+        "networks":{
+            "gas" : {
+                "mains_config": "tests_integration/test_data/Gas_Main.csv",
+                "service_config": "tests_integration/test_data/Gas_Service.csv",
+                "meter_config": "tests_integration/test_data/Gas_Meter.csv",
+                "leakage_factors": "tests_integration/test_data/leakage_factors.csv"
+            },
+            "elec" : {
+                "primary_config": "tests_integration/test_data/Elec_primary.csv",
+                "secondary_config": "tests_integration/test_data/Elec_secondary.csv",
+                "service_config": "tests_integration/test_data/Elec_Service.csv",
+                "meter_config": "tests_integration/test_data/Elec_meters.csv",
+                "xfmrs_config": "tests_integration/test_data/Elec_xfmrs.csv"
+            }
+    
+        }
+    }
+]

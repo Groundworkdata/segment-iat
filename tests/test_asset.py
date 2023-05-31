@@ -285,3 +285,22 @@ class TestAsset(unittest.TestCase):
             ],
             self.asset.get_stranded_value()
         )
+
+    def test_end_of_life_end_of_sim(self):
+        """
+        Test when the asset end of life is also the end year of the simulation
+        """
+        self.asset.replacement_year = 2040
+        self.asset.lifetime = 20
+
+        self.asset.initialize_end_use()
+
+        self.assertListEqual(
+            [1000 - 50 * i for i in range(20)],
+            self.asset.get_depreciation()
+        )
+
+        self.assertListEqual(
+            [0] * 20,
+            self.asset.get_stranded_value()
+        )

@@ -1,30 +1,133 @@
-import sys
-
-sys.path.append("../")
+"""
+Unit tests for ScenarioCreator class
+"""
+import unittest
+from unittest.mock import Mock, patch
 
 from scenario_creator.create_scenario import ScenarioCreator
 
-#TODO: Re-write so this runs in our testing pipeline
 
-def main(sim_settings_file=None, utility_network_config_file=None):
-    # setup scenario creators
-    utility_scenario = ScenarioCreator(
-        sim_settings_filepath=sim_settings_file,
-        building_config_filepath=" ",
-        utility_network_config_filepath=utility_network_config_file,
-    )
+class TestScenarioCreator(unittest.TestCase):
+    def setUp(self):
+        self.scenario_creator = ScenarioCreator(
+            "tests/input_data/sim_settings_config.json",
+            "tests/input_data/building_config.json",
+            "utility_config",
+            "tests/input_data/scenario_mapping.json",
+            write_building_energy_timeseries=True
+        )
 
-    # create the scenario
-    utility_scenario.create_scenario()
+    @patch("scenario_creator.create_scenario.ScenarioCreator._get_utility_network_outputs")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._write_outputs")
+    @patch("scenario_creator.create_scenario.ScenarioCreator.create_utility_network")
+    @patch("scenario_creator.create_scenario.ScenarioCreator.create_building")
+    @patch("scenario_creator.create_scenario.ScenarioCreator.get_scenario_mapping")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._get_years_vec")
+    @patch("scenario_creator.create_scenario.ScenarioCreator.get_sim_settings")
+    def test_create_scenario(
+        self,
+        mock_get_sim_settings: Mock,
+        mock_get_years_vec: Mock,
+        mock_get_scenario_mapping: Mock,
+        mock_create_building: Mock,
+        mock_create_utility_network: Mock,
+        mock_write_outputs: Mock,
+        mock_get_utility_network_outputs: Mock
+    ):
+        mock_get_years_vec.return_value = [1, 2, 3]
 
-    # print(utility_scenario.sim_config)
+        self.scenario_creator.create_scenario()
 
+        mock_get_sim_settings.assert_called_once()
+        mock_get_years_vec.assert_called_once()
+        self.assertListEqual(self.scenario_creator._years_vec, [1, 2, 3])
+        mock_get_scenario_mapping.assert_called_once()
+        mock_create_building.assert_called_once()
+        mock_create_utility_network.assert_called_once()
+        mock_write_outputs.assert_called_once()
+        mock_get_utility_network_outputs.assert_called_once()
 
-if __name__ == "__main__":
-    sim_settings_file = "../tests/input_data/sim_settings_config.json"
-    utility_network_config_file = "../tests/input_data/utility_network_config.json"
+    def test_get_sim_settings(self):
+        self.scenario_creator.get_sim_settings()
 
-    main(
-        sim_settings_file=sim_settings_file,
-        utility_network_config_file=utility_network_config_file,
-    )
+        self.assertDictEqual(
+            self.scenario_creator.sim_config,
+            {"sim_start_year": 2020, "sim_end_year": 2040}
+        )
+
+    def test_get_years_vec(self):
+        self.assertListEqual(
+            list(range(2020, 2050)),
+            self.scenario_creator._get_years_vec()
+        )
+
+    def test_get_scenario_mapping(self):
+        self.scenario_creator.get_scenario_mapping()
+
+        self.assertListEqual(
+            self.scenario_creator.scenario_mapping,
+            [{"scenario_1": "hello"}, {"scenario_2": "bye"}]
+        )
+
+    @patch("scenario_creator.create_scenario.Building")
+    def test_create_building(self, mock_building: Mock):
+        mock_building_instance = Mock()
+        mock_building_instance.building_id = "b1"
+        mock_building.return_value = mock_building_instance
+        self.scenario_creator.sim_config = "sim_config"
+        self.scenario_creator.scenario_mapping = "mapping"
+
+        self.scenario_creator.create_building()
+
+        expected_config = [{
+            "building_id": "building001",
+            "resstock_id": 1,
+            "retrofit_year": 2027,
+            "resstock_metadata": "resstock_metadata",
+            "end_uses": [
+                {
+                    "end_use": "stove",
+                    "original_energy_source": "gas",
+                    "original_config": "./stoves/gas_stove_config.json",
+                    "replacement_config": "./stoves/elec_stove_config.json"
+                }
+            ]
+        }]
+
+        self.assertListEqual(
+            self.scenario_creator.buildings_config,
+            expected_config
+        )
+
+        mock_building.assert_called_once_with(
+            expected_config[0], "sim_config", "mapping"
+        )
+
+        mock_building_instance.populate_building.assert_called_once()
+        mock_building_instance.write_building_cost_info.assert_called_once()
+        mock_building_instance.write_building_energy_info.assert_called_once()
+
+        self.assertDictEqual(
+            self.scenario_creator.buildings,
+            {"b1": mock_building_instance}
+        )
+
+    @patch("scenario_creator.create_scenario.UtilityNetwork")
+    def test_create_utility_network(self, mock_utility_network: Mock):
+        self.scenario_creator.sim_config = "sim_config"
+        self.scenario_creator.buildings = "buildings"
+        utility_instance = Mock()
+        mock_utility_network.return_value = utility_instance
+
+        self.scenario_creator.create_utility_network()
+
+        mock_utility_network.assert_called_once_with(
+            "utility_config", "sim_config", "buildings"
+        )
+
+        self.assertEqual(
+            self.scenario_creator.utility_network,
+            utility_instance
+        )
+
+        utility_instance.populate_utility_network.assert_called_once()
