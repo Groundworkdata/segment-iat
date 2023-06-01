@@ -1,6 +1,6 @@
 {
     "sim_start_year": 2020,
     "sim_end_year": 2040,
-    "decarb_scenario": 0,
+    "decarb_scenario": "accelerated_elec",
     "replacement_year": 2025
 }
