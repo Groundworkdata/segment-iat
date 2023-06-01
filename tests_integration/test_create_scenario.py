@@ -43,7 +43,7 @@ class TestScenarioCreator(unittest.TestCase):
         self.scenario_creator.create_scenario()
 
         for i in self.files:
-            output = pd.read_csv(os.path.join("./outputs_combined/scenarios/continued_gas", i))
+            output = pd.read_csv(os.path.join("./outputs_combined/scenarios/accelerated_elec", i))
             expected = pd.read_csv(os.path.join("./tests_integration/test_data/expected_outputs", i))
 
             pd.testing.assert_frame_equal(
@@ -53,4 +53,4 @@ class TestScenarioCreator(unittest.TestCase):
 
     def tearDown(self):
         for i in self.files:
-            os.remove(os.path.join("./outputs_combined/scenarios/continued_gas", i))
+            os.remove(os.path.join("./outputs_combined/scenarios/accelerated_elec", i))

@@ -1,6 +1,6 @@
 [
     {
-        "description": "baseline",
+        "description": "continued_gas",
         "insulation": "none",
         "heat_pump": 0,
         "heating_fuel": "existing",
@@ -15,7 +15,7 @@
         "resstock_scenarios": [0]
     },
     {
-        "description": "full_elec_natural",
+        "description": "natural_elec",
         "insulation": "enhanced",
         "heat_pump": 10,
         "heating_fuel": "none",
@@ -60,7 +60,7 @@
         "resstock_scenarios": [5, 6]
     },
     {
-        "description": "full_elec_immediate",
+        "description": "accelerated_elec",
         "insulation": "enhanced",
         "heat_pump": 10,
         "heating_fuel": "none",

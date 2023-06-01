@@ -23,10 +23,14 @@ class TestScenarioCreator(unittest.TestCase):
     @patch("scenario_creator.create_scenario.ScenarioCreator.create_building")
     @patch("scenario_creator.create_scenario.ScenarioCreator.get_scenario_mapping")
     @patch("scenario_creator.create_scenario.ScenarioCreator._get_years_vec")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._set_outputs_path")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._get_decarb_scenario")
     @patch("scenario_creator.create_scenario.ScenarioCreator.get_sim_settings")
     def test_create_scenario(
         self,
         mock_get_sim_settings: Mock,
+        mock_get_decarb_scenario: Mock,
+        mock_set_outputs_path: Mock,
         mock_get_years_vec: Mock,
         mock_get_scenario_mapping: Mock,
         mock_create_building: Mock,
@@ -34,11 +38,19 @@ class TestScenarioCreator(unittest.TestCase):
         mock_write_outputs: Mock,
         mock_get_utility_network_outputs: Mock
     ):
+        mock_get_sim_settings.return_value = {"sim_settings": 1}
+        mock_get_decarb_scenario.return_value = "decarb_scenario"
+        mock_set_outputs_path.return_value = "outputs_path"
         mock_get_years_vec.return_value = [1, 2, 3]
 
         self.scenario_creator.create_scenario()
 
         mock_get_sim_settings.assert_called_once()
+        self.assertDictEqual(self.scenario_creator.sim_config, {"sim_settings": 1})
+        mock_get_decarb_scenario.assert_called_once()
+        self.assertEqual(self.scenario_creator._decarb_scenario, "decarb_scenario")
+        mock_set_outputs_path.assert_called_once()
+        self.assertEqual(self.scenario_creator._outputs_path, "outputs_path")
         mock_get_years_vec.assert_called_once()
         self.assertListEqual(self.scenario_creator._years_vec, [1, 2, 3])
         mock_get_scenario_mapping.assert_called_once()
@@ -53,6 +65,27 @@ class TestScenarioCreator(unittest.TestCase):
         self.assertDictEqual(
             self.scenario_creator.sim_config,
             {"sim_start_year": 2020, "sim_end_year": 2040}
+        )
+
+    def test_get_decarb_scenario(self):
+        self.scenario_creator.sim_config = {"decarb_scenario": "continued_gas"}
+
+        self.assertEqual(
+            self.scenario_creator._get_decarb_scenario(),
+            "continued_gas"
+        )
+
+        self.scenario_creator.sim_config = {"decarb_scenario": "whatever"}
+
+        with self.assertRaises(ValueError):
+            self.scenario_creator._get_decarb_scenario()
+
+    def test_set_outputs_path(self):
+        self.scenario_creator._decarb_scenario = "hybrid_gas"
+
+        self.assertEqual(
+            self.scenario_creator._set_outputs_path(),
+            "./outputs_combined/scenarios/hybrid_gas"
         )
 
     def test_get_years_vec(self):

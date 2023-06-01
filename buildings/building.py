@@ -162,6 +162,9 @@ EMISSION_FACTORS = { # tCO2 / kWh
 
 COST_FILEPATH = "./config_files/retrofit_costs"
 
+REFERENCE_SCENARIO = "continued_gas"
+HYBRID_NPA_SCENARIO = "hybrid_npa"
+
 
 class Building:
     """
@@ -200,6 +203,8 @@ class Building:
         self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: List[int] = []
         self.building_id: str = ""
+        self.retrofit_scenario: str = ""
+        self.retrofit_params: dict = {}
         self.end_uses: dict = {}
         self.resstock_scenarios: Dict[int, pd.DataFrame] = {}
         self._main_resstock_retrofit_scenario: int = None
@@ -218,6 +223,8 @@ class Building:
         """
         self._get_years_vec()
         self._get_building_id()
+        self.retrofit_scenario = self._get_retrofit_scenario()
+        self.retrofit_params = self._get_retrofit_params()
         self._get_building_energies()
         self._create_end_uses()
         self._calc_total_energy_baseline()
@@ -245,6 +252,23 @@ class Building:
 
     def _get_building_id(self) -> None:
         self.building_id = self.building_params.get("building_id")
+
+    def _get_retrofit_scenario(self) -> str:
+        return self.sim_settings.get("decarb_scenario")
+
+    def _get_retrofit_params(self) -> dict:
+        scenario_params = next(
+            (i for i in self.scenario_mapping if i["description"]==self.retrofit_scenario),
+            None
+        )
+
+        if not scenario_params:
+            raise ValueError(
+                "Invalid decarb scenario provided. "
+                "Provided scenario '{}' not in scenario mapping".format(self.retrofit_scenario)
+            )
+
+        return scenario_params
 
     def _get_building_energies(self) -> None:
         if self.building_params.get("resstock_overwrite"):
@@ -281,14 +305,11 @@ class Building:
         return consump_df
 
     def _get_resstock_buildings(self) -> None:
-        decarb_scenario = self.sim_settings.get("decarb_scenario")
-        scenario_params = self.scenario_mapping[decarb_scenario]
-
-        self._main_resstock_retrofit_scenario = scenario_params.get(
+        self._main_resstock_retrofit_scenario = self.retrofit_params.get(
             "main_resstock_retrofit_scenario"
         )
 
-        resstock_scenarios = scenario_params.get("resstock_scenarios")
+        resstock_scenarios = self.retrofit_params.get("resstock_scenarios")
         resstock_scenarios.append(0)
         resstock_scenarios = list(set(resstock_scenarios))
 
@@ -330,24 +351,12 @@ class Building:
         """
         end_use_params: List[dict] = self.building_params.get("end_uses", [{}])
 
-        scenario = self.sim_settings.get("decarb_scenario")
-        scenario_string = {
-            0: "continued_gas",
-            1: "natural_electric",
-            2: "hybrid_gas",
-            3: "hybrid_npa",
-            4: "accelerated_electric"
-        }
-
-        original_scenario = scenario_string[0]
-        retrofit_scenario = scenario_string[scenario]
-
         costs_original = pd.read_csv(
-            os.path.join(COST_FILEPATH, f"COST_{original_scenario.upper()}.csv"),
+            os.path.join(COST_FILEPATH, f"COST_{REFERENCE_SCENARIO.upper()}.csv"),
             index_col="building_id"
         ).to_dict(orient="index")
         costs_retrofit = pd.read_csv(
-            os.path.join(COST_FILEPATH, f"COST_{retrofit_scenario.upper()}.csv"),
+            os.path.join(COST_FILEPATH, f"COST_{self.retrofit_scenario.upper()}.csv"),
             index_col="building_id"
         ).to_dict(orient="index")
 
@@ -381,7 +390,7 @@ class Building:
                 params.pop("original_energy_source"),
                 self.resstock_scenarios,
                 self.scenario_mapping,
-                self.sim_settings.get("decarb_scenario"),
+                self.retrofit_scenario,
                 self.resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
@@ -398,7 +407,7 @@ class Building:
                 params.pop("original_energy_source"),
                 self.resstock_scenarios,
                 self.scenario_mapping,
-                self.sim_settings.get("decarb_scenario"),
+                self.retrofit_scenario,
                 self.resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
@@ -415,7 +424,7 @@ class Building:
                 params.pop("original_energy_source"),
                 self.resstock_scenarios,
                 self.scenario_mapping,
-                self.sim_settings.get("decarb_scenario"),
+                self.retrofit_scenario,
                 self.resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
@@ -432,7 +441,7 @@ class Building:
                 params.pop("original_energy_source"),
                 self.resstock_scenarios,
                 self.scenario_mapping,
-                self.sim_settings.get("decarb_scenario"),
+                self.retrofit_scenario,
                 self.resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
@@ -564,7 +573,7 @@ class Building:
         asset_updates = [i for i in self.retrofit_consumption.columns if i.endswith("_update")]
 
         # If NPA, we need to switch all gas "other" to propane
-        if self.sim_settings.get("decarb_scenario") == 3:
+        if self.retrofit_scenario == HYBRID_NPA_SCENARIO:
             self.retrofit_consumption.loc[:, "out.propane.other.energy_consumption"] += \
                 self.retrofit_consumption.loc[:, "out.natural_gas.other.energy_consumption"]
             

@@ -13,9 +13,8 @@ from utility_network.utility_network import UtilityNetwork
 
 DEFAULT_SIM_START_YEAR = 2020
 DEFAULT_SIM_END_YEAR = 2050
-SCENARIO = "continued_gas"
 FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
-OUTPUTS_FILEPATH = "./outputs_combined/scenarios/{}".format(SCENARIO)
+OUTPUTS_BASEPATH = "./outputs_combined/scenarios"
 DOMAIN_BUILDING = "building"
 TYPE_BUILDING_AGGREGATE = "building_aggregate"
 DOMAIN_ELEC = "elec_network"
@@ -23,6 +22,7 @@ TYPE_ELEC_XMFR = "elec_xmfr"
 DOMAIN_GAS = "gas_network"
 TYPE_GAS_MAIN = "gas_main"
 TYPE_GAS_SERVICE = "gas_service"
+DECARB_SCENARIOS = ["continued_gas", "hybrid_npa", "hybrid_gas", "natural_elec", "accelerated_elec"]
 
 
 class ScenarioCreator:
@@ -45,6 +45,8 @@ class ScenarioCreator:
         self.write_building_energy_timeseries: bool = write_building_energy_timeseries
 
         self.sim_config: dict = {}
+        self._decarb_scenario: str = ""
+        self._outputs_path: str = ""
         self._years_vec: List[int] = []
         self.scenario_mapping: List[dict] = []
         self.buildings_config: dict = {}
@@ -52,7 +54,9 @@ class ScenarioCreator:
         self.utility_network: UtilityNetwork = None
 
     def create_scenario(self):
-        self.get_sim_settings()
+        self.sim_config = self.get_sim_settings()
+        self._decarb_scenario = self._get_decarb_scenario()
+        self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
         self.get_scenario_mapping()
         print("Creating buildings...")
@@ -62,13 +66,36 @@ class ScenarioCreator:
         self._write_outputs()
         self._get_utility_network_outputs()
 
-    def get_sim_settings(self) -> None:
+    def get_sim_settings(self) -> dict:
         """
         Read in simulation settings
         """
         with open(self._sim_settings_filepath) as f:
             data = json.load(f)
-        self.sim_config = data
+
+        return data
+
+    def _get_decarb_scenario(self) -> str:
+        """
+        Get the decarb scenario and check that it is valid
+        """
+        input_scenario = self.sim_config.get("decarb_scenario")
+
+        if input_scenario not in DECARB_SCENARIOS:
+            raise ValueError(
+                "Invalid scenario provided. "
+                "User provided {0} but allowable values are one of: {1}".format(
+                    input_scenario, DECARB_SCENARIOS
+                )
+            )
+        
+        return input_scenario
+
+    def _set_outputs_path(self) -> str:
+        """
+        Set the outputs filepath for this simulation
+        """
+        return os.path.join(OUTPUTS_BASEPATH, self._decarb_scenario)
 
     def _get_years_vec(self) -> List[int]:
         return list(range(
@@ -128,7 +155,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "is_retrofit_vec_table.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "is_retrofit_vec_table.csv"), index=False)
 
         # ---Retrofit year---
         all_dfs = []
@@ -139,7 +166,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_year.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "retrofit_year.csv"), index=False)
 
         # ---Retrofit cost---
         all_dfs = []
@@ -153,7 +180,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "retrofit_cost.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "retrofit_cost.csv"), index=False)
 
         # ---Book value---
         all_dfs = []
@@ -180,7 +207,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "book_val.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "book_val.csv"), index=False)
 
         # ---Existing stranded val---
         all_dfs = []
@@ -194,7 +221,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "existing_stranded_val.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "existing_stranded_val.csv"), index=False)
 
         # ---Energy use---
         building_energy_usage = {
@@ -226,7 +253,7 @@ class ScenarioCreator:
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "energy_consumption.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "energy_consumption.csv"), index=False)
 
         # ---Peak energy use---
         all_dfs = []
@@ -244,7 +271,7 @@ class ScenarioCreator:
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "peak_consump.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "peak_consump.csv"), index=False)
 
         # ---Building utility costs---
         building_util_costs = {
@@ -265,7 +292,7 @@ class ScenarioCreator:
                 df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
                 all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_costs.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "consumption_costs.csv"), index=False)
 
         # ---Building fuel---
         all_dfs = []
@@ -276,7 +303,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "fuel_type.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "fuel_type.csv"), index=False)
 
         # ---Methane leaks---
         all_dfs = []
@@ -310,7 +337,7 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_GAS_MAIN
             all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "methane_leaks.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "methane_leaks.csv"), index=False)
 
         # ---Combustion emissions---
         all_dfs = []
@@ -326,7 +353,7 @@ class ScenarioCreator:
                 df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
                 all_dfs.append(df)
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(OUTPUTS_FILEPATH, "consumption_emissions.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "consumption_emissions.csv"), index=False)
 
     def _get_utility_network_outputs(self):
         """

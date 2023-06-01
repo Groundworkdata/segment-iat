@@ -83,16 +83,10 @@ class TestBuilding(unittest.TestCase):
             "load_scaling_factor": 2.25
         }
 
-        # self._building_config_filepath = "tests/input_data/building_config.json"
-
-        # with open(self._building_config_filepath) as f:
-        #     data = json.load(f)
-        # self.building_params = data
-
         self.sim_settings = {
             "sim_start_year": 2020,
             "sim_end_year": 2030,
-            "decarb_scenario": 0,
+            "decarb_scenario": "continued_gas",
             "replacement_year": 2025
         }
 
@@ -111,12 +105,6 @@ class TestBuilding(unittest.TestCase):
             "main_resstock_retrofit_scenario": 5,
             "resstock_scenarios": [5, 6]
         }]
-
-        # scenario_mapping_filepath = "./config_files/scenario_mapping.json"
-
-        # with open(scenario_mapping_filepath) as f:
-        #     data = json.load(f)
-        # self.scenario_mapping = data
 
         self.building = Building(
             self.building_params,
@@ -209,6 +197,7 @@ class TestBuilding(unittest.TestCase):
     @patch("buildings.building.Building._get_resstock_scenario")
     def test_get_resstock_buildings(self, mock_get_resstock_scenario: Mock):
         mock_get_resstock_scenario.return_value = "resstock_scenario"
+        self.building.retrofit_params = self.scenario_mapping[0]
 
         self.building._get_resstock_buildings()
 
