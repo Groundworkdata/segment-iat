@@ -53,4 +53,6 @@ class TestScenarioCreator(unittest.TestCase):
 
     def tearDown(self):
         for i in self.files:
-            os.remove(os.path.join("./outputs_combined/scenarios/accelerated_elec", i))
+            filepath = os.path.join("./outputs_combined/scenarios/accelerated_elec", i)
+            if os.path.exists(filepath):
+                os.remove(os.path.join(filepath))

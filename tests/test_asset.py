@@ -60,6 +60,12 @@ class TestAsset(unittest.TestCase):
             self.asset.get_retrofit_vector()
         )
 
+    def test_get_replacement_vec(self):
+        self.assertListEqual(
+            [False]*10 + [True] + [False]*9,
+            self.asset._get_replacement_vec()
+        )
+
     def test_install_cost(self):
         """
         Test install cost vector when install year is during the sim timeframe

@@ -4,6 +4,9 @@ Defines a gas meter
 from end_uses.meters.meter import Meter
 
 
+GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
+
+
 class GasMeter(Meter):
     """
     Defines a gas meter, which inherits Meter class
@@ -42,3 +45,14 @@ class GasMeter(Meter):
             kwargs.get("building"),
             "natural_gas",
         )
+
+    def get_operational_vector(self) -> list:
+        building_scenario = self.building.retrofit_scenario
+
+        if building_scenario in GAS_SHUTOFF_SCENARIOS:
+            return [
+                1 if self.install_year <= i and self.replacement_year > i else 0
+                for i in self.years_vector
+            ]
+        
+        return [1] * len(self.years_vector)
