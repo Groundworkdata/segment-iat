@@ -60,11 +60,9 @@ class TestScenarioCreator(unittest.TestCase):
         mock_get_utility_network_outputs.assert_called_once()
 
     def test_get_sim_settings(self):
-        self.scenario_creator.get_sim_settings()
-
         self.assertDictEqual(
-            self.scenario_creator.sim_config,
-            {"sim_start_year": 2020, "sim_end_year": 2040}
+            self.scenario_creator.get_sim_settings(),
+            {"sim_start_year": 2020, "sim_end_year": 2040, "decarb_scenario": "continued_gas"}
         )
 
     def test_get_decarb_scenario(self):

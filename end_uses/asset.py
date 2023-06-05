@@ -60,6 +60,7 @@ class Asset:
         self.year_timestamps: pd.DatetimeIndex = None
         self.operational_vector: list = []
         self.retrofit_vector: list = []
+        self.replacement_vector: list = []
         self.install_cost: List[float] = []
         self.depreciation: list = []
         self.stranded_value: list = []
@@ -69,6 +70,7 @@ class Asset:
         self.year_timestamps = self.get_year_timestamps()
         self.operational_vector = self.get_operational_vector()
         self.retrofit_vector = self.get_retrofit_vector()
+        self.replacement_vector = self._get_replacement_vec()
         self.install_cost = self.get_install_cost()
         self.depreciation = self.get_depreciation()
         self.stranded_value = self.get_stranded_value()
@@ -98,6 +100,12 @@ class Asset:
     
     def get_retrofit_vector(self) -> list:
         return [1 - i for i in self.operational_vector]
+    
+    def _get_replacement_vec(self) -> List[bool]:
+        """
+        The replacement vector is a vector of True when the index is the retrofit year, False o/w
+        """
+        return [True if i==self.replacement_year else False for i in self.years_vector]
 
     def get_install_cost(self) -> List[float]:
         """
@@ -163,28 +171,4 @@ class Asset:
 
         Stranded value is 0 if the replacement year is outside of the sim timeframe
         """
-        replacement_ref = self.replacement_year - self.sim_start_year
-        operational_lifetime = self.replacement_year - self.install_year
-
-        stranded_val = np.zeros(len(self.operational_vector))
-
-        # Handle when the replacement year is beyond the simulation end year
-        if self.replacement_year > self.sim_end_year:
-            return stranded_val.tolist()
-
-        # Handle if replacement in final year and not fully depreciated
-        elif (
-            self.replacement_year == self.sim_end_year
-            and operational_lifetime != self.lifetime
-        ):
-            replacement_ref = -1
-
-        # Handle if replacement in final year and fully depreciated
-        elif (
-            self.replacement_year == self.sim_end_year
-            and operational_lifetime == self.lifetime
-        ):
-            return stranded_val.tolist()
-
-        stranded_val[replacement_ref] = self.depreciation[replacement_ref]
-        return stranded_val.tolist()
+        return (np.array(self.depreciation) * np.array(self.replacement_vector)).tolist()
