@@ -154,6 +154,17 @@ class ScenarioCreator:
             df.loc[:, "asset_domain"] = DOMAIN_BUILDING
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
+
+        for xmfr in self.utility_network.elec_transformers:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "is_retrofit": xmfr.is_replacement_vector
+            })
+            df.loc[:, "asset_id"] = xmfr.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_ELEC
+            df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "is_retrofit_vec_table.csv"), index=False)
 
@@ -165,6 +176,17 @@ class ScenarioCreator:
             df.loc[:, "asset_domain"] = DOMAIN_BUILDING
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
+
+        for xmfr in self.utility_network.elec_transformers:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_year": xmfr.retrofit_vector
+            })
+            df.loc[:, "asset_id"] = xmfr.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_ELEC
+            df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "retrofit_year.csv"), index=False)
 
@@ -179,6 +201,17 @@ class ScenarioCreator:
             df.loc[:, "asset_domain"] = DOMAIN_BUILDING
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
+
+        for xmfr in self.utility_network.elec_transformers:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": xmfr.upgrade_cost
+            })
+            df.loc[:, "asset_id"] = xmfr.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_ELEC
+            df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "retrofit_cost.csv"), index=False)
 
