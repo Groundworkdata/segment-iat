@@ -20,7 +20,7 @@ class Pipeline(UtilityEndUse):
         sim_start_year: int,
         sim_end_year: int,
         replacement_year: int,
-        decarb_scenario: int,
+        decarb_scenario: str,
         length_ft: int,
         pressure: str,
         diameter: str,
@@ -51,6 +51,8 @@ class Pipeline(UtilityEndUse):
         self.leak_rate: int = 2
         # TODO: update based on the material etc.
         self.connected_assets: list = connected_assets
+
+        self.decarb_scenario: str = decarb_scenario
 
         self.leakage_factors: pd.DataFrame = None
 

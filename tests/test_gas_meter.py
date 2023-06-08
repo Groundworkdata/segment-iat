@@ -27,9 +27,9 @@ class TestGasMeter(unittest.TestCase):
         }
 
         self.gas_meter = GasMeter(**kwargs)
+        self.gas_meter.years_vector = list(range(2020, 2030))
 
     def test_get_operational_vector(self):
-        self.gas_meter.years_vector = list(range(2020, 2030))
 
         self.assertListEqual(
             [1] * 5 + [0] * 5,
@@ -37,10 +37,31 @@ class TestGasMeter(unittest.TestCase):
         )
 
     def test_get_operational_vector_gas(self):
-        self.gas_meter.years_vector = list(range(2020, 2030))
         self.gas_meter.building.retrofit_scenario = "hybrid_gas"
 
         self.assertEqual(
             [1] * 10,
             self.gas_meter.get_operational_vector()
+        )
+
+    def test_get_depreciation(self):
+        self.assertEqual(
+            [0] * 10,
+            self.gas_meter.get_depreciation()
+        )
+
+    def test_get_retrofit_cost(self):
+        self.gas_meter.operational_vector = [1] * 10
+
+        self.assertEqual(
+            [0.]*6 + [400.] + [0.]*3,
+            self.gas_meter.get_retrofit_cost()
+        )
+
+        self.gas_meter.operational_vector = [1] * 34
+        self.gas_meter.years_vector = list(range(2020, 2054))
+
+        self.assertEqual(
+            [0.]*6 + [400.] + [0.]*6 + [400.] + [0.]*6 + [400.] + [0.]*6 + [400.] + [0.]*6,
+            self.gas_meter.get_retrofit_cost()
         )

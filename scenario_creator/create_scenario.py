@@ -22,6 +22,7 @@ TYPE_ELEC_XMFR = "elec_xmfr"
 DOMAIN_GAS = "gas_network"
 TYPE_GAS_MAIN = "gas_main"
 TYPE_GAS_SERVICE = "gas_service"
+TYPE_GAS_METER = "gas_meter"
 DECARB_SCENARIOS = ["continued_gas", "hybrid_npa", "hybrid_gas", "natural_elec", "accelerated_elec"]
 
 
@@ -165,6 +166,26 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
             all_dfs.append(df)
 
+        for gas_service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "is_retrofit": gas_service.retrofit_vector
+            })
+            df.loc[:, "asset_id"] = gas_service.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
+            all_dfs.append(df)
+
+        for gas_main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "is_retrofit": gas_main.retrofit_vector
+            })
+            df.loc[:, "asset_id"] = gas_main.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "is_retrofit_vec_table.csv"), index=False)
 
@@ -185,6 +206,26 @@ class ScenarioCreator:
             df.loc[:, "asset_id"] = xmfr.asset_id
             df.loc[:, "asset_domain"] = DOMAIN_ELEC
             df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
+            all_dfs.append(df)
+
+        for gas_service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_year": gas_service.replacement_vector
+            })
+            df.loc[:, "asset_id"] = gas_service.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
+            all_dfs.append(df)
+
+        for gas_main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_year": gas_main.replacement_vector
+            })
+            df.loc[:, "asset_id"] = gas_main.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
@@ -210,6 +251,36 @@ class ScenarioCreator:
             df.loc[:, "asset_id"] = xmfr.asset_id
             df.loc[:, "asset_domain"] = DOMAIN_ELEC
             df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
+            all_dfs.append(df)
+
+        for gas_meter in self.utility_network.gas_meters:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": gas_meter.get_retrofit_cost()
+            })
+            df.loc[:, "asset_id"] = gas_meter.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_METER
+            all_dfs.append(df)
+
+        for gas_service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": gas_service.get_install_cost()
+            })
+            df.loc[:, "asset_id"] = gas_service.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
+            all_dfs.append(df)
+
+        for gas_main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": gas_main.get_install_cost()
+            })
+            df.loc[:, "asset_id"] = gas_main.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
@@ -239,22 +310,69 @@ class ScenarioCreator:
             df.loc[:, "asset_domain"] = DOMAIN_BUILDING
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
             all_dfs.append(df)
+
+        for gas_service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "book_val": gas_service.book_value
+            })
+            df.loc[:, "asset_id"] = gas_service.asset_id
+            df.loc[:, "existing_or_retrofit"] = "retrofit"
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
+            all_dfs.append(df)
+
+        for gas_main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "book_val": gas_main.book_value
+            })
+            df.loc[:, "asset_id"] = gas_main.asset_id
+            df.loc[:, "existing_or_retrofit"] = "retrofit"
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "book_val.csv"), index=False)
 
-        # ---Existing stranded val---
+        # ---Stranded val---
         all_dfs = []
         for building_id, building in self.buildings.items():
             df = pd.DataFrame({
                 "year": years_vec,
-                "existing_stranded_val": building._get_exising_stranded_val_vec()
+                "stranded_val": building._get_exising_stranded_val_vec()
             })
             df.loc[:, "asset_id"] = building_id
             df.loc[:, "asset_domain"] = DOMAIN_BUILDING
             df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
+            df.loc[:, "existing_or_retrofit"] = "existing"
             all_dfs.append(df)
+
+        for gas_service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "stranded_val": gas_service.stranded_value
+            })
+            df.loc[:, "asset_id"] = gas_service.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
+            df.loc[:, "existing_or_retrofit"] = "retrofit"
+            all_dfs.append(df)
+
+        for gas_main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "stranded_val": gas_main.stranded_value
+            })
+            df.loc[:, "asset_id"] = gas_main.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
+            df.loc[:, "existing_or_retrofit"] = "retrofit"
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
-        all_dfs.to_csv(os.path.join(self._outputs_path, "existing_stranded_val.csv"), index=False)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "stranded_val.csv"), index=False)
 
         # ---Energy use---
         building_energy_usage = {
