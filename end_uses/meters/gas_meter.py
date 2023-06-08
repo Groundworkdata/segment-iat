@@ -1,10 +1,14 @@
 """
 Defines a gas meter
 """
+import numpy as np
+
 from end_uses.meters.meter import Meter
 
 
 GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
+RETROFIT_FREQ = 7
+RETROFIT_COST = 400
 
 
 class GasMeter(Meter):
@@ -54,5 +58,24 @@ class GasMeter(Meter):
                 1 if self.install_year <= i and self.replacement_year > i else 0
                 for i in self.years_vector
             ]
-        
+
         return [1] * len(self.years_vector)
+    
+    def get_depreciation(self) -> list:
+        """
+        Assume fully depreciated at all time
+        """
+        return np.zeros(len(self.years_vector)).tolist()
+    
+    def get_retrofit_cost(self) -> list:
+        """
+        Assume a regular schedule of retrofit costs
+        """
+        sim_length = len(self.years_vector)
+        retrofit_cost = np.zeros(sim_length)
+
+        retrofit_years = [RETROFIT_FREQ*(i+1)-1 for i in range(int(sim_length / RETROFIT_FREQ))]
+
+        retrofit_cost[retrofit_years] = RETROFIT_COST
+
+        return (retrofit_cost * np.array(self.operational_vector)).tolist()

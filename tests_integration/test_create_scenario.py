@@ -22,13 +22,13 @@ class TestScenarioCreator(unittest.TestCase):
             "consumption_costs.csv",
             "consumption_emissions.csv",
             "energy_consumption.csv",
-            "existing_stranded_val.csv",
             "fuel_type.csv",
             "is_retrofit_vec_table.csv",
             "methane_leaks.csv",
             "peak_consump.csv",
             "retrofit_cost.csv",
-            "retrofit_year.csv"
+            "retrofit_year.csv",
+            "stranded_val.csv"
         ]
 
         self.scenario_creator = ScenarioCreator(

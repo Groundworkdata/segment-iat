@@ -19,13 +19,14 @@ class TestGasService(unittest.TestCase):
             **{i: 0 for i in range(2025, 2030)}
         }
         self.connected_meter.operational_vector = [1]*5 + [0]*5
+        self.connected_meter.building._retrofit_vec = [0]*5 + [1] + [0]*4
 
         kwargs = {
             "gisid": "1",
             "parentid": "2",
             "inst_date": "1/1/1980",
             "inst_cost": 1000,
-            "lifetime": 80,
+            "lifetime": 40,
             "sim_start_year": 2020,
             "sim_end_year": 2030,
             "replacement_year": 2060,
@@ -34,6 +35,7 @@ class TestGasService(unittest.TestCase):
             "pressure": 1,
             "diameter": 1,
             "material": "WS",
+            "replacement_cost": 1000,
             "connected_assets": [self.connected_meter]
         }
 
@@ -68,7 +70,7 @@ class TestGasService(unittest.TestCase):
         self.assertListEqual(
             [
                 0, 0, 0, 0, 0,
-                437.5, 0, 0, 0, 0
+                0, 0, 0, 0, 0
             ],
             self.gas_service.stranded_value
         )
