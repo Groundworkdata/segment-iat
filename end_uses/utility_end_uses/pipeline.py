@@ -121,5 +121,17 @@ class Pipeline(UtilityEndUse):
 
         # TODO: check if the units of length and leakage factor match
 
-        return [i*leakage_factor for i in self.operational_vector]
+        annual_leakage = [i*leakage_factor for i in self.operational_vector]
 
+        for idx, retrofit in enumerate(self.retrofit_vector):
+            if retrofit:
+                leakage_factor = float(
+                    self.leakage_factors[
+                        (self.leakage_factors["asset"] == self.pipeline_type)
+                        & (self.leakage_factors["code"] == "PL")
+                    ].value
+                )
+
+                annual_leakage[idx] = leakage_factor * self.length
+
+        return (np.array(annual_leakage) * np.array(self.operational_vector)).tolist()
