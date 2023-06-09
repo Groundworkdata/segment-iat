@@ -513,6 +513,32 @@ class ScenarioCreator:
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "consumption_emissions.csv"), index=False)
 
+
+        # ---O&M costs---
+        all_dfs = []
+        for gas_service in self.utility_network.gas_services:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "annual_operating_costs": gas_service.annual_operating_expenses
+            })
+            df.loc[:, "asset_id"] = gas_service.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_SERVICE
+            all_dfs.append(df)
+
+        for gas_main in self.utility_network.gas_mains:
+            df = pd.DataFrame({
+                "year": years_vec,
+                "annual_operating_costs": gas_main.annual_operating_expenses
+            })
+            df.loc[:, "asset_id"] = gas_main.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_GAS
+            df.loc[:, "asset_type"] = TYPE_GAS_MAIN
+            all_dfs.append(df)
+
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "operating_costs.csv"), index=False)
+
     def _get_utility_network_outputs(self):
         """
         Printing out some utility network stuff. Will need to write to output tables soon...

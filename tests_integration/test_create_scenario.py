@@ -26,6 +26,7 @@ class TestScenarioCreator(unittest.TestCase):
             "is_retrofit_vec_table.csv",
             "methane_leaks.csv",
             "peak_consump.csv",
+            "operating_costs.csv",
             "retrofit_cost.csv",
             "retrofit_year.csv",
             "stranded_val.csv"

@@ -2,7 +2,9 @@
 Defines Mains end use
 """
 import numpy as np
+import pandas as pd
 from typing import List
+import warnings
 
 from end_uses.utility_end_uses.pipeline import Pipeline
 
@@ -10,6 +12,7 @@ from end_uses.utility_end_uses.pipeline import Pipeline
 GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
 GAS_RETROFIT_SCENARIOS = ["natural_elec", "hybrid_gas", "continued_gas", "hybrid_gas_immediate"]
 RETROFIT_YEAR = 2025
+ANNUAL_OM_FILEPATH = "./config_files/operating_expenses/gas_operating_expenses.csv"
 
 
 #TODO: Write unit tests
@@ -43,6 +46,7 @@ class GasMain(Pipeline):
         self.book_value = self.get_book_value()
         self.shutoff_year = self.get_shutoff_year()
         self.stranded_value = self._update_stranded_value()
+        self.annual_operating_expenses = self._get_annual_om()
 
     def get_operational_vector(self) -> list:
         operational_vecs = []
@@ -117,3 +121,17 @@ class GasMain(Pipeline):
     def get_system_shutoff_cost(self) -> List[float]:
         return (np.array(self.shutoff_year) * self.shutoff_cost).tolist()
 
+    def _get_annual_om(self) -> List[float]:
+        om_table = pd.read_csv(ANNUAL_OM_FILEPATH, index_col="material").to_dict(orient="index")
+
+        if self.material not in om_table.keys():
+            warnings.warn(f"Material {self.material} not in O&M table! Using $0 / year.")
+        
+        annual_operating_expense = om_table.get(self.material, {}).get(
+            "operating_expense_per_mile", 0
+        )
+
+        # Convert length in feet to miles
+        annual_operating_expense = annual_operating_expense * (self.length / 5280)
+
+        return (annual_operating_expense * np.array(self.operational_vector)).tolist()
