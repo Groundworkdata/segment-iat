@@ -23,7 +23,14 @@ DOMAIN_GAS = "gas_network"
 TYPE_GAS_MAIN = "gas_main"
 TYPE_GAS_SERVICE = "gas_service"
 TYPE_GAS_METER = "gas_meter"
-DECARB_SCENARIOS = ["continued_gas", "hybrid_npa", "hybrid_gas", "natural_elec", "accelerated_elec"]
+DECARB_SCENARIOS = [
+    "continued_gas",
+    "hybrid_npa",
+    "hybrid_gas",
+    "natural_elec",
+    "accelerated_elec",
+    "hybrid_gas_immediate"
+]
 
 
 class ScenarioCreator:

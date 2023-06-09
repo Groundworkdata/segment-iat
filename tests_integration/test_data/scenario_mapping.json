@@ -73,5 +73,20 @@
         "hvac": 10,
         "main_resstock_retrofit_scenario": 10,
         "resstock_scenarios": [10]
+    },
+    {
+        "description": "hybrid_gas_immediate",
+        "insulation": "none",
+        "heat_pump": 5,
+        "heating_fuel": "existing",
+        "replacement_fuel": "existing",
+        "hvac_resstock_scenario": 5,
+        "dhw_resstock_scenario": 6,
+        "dryer_resstock_scenario": 5,
+        "range_resstock_scenario": 5,
+        "range_retrofit_fuel": "existing",
+        "hvac": 10,
+        "main_resstock_retrofit_scenario": 5,
+        "resstock_scenarios": [5, 6]
     }
 ]
