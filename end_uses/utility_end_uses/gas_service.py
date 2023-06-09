@@ -8,7 +8,7 @@ from end_uses.utility_end_uses.pipeline import Pipeline
 
 
 GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
-GAS_RETROFIT_SCENARIOS = ["natural_elec", "hybrid_gas", "continued_gas"]
+GAS_RETROFIT_SCENARIOS = ["natural_elec", "hybrid_gas", "continued_gas", "hybrid_gas_immediate"]
 RETROFIT_YEAR = 2025
 
 

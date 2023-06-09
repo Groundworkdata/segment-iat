@@ -16,6 +16,7 @@ def main():
         "hybrid_gas",
         "hybrid_npa",
         "natural_elec",
+        "hybrid_gas_immediate",
     ]
 
     output_files = [
