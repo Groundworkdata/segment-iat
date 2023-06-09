@@ -26,7 +26,7 @@ class TestGasService(unittest.TestCase):
             "length_ft": 10,
             "pressure": 1,
             "diameter": 1,
-            "material": "WC",
+            "material": "WS",
             "replacement_cost": 1000,
             "connected_assets": [self.connected_meter]
         }
@@ -102,4 +102,21 @@ class TestGasService(unittest.TestCase):
         self.assertListEqual(
             [0, 1, 0],
             self.gas_service._update_stranded_value()
+        )
+
+    def test_get_annual_om(self):
+        self.gas_service.operational_vector = [1, 1, 1, 0, 0]
+
+        self.assertListEqual(
+            [7500 * (10 / 5280)]*3 + [0]*2,
+            self.gas_service._get_annual_om()
+        )
+
+        self.gas_service.material = "whatever"
+        with self.assertWarns(Warning):
+            annual_om = self.gas_service._get_annual_om()
+
+        self.assertListEqual(
+            [0]*5,
+            annual_om
         )

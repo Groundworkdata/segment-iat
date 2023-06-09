@@ -28,6 +28,7 @@ def main():
         "fuel_type",
         "is_retrofit_vec_table",
         "methane_leaks",
+        "operating_costs",
         "peak_consump",
         "retrofit_cost",
         "retrofit_year",
