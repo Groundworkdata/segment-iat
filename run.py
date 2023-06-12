@@ -6,10 +6,7 @@ from scenario_creator.create_scenario import ScenarioCreator
 
 def main():
     scenario = ScenarioCreator(
-        "./config_files/simulation_settings_config.json",
-        "./config_files/buildings_config.json",
-        "./config_files/utility_network_config.json",
-        "./config_files/scenario_mapping.json"
+        "./config_files/simulation_settings_config.json"
     )
 
     scenario.create_scenario()

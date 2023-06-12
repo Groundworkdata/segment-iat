@@ -2,5 +2,7 @@
     "sim_start_year": 2020,
     "sim_end_year": 2066,
     "decarb_scenario": "continued_gas",
-    "replacement_year": 2300
+    "replacement_year": 2300,
+    "buildings_config_filepath": "./config_files/history/doer_sf_accelerated-elec.json",
+    "utility_network_config_filepath": "./config_files/utility_network/doer_sf_network.json"
 }

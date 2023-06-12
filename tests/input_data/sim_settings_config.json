@@ -1,5 +1,7 @@
 {
     "sim_start_year": 2020,
     "sim_end_year": 2040,
-    "decarb_scenario": "continued_gas"
+    "decarb_scenario": "continued_gas",
+    "buildings_config_filepath": "./tests/input_data/building_config.json",
+    "utility_network_config_filepath": "./tests/input_data/whatever.json"
 }
