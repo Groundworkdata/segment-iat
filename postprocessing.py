@@ -24,7 +24,6 @@ def main():
         "consumption_costs",
         "consumption_emissions",
         "energy_consumption",
-        "existing_stranded_val",
         "fuel_type",
         "is_retrofit_vec_table",
         "methane_leaks",
@@ -32,6 +31,7 @@ def main():
         "peak_consump",
         "retrofit_cost",
         "retrofit_year",
+        "stranded_val"
     ]
 
     output_dir = "./outputs_combined/scenarios/combined/"
