@@ -12,9 +12,6 @@ from scenario_creator.create_scenario import ScenarioCreator
 class TestScenarioCreator(unittest.TestCase):
     def setUp(self):
         sim_settings_filepath = "tests_integration/test_data/simulation_settings_config.json"
-        building_config_filepath = "tests_integration/test_data/doer_sf_accelerated-elec.json"
-        utility_network_config_filepath = "tests_integration/test_data/utility_network_config.json"
-        scenario_mapping_filepath = "tests_integration/test_data/scenario_mapping.json"
         write_building_energy_timeseries = False
 
         self.files = [
@@ -34,9 +31,6 @@ class TestScenarioCreator(unittest.TestCase):
 
         self.scenario_creator = ScenarioCreator(
             sim_settings_filepath,
-            building_config_filepath,
-            utility_network_config_filepath,
-            scenario_mapping_filepath,
             write_building_energy_timeseries
         )
 

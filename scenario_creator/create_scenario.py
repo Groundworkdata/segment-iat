@@ -13,16 +13,23 @@ from utility_network.utility_network import UtilityNetwork
 
 DEFAULT_SIM_START_YEAR = 2020
 DEFAULT_SIM_END_YEAR = 2050
+
 FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
+
+SCENARIO_MAPPING_FILEPATH = "./config_files/scenario_mapping.json"
 OUTPUTS_BASEPATH = "./outputs_combined/scenarios"
+
 DOMAIN_BUILDING = "building"
 TYPE_BUILDING_AGGREGATE = "building_aggregate"
+
 DOMAIN_ELEC = "elec_network"
 TYPE_ELEC_XMFR = "elec_xmfr"
+
 DOMAIN_GAS = "gas_network"
 TYPE_GAS_MAIN = "gas_main"
 TYPE_GAS_SERVICE = "gas_service"
 TYPE_GAS_METER = "gas_meter"
+
 DECARB_SCENARIOS = [
     "continued_gas",
     "hybrid_npa",
@@ -41,15 +48,9 @@ class ScenarioCreator:
     def __init__(
             self,
             sim_settings_filepath: str,
-            building_config_filepath: str,
-            utility_network_config_filepath: str,
-            scenario_mapping_filepath: str,
             write_building_energy_timeseries: bool = False
     ):
-        self._sim_settings_filepath = sim_settings_filepath
-        self._building_config_filepath = building_config_filepath
-        self._utility_network_config_filepath = utility_network_config_filepath
-        self._scenario_mapping_filepath = scenario_mapping_filepath
+        self._sim_settings_filepath: str = sim_settings_filepath
         self.write_building_energy_timeseries: bool = write_building_energy_timeseries
 
         self.sim_config: dict = {}
@@ -115,12 +116,19 @@ class ScenarioCreator:
         """
         Read in ResStock scenario mapping
         """
-        with open(self._scenario_mapping_filepath) as f:
+        with open(SCENARIO_MAPPING_FILEPATH) as f:
             data = json.load(f)
         self.scenario_mapping = data
 
     def create_building(self) -> None:
-        with open(self._building_config_filepath) as f:
+        building_config_filepath = self.sim_config.get("buildings_config_filepath")
+
+        if not os.path.exists(building_config_filepath):
+            raise ValueError(
+                f"Filepath {building_config_filepath} for buildling configuration does not exist!"
+            )
+
+        with open(building_config_filepath) as f:
             data = json.load(f)
         self.buildings_config = data
 
@@ -142,8 +150,10 @@ class ScenarioCreator:
         """
         Create the utility network based on the input config
         """
+        utility_network_config_filepath = self.sim_config.get("utility_network_config_filepath")
+
         self.utility_network = UtilityNetwork(
-            self._utility_network_config_filepath, self.sim_config, self.buildings
+            utility_network_config_filepath, self.sim_config, self.buildings
         )
 
         self.utility_network.populate_utility_network()

@@ -2,5 +2,7 @@
     "sim_start_year": 2020,
     "sim_end_year": 2040,
     "decarb_scenario": "accelerated_elec",
-    "replacement_year": 2025
+    "replacement_year": 2025,
+    "buildings_config_filepath": "./tests_integration/test_data/doer_sf_accelerated-elec.json",
+    "utility_network_config_filepath": "./tests_integration/test_data/utility_network_config.json"
 }
