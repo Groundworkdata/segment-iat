@@ -10,7 +10,8 @@ from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 from collections import Counter
 
 
-POWER_FACTOR = 0.8
+POWER_FACTOR = 1
+OVERLOADING_FACTOR = 1.25
 UNIT_UPGRADE_COST = 2000
 
 
@@ -112,7 +113,7 @@ class ElecTransformer(UtilityEndUse):
             year_idx = years[0]
             year = years[1]
 
-            while load > self.annual_bank_KVA[year_idx] * POWER_FACTOR:
+            while load > self.annual_bank_KVA[year_idx] * POWER_FACTOR * OVERLOADING_FACTOR:
                 #TODO: Refactor. Kind of ugly
                 bank_kva = np.array(self.annual_bank_KVA)
                 bank_kva[year_idx:] += self._bank_kva
@@ -157,9 +158,11 @@ class ElecTransformer(UtilityEndUse):
 
     def get_overloading_status(self) -> None:
         self.overloading_flag = (
-            np.array(self.annual_peak_energy_use) > (np.array(self.annual_bank_KVA) * POWER_FACTOR)
+            np.array(self.annual_peak_energy_use)
+            > (np.array(self.annual_bank_KVA) * POWER_FACTOR * OVERLOADING_FACTOR)
         ).astype(int).tolist()
 
         self.overloading_ratio = (
-            np.array(self.annual_peak_energy_use) / (np.array(self.annual_bank_KVA) * POWER_FACTOR)
+            np.array(self.annual_peak_energy_use)
+            / (np.array(self.annual_bank_KVA) * POWER_FACTOR * OVERLOADING_FACTOR)
         ).tolist()

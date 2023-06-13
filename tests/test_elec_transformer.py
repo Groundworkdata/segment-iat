@@ -38,7 +38,7 @@ class TestElecTransformer(unittest.TestCase):
 
     def test_get_upgrade_year(self):
         self.elec_transformer.annual_bank_KVA = [100] * 10
-        self.elec_transformer.annual_peak_energy_use = [50] * 5 + [115] * 5
+        self.elec_transformer.annual_peak_energy_use = [50] * 5 + [130] * 5
 
         self.assertListEqual(
             [2025],
@@ -99,7 +99,7 @@ class TestElecTransformer(unittest.TestCase):
         )
 
     def test_get_overloading_status(self):
-        self.elec_transformer.annual_peak_energy_use = [100, 120, 400, 500, 700, 900]
+        self.elec_transformer.annual_peak_energy_use = [100, 120, 400, 510, 700, 900]
         self.elec_transformer.annual_bank_KVA = [200, 200, 200, 400, 400, 400]
 
         self.elec_transformer.get_overloading_status()
@@ -110,6 +110,6 @@ class TestElecTransformer(unittest.TestCase):
         )
 
         self.assertListEqual(
-            [1/(2*.8), 12/(20*.8), 2/0.8, 50/(40*.8), 70/(40*.8), 90/(40*.8)],
+            [1/(2*1.25), 12/(20*1.25), 2/1.25, 51/(40*1.25), 70/(40*1.25), 90/(40*1.25)],
             self.elec_transformer.overloading_ratio
         )
