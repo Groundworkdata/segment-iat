@@ -4,7 +4,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit
 2022,0.0,F_714592_2938902,building,building_aggregate,existing
 2023,0.0,F_714592_2938902,building,building_aggregate,existing
 2024,0.0,F_714592_2938902,building,building_aggregate,existing
-2025,8109.686000000001,F_714592_2938902,building,building_aggregate,existing
+2025,6699.220666666666,F_714592_2938902,building,building_aggregate,existing
 2026,0.0,F_714592_2938902,building,building_aggregate,existing
 2027,0.0,F_714592_2938902,building,building_aggregate,existing
 2028,0.0,F_714592_2938902,building,building_aggregate,existing
@@ -44,7 +44,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit
 2022,0.0,F_714815_2939003,building,building_aggregate,existing
 2023,0.0,F_714815_2939003,building,building_aggregate,existing
 2024,0.0,F_714815_2939003,building,building_aggregate,existing
-2025,13891.725000000002,F_714815_2939003,building,building_aggregate,existing
+2025,11581.326,F_714815_2939003,building,building_aggregate,existing
 2026,0.0,F_714815_2939003,building,building_aggregate,existing
 2027,0.0,F_714815_2939003,building,building_aggregate,existing
 2028,0.0,F_714815_2939003,building,building_aggregate,existing

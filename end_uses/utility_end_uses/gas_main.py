@@ -75,6 +75,7 @@ class GasMain(Pipeline):
 
         return retrofit_vector.astype(bool).tolist()
 
+    #TODO: Rename - install_cost is misleading. This is more of a retrofit or capital cost vector
     def get_install_cost(self) -> list:
         install_cost = np.zeros(len(self.years_vector))
 

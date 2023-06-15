@@ -5,6 +5,7 @@ import json
 import os
 from typing import Dict, List
 
+import numpy as np
 import pandas as pd
 
 from buildings.building import Building
@@ -291,9 +292,14 @@ class ScenarioCreator:
             all_dfs.append(df)
 
         for gas_main in self.utility_network.gas_mains:
+            total_cost = (
+                np.array(gas_main.get_install_cost())
+                + np.array(gas_main.get_system_shutoff_cost())
+            ).tolist()
+
             df = pd.DataFrame({
                 "year": years_vec,
-                "retrofit_cost": gas_main.get_install_cost()
+                "retrofit_cost": total_cost
             })
             df.loc[:, "asset_id"] = gas_main.asset_id
             df.loc[:, "asset_domain"] = DOMAIN_GAS
