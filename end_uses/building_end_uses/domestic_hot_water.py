@@ -16,6 +16,8 @@ ENERGY_KEYS = [
 
 RESSTOCK_BASELINE_SCENARIO_ID = 0
 
+INFLATION_ESCALATOR = 0.02
+
 
 class DHW:
     """
@@ -114,13 +116,19 @@ class DHW:
     def _get_existing_book_val(self) -> List[float]:
         existing_install_year = self._kwargs.get("existing_install_year", self._years_vec[0])
         lifetime = self._kwargs.get("lifetime", 10)
+        existing_cost_dollars_year = self._kwargs.get("replacement_cost_dollars_year", 2022)
+        cost_escalator = self._kwargs.get("escalator", INFLATION_ESCALATOR)
         existing_install_cost = self._kwargs.get("existing_install_cost", 0)
         salvage_val = 0
 
-        depreciation_rate = (existing_install_cost - salvage_val) / lifetime
+        existing_adjusted_cost = existing_install_cost * (
+            (1 - cost_escalator) ** (existing_cost_dollars_year - existing_install_year)
+        )
+
+        depreciation_rate = (existing_adjusted_cost - salvage_val) / lifetime
 
         existing_book_val = [
-            max(existing_install_cost - depreciation_rate * (i - existing_install_year), 0)
+            max(existing_adjusted_cost - depreciation_rate * (i - existing_install_year), 0)
             for i in self._years_vec
         ]
 
@@ -141,11 +149,11 @@ class DHW:
         replacement_cost = self._kwargs.get("replacement_cost", 0)
         replacement_year = self._kwargs.get("replacement_year", self._years_vec[-1])
 
-        cost_escalator = self._kwargs.get("escalator", 0)
+        cost_escalator = self._kwargs.get("escalator", INFLATION_ESCALATOR)
         replacement_cost_dollars_year = self._kwargs.get("replacement_cost_dollars_year", 2022)
 
         replacement_cost = replacement_cost * (
-            1 + cost_escalator ** (replacement_year - replacement_cost_dollars_year)
+            (1 + cost_escalator) ** (replacement_year - replacement_cost_dollars_year)
         )
 
         replacement_cost_vec = [

@@ -12,7 +12,7 @@ from collections import Counter
 
 POWER_FACTOR = 1
 OVERLOADING_FACTOR = 1.25
-UNIT_UPGRADE_COST = 2000
+UNIT_UPGRADE_COST = 20000
 
 
 class ElecTransformer(UtilityEndUse):
