@@ -7,8 +7,10 @@ from end_uses.meters.meter import Meter
 
 
 GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
+# TODO: Make configuration parameters
 RETROFIT_FREQ = 7
-RETROFIT_COST = 400
+# RETROFIT_COST = 400 for DOER
+RETROFIT_COST = 1100
 
 
 class GasMeter(Meter):

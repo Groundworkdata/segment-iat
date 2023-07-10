@@ -116,6 +116,7 @@ METHANE_LEAKS = {
 }
 
 
+#TODO: Make configurable for different geographies
 EMISSION_FACTORS = { # tCO2 / kWh
     "natural_gas": (53 / (293 * 907)), # Input of kgCO2 / MMBtu
     "electricity": 0.45 / 1000, # Input of tCO2 / MWh
@@ -644,6 +645,7 @@ class Building:
         """
         Calculate the utility billing metrics for the building, based on total energy consumption
         """
+        #TODO: Make configurable for different areas
         utility_rates = pd.read_csv("./config_files/utility_rates.csv", index_col=0)
 
         annual_utility_costs = {
