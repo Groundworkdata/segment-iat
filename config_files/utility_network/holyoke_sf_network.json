@@ -1,0 +1,20 @@
+[
+    {
+        "folder": "./config_files/GIS/SF/",
+        "networks":{
+            "gas" : {
+                "mains_config": "./config_files/GIS/SF/HSF_GasMains.csv",
+                "service_config": "./config_files/GIS/SF/HSF_GasServices.csv",
+                "meter_config": "./config_files/GIS/SF/HSF_GasMeter.csv",
+                "leakage_factors": "./config_files/leakage_data/leakage_factors.csv"
+            },
+            "elec" : {
+                "primary_config": "./config_files/GIS/SF/HSF_ElecPrimary.csv",
+                "secondary_config": "./config_files/GIS/SF/HSF_Elec_Secondary.csv",
+                "service_config": "./config_files/GIS/SF/HSF_ElecServices.csv",
+                "meter_config": "./config_files/GIS/SF/HSF_ElecMeter.csv",
+                "xfmrs_config": "./config_files/GIS/SF/HSF_ElecTFR.csv"
+            }
+        }
+    }
+]
