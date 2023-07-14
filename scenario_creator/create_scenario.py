@@ -1,5 +1,5 @@
 """
-Creates a scenario based on input values
+Creates and run a scenario based on provided configuration files
 """
 import json
 import os
@@ -43,7 +43,21 @@ DECARB_SCENARIOS = [
 
 class ScenarioCreator:
     """
-    Create scenario for a parcel and tally total energy usages
+    Executes a scenario simulation for a given street segment and writes outputs to CSVs
+
+    Args:
+        sim_settings_filepath (str): The filepath for the simulation settings configuration JSON
+
+    Optional args:
+        write_building_energy_timeseries (bool): If True, write the hourly energy consumption for
+            each building to a CSV
+
+    Attributes:
+        buildings (Dict[str, Building]): Dict of instantiated Building objects, mapped by parcel ID
+        utility_network (UtilityNetwork): Instantiated UtilityNetwork object for the street segment
+
+    Methods:
+        create_scenario (None): Executes the simulation
     """
 
     def __init__(
@@ -54,29 +68,30 @@ class ScenarioCreator:
         self._sim_settings_filepath: str = sim_settings_filepath
         self.write_building_energy_timeseries: bool = write_building_energy_timeseries
 
-        self.sim_config: dict = {}
+        self._sim_config: dict = {}
         self._decarb_scenario: str = ""
         self._outputs_path: str = ""
         self._years_vec: List[int] = []
-        self.scenario_mapping: List[dict] = []
-        self.buildings_config: dict = {}
+        self._scenario_mapping: List[dict] = []
+        self._buildings_config: dict = {}
+
         self.buildings: Dict[str, Building] = {}
         self.utility_network: UtilityNetwork = None
 
     def create_scenario(self):
-        self.sim_config = self.get_sim_settings()
+        self._sim_config = self._get_sim_settings()
         self._decarb_scenario = self._get_decarb_scenario()
         self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
-        self.get_scenario_mapping()
+        self._get_scenario_mapping()
         print("Creating buildings...")
-        self.create_building()
+        self._create_building()
         print("Creatingy utility network...")
-        self.create_utility_network()
+        self._create_utility_network()
         self._write_outputs()
         self._get_utility_network_outputs()
 
-    def get_sim_settings(self) -> dict:
+    def _get_sim_settings(self) -> dict:
         """
         Read in simulation settings
         """
@@ -89,7 +104,7 @@ class ScenarioCreator:
         """
         Get the decarb scenario and check that it is valid
         """
-        input_scenario = self.sim_config.get("decarb_scenario")
+        input_scenario = self._sim_config.get("decarb_scenario")
 
         if input_scenario not in DECARB_SCENARIOS:
             raise ValueError(
@@ -109,20 +124,20 @@ class ScenarioCreator:
 
     def _get_years_vec(self) -> List[int]:
         return list(range(
-            self.sim_config.get("sim_start_year", DEFAULT_SIM_START_YEAR),
-            self.sim_config.get("sim_end_year", DEFAULT_SIM_END_YEAR)
+            self._sim_config.get("sim_start_year", DEFAULT_SIM_START_YEAR),
+            self._sim_config.get("sim_end_year", DEFAULT_SIM_END_YEAR)
         ))
 
-    def get_scenario_mapping(self) -> None:
+    def _get_scenario_mapping(self) -> None:
         """
         Read in ResStock scenario mapping
         """
         with open(SCENARIO_MAPPING_FILEPATH) as f:
             data = json.load(f)
-        self.scenario_mapping = data
+        self._scenario_mapping = data
 
-    def create_building(self) -> None:
-        building_config_filepath = self.sim_config.get("buildings_config_filepath")
+    def _create_building(self) -> None:
+        building_config_filepath = self._sim_config.get("buildings_config_filepath")
 
         if not os.path.exists(building_config_filepath):
             raise ValueError(
@@ -131,30 +146,31 @@ class ScenarioCreator:
 
         with open(building_config_filepath) as f:
             data = json.load(f)
-        self.buildings_config = data
+        self._buildings_config = data
 
-        for building_params in self.buildings_config:
+        for building_params in self._buildings_config:
             print("Creating building {}".format(building_params.get("building_id")))
             building = Building(
                 building_params,
-                self.sim_config,
-                self.scenario_mapping
+                self._sim_config,
+                self._scenario_mapping
             )
 
             building.populate_building()
-            building.write_building_cost_info()
+
             if self.write_building_energy_timeseries:
                 building.write_building_energy_info()
+
             self.buildings[building.building_id] = building
 
-    def create_utility_network(self):
+    def _create_utility_network(self):
         """
         Create the utility network based on the input config
         """
-        utility_network_config_filepath = self.sim_config.get("utility_network_config_filepath")
+        utility_network_config_filepath = self._sim_config.get("utility_network_config_filepath")
 
         self.utility_network = UtilityNetwork(
-            utility_network_config_filepath, self.sim_config, self.buildings
+            utility_network_config_filepath, self._sim_config, self.buildings
         )
 
         self.utility_network.populate_utility_network()

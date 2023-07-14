@@ -1,33 +1,25 @@
 # Tactical Thermal Transition
-This repo contains scripts and database prototyping for the Tactical Thermal Transition (TTT) team
+The Tactical Thermal Transition (TTT) tool is a model for simulating energy intervention scenarios along a given street segment. The user provides a number of configuration files describing the makeup, energy consumption, and assumed intervention costs along a street. The tool then executes a given intervention scenario and reports annual indicators including total system costs, peak energy consumption, and emissions, among others.
 
-## Scenario Creator
-The main function of this repository is to create input data for simulation scenarios. An example of this process can be found in the script `example.py`. The example script makes use of a set of JSON config files that are not tracked by git. See the tests for examples of config file formatting.
+## Running the tool
+The tool is executed via `run.py`. Once all configuration files are created, the user can enter `python run.py` in a terminal to execute the tool. The tool will display status updates to the user as the simulation is running.
 
-**_TODO: Document config file format_**
+If the user wants to investigate multiple scenarios, run each scenario individually and then run `python postprocessing.py`. This will combine output tables across scenarios for easier investigation.
 
-## Repo structure
-### `scenario_creator/`
-Contains the main entry point for creating input data, `create_scenario.py`.
+## About the tool
+The TTT tool is a local energy asset planning (LEAP) simulation tool. Interventions at individual buildings are aggregated "up" the network to account for total cost and energy consumption, at times triggering upstream interventions. For example, this can occur when all gas-consuming building assets are shutoff, triggering a shutoff of the gas service line to that building. The tool outputs a number of indicators that quantify how different interventions strategies impact costs, energy consumption patterns, and emissions.
 
-### `end_uses/`
-Contains classes that define different end uses in a parcel. These include appliances such as stoves and HVAC equipment.
-
-### `parcel_database/`
-This repo is the parcel database. It contains directories of parcel data and prototyping scripts. Additionally, it contains a handful of top-level python files of note:
-* `example.py` - An example file for the final JSON structure of the parcel database
-* `helper_funcs.py` - A file of helper functions used in prototyping notebooks
-* `parcel_database_creation.py` - The main file for creating the enriched parcel database
-
-The sub-folders of `parcel_database/` are described below.
-
-#### `parcel_database/data_explore`
-This repo contains scripts and files for exploration of the data. It is only meant for prototyping. See `parcel_database/data_explore/README.md` for more.
-
-#### `parcel_database/database`
-The core database. Raw input files are saved here, along with scripts for creating "enriched" datasets.
-
-The directory also has files for mapping certain data to higher-level classifications. Additionally, shape files can be found here, which are spatially joined with the parcel data.
-
-### `resstock_explore/`
-Ignore for now - this directory has explorations of ResStock energy usage data
+## Outputs
+All output tables are written to CSVs, which can be utilized for further investigation. The output tables are as follows:
+* `book_value`: The annual depreciated book value of all assets over the simulation timeframe.
+* `consumption_costs`: The cost to an individual consumer for their energy consumption. This is organized by energy source (electricity, natural gas, etc).
+* `consumption_emissions`: The carbon emissions associated with energy consumption. Note that these are different from leak emissions.
+* `energy_consumption`: The total annual energy consumption, by energy source, of an entity.
+* `fuel_type`: The dominant fuel type each year at a building
+* `is_retrofit_vec_table`: This annual vector is `True` in the retrofit year and all subsequent years. It helps indicate whether or not a given entity has been retrofit.
+* `methan_leaks`: The annual methane leaks in the system, organized by various entities (total leaks within the building, leaks within a given pipe, etc).
+* `operating_costs`: The annual operating associated with an entity. Currently, this only outputs operating costs for gas utility assets.
+* `peak_consump`: The annual peak consumption at electric transformers based on downstream energy consumption at connected buildings.
+* `retrofit_cost`: The annual cost of retrofitting an asset.
+* `retrofit_year`: Similar to the `is_retrofit_vec_table`, except this vector is only `True` in the asset's retrofit year.
+* `stranded_val`: The stranded value of an asset in a given year if it is retrofit prior to the end of its useful life (before it fully depreciates).

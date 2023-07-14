@@ -1,0 +1,21 @@
+[
+    {
+        "folder": "./config_files/utility_network/network_typology/SF/",
+        "networks":{
+            "gas" : {
+                "mains_config": "./config_files/utility_network/network_typology/SF/Gas_Main.csv",
+                "service_config": "./config_files/utility_network/network_typology/SF/Gas_Service.csv",
+                "meter_config": "./config_files/utility_network/network_typology/SF/Gas_Meter.csv",
+                "leakage_factors": "./config_files/utility_network/leakage_factors.csv"
+            },
+            "elec" : {
+                "primary_config": "./config_files/utility_network/network_typology/SF/Elec_primary.csv",
+                "secondary_config": "./config_files/utility_network/network_typology/SF/Elec_secondary.csv",
+                "service_config": "./config_files/utility_network/network_typology/SF/Elec_Service.csv",
+                "meter_config": "./config_files/utility_network/network_typology/SF/Elec_meters.csv",
+                "xfmrs_config": "./config_files/utility_network/network_typology/SF/Elec_xfmrs.csv"
+            }
+    
+        }
+    }
+]

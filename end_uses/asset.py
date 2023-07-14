@@ -1,5 +1,5 @@
 """
-Parent _Asset class
+Parent Asset class
 """
 from typing import List
 
@@ -12,13 +12,13 @@ class Asset:
     Parent class for all assets
 
     Args:
-        install_year (int): The install year of the asset
-        asset_cost (float): The cost of the asset in present day dollars
+        inst_date (int): The install year of the asset
+        inst_cost (float): The cost of the asset in present day dollars
             (or in $ from install year if installed prior to sim start)
-        replacement_year (int): The replacement year of the asset
-        lifetime (int): The asset lifetime in years
+        lifetime (int): Useful lifetime of the asset in years
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year (exclusive)
+        replacement_year (int): The replacement year of the asset
 
     Attributes:
         install_year (int): The install year of the asset
@@ -29,7 +29,11 @@ class Asset:
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year (exclusive)
         years_vector (list): List of all years for the simulation
+        year_timestamps (pd.DatetimeIndex): DatetimeIndex of hourly timestamps for a full year
         operational_vector (list): Boolean vals for years of the simulation when asset in operation
+        retrofit_vector (list): Indicates that the asset has been retrofit; 1 for the retrofit year
+            and all following years, 0 o/w
+        replacement_vector (list): Indicates when the asset is retrofit; 1 in the retrofit year, 0 o/w
         install_cost (list): Install cost during the simulation years
         depreciation (list): Depreciated val during the simulation years
             (val is depreciated val at beginning of each year)
@@ -37,7 +41,14 @@ class Asset:
             (equal to the depreciated val at the replacement year)
 
     Methods:
-        initialize_end_use: Initializes the asset by calculating all derived variables
+        initialize_end_use (None): Initializes the asset by calculating all derived variables
+        get_years_vector (list): Returns list of all simulation years
+        get_year_timestamps (pd.DatetimeIndex): Returns hourly timestamps for a full year
+        get_operational_vector (list): Returns list of 1 if asset in use that year, 0 o/w
+        get_retrofit_vector (list): Return the asset retrofit_vector
+        get_install_cost (list): Return list with annual install cost
+        get_depreciation (list): Return list of annual depreciated value of the asset
+        get_stranded_value (list): Return stranded value of asset after replacement
     """
 
     def __init__(

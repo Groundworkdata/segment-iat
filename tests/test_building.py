@@ -1,7 +1,6 @@
 """
 Unit tests for the Building module
 """
-#TODO: Integration tests
 import datetime
 import json
 import os
