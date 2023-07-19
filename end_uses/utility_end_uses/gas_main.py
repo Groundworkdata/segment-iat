@@ -1,5 +1,5 @@
 """
-Defines Mains end use
+Defines gas main asset
 """
 import numpy as np
 import pandas as pd
@@ -12,11 +12,51 @@ from end_uses.utility_end_uses.pipeline import Pipeline
 GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
 GAS_RETROFIT_SCENARIOS = ["natural_elec", "hybrid_gas", "continued_gas", "hybrid_gas_immediate"]
 RETROFIT_YEAR = 2025
-ANNUAL_OM_FILEPATH = "./config_files/operating_expenses/gas_operating_expenses.csv"
+ANNUAL_OM_FILEPATH = "./config_files/utility_network/gas_operating_expenses.csv"
 
 
-#TODO: Write unit tests
 class GasMain(Pipeline):
+    """
+    Defines a gas main pipeline, which inherits Pipeline class
+
+    Args:
+        None
+
+    Keyword Args:
+        gisid (str): The ID for the given asset
+        parentid (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        inst_date (int): The install year of the asset
+        inst_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        lifetime (int): Useful lifetime of the asset in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        replacement_year (int): The replacement year of the asset
+        decarb_scenario (str): The energy retrofit intervention scenario
+        length_ft (int): Pipeline length in feet
+        pressure (str): Rated pressure of the pipe
+        diameter (str): Diameter of the pipe
+        material (str): The pipe material
+        connected_assets (list): List of associated downstream assets
+        replacement_cost (float): The cost of replacing the gas meter
+        shutoff_cost (float): The cost of pipeline shutoff
+
+    Attributes:
+        replacement_cost (float): Cost of gas main replacement
+        shutoff_cost (float): Cost of gas main shutoff
+        book_value (list): Annual book value of the gas main
+        shutoff_year (list): 1 in the shutoff year, 0 all other years
+
+    Methods:
+        initialize_end_use (None): Executes all calculations for the meter
+        get_operational_vector (list): Returns list of 1 if gas meter in use, 0 o/w, for all sim years
+        get_retrofit_vector (list): Returns vector where value is 1 in the retrofit year, 0 o/w
+        get_install_cost (list): Returns vector of install cost by sim year
+        get_depreciation (list): Return the list of annual depreciated value for all sim years
+        get_book_value (list): Returns annual book value vector
+        get_shutoff_year (list): Returns vector with value 1 in shutoff year, 0 o/w
+        get_system_shutoff_cost (list): Returns vector with the system shutoff cost by sim year
+    """
     def __init__(self, **kwargs):
         super().__init__(
             kwargs.get("gisid"),
@@ -75,7 +115,6 @@ class GasMain(Pipeline):
 
         return retrofit_vector.astype(bool).tolist()
 
-    #TODO: Rename - install_cost is misleading. This is more of a retrofit or capital cost vector
     def get_install_cost(self) -> list:
         install_cost = np.zeros(len(self.years_vector))
 

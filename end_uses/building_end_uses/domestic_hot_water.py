@@ -1,5 +1,5 @@
 """
-Defines Stove end use
+Defines a domestic hot water asset
 """
 from typing import Dict, List
 
@@ -21,26 +21,42 @@ INFLATION_ESCALATOR = 0.02
 
 class DHW:
     """
-    Domestic Hot Water end use
+    Domestic hot water end use
 
     Args:
-        resstock_metadata (dict): Need to include ResStock metadata of inputs so we can check if the
-        retrofit water heater is gas and we need to convert to propane in the NPA scenario
+        energy_source (str): The energy source of the baseline asset
+        resstock_consumptions (Dict[int, pd.DataFrame]): Dict of energy consumption timeseries
+            organized by retrofit scenario
+        scenario_mapping (List[Dict]): Mapping of ResStock scenarios to Groundwork scenarios
+        scenario (int): The retrofit intervention scenario
+        resstock_metadata (dict): Dict of metadata from ResStock
+        years_vec (List[int]): List of simulation years
+
+    Optional Args:
+        custom_baseline_energy (pd.DataFrame): Custom input timeseries of baseline energy consump
+        custom_retrofit_energy (pd.DataFrame): Custom input timeseries of retrofit energy consump
 
     Keyword Args:
-        existing_install_year
-        lifetime
-        existing_install_cost
-        replacement_cost
-        replacement_year
-        replacement_cost_dollars_year
-        replacement_lifetime
+        existing_install_year (int): Install year of the baseline asset
+        lifetime (int): Useful lifetime of the asset in years
+        replacement_cost_dollars_year (int): Reference year for the input costs
+        escalator (float): Inflation escalator for cost calculations
+        existing_install_cost (float): Installation cost of the baseline asset
+        replacement_year (int): Year of retrofit
+        replacement_cost (float): Cost of replacing asset
+        replacement_lifetime (int): Useful lifetime of the replacement asset in years
+        end_use (str): The asset type
 
     Attributes:
-        ?
+        existing_book_val (List[float]): The annual book value of the existing asset
+        replacement_cost (List[float]): The annual cost of asset replacement
+        replacement_book_val (List[float]): The annual book value of the replacement asset
+        cost_table (pd.DataFrame): Table of annual costs for the asset
+        baseline_energy_use (pd.DataFrame): Timeseries baseline energy consumption for a full year
+        retrofit_energy_use (pd.DataFrame): Timeseries retrofit energy consumption for a full year
 
     Methods:
-        ?
+        initialize_end_use (None): Calculate all associated asset values
     """
     def __init__(
             self,
@@ -56,7 +72,7 @@ class DHW:
     ):
         self._kwargs = kwargs
 
-        self.energy_source: str = energy_source
+        self._energy_source: str = energy_source
         self._resstock_consumps: Dict[int, pd.DataFrame] = resstock_consumptions
         self._scenario_mapping: List[Dict] = scenario_mapping
         self._scenario: int = scenario
@@ -66,7 +82,7 @@ class DHW:
         self._custom_retrofit_energy: pd.DataFrame = custom_retrofit_energy
 
         self.existing_book_val: List[float] = []
-        self.replacement_vec: List[bool] = []
+        self._replacement_vec: List[bool] = []
         self.replacement_cost: List[float] = []
         self.replacement_book_val: List[float] = []
         self.cost_table: pd.DataFrame = None
@@ -80,7 +96,7 @@ class DHW:
         Initialize the end use and calculate values
         """
         self.existing_book_val = self._get_existing_book_val()
-        self.replacement_vec = self._get_replacement_vec()
+        self._replacement_vec = self._get_replacement_vec()
         self.existing_stranded_val = self._get_existing_stranded_val()
         self.replacement_cost = self._get_replacement_cost()
         self.replacement_book_val = self._get_replacement_book_value()
@@ -133,7 +149,7 @@ class DHW:
         ]
 
         return existing_book_val
-    
+
     def _get_replacement_vec(self) -> List[bool]:
         """
         The replacement vector is a vector of True when the index is the retrofit year, False o/w
@@ -142,9 +158,9 @@ class DHW:
         return [True if i==replacement_year else False for i in self._years_vec]
 
     def _get_existing_stranded_val(self) -> List[float]:
-        stranded_val = np.multiply(self.existing_book_val, self.replacement_vec).tolist()
+        stranded_val = np.multiply(self.existing_book_val, self._replacement_vec).tolist()
         return stranded_val
-    
+
     def _get_replacement_cost(self) -> List[float]:
         replacement_cost = self._kwargs.get("replacement_cost", 0)
         replacement_year = self._kwargs.get("replacement_year", self._years_vec[-1])
@@ -161,7 +177,7 @@ class DHW:
         ]
 
         return replacement_cost_vec
-    
+
     def _get_replacement_book_value(self) -> List[float]:
         replacement_cost = max(self.replacement_cost)
         replacement_year = self._kwargs.get("replacement_year", self._years_vec[-1])
@@ -187,7 +203,7 @@ class DHW:
 
         values = {
             "{}_existing_book_value".format(asset_type): self.existing_book_val,
-            "{}_replacement_vec".format(asset_type): np.array(self.replacement_vec, dtype=int),
+            "{}_replacement_vec".format(asset_type): np.array(self._replacement_vec, dtype=int),
             "{}_existing_stranded_value".format(asset_type): self.existing_stranded_val,
             "{}_replacement_cost".format(asset_type): self.replacement_cost,
             "{}_replacement_book_val".format(asset_type): self.replacement_book_val,

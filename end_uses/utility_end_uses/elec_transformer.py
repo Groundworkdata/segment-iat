@@ -1,5 +1,5 @@
 """
-Defines Gas Service end use
+Defines electric transformer end use
 """
 from typing import Dict
 import pandas as pd
@@ -16,6 +16,57 @@ UNIT_UPGRADE_COST = 20000
 
 
 class ElecTransformer(UtilityEndUse):
+    """
+    An electric transformer asset
+
+    Args:
+        None
+
+    Keyword Args:
+        gisid (str): The ID for the given asset
+        parentid (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        inst_date (int): The install year of the asset
+        inst_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        lifetime (int): Useful lifetime of the asset in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        replacement_year (int): The replacement year of the asset
+        decarb_scenario (str): The energy retrofit intervention scenario
+        circuit (int): The electric circuit ID
+        trans_qty (int): Number of transformers at the location
+        tr_secvolt (int): The transformer secondary voltage
+        PolePadVLT (str): The mounting of the transformer (pole, pad, etc)
+        bank_KVA (float): The rated kVA of the transformer
+        connected_assets (list): List of associated downstream assets
+
+    Attributes:
+        circuit (int): The electric circuit ID
+        trans_qty (int): Number of transformers at the location
+        PolePadVLT (str): The mounting of the transformer (pole, pad, etc)
+        bank_KVA (float): The rated kVA of the transformer
+        connected_assets (list): List of associated downstream assets
+        annual_bank_KVA (list): Annual kVA rating
+        annual_total_energy_use (dict): Annual total energy use
+        annual_peak_energy_use (list): Annual peak consumption
+        annual_energy_use_timeseries (dict): Annual energy consumption hourly timeseries
+        annual_upgrades (list): List of the number of transformer upgrades per year to satisfy peaks
+        required_upgrade_year (list): List of years where an upgrade is required
+        upgrade_cost (list): Annual cost of upgrading the transformer
+        overloading_flag (list): 1 if the transformer is overloaded that year, 0 o/w
+        overloading_ratio (list): Annual ratio of peak load to rated peak (> 1 means overloaded)
+
+    Methods:
+        initialize_end_use (None): Executes all calculations for the transformer
+        get_annual_total_energy_use (dict): Gets the total energy use for the meter
+        get_annual_energy_use_timeseries (dict): Gets the energy use timeseries per year for the meter
+        get_annual_peak_energy_use (dict): Gets the total energy demand for the meter
+        get_upgrade_year (list): Return lists of upgrade years based ont he peak load
+        update_is_replacement_vector (list): Update the is_replacement_vector
+        update_retrofit_vector (list): Update the retrofit_vector
+        get_upgrade_cost (list): Get the annual upgrade cost
+        get_overloading_status (None): Calculate the overloading flag and ratio
+    """
     def __init__(self, **kwargs):
         super().__init__(
             kwargs.get("gisid"),
@@ -38,9 +89,9 @@ class ElecTransformer(UtilityEndUse):
         self.connected_assets: list = kwargs.get("connected_assets")
 
         self.annual_bank_KVA: list = []
-        self.annual_total_energy_use: dict = []
+        self.annual_total_energy_use: dict = {}
         self.annual_peak_energy_use: list = []
-        self.annual_energy_use_timeseries: dict = []
+        self.annual_energy_use_timeseries: dict = {}
         self.annual_upgrades: list = []
 
         self.required_upgrade_year: list = []

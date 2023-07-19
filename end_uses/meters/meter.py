@@ -13,44 +13,31 @@ class Meter(UtilityEndUse):
     Defines a meter parent class. A Meter sums energy consumptions of all end uses
 
     Args:
-        install_year (int): The install year of the asset
-        asset_cost (float): The cost of the asset in present day dollars
+        gisid (str): The ID for the given asset
+        parent_id (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        inst_date (int): The install year of the asset
+        inst_cost (float): The cost of the asset in present day dollars
             (or in $ from install year if installed prior to sim start)
-        replacement_year (int): The replacement year of the asset
-        lifetime (int): The asset lifetime in years
+        lifetime (int): Useful lifetime of the asset in years
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year (exclusive)
-        asset_id (str): The ID for the given asset
-        parent_id (str): The ID for the parent of the asset (if applicable, otherwise empty)
-        building_id (str): The ID of the associated building for the meter
+        replacement_year (int): The replacement year of the asset
+        decarb_scenario (str): The energy retrofit intervention scenario
         building (Building): Instance of the associated Building object
-        meter_type (str): The type of meter (ELEC, GAS)
+        meter_type (str): The type of meter (electricity, natural_gas)
 
     Attributes:
-        install_year (int): The install year of the asset
-        asset_cost (float): The cost of the asset in present day dollars
-            (or in $ from install year if installed prior to sim start)
-        replacement_year (int): The replacement year of the asset
-        lifetime (int): The asset lifetime in years
-        sim_start_year (int): The simulation start year
-        sim_end_year (int): The simulation end year (exclusive)
-        years_vector (list): List of all years for the simulation
-        operational_vector (list): Boolean vals for years of the simulation when asset in operation
-        install_cost (list): Install cost during the simulation years
-        depreciation (list): Depreciated val during the simulation years
-            (val is depreciated val at beginning of each year)
-        stranded_value (list): Stranded asset val for early replacement during the simulation years
-            (equal to the depreciated val at the replacement year)
-        asset_id (str): The ID for the given asset
-        parent_id (str): The ID for the parent of the asset (if applicable, otherwise empty)
-        building_id (str): The ID of the associated building for the meter
         building (Building): Instance of the associated Building object
         meter_type (str): The type of meter (ELEC, GAS)
-        total_annual_energy_use (list): Total annual energy use behind the meter
+        annual_total_energy_use (dict): Total annual energy use behind the meter, by sim year
+        annual_peak_energy_use (dict): Total peak energy use at the meter, by sim year
+        annual_energy_use_timeseries (dict): Hourly annual timeseries consumption at the meter, by sim year
 
     Methods:
-        get_total_annual_energy_use (list): Gets the total energy use for the meter
-        get_total_annual_peak_use (list): Gets the total energy demand for the meter
+        initialize_end_use (None): Executes all calculations for the meter
+        get_annual_total_energy_use (dict): Gets the total energy use for the meter
+        get_annual_peak_energy_use (dict): Gets the total energy demand for the meter
+        get_annual_energy_use_timeseries (dict): Gets the energy use timeseries per year for the meter
     """
 
     def __init__(
@@ -85,9 +72,9 @@ class Meter(UtilityEndUse):
         if self.building.building_params.get("retrofit_year"):
             self.replacement_year = self.building.building_params.get("retrofit_year")
 
-        self.annual_total_energy_use: dict = []
-        self.annual_peak_energy_use: dict = []
-        self.annual_energy_use_timeseries: dict = []
+        self.annual_total_energy_use: dict = {}
+        self.annual_peak_energy_use: dict = {}
+        self.annual_energy_use_timeseries: dict = {}
 
     def initialize_end_use(self) -> None:
         """
@@ -149,7 +136,7 @@ class Meter(UtilityEndUse):
 
         return dict(zip(self.years_vector, annual_peak_energy))
 
-    def get_annual_energy_use_timeseries(self) -> list:
+    def get_annual_energy_use_timeseries(self) -> dict:
         energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
         annual_energy_use_baseline = \

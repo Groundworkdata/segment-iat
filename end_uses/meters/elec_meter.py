@@ -12,16 +12,20 @@ class ElecMeter(Meter):
         None
 
     Keyword Args:
+        gisid (str): The ID for the given asset
+        parentid (str): The ID for the parent of the asset (if applicable, otherwise empty)
         inst_date (int): The install year of the asset
         inst_cost (float): The cost of the asset in present day dollars
             (or in $ from install year if installed prior to sim start)
-        replacement_year (int): The replacement year of the asset
-        lifetime (int): The asset lifetime in years
+        lifetime (int): Useful lifetime of the asset in years
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year (exclusive)
-        gisid (str): The ID for the given asset
-        parentid (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        replacement_year (int): The replacement year of the asset
+        decarb_scenario (str): The energy retrofit intervention scenario
         building (Building): Instance of the associated Building object
+
+    Attributes:
+        None
 
     Methods:
         None
@@ -41,6 +45,3 @@ class ElecMeter(Meter):
             kwargs.get("building"),
             "electricity",
         )
-
-        self.solar: bool = kwargs.get("solar")
-        self.type: str = kwargs.get("type")

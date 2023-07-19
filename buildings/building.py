@@ -1,7 +1,6 @@
 """
-Defines a building. A bucket for all end uses
+Object for simulating a single building, accounting for energy, emissions, and costs
 """
-import os
 from typing import Dict, List
 
 import numpy as np
@@ -127,68 +126,31 @@ EMISSION_FACTORS = { # tCO2 / kWh
 }
 
 
-# ASSET_COSTS = {
-#     # ---Single family---
-#     # 'HYBRID.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
-#     # 'HYBRID.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
-#     # 'HYBRID.HVAC': {'LARGE': 23318, 'MEDIUM': 19431, 'SMALL': 16090},
-#     # 'HYBRID.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
-#     # 'HYBRID_NPA.Adder': {'LARGE': 1310, 'MEDIUM': 1101, 'SMALL': 891},
-#     # 'LEGACY.DHW': {'LARGE': 2052, 'MEDIUM': 1616, 'SMALL': 1181},
-#     # 'LEGACY.DRYER': {'LARGE': 1244, 'MEDIUM': 1244, 'SMALL': 1244},
-#     # 'LEGACY.HVAC': {'LARGE': 17723, 'MEDIUM': 14926, 'SMALL': 12129},
-#     # 'LEGACY.STOVE': {'LARGE': 4276, 'MEDIUM': 3032, 'SMALL': 1943},
-#     # 'WHOLE.DHW': {'LARGE': 2923, 'MEDIUM': 2488, 'SMALL': 2052},
-#     # 'WHOLE.DRYER': {'LARGE': 2115, 'MEDIUM': 2115, 'SMALL': 2115},
-#     # 'WHOLE.HVAC': {'LARGE': 30162, 'MEDIUM': 25186, 'SMALL': 20211},
-#     # 'WHOLE.PANEL': {'LARGE': 3886, 'MEDIUM': 3187, 'SMALL': 2488},
-#     # 'WHOLE.STOVE': {'LARGE': 5210, 'MEDIUM': 3577, 'SMALL': 2488}
-#     # ---Multi-family---
-#     'HYBRID.DHW': {'LARGE': 2923.0, 'MEDIUM': 2488.0, 'SMALL': 1399.0},
-#     'HYBRID.DRYER': {'LARGE': 1244.0, 'MEDIUM': 1244.0, 'SMALL': 1244.0},
-#     'HYBRID.HVAC': {'LARGE': 23318.0, 'MEDIUM': 19431.0, 'SMALL': 13367.0},
-#     'HYBRID.STOVE': {'LARGE': 4276.0, 'MEDIUM': 3032.0, 'SMALL': 1399.0},
-#     'HYBRID_NPA.Adder': {'LARGE': 1310.0, 'MEDIUM': 1101.0, 'SMALL': 891.0},
-#     'LEGACY.DHW': {'LARGE': 2052.0, 'MEDIUM': 1616.0, 'SMALL': 1181.0},
-#     'LEGACY.DRYER': {'LARGE': 1244.0, 'MEDIUM': 1244.0, 'SMALL': 1244.0},
-#     'LEGACY.HVAC': {'LARGE': 17723.0, 'MEDIUM': 14926.0, 'SMALL': 9951.0},
-#     'LEGACY.STOVE': {'LARGE': 4276.0, 'MEDIUM': 3032.0, 'SMALL': 1399.0},
-#     'WHOLE.DHW': {'LARGE': 2923.0, 'MEDIUM': 2488.0, 'SMALL': 2052.0},
-#     'WHOLE.DRYER': {'LARGE': 2115.0, 'MEDIUM': 2115.0, 'SMALL': 2115.0},
-#     'WHOLE.HVAC': {'LARGE': 21140.0, 'MEDIUM': 18342.0, 'SMALL': 13367.0},
-#     'WHOLE.PANEL': {'LARGE': 3886.0, 'MEDIUM': 3187.0, 'SMALL': 2488.0},
-#     'WHOLE.STOVE': {'LARGE': 5210.0, 'MEDIUM': 3577.0, 'SMALL': 1943.0}
-# }
-
-
-COST_FILEPATH = "./config_files/retrofit_costs"
-
-REFERENCE_SCENARIO = "continued_gas"
 HYBRID_NPA_SCENARIO = "hybrid_npa"
 
 
 class Building:
     """
-    A bucket for all end uses at a parcel. Currently assuming one building/one unit per parcel
+    A bucket for all end uses at a parcel. Currently assuming one building per parcel
 
     Args:
-        building_id (str): The ID of the building
-        building_config (str): Filepath of a config file for the building's end uses
-        sim_settings (dict): Dict of simulation settings -- {
-            sim_start_year (int): The simulation start year
-            sim_end_year (int): The simulation end year (exclusive)
-        }
+        building_params (dict): Dict of input parameters for the building
+        sim_settings (dict): Dict of simulation settings
+        scenario_mapping (List[dict]): Config for parsing data from ResStock
 
     Attributes:
-        building_id (str): The ID of the building
-        sim_settings (dict): Dict of simulation settings
-        building_params (dict): Dict of building input parameters from config file
-        end_uses (dict): Dict of building end use class instances
+        building_params (dict): Dict of input parameters for the building
+        years_vec (List[int]): List of simulation years
+        building_id (str): The building ID, also referred to as parcel ID
+        retrofit_scenario (str): The energy intervention scenario
+        end_uses (dict): Dict of building asset objects, organized by asset type
+        baseline_consumption (pd.DataFrame): Baseline energy consumption timeseries for the building
+        retrofit_consumption (pd.DataFrame): Retrofit energy consumption timeseries for the buliding
 
     Methods:
-        populate_building (None): Creates building end use class instances
+        populate_building (None): Executes downstream calculations for the building simulation
         write_building_cost_info (None): Write building cost information to a CSV
-        write_building_energy_info (None): Write building energy information to a CSV
+        write_building_energy_info (None): Write building energy timeseries to a CSV
     """
     def __init__(
             self,
@@ -197,17 +159,17 @@ class Building:
             scenario_mapping: List[dict],
     ):
         self.building_params: dict = building_params
-        self.sim_settings: dict = sim_settings
-        self.scenario_mapping: List[dict] = scenario_mapping
-        self.resstock_metadata = building_params.get("resstock_metadata")
+        self._sim_settings: dict = sim_settings
+        self._scenario_mapping: List[dict] = scenario_mapping
 
+        self._resstock_metadata = building_params.get("resstock_metadata")
         self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: List[int] = []
         self.building_id: str = ""
         self.retrofit_scenario: str = ""
-        self.retrofit_params: dict = {}
+        self._retrofit_params: dict = {}
         self.end_uses: dict = {}
-        self.resstock_scenarios: Dict[int, pd.DataFrame] = {}
+        self._resstock_scenarios: Dict[int, pd.DataFrame] = {}
         self._main_resstock_retrofit_scenario: int = None
         self.baseline_consumption: pd.DataFrame = pd.DataFrame()
         self.retrofit_consumption: pd.DataFrame = pd.DataFrame()
@@ -220,12 +182,18 @@ class Building:
 
     def populate_building(self) -> None:
         """
-        Creates instances of all assets for a given building based on the config file
+        Executes all necessary functions and calculations for simulating the building scenario
+
+        Args:
+            None
+
+        Returns:
+            None
         """
         self._get_years_vec()
         self._get_building_id()
         self.retrofit_scenario = self._get_retrofit_scenario()
-        self.retrofit_params = self._get_retrofit_params()
+        self._retrofit_params = self._get_retrofit_params()
         self._get_building_energies()
         self._create_end_uses()
         self._calc_total_energy_baseline()
@@ -243,8 +211,8 @@ class Building:
         Vector of simulation years
         """
         self.years_vec = list(range(
-            self.sim_settings.get("sim_start_year", 2020),
-            self.sim_settings.get("sim_end_year", 2050)
+            self._sim_settings.get("sim_start_year", 2020),
+            self._sim_settings.get("sim_end_year", 2050)
         ))
 
         self._year_timestamps = pd.date_range(
@@ -255,11 +223,11 @@ class Building:
         self.building_id = self.building_params.get("building_id")
 
     def _get_retrofit_scenario(self) -> str:
-        return self.sim_settings.get("decarb_scenario")
+        return self._sim_settings.get("decarb_scenario")
 
     def _get_retrofit_params(self) -> dict:
         scenario_params = next(
-            (i for i in self.scenario_mapping if i["description"]==self.retrofit_scenario),
+            (i for i in self._scenario_mapping if i["description"]==self.retrofit_scenario),
             None
         )
 
@@ -306,22 +274,22 @@ class Building:
         return consump_df
 
     def _get_resstock_buildings(self) -> None:
-        self._main_resstock_retrofit_scenario = self.retrofit_params.get(
+        self._main_resstock_retrofit_scenario = self._retrofit_params.get(
             "main_resstock_retrofit_scenario"
         )
 
-        resstock_scenarios = self.retrofit_params.get("resstock_scenarios")
+        resstock_scenarios = self._retrofit_params.get("resstock_scenarios")
         resstock_scenarios.append(0)
         resstock_scenarios = list(set(resstock_scenarios))
 
         for i in resstock_scenarios:
-            self.resstock_scenarios[i] = self._get_resstock_scenario(i)
+            self._resstock_scenarios[i] = self._get_resstock_scenario(i)
 
     def _get_resstock_scenario(self, i) -> pd.DataFrame:
-        return self.resstock_timeseries_connector("MA", i, self.building_params.get("resstock_id"))
+        return self._resstock_timeseries_connector("MA", i, self.building_params.get("resstock_id"))
     
     def _get_baseline_consumptions(self) -> None:
-        self.baseline_consumption = self.resstock_scenarios[0][RESSTOCK_ENERGY_CONSUMP_KEYS]
+        self.baseline_consumption = self._resstock_scenarios[0][RESSTOCK_ENERGY_CONSUMP_KEYS]
 
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             asset_fuel_keys = [i for i in ASSET_ENERGY_CONSUMP_KEYS if fuel in i]
@@ -333,7 +301,7 @@ class Building:
             )
 
     def _get_retrofit_consumptions(self) -> None:
-        self.retrofit_consumption = self.resstock_scenarios[
+        self.retrofit_consumption = self._resstock_scenarios[
             self._main_resstock_retrofit_scenario
         ][RESSTOCK_ENERGY_CONSUMP_KEYS]
 
@@ -352,12 +320,17 @@ class Building:
         """
         end_use_params: List[dict] = self.building_params.get("end_uses", [{}])
 
+        #TODO: These costs should be part of asset configs rather than the current format
+        cost_original_filepath = self.building_params.get("original_asset_cost_filepath")
+        cost_retrofit_filepath = self.building_params.get("retrofit_asset_cost_filepath")
+
         costs_original = pd.read_csv(
-            os.path.join(COST_FILEPATH, f"COST_{REFERENCE_SCENARIO.upper()}.csv"),
+            cost_original_filepath,
             index_col="building_id"
         ).to_dict(orient="index")
+
         costs_retrofit = pd.read_csv(
-            os.path.join(COST_FILEPATH, f"COST_{self.retrofit_scenario.upper()}.csv"),
+            cost_retrofit_filepath,
             index_col="building_id"
         ).to_dict(orient="index")
 
@@ -370,29 +343,16 @@ class Building:
             end_use["existing_install_cost"] = building_costs_original.get(end_use_type.upper())
             end_use["replacement_cost"] = building_costs_retrofit.get(end_use_type.upper())
 
-            #TODO: Need to standardize cost format
-            # end_use["existing_install_cost"] = ASSET_COSTS.get(
-            #     end_use["existing_type"], {}
-            # ).get(
-            #     end_use["size"], 0
-            # )
-
-            # end_use["replacement_cost"] = ASSET_COSTS.get(
-            #     end_use["replacement_type"], {}
-            # ).get(
-            #     end_use["size"], 0
-            # )
-
             self.end_uses[end_use_type] = self._get_single_end_use(end_use)
 
     def _get_single_end_use(self, params: dict):
         if params.get("end_use") == "stove":
             stove = Stove(
                 params.pop("original_energy_source"),
-                self.resstock_scenarios,
-                self.scenario_mapping,
+                self._resstock_scenarios,
+                self._scenario_mapping,
                 self.retrofit_scenario,
-                self.resstock_metadata,
+                self._resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
@@ -406,10 +366,10 @@ class Building:
         if params.get("end_use") == "clothes_dryer":
             dryer = ClothesDryer(
                 params.pop("original_energy_source"),
-                self.resstock_scenarios,
-                self.scenario_mapping,
+                self._resstock_scenarios,
+                self._scenario_mapping,
                 self.retrofit_scenario,
-                self.resstock_metadata,
+                self._resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
@@ -423,10 +383,10 @@ class Building:
         if params.get("end_use") == "domestic_hot_water":
             dhw = DHW(
                 params.pop("original_energy_source"),
-                self.resstock_scenarios,
-                self.scenario_mapping,
+                self._resstock_scenarios,
+                self._scenario_mapping,
                 self.retrofit_scenario,
-                self.resstock_metadata,
+                self._resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
@@ -440,10 +400,10 @@ class Building:
         if params.get("end_use") == "hvac":
             hvac = HVAC(
                 params.pop("original_energy_source"),
-                self.resstock_scenarios,
-                self.scenario_mapping,
+                self._resstock_scenarios,
+                self._scenario_mapping,
                 self.retrofit_scenario,
-                self.resstock_metadata,
+                self._resstock_metadata,
                 self.years_vec,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
@@ -458,7 +418,8 @@ class Building:
     
     def _calc_total_energy_baseline(self) -> None:
         """
-        x
+        Calculate the total baseline consumption for the building. Contains logic for direct
+        connection to ResStock or overwrite using locally-provided energy consumption profiles
         """
         if self.building_params.get("resstock_overwrite"):
             self._calc_total_custom_baseline()
@@ -467,6 +428,9 @@ class Building:
             self._calc_baseline_energy()
 
     def _calc_total_custom_baseline(self) -> None:
+        """
+        Calculate the baseline energy consumption using custom input energy consumption profiles
+        """
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             filter_cols = [
                 col
@@ -484,6 +448,8 @@ class Building:
 
     def _calc_baseline_energy(self) -> None:
         """
+        Calculate the baseline energy consumption using direct connection to ResStock
+
         Steps:
         1. Get a single asset
         2. Get all asset energies and add them to the building consumption dataframe with underscore
@@ -524,9 +490,6 @@ class Building:
                 self.baseline_consumption[asset_update_consump_keys].sum(axis=1)
             
     def _calc_total_energy_retrofit(self) -> None:
-        """
-        x
-        """
         if self.building_params.get("resstock_overwrite"):
             self._calc_total_custom_retrofit()
 
@@ -640,13 +603,13 @@ class Building:
                 annual_energy_use[fuel].append(annual_use)
 
         return annual_energy_use
-    
+
     def _calc_building_utility_costs(self) -> Dict[str, List[float]]:
         """
         Calculate the utility billing metrics for the building, based on total energy consumption
         """
-        #TODO: Make configurable for different areas
-        utility_rates = pd.read_csv("./config_files/utility_rates.csv", index_col=0)
+        energy_consump_cost_filepath = self.building_params.get("consump_costs_filepath")
+        consump_rates = pd.read_csv(energy_consump_cost_filepath, index_col=0)
 
         annual_utility_costs = {
             "electricity": [],
@@ -656,7 +619,7 @@ class Building:
         }
 
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
-            for replaced, rate in zip(self._is_retrofit_vec, utility_rates[fuel].to_list()):
+            for replaced, rate in zip(self._is_retrofit_vec, consump_rates[fuel].to_list()):
                 if replaced:
                     annual_use = self.retrofit_consumption[
                         "out.{}.total.energy_consumption".format(fuel)
@@ -734,10 +697,16 @@ class Building:
 
     def write_building_energy_info(self, freq: int =60) -> None:
         """
-        Write calcualted building information for energy use
+        Write building energy timeseries (baseline and retrofit) to output CSV
 
         Args:
+            None
+
+        Optional Args:
             freq (int): The frequency of the timeseries output in minutes
+
+        Returns:
+            None
         """
         if freq < 15:
             print("Unable to resample to under 15 minutes!")
@@ -756,7 +725,13 @@ class Building:
 
     def write_building_cost_info(self) -> None:
         """
-        Write calculated building information for total costs
+        Write calculated building information for total costs to output CSV
+
+        Args:
+            None
+
+        Returns:
+            None
         """
         cost_table = pd.DataFrame(index=self.years_vec)
 
@@ -845,31 +820,9 @@ class Building:
 
         return costs_df
 
-    def get_total_consumption(self, e_type) -> pd.DataFrame:
-        """
-        Get the total energy consumption at the building, summing all end uses
-
-        e_type must be in ["elec", "gas"]
-        """
-        total_consump = {}
-
-        stoves = self.end_uses.get("stove")
-
-        # TODO: This wil output the elec timeseries for every asset, regardless of install year
-        # But what we really want to see is the impact the asset replacement has on load
-        # So do we want this to be an 8760 X number of sim years? That becomes a lot more data to
-        # save and track than just 8760 datapoints per building
-
-        for stove_id, stove in stoves.items():
-            total_consump[stove_id] = getattr(stove, "{}_consump".format(e_type))
-
-        total_consump_df = pd.DataFrame(total_consump)
-        total_consump_df.index = self._year_timestamps
-
-        return total_consump_df
-
+    #TODO: Remove legacy ResStock code from Holyoke deliverable
     @staticmethod
-    def resstock_timeseries_connector(state: str, scenario: int, building_id: int) -> pd.DataFrame:
+    def _resstock_timeseries_connector(state: str, scenario: int, building_id: int) -> pd.DataFrame:
         """
         ResStock connection for the 2022 release 1.1 for timeseries data
 
@@ -891,5 +844,5 @@ class Building:
         response.index = response.index.shift(-1, "15T")
 
         return response
-    
+
     #TODO: Read in metadata so we can get the ResStock input data for scenarios

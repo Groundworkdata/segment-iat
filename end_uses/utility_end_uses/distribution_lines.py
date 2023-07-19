@@ -1,5 +1,5 @@
 """
-Defines meter parent class
+Defines distribution line parent class
 """
 import pandas as pd
 import numpy as np
@@ -10,6 +10,38 @@ from collections import Counter
 
 
 class DistributionLine(UtilityEndUse):
+    """
+    Class definition for a distribution line
+
+    Args:
+        gisid (str): The ID for the given asset
+        parentid (str): The ID for the parent of the asset (if applicable, otherwise empty)
+        inst_date (int): The install year of the asset
+        inst_cost (float): The cost of the asset in present day dollars
+            (or in $ from install year if installed prior to sim start)
+        lifetime (int): Useful lifetime of the asset in years
+        sim_start_year (int): The simulation start year
+        sim_end_year (int): The simulation end year (exclusive)
+        replacement_year (int): The replacement year of the asset
+        decarb_scenario (str): The energy retrofit intervention scenario
+        connected_assets (list): List of associated downstream assets
+        distribution_line_type (str): The type of distribution line
+
+    Attributes:
+        distribution_line_type (str): The type of distribution line
+        loss_rate (int): Electric loss rate across the line
+        connected_assets (list): List of associated downstream assets
+        annual_total_energy_use (dict): Total annual energy use behind the meter, by sim year
+        annual_peak_energy_use (dict): Total peak energy use at the meter, by sim year
+        annual_energy_use_timeseries (dict): Hourly annual timeseries consumption at the meter, by sim year
+
+    Methods:
+        initialize_end_use (None): Executes all calculations for the meter
+        get_elec_losses (list): List of elec losses over sim years
+        get_annual_total_energy_use (dict): Gets the total energy use for the meter
+        get_annual_peak_energy_use (dict): Gets the total energy demand for the meter
+        get_annual_energy_use_timeseries (dict): Gets the energy use timeseries per year for the meter
+    """
     def __init__(
         self,
         gisid: str,
@@ -41,9 +73,9 @@ class DistributionLine(UtilityEndUse):
         # TODO: update based on the sec_wtype etc.
         self.connected_assets: list = connected_assets
 
-        self.annual_total_energy_use: dict = []
-        self.annual_peak_energy_use: dict = []
-        self.annual_energy_use_timeseries: dict = []
+        self.annual_total_energy_use: dict = {}
+        self.annual_peak_energy_use: dict = {}
+        self.annual_energy_use_timeseries: dict = {}
 
     def initialize_end_use(self) -> None:
         """
@@ -84,7 +116,7 @@ class DistributionLine(UtilityEndUse):
 
         return annual_peak
 
-    def get_annual_energy_use_timeseries(self) -> list:
+    def get_annual_energy_use_timeseries(self) -> dict:
         energy_timeseries = {i: pd.Series(0, index=self.year_timestamps) for i in self.years_vector}
         for i in self.years_vector:
             for meter in self.connected_assets:

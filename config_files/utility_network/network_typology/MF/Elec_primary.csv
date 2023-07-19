@@ -1,0 +1,5 @@
+id,gisid,parentid,phase,oh_ug,circuit,pwire_size,voltage,inst_date,inst_cost,lifetime
+0,PL201,PL200,ABC,oh,200,336,13.8kV,1/1/00,10000,40
+0,PL200,SUBSTATION,ABC,oh,999,336,13.8kV,1/1/00,10000,40
+0,PL202,PL201,ABC,oh,200,336,13.8kV,1/1/00,10000,40
+0,PL203,PL202,A,oh,200,336,13.8kV,1/1/00,10000,40
