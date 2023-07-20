@@ -196,12 +196,12 @@ class TestBuilding(unittest.TestCase):
     @patch("buildings.building.Building._get_resstock_scenario")
     def test_get_resstock_buildings(self, mock_get_resstock_scenario: Mock):
         mock_get_resstock_scenario.return_value = "resstock_scenario"
-        self.building.retrofit_params = self.scenario_mapping[0]
+        self.building._retrofit_params = self.scenario_mapping[0]
 
         self.building._get_resstock_buildings()
 
         self.assertDictEqual(
-            self.building.resstock_scenarios,
+            self.building._resstock_scenarios,
             {
                 0: "resstock_scenario",
                 5: "resstock_scenario",
@@ -209,7 +209,7 @@ class TestBuilding(unittest.TestCase):
             }
         )
 
-    @patch("buildings.building.Building.resstock_timeseries_connector")
+    @patch("buildings.building.Building._resstock_timeseries_connector")
     def test_get_resstock_scenario(self, mock_resstock_timeseries_connector: Mock):
         mock_resstock_timeseries_connector.return_value = "connected"
 
@@ -223,7 +223,7 @@ class TestBuilding(unittest.TestCase):
         )
 
     def test_get_baseline_consumptions(self):
-        self.building.resstock_scenarios = {
+        self.building._resstock_scenarios = {
             0: pd.DataFrame({
                 "out.site_energy.total.energy_consumption": {},
                 "out.electricity.total.energy_consumption": {1: 100, 2: 100, 3: 400, 5: 150},

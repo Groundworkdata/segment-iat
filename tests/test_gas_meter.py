@@ -54,7 +54,7 @@ class TestGasMeter(unittest.TestCase):
         self.gas_meter.operational_vector = [1] * 10
 
         self.assertEqual(
-            [0.]*6 + [400.] + [0.]*3,
+            [0.]*6 + [1100.] + [0.]*3,
             self.gas_meter.get_retrofit_cost()
         )
 
@@ -62,6 +62,6 @@ class TestGasMeter(unittest.TestCase):
         self.gas_meter.years_vector = list(range(2020, 2054))
 
         self.assertEqual(
-            [0.]*6 + [400.] + [0.]*6 + [400.] + [0.]*6 + [400.] + [0.]*6 + [400.] + [0.]*6,
+            [0.]*6 + [1100.] + [0.]*6 + [1100.] + [0.]*6 + [1100.] + [0.]*6 + [1100.] + [0.]*6,
             self.gas_meter.get_retrofit_cost()
         )
