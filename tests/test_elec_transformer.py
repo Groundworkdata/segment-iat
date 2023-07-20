@@ -94,7 +94,7 @@ class TestElecTransformer(unittest.TestCase):
         self.elec_transformer.annual_upgrades = [0]*5 + [1] +[0]*4
 
         self.assertListEqual(
-            [0.]*5 + [2000.] + [0.]*4,
+            [0.]*5 + [20000.] + [0.]*4,
             self.elec_transformer.get_upgrade_cost()
         )
 

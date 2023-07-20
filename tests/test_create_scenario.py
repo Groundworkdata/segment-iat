@@ -17,13 +17,13 @@ class TestScenarioCreator(unittest.TestCase):
 
     @patch("scenario_creator.create_scenario.ScenarioCreator._get_utility_network_outputs")
     @patch("scenario_creator.create_scenario.ScenarioCreator._write_outputs")
-    @patch("scenario_creator.create_scenario.ScenarioCreator.create_utility_network")
-    @patch("scenario_creator.create_scenario.ScenarioCreator.create_building")
-    @patch("scenario_creator.create_scenario.ScenarioCreator.get_scenario_mapping")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._create_utility_network")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._create_building")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._get_scenario_mapping")
     @patch("scenario_creator.create_scenario.ScenarioCreator._get_years_vec")
     @patch("scenario_creator.create_scenario.ScenarioCreator._set_outputs_path")
     @patch("scenario_creator.create_scenario.ScenarioCreator._get_decarb_scenario")
-    @patch("scenario_creator.create_scenario.ScenarioCreator.get_sim_settings")
+    @patch("scenario_creator.create_scenario.ScenarioCreator._get_sim_settings")
     def test_create_scenario(
         self,
         mock_get_sim_settings: Mock,
@@ -44,7 +44,7 @@ class TestScenarioCreator(unittest.TestCase):
         self.scenario_creator.create_scenario()
 
         mock_get_sim_settings.assert_called_once()
-        self.assertDictEqual(self.scenario_creator.sim_config, {"sim_settings": 1})
+        self.assertDictEqual(self.scenario_creator._sim_config, {"sim_settings": 1})
         mock_get_decarb_scenario.assert_called_once()
         self.assertEqual(self.scenario_creator._decarb_scenario, "decarb_scenario")
         mock_set_outputs_path.assert_called_once()
@@ -59,7 +59,7 @@ class TestScenarioCreator(unittest.TestCase):
 
     def test_get_sim_settings(self):
         self.assertDictEqual(
-            self.scenario_creator.get_sim_settings(),
+            self.scenario_creator._get_sim_settings(),
             {
                 "sim_start_year": 2020,
                 "sim_end_year": 2040,
@@ -70,14 +70,14 @@ class TestScenarioCreator(unittest.TestCase):
         )
 
     def test_get_decarb_scenario(self):
-        self.scenario_creator.sim_config = {"decarb_scenario": "continued_gas"}
+        self.scenario_creator._sim_config = {"decarb_scenario": "continued_gas"}
 
         self.assertEqual(
             self.scenario_creator._get_decarb_scenario(),
             "continued_gas"
         )
 
-        self.scenario_creator.sim_config = {"decarb_scenario": "whatever"}
+        self.scenario_creator._sim_config = {"decarb_scenario": "whatever"}
 
         with self.assertRaises(ValueError):
             self.scenario_creator._get_decarb_scenario()
@@ -97,13 +97,13 @@ class TestScenarioCreator(unittest.TestCase):
         )
 
     def test_get_scenario_mapping(self):
-        self.scenario_creator.get_scenario_mapping()
+        self.scenario_creator._get_scenario_mapping()
 
         with open("./config_files/scenario_mapping.json") as f:
             expected = json.load(f)
 
         self.assertListEqual(
-            self.scenario_creator.scenario_mapping,
+            self.scenario_creator._scenario_mapping,
             expected
         )
 
@@ -112,13 +112,13 @@ class TestScenarioCreator(unittest.TestCase):
         mock_building_instance = Mock()
         mock_building_instance.building_id = "b1"
         mock_building.return_value = mock_building_instance
-        self.scenario_creator.sim_config = {
+        self.scenario_creator._sim_config = {
             "buildings_config_filepath": "./tests/input_data/building_config.json"
         }
 
-        self.scenario_creator.scenario_mapping = "mapping"
+        self.scenario_creator._scenario_mapping = "mapping"
 
-        self.scenario_creator.create_building()
+        self.scenario_creator._create_building()
 
         expected_config = [{
             "building_id": "building001",
@@ -136,7 +136,7 @@ class TestScenarioCreator(unittest.TestCase):
         }]
 
         self.assertListEqual(
-            self.scenario_creator.buildings_config,
+            self.scenario_creator._buildings_config,
             expected_config
         )
 
@@ -147,7 +147,6 @@ class TestScenarioCreator(unittest.TestCase):
         )
 
         mock_building_instance.populate_building.assert_called_once()
-        mock_building_instance.write_building_cost_info.assert_called_once()
         mock_building_instance.write_building_energy_info.assert_called_once()
 
         self.assertDictEqual(
@@ -157,14 +156,14 @@ class TestScenarioCreator(unittest.TestCase):
 
     @patch("scenario_creator.create_scenario.UtilityNetwork")
     def test_create_utility_network(self, mock_utility_network: Mock):
-        self.scenario_creator.sim_config = {
+        self.scenario_creator._sim_config = {
             "utility_network_config_filepath": "path-to-config"
         }
         self.scenario_creator.buildings = "buildings"
         utility_instance = Mock()
         mock_utility_network.return_value = utility_instance
 
-        self.scenario_creator.create_utility_network()
+        self.scenario_creator._create_utility_network()
 
         mock_utility_network.assert_called_once_with(
             "path-to-config",

@@ -195,6 +195,7 @@ class TestStove(unittest.TestCase):
             "existing_install_year": 2015,
             "lifetime": 10,
             "existing_install_cost": 750,
+            "escalator": 0,
         }
 
         expected_book_val = [375., 300., 225., 150., 75.]
@@ -218,7 +219,7 @@ class TestStove(unittest.TestCase):
         }
 
         self.stove.existing_book_val = [500, 400, 300, 200, 100]
-        self.stove.replacement_vec = [False, False, False, True, False]
+        self.stove._replacement_vec = [False, False, False, True, False]
 
         self.assertListEqual(
             [0, 0, 0, 200, 0],
