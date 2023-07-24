@@ -111,67 +111,6 @@ class TestBuilding(unittest.TestCase):
             self.scenario_mapping
         )
 
-    @unittest.skip
-    def test_populate_building(self):
-        self.building.populate_building()
-
-        self.assertEqual(
-            list(self.building.end_uses.keys()),
-            ["stove"]
-        )
-
-        self.assertEqual(
-            list(self.building.end_uses["stove"].keys()),
-            ["stove1", "stove2"]
-        )
-
-        self.assertEqual(type(self.building.end_uses["stove"]["stove1"]), Stove)
-        self.assertEqual(type(self.building.end_uses["stove"]["stove2"]), Stove)
-
-    @unittest.skip
-    def test_sum_end_use_figures(self):
-        mock_stove_1 = Mock()
-        mock_stove_1.install_cost = [100, 0, 0, 0, 0]
-
-        mock_stove_2 = Mock()
-        mock_stove_2.install_cost = [0, 0, 70, 0, 0]
-
-        self.building.end_uses = {
-            "stove": {
-                "stove1": mock_stove_1,
-                "stove2": mock_stove_2
-            }
-        }
-
-        self.building.years_vec = list(range(2025, 2030))
-
-        pd.testing.assert_frame_equal(
-            pd.DataFrame({
-                "stove1_install_cost": {
-                    2025: 100,
-                    2026: 0,
-                    2027: 0,
-                    2028: 0,
-                    2029: 0
-                },
-                "stove2_install_cost": {
-                    2025: 0,
-                    2026: 0,
-                    2027: 70,
-                    2028: 0,
-                    2029: 0
-                },
-                "total_install_cost": {
-                    2025: 100,
-                    2026: 0,
-                    2027: 70,
-                    2028: 0,
-                    2029: 0
-                }
-            }),
-            self.building._sum_end_use_figures("install_cost")
-        )
-
     def test_get_years_vec(self):
         self.building._get_years_vec()
 
@@ -315,11 +254,14 @@ class TestBuilding(unittest.TestCase):
             "replacement_config": "./stoves/elec_stove_config.json"
         })
 
-    @unittest.skip
     @patch("buildings.building.Stove")
     def test_get_single_end_use(self, mock_stove: Mock):
         initialized_stove = Mock()
         mock_stove.return_value = initialized_stove
+
+        # Need to set because of issues testing pandas objects
+        self.building.baseline_consumption = "baseline_consump"
+        self.building.retrofit_consumption = "retrofit_consump"
 
         params = {
             "end_use": "stove",
@@ -338,14 +280,14 @@ class TestBuilding(unittest.TestCase):
             "gas",
             {},
             self.scenario_mapping,
-            3,
-            "resstock_metadata",
+            "",
+            {},
             [],
-            custom_baseline_energy=pd.DataFrame(),
-            custom_retrofit_energy=pd.DataFrame(),
+            custom_baseline_energy="baseline_consump",
+            custom_retrofit_energy="retrofit_consump",
             **{
                 "end_use": "stove",
-                "replacement_config": "tests/input_data/stoves/elec_stove_config.json",
+                "replacement_config": "tests/input_data/stoves/elec_stove_config.json"
             }
         )
 
