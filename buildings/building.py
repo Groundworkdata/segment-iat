@@ -799,27 +799,6 @@ class Building:
 
         return existing_stranded.sum(axis=1).to_list()
 
-    def _sum_end_use_figures(self, cost_figure) -> pd.DataFrame:
-        """
-        cost_figure must be in [
-            "install_cost", "depreciation", "stranded_value",
-            "elec_consump_annual", "gas_consump_annual", "elec_peak_annual", "gas_peak_annual"
-        ]
-        """
-        costs = {}
-
-        stoves = self.end_uses.get("stove")
-
-        for stove_id, stove in stoves.items():
-            costs[stove_id + "_{}".format(cost_figure)] = getattr(stove, cost_figure)
-
-        costs_df = pd.DataFrame(costs)
-        costs_df.index = self.years_vec
-
-        costs_df["total_{}".format(cost_figure)] = costs_df.sum(axis=1)
-
-        return costs_df
-
     #TODO: Remove legacy ResStock code from Holyoke deliverable
     @staticmethod
     def _resstock_timeseries_connector(state: str, scenario: int, building_id: int) -> pd.DataFrame:
