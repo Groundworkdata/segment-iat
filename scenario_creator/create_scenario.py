@@ -36,7 +36,9 @@ DECARB_SCENARIOS = [
     "hybrid_npa",
     "hybrid_gas",
     "natural_elec",
+    "natural_elec_higheff",
     "accelerated_elec",
+    "accelerated_elec_higheff",
     "hybrid_gas_immediate"
 ]
 

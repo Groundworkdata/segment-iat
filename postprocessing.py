@@ -12,10 +12,12 @@ def main():
     """
     scenarios = [
         "accelerated_elec",
+        "accelerated_elec_higheff",
         "continued_gas",
         "hybrid_gas",
         "hybrid_npa",
         "natural_elec",
+        "natural_elec_higheff",
         "hybrid_gas_immediate",
     ]
 
