@@ -6,7 +6,11 @@ import numpy as np
 from end_uses.meters.meter import Meter
 
 
-GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
+GAS_SHUTOFF_SCENARIOS = [
+    "natural_elec", "accelerated_elec",
+    "natural_elec_higheff", "accelerated_elec_higheff",
+    "hybrid_npa"
+]
 DEFAULT_RETROFIT_FREQ = 7
 DEFAULT_RETROFIT_COST = 1100
 

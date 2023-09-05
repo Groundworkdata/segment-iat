@@ -9,8 +9,14 @@ import warnings
 from end_uses.utility_end_uses.pipeline import Pipeline
 
 
-GAS_SHUTOFF_SCENARIOS = ["natural_elec", "accelerated_elec", "hybrid_npa"]
-GAS_RETROFIT_SCENARIOS = ["natural_elec", "hybrid_gas", "continued_gas", "hybrid_gas_immediate"]
+GAS_SHUTOFF_SCENARIOS = [
+    "natural_elec", "accelerated_elec",
+    "natural_elec_higheff", "accelerated_elec_higheff",
+    "hybrid_npa"
+]
+GAS_RETROFIT_SCENARIOS = [
+    "natural_elec", "natural_elec_higheff", "hybrid_gas", "continued_gas", "hybrid_gas_immediate"
+]
 RETROFIT_YEAR = 2025
 ANNUAL_OM_FILEPATH = "./config_files/utility_network/gas_operating_expenses.csv"
 
