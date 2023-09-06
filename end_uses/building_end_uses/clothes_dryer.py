@@ -1,7 +1,7 @@
 """
 Defines a clothes dryer asset
 """
-from typing import Dict, List
+from typing import List
 
 import numpy as np
 import pandas as pd
@@ -13,8 +13,6 @@ ENERGY_KEYS = [
     "out.propane.clothes_dryer.energy_consumption",
 ]
 
-RESSTOCK_BASELINE_SCENARIO_ID = 0
-
 INFLATION_ESCALATOR = 0.02
 
 
@@ -23,15 +21,7 @@ class ClothesDryer:
     Clothes dryer asset
 
     Args:
-        energy_source (str): The energy source of the baseline asset
-        resstock_consumptions (Dict[int, pd.DataFrame]): Dict of energy consumption timeseries
-            organized by retrofit scenario
-        scenario_mapping (List[Dict]): Mapping of ResStock scenarios to Groundwork scenarios
-        scenario (int): The retrofit intervention scenario
-        resstock_metadata (dict): Dict of metadata from ResStock
         years_vec (List[int]): List of simulation years
-
-    Optional Args:
         custom_baseline_energy (pd.DataFrame): Custom input timeseries of baseline energy consump
         custom_retrofit_energy (pd.DataFrame): Custom input timeseries of retrofit energy consump
 
@@ -59,11 +49,6 @@ class ClothesDryer:
     """
     def __init__(
             self,
-            energy_source: str,
-            resstock_consumptions: Dict[int, pd.DataFrame],
-            scenario_mapping: List[Dict],
-            scenario: int,
-            resstock_metadata: dict,
             years_vec: List[int],
             custom_baseline_energy: pd.DataFrame = pd.DataFrame(),
             custom_retrofit_energy: pd.DataFrame = pd.DataFrame(),
@@ -71,11 +56,6 @@ class ClothesDryer:
     ):
         self._kwargs = kwargs
 
-        self._energy_source: str = energy_source
-        self._resstock_consumps: Dict[int, pd.DataFrame] = resstock_consumptions
-        self._scenario_mapping: List[Dict] = scenario_mapping
-        self._scenario: int = scenario
-        self._resstock_metadata = resstock_metadata
         self._years_vec: List[int] = years_vec
         self._custom_baseline_energy: pd.DataFrame = custom_baseline_energy
         self._custom_retrofit_energy: pd.DataFrame = custom_retrofit_energy
@@ -87,7 +67,6 @@ class ClothesDryer:
         self.cost_table: pd.DataFrame = None
 
         self.baseline_energy_use = None
-        self._resstock_retrofit_scenario_id: int = None
         self.retrofit_energy_use = None
 
     def initialize_end_use(self) -> None:
@@ -104,11 +83,6 @@ class ClothesDryer:
         if not self._custom_baseline_energy.empty and not self._custom_retrofit_energy.empty:
             self._get_custom_energies()
 
-        else:
-            self.baseline_energy_use = self._get_energy_consump_baseline()
-            self._resstock_retrofit_scenario_id = self._get_retrofit_scenario()
-            self.retrofit_energy_use = self._get_energy_consump_retrofit()
-
     def _get_custom_energies(self) -> None:
         self.baseline_energy_use = self._custom_baseline_energy.reindex(
             ENERGY_KEYS, axis=1, fill_value=0
@@ -117,35 +91,6 @@ class ClothesDryer:
         self.retrofit_energy_use = self._custom_retrofit_energy.reindex(
             ENERGY_KEYS, axis=1, fill_value=0
         )
-
-    def _get_energy_consump_baseline(self) -> pd.DataFrame:
-        return self._resstock_consumps[RESSTOCK_BASELINE_SCENARIO_ID][ENERGY_KEYS]
-
-    def _get_retrofit_scenario(self) -> int:
-        retrofits = self._scenario_mapping[self._scenario]
-        return retrofits.get("dryer_resstock_scenario")
-
-    def _get_energy_consump_retrofit(self) -> pd.DataFrame:
-        retrofit_energies = self._resstock_consumps[self._resstock_retrofit_scenario_id][
-            ENERGY_KEYS
-        ]
-
-        retrofit_fuel = self._scenario_mapping[self._scenario]["replacement_fuel"]
-        resstock_retrofit_fuel = self._resstock_metadata["in.clothes_dryer"]
-
-        if "propane" not in resstock_retrofit_fuel.lower() and retrofit_fuel=="propane":
-            retrofit_energies = self._adjust_retrofit_energies(retrofit_energies)
-
-        return retrofit_energies
-
-    @staticmethod
-    def _adjust_retrofit_energies(retrofit_energies: pd.DataFrame) -> pd.DataFrame:
-        retrofit_energies["out.propane.clothes_dryer.energy_consumption"] += \
-            retrofit_energies["out.natural_gas.clothes_dryer.energy_consumption"]
-        
-        retrofit_energies["out.natural_gas.clothes_dryer.energy_consumption"] = 0
-
-        return retrofit_energies
 
     def _get_existing_book_val(self) -> List[float]:
         existing_install_year = self._kwargs.get("existing_install_year", self._years_vec[0])

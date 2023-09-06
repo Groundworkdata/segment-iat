@@ -74,7 +74,6 @@ class ScenarioCreator:
         self._decarb_scenario: str = ""
         self._outputs_path: str = ""
         self._years_vec: List[int] = []
-        self._scenario_mapping: List[dict] = []
         self._buildings_config: dict = {}
 
         self.buildings: Dict[str, Building] = {}
@@ -85,7 +84,6 @@ class ScenarioCreator:
         self._decarb_scenario = self._get_decarb_scenario()
         self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
-        self._get_scenario_mapping()
         print("Creating buildings...")
         self._create_building()
         print("Creatingy utility network...")
@@ -130,14 +128,6 @@ class ScenarioCreator:
             self._sim_config.get("sim_end_year", DEFAULT_SIM_END_YEAR)
         ))
 
-    def _get_scenario_mapping(self) -> None:
-        """
-        Read in ResStock scenario mapping
-        """
-        with open(SCENARIO_MAPPING_FILEPATH) as f:
-            data = json.load(f)
-        self._scenario_mapping = data
-
     def _create_building(self) -> None:
         building_config_filepath = self._sim_config.get("buildings_config_filepath")
 
@@ -154,8 +144,7 @@ class ScenarioCreator:
             print("Creating building {}".format(building_params.get("building_id")))
             building = Building(
                 building_params,
-                self._sim_config,
-                self._scenario_mapping
+                self._sim_config
             )
 
             building.populate_building()
