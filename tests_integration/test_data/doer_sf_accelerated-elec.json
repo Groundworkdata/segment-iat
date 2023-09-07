@@ -70,8 +70,8 @@
         "retrofit_consump_filepath": "./config_files/buildings/energy_consumption/SF_Whole-HighEff-noEncl_ELEC.csv",
         "load_scaling_factor": 1.19,
         "consump_costs_filepath": "./config_files/buildings/energy_consumption_costs/doer_consump_costs.csv",
-        "original_asset_cost_filepath": "./config_files/buildings/retrofit_costs/doer/COST_CONTINUED_GAS.csv",
-        "retrofit_asset_cost_filepath": "./config_files/buildings/retrofit_costs/doer/COST_ACCELERATED_ELEC.csv"
+        "original_asset_cost_filepath": "./tests_integration/test_data/COST_CONTINUED_GAS.csv",
+        "retrofit_asset_cost_filepath": "./tests_integration/test_data/COST_ACCELERATED_ELEC.csv"
     },
     {
         "building_id": "F_714723_2938816",
@@ -144,8 +144,8 @@
         "retrofit_consump_filepath": "./config_files/buildings/energy_consumption/SF_Whole-HighEff-noEncl_ELEC.csv",
         "load_scaling_factor": 1.146,
         "consump_costs_filepath": "./config_files/buildings/energy_consumption_costs/doer_consump_costs.csv",
-        "original_asset_cost_filepath": "./config_files/buildings/retrofit_costs/doer/COST_CONTINUED_GAS.csv",
-        "retrofit_asset_cost_filepath": "./config_files/buildings/retrofit_costs/doer/COST_ACCELERATED_ELEC.csv"
+        "original_asset_cost_filepath": "./tests_integration/test_data/COST_CONTINUED_GAS.csv",
+        "retrofit_asset_cost_filepath": "./tests_integration/test_data/COST_ACCELERATED_ELEC.csv"
     },
     {
         "building_id": "F_714815_2939003",
@@ -218,7 +218,7 @@
         "retrofit_consump_filepath": "./config_files/buildings/energy_consumption/SF_Whole-HighEff-noEncl_ELEC.csv",
         "load_scaling_factor": 0.902,
         "consump_costs_filepath": "./config_files/buildings/energy_consumption_costs/doer_consump_costs.csv",
-        "original_asset_cost_filepath": "./config_files/buildings/retrofit_costs/doer/COST_CONTINUED_GAS.csv",
-        "retrofit_asset_cost_filepath": "./config_files/buildings/retrofit_costs/doer/COST_ACCELERATED_ELEC.csv"
+        "original_asset_cost_filepath": "./tests_integration/test_data/COST_CONTINUED_GAS.csv",
+        "retrofit_asset_cost_filepath": "./tests_integration/test_data/COST_ACCELERATED_ELEC.csv"
     }
 ]

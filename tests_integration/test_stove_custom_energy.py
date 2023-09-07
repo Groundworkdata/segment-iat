@@ -38,11 +38,6 @@ class TestStoveIntegration(unittest.TestCase):
         }
 
         self.stove = Stove(
-            self.energy_source,
-            {},
-            [],
-            scenario,
-            {},
             years_vec,
             custom_baseline_energy=self.custom_baseline_consump,
             custom_retrofit_energy=self.custom_retrofit_consump,
