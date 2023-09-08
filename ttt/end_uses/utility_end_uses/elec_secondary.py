@@ -1,12 +1,12 @@
 """
-Defines an electric meter
+Defines electric secondary end use
 """
-from end_uses.meters.meter import Meter
+from ttt.end_uses.utility_end_uses.distribution_lines import DistributionLine
 
 
-class ElecMeter(Meter):
+class ElecSecondary(DistributionLine):
     """
-    Defines an electric meter, which inherits Meter class
+    An electric secondary line
 
     Args:
         None
@@ -22,15 +22,23 @@ class ElecMeter(Meter):
         sim_end_year (int): The simulation end year (exclusive)
         replacement_year (int): The replacement year of the asset
         decarb_scenario (str): The energy retrofit intervention scenario
-        building (Building): Instance of the associated Building object
+        connected_assets (list): List of associated downstream assets
+        circuit (int): The electric circuit ID
+        oh_ug (str): Signifies if overhead (OH) or underground (UG) wire
+        phase (str): Phase rotation of the line (ABC or ACB)
+        sec_wsize (int): The wire size
+        sec_wtype (str): Wire type
 
     Attributes:
-        None
+        circuit (int): The electric circuit ID
+        oh_ug (str): Signifies if overhead (OH) or underground (UG) wire
+        phase (str): Phase rotation of the line (ABC or ACB)
+        sec_wsize (int): The wire size
+        sec_wtype (str): Wire type
 
     Methods:
         None
     """
-
     def __init__(self, **kwargs):
         super().__init__(
             kwargs.get("gisid"),
@@ -42,6 +50,12 @@ class ElecMeter(Meter):
             kwargs.get("sim_end_year"),
             kwargs.get("replacement_year"),
             kwargs.get("decarb_scenario"),
-            kwargs.get("building"),
-            "electricity",
+            kwargs.get("connected_assets"),
+            "elec_secondary",
         )
+
+        self.circuit: int = kwargs.get("circuit")
+        self.oh_ug: str = kwargs.get("oh_ug")
+        self.phase: str = kwargs.get("phase")
+        self.sec_wsize: int = kwargs.get("sec_wsize")
+        self.sec_wtype: str = kwargs.get("sec_wtype")

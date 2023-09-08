@@ -1,12 +1,12 @@
 """
-Defines electric primary end use
+Defines an electric meter
 """
-from end_uses.utility_end_uses.distribution_lines import DistributionLine
+from ttt.end_uses.meters.meter import Meter
 
 
-class ElecPrimary(DistributionLine):
+class ElecMeter(Meter):
     """
-    An electric primary line
+    Defines an electric meter, which inherits Meter class
 
     Args:
         None
@@ -22,23 +22,15 @@ class ElecPrimary(DistributionLine):
         sim_end_year (int): The simulation end year (exclusive)
         replacement_year (int): The replacement year of the asset
         decarb_scenario (str): The energy retrofit intervention scenario
-        connected_assets (list): List of associated downstream assets
-        circuit (int): The electric circuit ID
-        oh_ug (str): Signifies if overhead (OH) or underground (UG) wire
-        phase (str): Phase rotation of the line (ABC or ACB)
-        pwire_size (int): The wire size
-        voltage (str): Voltage rating of the line
+        building (Building): Instance of the associated Building object
 
     Attributes:
-        circuit (int): The electric circuit ID
-        oh_ug (str): Signifies if overhead (OH) or underground (UG) wire
-        phase (str): Phase rotation of the line (ABC or ACB)
-        pwire_size (int): The wire size
-        voltage (str): Voltage rating of the line
+        None
 
     Methods:
         None
     """
+
     def __init__(self, **kwargs):
         super().__init__(
             kwargs.get("gisid"),
@@ -50,12 +42,6 @@ class ElecPrimary(DistributionLine):
             kwargs.get("sim_end_year"),
             kwargs.get("replacement_year"),
             kwargs.get("decarb_scenario"),
-            kwargs.get("connected_assets"),
-            "elec_primary",
+            kwargs.get("building"),
+            "electricity",
         )
-
-        self.circuit: int = kwargs.get("circuit")
-        self.oh_ug: str = kwargs.get("oh_ug")
-        self.phase: str = kwargs.get("phase")
-        self.pwire_size: int = kwargs.get("pwire_size")
-        self.voltage: str = kwargs.get("voltage")

@@ -4,8 +4,8 @@ Defines meter parent class
 import numpy as np
 from typing import List
 
-from buildings.building import Building
-from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
+from ttt.buildings.building import Building
+from ttt.end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 
 
 class Meter(UtilityEndUse):

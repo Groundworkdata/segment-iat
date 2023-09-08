@@ -5,7 +5,7 @@ import unittest
 
 import pandas as pd
 
-from end_uses.asset import Asset
+from ttt.end_uses.asset import Asset
 
 
 class TestAsset(unittest.TestCase):

@@ -6,10 +6,10 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
-from end_uses.building_end_uses.clothes_dryer import ClothesDryer
-from end_uses.building_end_uses.domestic_hot_water import DHW
-from end_uses.building_end_uses.hvac import HVAC
-from end_uses.building_end_uses.stove import Stove
+from ttt.end_uses.building_end_uses.clothes_dryer import ClothesDryer
+from ttt.end_uses.building_end_uses.domestic_hot_water import DHW
+from ttt.end_uses.building_end_uses.hvac import HVAC
+from ttt.end_uses.building_end_uses.stove import Stove
 
 
 CUSTOM_RESSTOCK_MAPPING = {

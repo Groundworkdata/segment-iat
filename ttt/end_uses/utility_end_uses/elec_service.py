@@ -1,7 +1,7 @@
 """
 Defines electricity service end use
 """
-from end_uses.utility_end_uses.distribution_lines import DistributionLine
+from ttt.end_uses.utility_end_uses.distribution_lines import DistributionLine
 
 
 class ElecService(DistributionLine):
