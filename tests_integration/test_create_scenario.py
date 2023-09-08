@@ -6,7 +6,7 @@ import unittest
 
 import pandas as pd
 
-from scenario_creator.create_scenario import ScenarioCreator
+from ttt.scenario_creator.create_scenario import ScenarioCreator
 
 
 class TestScenarioCreator(unittest.TestCase):

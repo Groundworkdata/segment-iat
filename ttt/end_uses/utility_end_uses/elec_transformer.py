@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import warnings
 
-from end_uses.utility_end_uses.utility_end_use import UtilityEndUse
+from ttt.end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 from collections import Counter
 
 

@@ -4,7 +4,7 @@ Integration tests for the gas service line
 import unittest
 from unittest.mock import Mock
 
-from end_uses.utility_end_uses.gas_service import GasService
+from ttt.end_uses.utility_end_uses.gas_service import GasService
 
 
 class TestGasService(unittest.TestCase):

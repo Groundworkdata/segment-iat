@@ -3,7 +3,7 @@ Defines a gas meter
 """
 import numpy as np
 
-from end_uses.meters.meter import Meter
+from ttt.end_uses.meters.meter import Meter
 
 
 GAS_SHUTOFF_SCENARIOS = [

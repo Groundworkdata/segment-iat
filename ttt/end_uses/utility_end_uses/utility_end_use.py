@@ -1,7 +1,7 @@
 """
 Defines UtilityEndUse parent class
 """
-from end_uses.asset import Asset
+from ttt.end_uses.asset import Asset
 
 
 class UtilityEndUse(Asset):

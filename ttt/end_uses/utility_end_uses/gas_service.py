@@ -1,12 +1,12 @@
 """
-Defines gas main asset
+Defines gas service end use
 """
 import numpy as np
 import pandas as pd
 from typing import List
 import warnings
 
-from end_uses.utility_end_uses.pipeline import Pipeline
+from ttt.end_uses.utility_end_uses.pipeline import Pipeline
 
 
 GAS_SHUTOFF_SCENARIOS = [
@@ -21,9 +21,9 @@ RETROFIT_YEAR = 2025
 ANNUAL_OM_FILEPATH = "./config_files/utility_network/gas_operating_expenses.csv"
 
 
-class GasMain(Pipeline):
+class GasService(Pipeline):
     """
-    Defines a gas main pipeline, which inherits Pipeline class
+    Defines a gas service pipeline, which inherits Pipeline class
 
     Args:
         None
@@ -45,12 +45,10 @@ class GasMain(Pipeline):
         material (str): The pipe material
         connected_assets (list): List of associated downstream assets
         replacement_cost (float): The cost of replacing the gas meter
-        shutoff_cost (float): The cost of pipeline shutoff
 
     Attributes:
-        replacement_cost (float): Cost of gas main replacement
-        shutoff_cost (float): Cost of gas main shutoff
-        book_value (list): Annual book value of the gas main
+        replacement_cost (float): Cost of gas service replacement
+        book_value (list): Annual book value of the gas service
         shutoff_year (list): 1 in the shutoff year, 0 all other years
 
     Methods:
@@ -61,7 +59,6 @@ class GasMain(Pipeline):
         get_depreciation (list): Return the list of annual depreciated value for all sim years
         get_book_value (list): Returns annual book value vector
         get_shutoff_year (list): Returns vector with value 1 in shutoff year, 0 o/w
-        get_system_shutoff_cost (list): Returns vector with the system shutoff cost by sim year
     """
     def __init__(self, **kwargs):
         super().__init__(
@@ -79,11 +76,10 @@ class GasMain(Pipeline):
             kwargs.get("diameter"),
             kwargs.get("material"),
             kwargs.get("connected_assets"),
-            "gas_main",
+            "gas_service",
         )
 
         self.replacement_cost = kwargs.get("replacement_cost", 0)
-        self.shutoff_cost = kwargs.get("shutoff_cost", 0)
         self.book_value: list = []
         self.shutoff_year: list = []
 
@@ -106,7 +102,7 @@ class GasMain(Pipeline):
         operational_vector = np.stack(operational_vecs).max(axis=0)
 
         return operational_vector.tolist()
-    
+
     def _get_replacement_vec(self) -> List[bool]:
         replacement_vec = [False] * len(self.years_vector)
         if self.decarb_scenario in GAS_RETROFIT_SCENARIOS:
@@ -148,24 +144,12 @@ class GasMain(Pipeline):
         shutoff_year_vec = [0] * len(self.years_vector)
 
         if self.decarb_scenario in GAS_SHUTOFF_SCENARIOS:
-            shutoff_year = 0
-            for service in self.connected_assets:
-                building = service.connected_assets[0].building
-
-                for idx, retrofit in enumerate(building._retrofit_vec):
-                    if retrofit:
-                        shutoff_year = max(shutoff_year, idx)
-
-            if shutoff_year:
-                shutoff_year_vec[shutoff_year] = 1
+            shutoff_year_vec = self.connected_assets[0].building._retrofit_vec
 
         return shutoff_year_vec
 
     def _update_stranded_value(self) -> List[float]:
         return (np.array(self.book_value) * np.array(self.shutoff_year)).tolist()
-    
-    def get_system_shutoff_cost(self) -> List[float]:
-        return (np.array(self.shutoff_year) * self.shutoff_cost).tolist()
 
     def _get_annual_om(self) -> List[float]:
         om_table = pd.read_csv(ANNUAL_OM_FILEPATH, index_col="material").to_dict(orient="index")

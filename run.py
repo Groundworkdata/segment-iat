@@ -1,7 +1,7 @@
 """
 Main script to run the simulation
 """
-from scenario_creator.create_scenario import ScenarioCreator
+from ttt.scenario_creator.create_scenario import ScenarioCreator
 
 
 def main():

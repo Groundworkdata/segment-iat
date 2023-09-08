@@ -6,16 +6,16 @@ import pandas as pd
 
 import json
 
-from buildings.building import Building
-from end_uses.utility_end_uses.gas_main import GasMain
-from end_uses.utility_end_uses.gas_service import GasService
-from end_uses.meters.gas_meter import GasMeter
+from ttt.buildings.building import Building
+from ttt.end_uses.utility_end_uses.gas_main import GasMain
+from ttt.end_uses.utility_end_uses.gas_service import GasService
+from ttt.end_uses.meters.gas_meter import GasMeter
 
-from end_uses.utility_end_uses.elec_service import ElecService
-from end_uses.utility_end_uses.elec_secondary import ElecSecondary
-from end_uses.utility_end_uses.elec_transformer import ElecTransformer
-from end_uses.utility_end_uses.elec_primary import ElecPrimary
-from end_uses.meters.elec_meter import ElecMeter
+from ttt.end_uses.utility_end_uses.elec_service import ElecService
+from ttt.end_uses.utility_end_uses.elec_secondary import ElecSecondary
+from ttt.end_uses.utility_end_uses.elec_transformer import ElecTransformer
+from ttt.end_uses.utility_end_uses.elec_primary import ElecPrimary
+from ttt.end_uses.meters.elec_meter import ElecMeter
 
 
 class UtilityNetwork:
