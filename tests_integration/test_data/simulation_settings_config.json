@@ -4,5 +4,7 @@
     "decarb_scenario": "accelerated_elec",
     "replacement_year": 2025,
     "buildings_config_filepath": "./tests_integration/test_data/doer_sf_accelerated-elec.json",
-    "utility_network_config_filepath": "./tests_integration/test_data/utility_network_config.json"
+    "utility_network_config_filepath": "./tests_integration/test_data/utility_network_config.json",
+    "scenario_name": "test_doer_sf_accelerated_elec",
+    "street_segment": "test_doer_sf"
 }

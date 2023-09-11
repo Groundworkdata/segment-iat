@@ -2,6 +2,7 @@
 Integration tests for the ScenarioCreator
 """
 import os
+import shutil
 import unittest
 
 import pandas as pd
@@ -38,7 +39,7 @@ class TestScenarioCreator(unittest.TestCase):
         self.scenario_creator.create_scenario()
 
         for i in self.files:
-            output = pd.read_csv(os.path.join("./outputs_combined/scenarios/accelerated_elec", i))
+            output = pd.read_csv(os.path.join("./outputs/test_doer_sf/accelerated_elec", i))
             expected = pd.read_csv(os.path.join("./tests_integration/test_data/expected_outputs", i))
 
             pd.testing.assert_frame_equal(
@@ -47,7 +48,4 @@ class TestScenarioCreator(unittest.TestCase):
             )
 
     def tearDown(self):
-        for i in self.files:
-            filepath = os.path.join("./outputs_combined/scenarios/accelerated_elec", i)
-            if os.path.exists(filepath):
-                os.remove(os.path.join(filepath))
+        shutil.rmtree("./outputs/test_doer_sf")

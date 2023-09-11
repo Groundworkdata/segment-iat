@@ -1,7 +1,7 @@
 """
 Unit tests for ScenarioCreator class
 """
-import json
+import shutil
 import unittest
 from unittest.mock import Mock, patch
 
@@ -62,7 +62,9 @@ class TestScenarioCreator(unittest.TestCase):
                 "sim_end_year": 2040,
                 "decarb_scenario": "continued_gas",
                 "buildings_config_filepath": "./tests/input_data/building_config.json",
-                "utility_network_config_filepath": "./tests/input_data/whatever.json"
+                "utility_network_config_filepath": "./tests/input_data/whatever.json",
+                "scenario_name": "wherever_accelerated_elec",
+                "street_segment": "wherever"
             }
         )
 
@@ -80,12 +82,15 @@ class TestScenarioCreator(unittest.TestCase):
             self.scenario_creator._get_decarb_scenario()
 
     def test_set_outputs_path(self):
+        self.scenario_creator.street_segment = "test_location"
         self.scenario_creator._decarb_scenario = "hybrid_gas"
 
         self.assertEqual(
             self.scenario_creator._set_outputs_path(),
-            "./outputs_combined/scenarios/hybrid_gas"
+            "./outputs/test_location/hybrid_gas"
         )
+
+        shutil.rmtree("./outputs/test_location")
 
     def test_get_years_vec(self):
         self.assertListEqual(

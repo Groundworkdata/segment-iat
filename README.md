@@ -5,21 +5,17 @@ The Tactical Thermal Transition (TTT) tool is a model for simulating energy inte
 The TTT tool is a local energy asset planning (LEAP) simulation tool. Interventions at individual buildings are aggregated "up" the network to account for total cost and energy consumption, at times triggering upstream interventions. For example, this can occur when all gas-consuming building assets are shutoff, triggering a shutoff of the gas service line to that building. The tool outputs a number of indicators that quantify how different interventions strategies impact costs, energy consumption patterns, and emissions.
 
 ## Running the tool
-The tool is executed via `run.py`. This script expects that the user has created all input files for the following scenario:
-* "continued_gas"
-* "accelerated_elec"
-* "accelerated_elec_higheff"
-* "natural_elec"
-* "natural_elec_higheff"
-* "hybrid_gas"
-* "hybrid_gas_immediate"
-* "hybrid_npa"
+The tool is executed via `run.py`. The user specifies which scenario(s) to run by providing the scenario IDs. These IDs should match the filename of the scenario settings file in `config_files/settings`. The script expects that the user has created all input files for the scenarios provided. The tool will display status updates to the user as the simulation is running.
 
-The user must specify which street segment to run. The tool currently assumes the user is executing the DOER scenarios. Therefore, executing `run.py` with `street_segment` set to `mf` will run all DOER multifamily scenarios. The user must edit the `run.py` file to run other street segments.
+The user can also provide a flag to `run.py` to perform post-processing on the results. This will combine output tables across scenarios for easier investigation and save them to `outputs_combined/scenario/combined`. Alternatively, the user can perform post-processing via the `postprocessing.py` script.
 
-Once all configuration files are created, the user can enter `python run.py` in a terminal to execute the tool. The tool will display status updates to the user as the simulation is running.
+### Example
+Suppose you want to run 3 different scenarios on a street segment (say, "continued_gas", "accelerated_elec", and "hybrid_npa") and combine the results from each simulation. We'll call the street segment "anytown_usa". Therefore, our settings files are "anytown_usa_continued_gas.json", "anytown_usa_accelerated_elec.json", and "anytown_usa_hybrid_npa.json". Create these settings files and then execute the following:
+```python
+python run.py anytown_usa_continued_gas anytown_usa_accelerated_elec anytown_usa_hybrid_npa --postprocessing
+```
 
-Once all scenarios are run, outputs can be combined via `python postprocessing.py`. This will combine output tables across scenarios for easier investigation and save them to `outputs_combined/scenario/combined`.
+For more information on `run.py` and the input values, execute `python run.py --help`.
 
 ### Outputs
 All output tables are written to CSVs, which can be utilized for further investigation. The output tables are as follows:
@@ -35,6 +31,26 @@ All output tables are written to CSVs, which can be utilized for further investi
 * `retrofit_cost`: The annual cost of retrofitting an asset.
 * `retrofit_year`: Similar to the `is_retrofit_vec_table`, except this vector is only `True` in the asset's retrofit year.
 * `stranded_val`: The stranded value of an asset in a given year if it is retrofit prior to the end of its useful life (before it fully depreciates).
+
+The outputs are written with the file heirarchy of `outputs/`, followed by the street segment name, followed by the scenario name for that street segment. Therefore, in the example given above, you would have the following file structure once complete:
+```
+outputs/
+|
+|---anytown_usa/
+|   |
+|   |---continued_gas/
+|   |   |
+|   |   |---book_value.csv
+...
+|   |---accelerated_elec/
+|   |   |
+|   |   |---book_value.csv
+...
+|   |---hybrid_npa/
+|   |   |
+|   |   |---book_value.csv
+...
+```
 
 ## Development
 The tool is developed in Python. Development and execution of the tool require an environment with Python >= 3.9 and the packages described in `requirements.txt`. The environment can be created using `pip` and `virtualenv`.

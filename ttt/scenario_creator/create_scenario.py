@@ -18,7 +18,7 @@ DEFAULT_SIM_END_YEAR = 2050
 FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
 
 SCENARIO_MAPPING_FILEPATH = "./config_files/scenario_mapping.json"
-OUTPUTS_BASEPATH = "./outputs_combined/scenarios"
+OUTPUTS_BASEPATH = "./outputs"
 
 DOMAIN_BUILDING = "building"
 TYPE_BUILDING_AGGREGATE = "building_aggregate"
@@ -55,6 +55,7 @@ class ScenarioCreator:
             each building to a CSV
 
     Attributes:
+        street_segment (str): The ID of the street segment being simulated
         buildings (Dict[str, Building]): Dict of instantiated Building objects, mapped by parcel ID
         utility_network (UtilityNetwork): Instantiated UtilityNetwork object for the street segment
 
@@ -76,11 +77,13 @@ class ScenarioCreator:
         self._years_vec: List[int] = []
         self._buildings_config: dict = {}
 
+        self.street_segment: str = ""
         self.buildings: Dict[str, Building] = {}
         self.utility_network: UtilityNetwork = None
 
     def create_scenario(self):
         self._sim_config = self._get_sim_settings()
+        self.street_segment = self._get_street_segment()
         self._decarb_scenario = self._get_decarb_scenario()
         self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
@@ -99,6 +102,12 @@ class ScenarioCreator:
             data = json.load(f)
 
         return data
+    
+    def _get_street_segment(self) -> str:
+        """
+        Return the street segment ID
+        """
+        return self._sim_config.get("street_segment")
 
     def _get_decarb_scenario(self) -> str:
         """
@@ -120,7 +129,16 @@ class ScenarioCreator:
         """
         Set the outputs filepath for this simulation
         """
-        return os.path.join(OUTPUTS_BASEPATH, self._decarb_scenario)
+        outputs_filepath = os.path.join(
+            OUTPUTS_BASEPATH,
+            self.street_segment,
+            self._decarb_scenario
+        )
+
+        if not os.path.exists(outputs_filepath):
+            os.makedirs(outputs_filepath)
+
+        return outputs_filepath
 
     def _get_years_vec(self) -> List[int]:
         return list(range(
