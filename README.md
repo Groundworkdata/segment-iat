@@ -5,9 +5,21 @@ The Tactical Thermal Transition (TTT) tool is a model for simulating energy inte
 The TTT tool is a local energy asset planning (LEAP) simulation tool. Interventions at individual buildings are aggregated "up" the network to account for total cost and energy consumption, at times triggering upstream interventions. For example, this can occur when all gas-consuming building assets are shutoff, triggering a shutoff of the gas service line to that building. The tool outputs a number of indicators that quantify how different interventions strategies impact costs, energy consumption patterns, and emissions.
 
 ## Running the tool
-The tool is executed via `run.py`. Once all configuration files are created, the user can enter `python run.py` in a terminal to execute the tool. The tool will display status updates to the user as the simulation is running.
+The tool is executed via `run.py`. This script expects that the user has created all input files for the following scenario:
+* "continued_gas"
+* "accelerated_elec"
+* "accelerated_elec_higheff"
+* "natural_elec"
+* "natural_elec_higheff"
+* "hybrid_gas"
+* "hybrid_gas_immediate"
+* "hybrid_npa"
 
-If the user wants to investigate multiple scenarios, run each scenario individually and then run `python postprocessing.py`. This will combine output tables across scenarios for easier investigation.
+The user must specify which street segment to run. The tool currently assumes the user is executing the DOER scenarios. Therefore, executing `run.py` with `street_segment` set to `mf` will run all DOER multifamily scenarios. The user must edit the `run.py` file to run other street segments.
+
+Once all configuration files are created, the user can enter `python run.py` in a terminal to execute the tool. The tool will display status updates to the user as the simulation is running.
+
+Once all scenarios are run, outputs can be combined via `python postprocessing.py`. This will combine output tables across scenarios for easier investigation and save them to `outputs_combined/scenario/combined`.
 
 ### Outputs
 All output tables are written to CSVs, which can be utilized for further investigation. The output tables are as follows:
