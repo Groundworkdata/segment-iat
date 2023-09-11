@@ -4,5 +4,7 @@
     "decarb_scenario": "continued_gas",
     "replacement_year": 2100,
     "buildings_config_filepath": "./config_files/buildings/configs/holyoke_mf_baseline.json",
-    "utility_network_config_filepath": "./config_files/utility_network/configs/holyoke_mf_network.json"
+    "utility_network_config_filepath": "./config_files/utility_network/configs/holyoke_mf_network.json",
+    "scenario_name": "holyoke_mf_continued_gas",
+    "street_segment": "holyoke_mf"
 }

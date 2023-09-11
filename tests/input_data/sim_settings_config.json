@@ -3,5 +3,7 @@
     "sim_end_year": 2040,
     "decarb_scenario": "continued_gas",
     "buildings_config_filepath": "./tests/input_data/building_config.json",
-    "utility_network_config_filepath": "./tests/input_data/whatever.json"
+    "utility_network_config_filepath": "./tests/input_data/whatever.json",
+    "scenario_name": "wherever_accelerated_elec",
+    "street_segment": "wherever"
 }
