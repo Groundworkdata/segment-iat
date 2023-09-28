@@ -66,10 +66,12 @@ class ScenarioCreator:
     def __init__(
             self,
             sim_settings_filepath: str,
-            write_building_energy_timeseries: bool = False
+            write_building_energy_timeseries: bool = False,
+            status_logging=None
     ):
         self._sim_settings_filepath: str = sim_settings_filepath
         self.write_building_energy_timeseries: bool = write_building_energy_timeseries
+        self.status_logging = status_logging
 
         self._sim_config: dict = {}
         self._decarb_scenario: str = ""
@@ -87,12 +89,13 @@ class ScenarioCreator:
         self._decarb_scenario = self._get_decarb_scenario()
         self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
-        print("Creating buildings...")
+        self._status_update("Creating buildings...", 0.25)
         self._create_building()
-        print("Creatingy utility network...")
+        self._status_update("Creating utility network...", 0.8)
         self._create_utility_network()
         self._write_outputs()
         self._get_utility_network_outputs()
+        self._status_update("Simulation complete!", 1.0)
 
     def _get_sim_settings(self) -> dict:
         """
@@ -158,8 +161,16 @@ class ScenarioCreator:
             data = json.load(f)
         self._buildings_config = data
 
+        num_buildings = len(self._buildings_config)
+        building_num = 0
+
         for building_params in self._buildings_config:
-            print("Creating building {}".format(building_params.get("building_id")))
+            building_num += 1
+            self._status_update(
+                f"Creating building {building_num} of {num_buildings}",
+                (building_num / num_buildings) * 0.5 + 0.25
+            )
+
             building = Building(
                 building_params,
                 self._sim_config
@@ -188,6 +199,8 @@ class ScenarioCreator:
         """
         Write output tables from all buildings
         """
+        self._status_update("Writing outputs", 0.9)
+
         years_vec = pd.Index(data=self._years_vec, name="year")
 
         # ---Is Retrofit Vec---
@@ -607,3 +620,12 @@ class ScenarioCreator:
                 }
             )
         print(pd.DataFrame(xmfrs))
+
+    def _status_update(self, msg: str, pct: float) -> None:
+        """
+        Display a status message on the progress of the simulation
+        """
+        if self.status_logging:
+            self.status_logging.progress(pct, msg)
+        else:
+            print(msg)
