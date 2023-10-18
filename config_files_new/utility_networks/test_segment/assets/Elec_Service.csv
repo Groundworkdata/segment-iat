@@ -1,0 +1,3 @@
+gisid,parentid,circuit,oh_ug,phase,sec_wsize,sec_wtype,inst_date,inst_cost,LOC_ID,lifetime
+EV001,ES001,200,OH,A,2,TRIPLEX,1/1/00,2000,F_001,40
+EV002,ES002,200,OH,A,2,TRIPLEX,1/1/00,2000,F_002,40

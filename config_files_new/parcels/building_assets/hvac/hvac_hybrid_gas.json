@@ -1,0 +1,8 @@
+{
+    "name": "hvac_hybrid_gas",
+    "uuid": "hvac_hybrid_gas",
+    "fuel_type": "hybrid_gas",
+    "install_cost": 1000,
+    "install_cost_dollars": 2022,
+    "lifetime": 30
+}

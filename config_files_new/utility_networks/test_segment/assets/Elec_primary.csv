@@ -1,0 +1,2 @@
+id,gisid,parentid,phase,oh_ug,circuit,pwire_size,voltage,inst_date,inst_cost,lifetime
+0,PL001,SUBSTATION,ABC,oh,200,336,13.8kV,1/1/00,10000,40

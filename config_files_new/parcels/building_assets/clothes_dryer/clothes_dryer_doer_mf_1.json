@@ -1,0 +1,8 @@
+{
+    "name": "clothes_dryer_doer_mf_1",
+    "uuid": "clothes_dryer_doer_mf_1",
+    "fuel_type": "natural_gas",
+    "install_cost": 1341,
+    "install_cost_dollars": 2022,
+    "lifetime": 30
+}

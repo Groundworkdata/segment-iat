@@ -12,7 +12,7 @@ GAS_SHUTOFF_SCENARIOS = [
     "hybrid_npa"
 ]
 DEFAULT_RETROFIT_FREQ = 7
-DEFAULT_RETROFIT_COST = 1100
+DEFAULT_RETROFIT_COST = 1000
 
 
 class GasMeter(Meter):
@@ -60,15 +60,17 @@ class GasMeter(Meter):
             "natural_gas",
         )
 
+        self._gas_shutoff: bool = kwargs.get("gas_shutoff_scenario", False)
+        self._gas_shutoff_year: int = kwargs.get("gas_shutoff_year")
         self._retrofit_cost = kwargs.get("replacement_cost", DEFAULT_RETROFIT_COST)
         self._retrofit_freq = kwargs.get("replacement_freq", DEFAULT_RETROFIT_FREQ)
 
     def get_operational_vector(self) -> list:
         building_scenario = self.building.retrofit_scenario
 
-        if building_scenario in GAS_SHUTOFF_SCENARIOS:
+        if self._gas_shutoff:
             return [
-                1 if self.install_year <= i and self.replacement_year > i else 0
+                1 if self.install_year <= i and self._gas_shutoff_year > i else 0
                 for i in self.years_vector
             ]
 

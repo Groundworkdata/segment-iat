@@ -399,6 +399,9 @@ class Building:
         Fuel type vector of dominant fuel in building. Based on inputs original_fuel_type and
         retrofit_fuel_type
         """
+        #TODO: There should be a heirarchy to this, based on the fuel of each asset, to determine these variables
+        # OR, we should be more explicit and just call this the heating fuel... as long as that translates
+        # properly to the fuel type of the other appliances
         original_fuel = self.building_params.get("original_fuel_type", None)
         retrofit_fuel = self.building_params.get("retrofit_fuel_type", None)
 
@@ -436,6 +439,7 @@ class Building:
             annual_fuel_consump = self._annual_energy_by_fuel[fuel]
             emissions_factor = EMISSION_FACTORS.get(fuel, 0)
 
+            #TODO: Make configurable
             if fuel == "electricity":
                 emissions_factor = np.zeros(len(self.years_vec))
                 for i in range(len(self.years_vec)):

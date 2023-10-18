@@ -62,7 +62,12 @@ class Asset:
     ):
         self.install_year: int = int(inst_date.split("/")[2])
         self.asset_cost: float = inst_cost
+
+        # Set the replacement year to something arbitrarily high if we are not replacing the asset
+        if not replacement_year:
+            replacement_year = 10000
         self.replacement_year: int = int(replacement_year)
+
         self.lifetime: int = lifetime
         self.sim_start_year: int = sim_start_year
         self.sim_end_year: int = sim_end_year

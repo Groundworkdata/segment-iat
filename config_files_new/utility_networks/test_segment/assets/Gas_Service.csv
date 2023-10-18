@@ -1,0 +1,3 @@
+gisid,parentid,inst_date,diameter,pressure,length_ft,material,LOC_ID,lifetime,inst_cost,replacement_cost
+GS001,GM001,1/1/00,2,LP,20,PL-A,F_001,40,10,6500
+GS002,GM001,1/1/00,2,LP,20,PL-A,F_002,40,10,6500

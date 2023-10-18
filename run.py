@@ -47,7 +47,8 @@ def main():
     print("==========Simulation pre-check==========")
     for scenario in scenarios:
 
-        settings_filepath = f"./config_files/settings/{scenario}.json"
+        # FIXME: Update after final changes
+        settings_filepath = f"./config_files_new/scenarios/{scenario}.json"
         settings_exist = os.path.exists(settings_filepath)
 
         if not settings_exist:
@@ -60,7 +61,8 @@ def main():
         print(f"==========Scenario: {scenario}==========")
         print("Loading inputs...")
 
-        settings_filepath = f"./config_files/settings/{scenario}.json"
+        # FIXME: Update after final changes
+        settings_filepath = f"./config_files_new/scenarios/{scenario}.json"
         scenario_creator = ScenarioCreator(settings_filepath)
 
         scenario_creator.create_scenario()

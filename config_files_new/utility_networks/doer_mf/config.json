@@ -1,0 +1,13 @@
+{
+    "util_segment_id": "doer_mf",
+    "util_operating_expenses": "./config_files_new/utility_networks/doer_mf/operating_expenses.csv",
+    "util_leakage_factors": "./config_files_new/utility_networks/doer_mf/leakage_factors.csv",
+    "gas_mains_config": "./config_files_new/utility_networks/doer_mf/assets/Gas_Main.csv",
+    "gas_services_config": "./config_files_new/utility_networks/doer_mf/assets/Gas_Service.csv",
+    "gas_meter_config": "./config_files_new/utility_networks/doer_mf/assets/Gas_Meter.csv",
+    "elec_primary_config": "./config_files_new/utility_networks/doer_mf/assets/Elec_primary.csv",
+    "elec_secondary_config": "./config_files_new/utility_networks/doer_mf/assets/Elec_secondary.csv",
+    "elec_service_config": "./config_files_new/utility_networks/doer_mf/assets/Elec_Service.csv",
+    "elec_meter_config": "./config_files_new/utility_networks/doer_mf/assets/Elec_meter.csv",
+    "elec_xfmrs_config": "./config_files_new/utility_networks/doer_mf/assets/Elec_xfmrs.csv"
+}

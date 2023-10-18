@@ -1,0 +1,3 @@
+gisid,parentid,inst_date,inst_cost,LOC_ID,lifetime,replacement_cost,replacement_freq
+GME001,GS001,1/1/18,300,F_001,40,400,7
+GME002,GS002,1/1/18,300,F_002,40,400,7

@@ -1,0 +1,8 @@
+{
+    "name": "domestic_hot_water_002",
+    "uuid": "domestic_hot_water_002",
+    "fuel_type": "electricity",
+    "install_cost": 2315,
+    "install_cost_dollars": 2022,
+    "lifetime": 30
+}

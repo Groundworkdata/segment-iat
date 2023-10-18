@@ -74,6 +74,25 @@ class UtilityNetwork:
             config_file_path=self._network_config_filepath
         )
 
+        #TODO: Fix this config later. Fix must include leak factors data as well (currently hard-coded)
+        self._network_config = {
+            "networks": {
+                "gas": {
+                    "mains_config": self._network_config["gas_mains_config"],
+                    "service_config": self._network_config["gas_services_config"],
+                    "meter_config": self._network_config["gas_meter_config"],
+                    "leakage_factors": self._network_config["util_leakage_factors"]
+                },
+                "elec": {
+                    "primary_config": self._network_config["elec_primary_config"],
+                    "secondary_config": self._network_config["elec_secondary_config"],
+                    "service_config": self._network_config["elec_service_config"],
+                    "meter_config": self._network_config["elec_meter_config"],
+                    "xfmrs_config": self._network_config["elec_xfmrs_config"]
+                }
+            }
+        }
+
         self._get_years_vec()
 
         # order is important
@@ -99,7 +118,7 @@ class UtilityNetwork:
         Read in the utilty network config file and save to network_config attr
         """
         with open(config_file_path) as f:
-            data = json.load(f)[0]
+            data = json.load(f)
         return data
 
     def _get_years_vec(self) -> None:
@@ -124,9 +143,11 @@ class UtilityNetwork:
         meter_config_file = self._network_config["networks"]["gas"]["meter_config"]
         meter_configs = self._read_csv_config(config_file_path=meter_config_file)
 
+
         for _, meter_config in meter_configs.iterrows():
             building_id = meter_config["LOC_ID"]
             building = self.buildings.get(building_id, None)
+
             gas_meter = GasMeter(**meter_config, **self._sim_settings, building=building)
             gas_meter.initialize_end_use()
             self.gas_meters.append(gas_meter)
@@ -149,8 +170,20 @@ class UtilityNetwork:
                 parent_id=service_config["gisid"], all_children=self.gas_meters
             )
 
+            service_retrofit_params = next(
+                (
+                    item for item in self._sim_settings["util_retrofit_schedule"]
+                    if item.get("asset_id") == service_config["gisid"]
+                    and item.get("asset_type") == "gas_service"
+                ),
+                {}
+            )
+
             gas_service = GasService(
-                **service_config, **self._sim_settings, connected_assets=connected_meters
+                **service_config,
+                **service_retrofit_params,
+                **self._sim_settings,
+                connected_assets=connected_meters
             )
 
             gas_service.initialize_end_use()
@@ -168,8 +201,20 @@ class UtilityNetwork:
                 parent_id=main_config["gisid"], all_children=self.gas_services
             )
 
+            main_retrofit_params = next(
+                (
+                    item for item in self._sim_settings["util_retrofit_schedule"]
+                    if item.get("asset_id") == main_config["gisid"]
+                    and item.get("asset_type") == "gas_main"
+                ),
+                {}
+            )
+
             gas_main = GasMain(
-                **main_config, **self._sim_settings, connected_assets=connected_services
+                **main_config,
+                **main_retrofit_params,
+                **self._sim_settings,
+                connected_assets=connected_services
             )
 
             gas_main.initialize_end_use()
@@ -185,6 +230,7 @@ class UtilityNetwork:
         for _, meter_config in meter_configs.iterrows():
             building_id = meter_config["LOC_ID"]
             building = self.buildings.get(building_id, None)
+
             elec_meter = ElecMeter(
                 **meter_config, **self._sim_settings, building=building
             )

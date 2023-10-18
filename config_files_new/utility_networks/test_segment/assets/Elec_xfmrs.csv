@@ -1,0 +1,2 @@
+gisid,parentid,circuit,trans_qty,tr_secvolt,bank_KVA,PolePadVLT,inst_date,inst_cost,lifetime
+TB001,PL001,200,1,120/240,37,Pole,1/1/00,10000,40

@@ -1,0 +1,8 @@
+{
+    "name": "clothes_dryer_002",
+    "uuid": "clothes_dryer_002",
+    "fuel_type": "electricity",
+    "install_cost": 2757,
+    "install_cost_dollars": 2022,
+    "lifetime": 30
+}
