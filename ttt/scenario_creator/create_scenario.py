@@ -110,21 +110,21 @@ class ScenarioCreator:
         """
         Return the street segment ID
         """
-        return self._sim_config.get("street_segment")
+        return self._sim_config.get("segment_id")
 
     def _get_decarb_scenario(self) -> str:
         """
         Get the decarb scenario and check that it is valid
         """
-        input_scenario = self._sim_config.get("decarb_scenario")
+        input_scenario = self._sim_config.get("scenario_name")
 
-        if input_scenario not in DECARB_SCENARIOS:
-            raise ValueError(
-                "Invalid scenario provided. "
-                "User provided {0} but allowable values are one of: {1}".format(
-                    input_scenario, DECARB_SCENARIOS
-                )
-            )
+        # if input_scenario not in DECARB_SCENARIOS:
+        #     raise ValueError(
+        #         "Invalid scenario provided. "
+        #         "User provided {0} but allowable values are one of: {1}".format(
+        #             input_scenario, DECARB_SCENARIOS
+        #         )
+        #     )
         
         return input_scenario
 
@@ -150,25 +150,54 @@ class ScenarioCreator:
         ))
 
     def _create_building(self) -> None:
-        building_config_filepath = self._sim_config.get("buildings_config_filepath")
+        segment_filepath = f"./config_files_new/segments/{self.street_segment}.json"
 
-        if not os.path.exists(building_config_filepath):
-            raise ValueError(
-                f"Filepath {building_config_filepath} for buildling configuration does not exist!"
+        if not os.path.exists(segment_filepath):
+            raise FileNotFoundError(
+                f"Segment configuration file for segment ID '{self.street_segment}' not found!"
             )
 
-        with open(building_config_filepath) as f:
-            data = json.load(f)
-        self._buildings_config = data
+        with open(segment_filepath) as f:
+            segment_data = json.load(f)
 
-        num_buildings = len(self._buildings_config)
+        parcels = segment_data.get("parcel_ids")
+
+
+        # building_config_filepath = self._sim_config.get("buildings_config_filepath")
+
+        # if not os.path.exists(building_config_filepath):
+        #     raise ValueError(
+        #         f"Filepath {building_config_filepath} for buildling configuration does not exist!"
+        #     )
+
+        # with open(building_config_filepath) as f:
+        #     data = json.load(f)
+        # self._buildings_config = data
+
+        num_buildings = len(parcels)
         building_num = 0
 
-        for building_params in self._buildings_config:
+        for building_id in parcels:
             building_num += 1
             self._status_update(
                 f"Creating building {building_num} of {num_buildings}",
                 (building_num / num_buildings) * 0.5 + 0.25
+            )
+
+            building_params_filepath = f"./config_files_new/parcels/configs/{building_id}.json"
+            with open(building_params_filepath) as f:
+                building_params = json.load(f)
+
+            building_retrofit_schedule = next(
+                item for item in self._sim_config["parcel_retrofit_schedule"]
+                if item["parcel_uuid"] == building_id
+            )
+
+            # Now for some ugly magic to massage the new config format into the old. This will
+            # minimize the changes for now
+            building_params = self._update_building_params(
+                building_params,
+                building_retrofit_schedule
             )
 
             building = Building(
@@ -183,11 +212,83 @@ class ScenarioCreator:
 
             self.buildings[building.building_id] = building
 
+    def _update_building_params(self, building_params: dict, building_retrofit_schedule: dict) -> dict:
+        """
+        Update the building parameters dict to conform to expected inputs.
+        Patch as we test new db structure
+
+        Returns:
+            dict: Dict of building params for the Building module
+        """
+        # The building_id
+        building_params["building_id"] = building_params["parcel_id"]
+
+        # resstock overwrite
+        building_params["resstock_overwrite"] = True
+
+        # The overall install and retrofit years
+        asset_replacements = [i["install_year"] for i in building_retrofit_schedule["assets"]]
+        building_params["retrofit_year"] = min(asset_replacements)
+
+        # The overall original and retrofit fuel types
+        building_params["original_fuel_type"] = building_params["heating_fuel"]
+        building_params["retrofit_fuel_type"] = building_retrofit_schedule["replacement_fuel"]
+
+        # The asset schedules
+        for asset in building_params["end_uses"]:
+            asset_type = asset["end_use"]
+            asset_id = asset["uuid"]
+            asset_params_filepath = f"./config_files_new/parcels/building_assets/{asset_type}/{asset_id}.json"
+            with open(asset_params_filepath, "r") as f:
+                asset_params = json.load(f)
+            # existing_install_year
+            asset["existing_install_year"] = asset["install_year"]
+            # replacement_cost_dollars_year -- do we just default this for now?
+            asset["replacement_cost_dollars_year"] = asset_params["install_cost_dollars"]
+            # lifetime
+            asset["lifetime"] = asset_params["lifetime"]
+
+            # replacement asset
+            retrofit_assets = building_retrofit_schedule["assets"]
+            retrofit_asset_schedule = next(
+                item for item in retrofit_assets
+                if item["asset_type"] == asset_type
+            )
+            retrofit_asset_id = retrofit_asset_schedule["replacement_asset_uuid"]
+
+            replacement_asset_params_filepath = f"./config_files_new/parcels/building_assets/{asset_type}/{retrofit_asset_id}.json"
+            with open(replacement_asset_params_filepath, "r") as f:
+                retrofit_asset_params = json.load(f)
+            # replacement_year
+            asset["replacement_year"] = retrofit_asset_schedule["install_year"]
+            # replacement_lifetime
+            asset["replacement_lifetime"] = retrofit_asset_params["lifetime"]
+
+        # The extra costs
+        building_params["building_level_costs"] = {
+            "retrofit_adder": {
+                building_params["building_class_size"]: building_retrofit_schedule["additional_retrofit_costs"]
+            }
+        }
+
+        # Consump filepaths
+        building_params["reference_consump_filepath"] = building_params["parcel_baseline_consump_filepath"]
+        building_params["retrofit_consump_filepath"] = building_retrofit_schedule["parcel_retrofit_consumption_filepath"]
+
+        # Consumption cost filepath
+        building_params["consump_costs_filepath"] = self._sim_config["energy_consump_rates_filepath"]
+
+        # Asset cost filepaths
+        building_params["retrofit_asset_cost_filepath"] = self._sim_config["retrofit_asset_cost_filepath"]
+
+        return building_params
+
     def _create_utility_network(self):
         """
         Create the utility network based on the input config
         """
-        utility_network_config_filepath = self._sim_config.get("utility_network_config_filepath")
+        utility_segment_id = self._sim_config["util_segment_id"]
+        utility_network_config_filepath = f"./config_files_new/utility_networks/{utility_segment_id}/config.json"
 
         self.utility_network = UtilityNetwork(
             utility_network_config_filepath, self._sim_config, self.buildings

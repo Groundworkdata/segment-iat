@@ -1,0 +1,8 @@
+{
+    "name": "stove_002",
+    "uuid": "stove_002",
+    "fuel_type": "electricity",
+    "install_cost": 1767.25,
+    "install_cost_dollars": 2022,
+    "lifetime": 30
+}

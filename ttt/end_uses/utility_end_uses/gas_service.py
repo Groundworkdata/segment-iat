@@ -9,15 +9,7 @@ import warnings
 from ttt.end_uses.utility_end_uses.pipeline import Pipeline
 
 
-GAS_SHUTOFF_SCENARIOS = [
-    "natural_elec", "accelerated_elec",
-    "natural_elec_higheff", "accelerated_elec_higheff",
-    "hybrid_npa"
-]
-GAS_RETROFIT_SCENARIOS = [
-    "natural_elec", "natural_elec_higheff", "hybrid_gas", "continued_gas", "hybrid_gas_immediate"
-]
-RETROFIT_YEAR = 2025
+DEFAULT_REPLACEMENT_YEAR = 2025
 ANNUAL_OM_FILEPATH = "./config_files/utility_network/gas_operating_expenses.csv"
 
 
@@ -79,6 +71,8 @@ class GasService(Pipeline):
             "gas_service",
         )
 
+        self._gas_shutoff: bool = kwargs.get("gas_shutoff_scenario", False)
+        self._gas_replacement_year: bool = kwargs.get("replacement_year", DEFAULT_REPLACEMENT_YEAR)
         self.replacement_cost = kwargs.get("replacement_cost", 0)
         self.book_value: list = []
         self.shutoff_year: list = []
@@ -105,34 +99,34 @@ class GasService(Pipeline):
 
     def _get_replacement_vec(self) -> List[bool]:
         replacement_vec = [False] * len(self.years_vector)
-        if self.decarb_scenario in GAS_RETROFIT_SCENARIOS:
-            replacement_vec[RETROFIT_YEAR - self.sim_start_year] = True
+        if not self._gas_shutoff:
+            replacement_vec[self._gas_replacement_year - self.sim_start_year] = True
 
         return replacement_vec
 
     def get_retrofit_vector(self) -> list:
         retrofit_vector = np.zeros(len(self.years_vector))
-        if self.decarb_scenario in GAS_RETROFIT_SCENARIOS:
-            retrofit_vector[RETROFIT_YEAR - self.sim_start_year:] = 1
+        if not self._gas_shutoff:
+            retrofit_vector[self._gas_replacement_year - self.sim_start_year:] = 1
 
         return retrofit_vector.astype(bool).tolist()
 
     def get_install_cost(self) -> list:
         install_cost = np.zeros(len(self.years_vector))
 
-        if self.decarb_scenario in GAS_RETROFIT_SCENARIOS:
-            install_cost[RETROFIT_YEAR - self.sim_start_year] = self.replacement_cost
+        if not self._gas_shutoff:
+            install_cost[self._gas_replacement_year - self.sim_start_year] = self.replacement_cost
 
         return install_cost.tolist()
 
     def get_depreciation(self) -> List[float]:
         depreciation = np.zeros(len(self.years_vector))
 
-        if self.decarb_scenario in GAS_RETROFIT_SCENARIOS:
+        if not self._gas_shutoff:
             depreciation_rate = self.replacement_cost / self.lifetime
-            depreciation[RETROFIT_YEAR - self.sim_start_year:] = [
+            depreciation[self._gas_replacement_year - self.sim_start_year:] = [
                 max(self.replacement_cost - depreciation_rate * i, 0)
-                for i in range(self.sim_end_year - RETROFIT_YEAR)
+                for i in range(self.sim_end_year - self._gas_replacement_year)
             ]
 
         return depreciation.tolist()
@@ -143,7 +137,7 @@ class GasService(Pipeline):
     def get_shutoff_year(self) -> List[float]:
         shutoff_year_vec = [0] * len(self.years_vector)
 
-        if self.decarb_scenario in GAS_SHUTOFF_SCENARIOS:
+        if self._gas_shutoff:
             shutoff_year_vec = self.connected_assets[0].building._retrofit_vec
 
         return shutoff_year_vec

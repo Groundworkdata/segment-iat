@@ -1,0 +1,87 @@
+{
+    "sim_start_year": 2020,
+    "sim_end_year": 2066,
+    "segment_id": "test_segment",
+    "sim_name": "test_segment_hybrid_gas",
+    "sim_uuid": "test_segment_hybrid_gas",
+    "scenario_name": "hybrid_gas",
+    "gas_shutoff_scenario": false,
+    "retrofit_asset_cost_filepath": "./config_files_new/parcels/retrofit_costs/test_segment_retrofit_001.csv",
+    "parcel_retrofit_schedule": [
+        {
+            "parcel_uuid": "F_001",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_001",
+                    "install_year": 2028
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_hybrid_gas",
+                    "install_year": 2028
+                },
+                {
+                    "asset_type": "dhw",
+                    "replacement_asset_uuid": "dhw_001",
+                    "install_year": 2028
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_001",
+                    "install_year": 2028
+                }
+            ],
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files_new/parcels/energy_consumption/MF_Whole-HighEff-noEncl_ELEC.csv",
+            "additional_retrofit_costs": 0
+        },
+        {
+            "parcel_uuid": "F_002",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_002",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_hybrid_gas",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "dhw",
+                    "replacement_asset_uuid": "dhw_002",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_002",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files_new/parcels/energy_consumption/MF_Whole-HighEff-noEncl_ELEC.csv",
+            "additional_retrofit_costs": 10
+        }
+    ],
+    "energy_consump_rates_filepath": "./config_files_new/parcels/energy_consumption_rates/test_segment_consump_costs.csv",
+    "util_segment_id": "test_segment",
+    "util_retrofit_schedule": [
+        {
+            "asset_id": "GM001",
+            "asset_type": "gas_main",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS001",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS002",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        }
+    ]
+}

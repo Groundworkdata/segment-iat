@@ -1,0 +1,31 @@
+{
+    "parcel_id": "F_753492_2717319",
+    "parcel_uuid": "F_753492_2717319",
+    "heating_fuel": "natural_gas",
+    "end_uses": [
+        {
+            "end_use": "stove",
+            "uuid": "stove_doer_mf_1",
+            "install_year": 2012
+        },
+        {
+            "end_use": "clothes_dryer",
+            "uuid": "clothes_dryer_doer_mf_1",
+            "install_year": 2012
+        },
+        {
+            "end_use": "domestic_hot_water",
+            "uuid": "domestic_hot_water_doer_mf_1",
+            "install_year": 2012
+        },
+        {
+            "end_use": "hvac",
+            "uuid": "hvac_doer_mf_1",
+            "install_year": 2012
+        }
+    ],
+    "building_class_size": "small",
+    "parcel_baseline_consump_filepath": "./config_files/buildings/energy_consumption/MF_Existing_GAS.csv",
+    "load_scaling_factor": 0.75,
+    "original_asset_cost_filepath": "./config_files_new/parcels/retrofit_costs/doer_mf_segment_baseline.csv"
+}
