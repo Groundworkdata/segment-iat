@@ -1,0 +1,550 @@
+{
+    "sim_start_year": 2020,
+    "sim_end_year": 2050,
+    "segment_id": "doer_mf_segment",
+    "sim_name": "doer_mf_segment_baseline",
+    "sim_uuid": "doer_mf_segment_retrofit_002",
+    "scenario_name": "baseline",
+    "gas_shutoff_scenario": false,
+    "gas_shutoff_year": 2100,
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_mf_segment_baseline.csv",
+    "parcel_retrofit_schedule": [
+        {
+            "parcel_uuid": "F_753432_2717080",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753569_2717047",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2032
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2032
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2032
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2032
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753515_2717411",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753646_2717355",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2041
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2041
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2041
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2041
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753504_2717366",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2030
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2030
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2030
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2030
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753526_2717454",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2028
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2028
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2028
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2028
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753629_2717285",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2038
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2038
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2038
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2038
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753421_2717033",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2026
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753674_2717470",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753588_2717245",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753474_2717148",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2043
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753480_2717271",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2040
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2040
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2040
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2040
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753409_2716987",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2042
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2042
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2042
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2042
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753581_2717093",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2037
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2037
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2037
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2037
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753663_2717423",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2045
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2045
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2045
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2045
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_753492_2717319",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_doer_mf_natural_gas_small",
+                    "install_year": 2035
+                }
+            ],
+            "replacement_fuel": "natural_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/MF_Existing_GAS.csv",
+            "additional_retrofit_costs": null
+        }
+    ],
+    "energy_consump_rates_filepath": "./config_files/parcels/energy_consumption_rates/doer_mf_segment_consump_costs.csv",
+    "util_segment_id": "doer_mf",
+    "util_retrofit_schedule": [
+        {
+            "asset_id": "GS216",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS228",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS234",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS235",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS254",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS273",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS274",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS287",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS288",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS292",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS302",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS303",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS315",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS312",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS875",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GS245",
+            "asset_type": "gas_service",
+            "replacement_year": 2025
+        },
+        {
+            "asset_id": "GM201",
+            "asset_type": "gas_main",
+            "replacement_year": 2025
+        }
+    ]
+}

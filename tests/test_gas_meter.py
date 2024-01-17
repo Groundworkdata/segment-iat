@@ -12,6 +12,7 @@ class TestGasMeter(unittest.TestCase):
         building_mock = Mock()
         building_mock.retrofit_scenario = "hybrid_npa"
         building_mock.building_params = {"retrofit_year": 2025}
+        building_mock._fuel_type = ["GAS"] * 5 + ["NPH"] * 5
 
         kwargs = {
             "gisid": "100",
@@ -24,20 +25,21 @@ class TestGasMeter(unittest.TestCase):
             "replacement_year": 2021,
             "decarb_scenario": "hybrid_npa",
             "building": building_mock,
+            "gas_shutoff_scenario": True,
+            "gas_shutoff_year": 2025
         }
 
         self.gas_meter = GasMeter(**kwargs)
         self.gas_meter.years_vector = list(range(2020, 2030))
 
     def test_get_operational_vector(self):
-
         self.assertListEqual(
             [1] * 5 + [0] * 5,
             self.gas_meter.get_operational_vector()
         )
 
     def test_get_operational_vector_gas(self):
-        self.gas_meter.building.retrofit_scenario = "hybrid_gas"
+        self.gas_meter._gas_shutoff = False
 
         self.assertEqual(
             [1] * 10,
@@ -54,7 +56,7 @@ class TestGasMeter(unittest.TestCase):
         self.gas_meter.operational_vector = [1] * 10
 
         self.assertEqual(
-            [0.]*6 + [1100.] + [0.]*3,
+            [0.]*6 + [1000.] + [0.]*3,
             self.gas_meter.get_retrofit_cost()
         )
 
@@ -62,6 +64,6 @@ class TestGasMeter(unittest.TestCase):
         self.gas_meter.years_vector = list(range(2020, 2054))
 
         self.assertEqual(
-            [0.]*6 + [1100.] + [0.]*6 + [1100.] + [0.]*6 + [1100.] + [0.]*6 + [1100.] + [0.]*6,
+            [0.]*6 + [1000.] + [0.]*6 + [1000.] + [0.]*6 + [1000.] + [0.]*6 + [1000.] + [0.]*6,
             self.gas_meter.get_retrofit_cost()
         )

@@ -1,0 +1,31 @@
+{
+    "parcel_id": "F_350460_2902490",
+    "parcel_uuid": "F_350460_2902490",
+    "heating_fuel": "natural_gas",
+    "end_uses": [
+        {
+            "end_use": "stove",
+            "uuid": "stove_holyoke_sf_natural_gas_medium_1",
+            "install_year": 2005
+        },
+        {
+            "end_use": "clothes_dryer",
+            "uuid": "clothes_dryer_holyoke_sf_natural_gas_medium_1",
+            "install_year": 2005
+        },
+        {
+            "end_use": "domestic_hot_water",
+            "uuid": "domestic_hot_water_holyoke_sf_natural_gas_medium_1",
+            "install_year": 2005
+        },
+        {
+            "end_use": "hvac",
+            "uuid": "hvac_holyoke_sf_natural_gas_medium_1",
+            "install_year": 2005
+        }
+    ],
+    "building_class_size": "medium",
+    "parcel_baseline_consump_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+    "load_scaling_factor": 0.957287836,
+    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_sf_baseline.csv"
+}
