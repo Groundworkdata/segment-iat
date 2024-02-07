@@ -1,0 +1,31 @@
+{
+    "parcel_id": "F_715195_2938669",
+    "parcel_uuid": "F_715195_2938669",
+    "heating_fuel": "fuel_oil",
+    "end_uses": [
+        {
+            "end_use": "stove",
+            "uuid": "stove_doer_sf_electricity_small_1",
+            "install_year": 2018
+        },
+        {
+            "end_use": "clothes_dryer",
+            "uuid": "clothes_dryer_doer_sf_electricity_small_1",
+            "install_year": 2018
+        },
+        {
+            "end_use": "domestic_hot_water",
+            "uuid": "domestic_hot_water_doer_sf_fuel_oil_small_1",
+            "install_year": 2018
+        },
+        {
+            "end_use": "hvac",
+            "uuid": "hvac_doer_sf_fuel_oil_small_1",
+            "install_year": 2018
+        }
+    ],
+    "building_class_size": "small",
+    "parcel_baseline_consump_filepath": "./config_files/parcels/energy_consumption/SF_Existing_OIL.csv",
+    "load_scaling_factor": 0.857,
+    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_baseline.csv"
+}

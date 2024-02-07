@@ -1,8 +1,0 @@
-{
-    "name": "hvac_doer_mf_1",
-    "uuid": "hvac_doer_mf_1",
-    "fuel_type": "natural_gas",
-    "install_cost": 14992.56,
-    "install_cost_dollars": 2022,
-    "lifetime": 30
-}

@@ -1,8 +1,0 @@
-{
-    "name": "stove_doer_mf_2",
-    "uuid": "stove_doer_mf_2",
-    "fuel_type": "electricity",
-    "install_cost": 1507.65,
-    "install_cost_dollars": 2022,
-    "lifetime": 30
-}

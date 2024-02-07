@@ -66,11 +66,23 @@ class GasMeter(Meter):
         self._retrofit_freq = kwargs.get("replacement_freq", DEFAULT_RETROFIT_FREQ)
 
     def get_operational_vector(self) -> list:
-        building_scenario = self.building.retrofit_scenario
+        """
+        Use building fuel to determine if there is still gas or not
+        Take min of first year without gas and self._gas_shutoff_year
+
+        Building _fuel_type can take values of: [GAS, OIL, ELEC, LPG, HPL, NPH]
+        """
+        building_fuel = self.building._fuel_type
+        final_gas_year = (
+            len(building_fuel) - 1 - building_fuel[::-1].index("GAS")
+            + self.sim_start_year
+        )
+
+        gas_shutoff_year = min(self._gas_shutoff_year, final_gas_year+1)
 
         if self._gas_shutoff:
             return [
-                1 if self.install_year <= i and self._gas_shutoff_year > i else 0
+                1 if self.install_year <= i and gas_shutoff_year > i else 0
                 for i in self.years_vector
             ]
 

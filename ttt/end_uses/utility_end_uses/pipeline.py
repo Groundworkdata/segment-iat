@@ -125,7 +125,8 @@ class Pipeline(UtilityEndUse):
             self.annual_total_leakage = self.get_annual_total_leakage()
 
     def _load_leakage_factors(self) -> int:
-        leakage_factor_file = "./config_files/utility_network/leakage_factors.csv"
+        #TODO: Make configurable
+        leakage_factor_file = "./config_files/utility_networks/doer_mf/leakage_factors.csv"
         return self._read_csv_config(config_file_path=leakage_factor_file)
 
     def get_annual_total_energy_use(self) -> dict:

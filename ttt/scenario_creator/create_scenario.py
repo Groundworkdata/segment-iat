@@ -14,10 +14,11 @@ from ttt.utility_network.utility_network import UtilityNetwork
 
 DEFAULT_SIM_START_YEAR = 2020
 DEFAULT_SIM_END_YEAR = 2050
+DEFAULT_ASSET_LIFETIME = 30
+DEFAULT_REPLACEMENT_COST_DOLLARS_YEAR = 2022
 
 FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
 
-SCENARIO_MAPPING_FILEPATH = "./config_files/scenario_mapping.json"
 OUTPUTS_BASEPATH = "./outputs"
 
 DOMAIN_BUILDING = "building"
@@ -150,7 +151,7 @@ class ScenarioCreator:
         ))
 
     def _create_building(self) -> None:
-        segment_filepath = f"./config_files_new/segments/{self.street_segment}.json"
+        segment_filepath = f"./config_files/segments/{self.street_segment}.json"
 
         if not os.path.exists(segment_filepath):
             raise FileNotFoundError(
@@ -184,7 +185,7 @@ class ScenarioCreator:
                 (building_num / num_buildings) * 0.5 + 0.25
             )
 
-            building_params_filepath = f"./config_files_new/parcels/configs/{building_id}.json"
+            building_params_filepath = f"./config_files/parcels/configs/{building_id}.json"
             with open(building_params_filepath) as f:
                 building_params = json.load(f)
 
@@ -238,15 +239,16 @@ class ScenarioCreator:
         for asset in building_params["end_uses"]:
             asset_type = asset["end_use"]
             asset_id = asset["uuid"]
-            asset_params_filepath = f"./config_files_new/parcels/building_assets/{asset_type}/{asset_id}.json"
-            with open(asset_params_filepath, "r") as f:
-                asset_params = json.load(f)
+
             # existing_install_year
             asset["existing_install_year"] = asset["install_year"]
-            # replacement_cost_dollars_year -- do we just default this for now?
-            asset["replacement_cost_dollars_year"] = asset_params["install_cost_dollars"]
+
+            # TODO: Create and incorporate individual asset config files for original and replacement asset
+            # Note that some asset config files are created, but they are not connected!
+            # replacement_cost_dollars_year
+            asset["replacement_cost_dollars_year"] = DEFAULT_REPLACEMENT_COST_DOLLARS_YEAR
             # lifetime
-            asset["lifetime"] = asset_params["lifetime"]
+            asset["lifetime"] = DEFAULT_ASSET_LIFETIME
 
             # replacement asset
             retrofit_assets = building_retrofit_schedule["assets"]
@@ -254,15 +256,14 @@ class ScenarioCreator:
                 item for item in retrofit_assets
                 if item["asset_type"] == asset_type
             )
-            retrofit_asset_id = retrofit_asset_schedule["replacement_asset_uuid"]
 
-            replacement_asset_params_filepath = f"./config_files_new/parcels/building_assets/{asset_type}/{retrofit_asset_id}.json"
-            with open(replacement_asset_params_filepath, "r") as f:
-                retrofit_asset_params = json.load(f)
+            # TODO: Create and incorporate individual asset config files for original and replacement asset
+            # Note that some asset config files are created, but they are not connected!
+
             # replacement_year
             asset["replacement_year"] = retrofit_asset_schedule["install_year"]
             # replacement_lifetime
-            asset["replacement_lifetime"] = retrofit_asset_params["lifetime"]
+            asset["replacement_lifetime"] = DEFAULT_ASSET_LIFETIME
 
         # The extra costs
         building_params["building_level_costs"] = {
@@ -288,7 +289,7 @@ class ScenarioCreator:
         Create the utility network based on the input config
         """
         utility_segment_id = self._sim_config["util_segment_id"]
-        utility_network_config_filepath = f"./config_files_new/utility_networks/{utility_segment_id}/config.json"
+        utility_network_config_filepath = f"./config_files/utility_networks/{utility_segment_id}/config.json"
 
         self.utility_network = UtilityNetwork(
             utility_network_config_filepath, self._sim_config, self.buildings
