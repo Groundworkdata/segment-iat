@@ -54,6 +54,7 @@ METHANE_LEAKS = {
 
 #TODO: Make configurable for different geographies
 EMISSION_FACTORS = { # tCO2 / kWh
+    # Should be metric tons rather than imperial...
     "natural_gas": (53 / (293 * 907)), # Input of kgCO2 / MMBtu
     "electricity": 0.45 / 1000, # Input of tCO2 / MWh
     "fuel_oil": (73.96 / (293 * 907)), # Input of kgCO2 / MMBtu
