@@ -27,5 +27,5 @@
     "building_class_size": "medium",
     "parcel_baseline_consump_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
     "load_scaling_factor": 0.957496736,
-    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_sf_baseline.csv"
+    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_sf_segment_baseline.csv"
 }

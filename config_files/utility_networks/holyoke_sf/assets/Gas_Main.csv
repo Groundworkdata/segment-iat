@@ -1,0 +1,2 @@
+﻿gisid,parentid,parentid2,size_in,material,pressure,length_ft,inst_date,inst_cost,lifetime,replacement_cost,shutoff_cost
+GP001,GP000,END,2,CI,LP,500,1/1/1930,4735,40,125000,20000

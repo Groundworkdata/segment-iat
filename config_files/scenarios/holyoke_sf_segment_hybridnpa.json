@@ -1,0 +1,466 @@
+{
+    "sim_start_year": 2020,
+    "sim_end_year": 2050,
+    "segment_id": "holyoke_sf_segment",
+    "sim_name": "holyoke_sf_segment_hybridnpa",
+    "sim_uuid": "holyoke_sf_segment_retrofit_002",
+    "scenario_name": "hybridnpa",
+    "gas_shutoff_scenario": true,
+    "gas_shutoff_year": 2025,
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_sf_segment_hybridnpa.csv",
+    "parcel_retrofit_schedule": [
+        {
+            "parcel_uuid": "F_350460_2902490",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_LPG.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350459_2902427",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_LPG.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350459_2902366",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2044
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2044
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2044
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2044
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350459_2902307",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_LPG.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350459_2902248",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2047
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2047
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2047
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2047
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350458_2902189",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2041
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2041
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2041
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2041
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350458_2902131",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_LPG.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350457_2902072",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_propane_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_LPG.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350335_2902479",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2039
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2039
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2039
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2039
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350334_2902417",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2026
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2026
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350333_2902360",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2025
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2025
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350332_2902301",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2039
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2039
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2039
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2039
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350331_2902242",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2024
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2024
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2024
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2024
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350331_2902122",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2030
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2030
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2030
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2030
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350330_2902182",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2045
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2045
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2045
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2045
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        },
+        {
+            "parcel_uuid": "F_350329_2902061",
+            "assets": [
+                {
+                    "asset_type": "stove",
+                    "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
+                    "install_year": 2031
+                },
+                {
+                    "asset_type": "clothes_dryer",
+                    "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
+                    "install_year": 2031
+                },
+                {
+                    "asset_type": "domestic_hot_water",
+                    "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
+                    "install_year": 2031
+                },
+                {
+                    "asset_type": "hvac",
+                    "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_npa_medium",
+                    "install_year": 2031
+                }
+            ],
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
+            "additional_retrofit_costs": null
+        }
+    ],
+    "energy_consump_rates_filepath": "./config_files/parcels/energy_consumption_rates/holyoke_sf_segment_consump_costs.csv",
+    "util_segment_id": "holyoke_sf",
+    "util_retrofit_schedule": [
+        {}
+    ]
+}
