@@ -1,6 +1,6 @@
 {
     "sim_start_year": 2020,
-    "sim_end_year": 2050,
+    "sim_end_year": 2066,
     "segment_id": "holyoke_mf_segment",
     "sim_name": "holyoke_mf_segment_hybridnpa",
     "sim_uuid": "holyoke_mf_segment_retrofit_002",

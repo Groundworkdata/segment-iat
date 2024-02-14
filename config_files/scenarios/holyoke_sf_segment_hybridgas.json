@@ -1,6 +1,6 @@
 {
     "sim_start_year": 2020,
-    "sim_end_year": 2050,
+    "sim_end_year": 2066,
     "segment_id": "holyoke_sf_segment",
     "sim_name": "holyoke_sf_segment_hybridgas",
     "sim_uuid": "holyoke_sf_segment_retrofit_002",
