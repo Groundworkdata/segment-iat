@@ -1,0 +1,4 @@
+﻿parentid,bank_KVA,circut,trans_qty,PolePadVLT,inst_date,inst_cost,gisid,lifetime
+EP001,37.50,99,1,Pole,1/1/2010,10000,TB001,40
+EP001,37.50,99,1,Pole,1/1/2010,10000,TB002,40
+EP001,37.50,99,1,Pole,1/10/2010,10000,TB003,40
