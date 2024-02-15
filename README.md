@@ -5,12 +5,12 @@ The Tactical Thermal Transition (TTT) tool is a model for simulating energy inte
 The TTT tool is a local energy asset planning (LEAP) simulation tool. Interventions at individual buildings are aggregated "up" the network to account for total cost and energy consumption, at times triggering upstream interventions. For example, this can occur when all gas-consuming building assets are shutoff, triggering a shutoff of the gas service line to that building. The tool outputs a number of indicators that quantify how different interventions strategies impact costs, energy consumption patterns, and emissions.
 
 ## Running the tool
-The tool is executed via `run.py`. The user specifies which scenario(s) to run by providing the scenario IDs. These IDs should match the filename of the scenario settings file in `config_files/settings`. The script expects that the user has created all input files for the scenarios provided. The tool will display status updates to the user as the simulation is running.
+The tool is executed via `run.py`. The user specifies which scenario(s) to run by providing the scenario IDs. These IDs should match the filename of the scenario settings file in `config_files/scenarios`. The script expects that the user has created all input files for the scenarios provided. The tool will display status updates to the user as the simulation is running.
 
-The user can also provide a flag to `run.py` to perform post-processing on the results. This will combine output tables across scenarios for easier investigation and save them to `outputs_combined/scenario/combined`. Alternatively, the user can perform post-processing via the `postprocessing.py` script.
+The user can also provide a flag to `run.py` to perform post-processing on the results (`--postprocessing`). This will combine output tables across scenarios for easier investigation and save them to `results/{SEGMENT_NAME}`. Alternatively, the user can perform post-processing via the `postprocessing.py` script. Postprocessing must be performed in order to track the results in version control. **Model outputs saved to `outputs/` are not tracked!**
 
 ### Example
-Suppose you want to run 3 different scenarios on a street segment (say, "continued_gas", "accelerated_elec", and "hybrid_npa") and combine the results from each simulation. We'll call the street segment "anytown_usa". Therefore, our settings files are "anytown_usa_continued_gas.json", "anytown_usa_accelerated_elec.json", and "anytown_usa_hybrid_npa.json". Create these settings files and then execute the following:
+Suppose you want to run 3 different scenarios on a street segment (say, "continued_gas", "accelerated_elec", and "hybrid_npa") and combine the results from each simulation. We'll call the street segment "anytown_usa". Therefore, our scenario files are "anytown_usa_continued_gas.json", "anytown_usa_accelerated_elec.json", and "anytown_usa_hybrid_npa.json". Create these scenario files and then execute the following:
 ```python
 python run.py anytown_usa_continued_gas anytown_usa_accelerated_elec anytown_usa_hybrid_npa --postprocessing
 ```
