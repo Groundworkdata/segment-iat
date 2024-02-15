@@ -1,6 +1,6 @@
 {
     "sim_start_year": 2020,
-    "sim_end_year": 2050,
+    "sim_end_year": 2066,
     "segment_id": "doer_sf_segment",
     "sim_name": "doer_sf_segment_natural_elec_higheff",
     "sim_uuid": "doer_sf_segment_retrofit_002",

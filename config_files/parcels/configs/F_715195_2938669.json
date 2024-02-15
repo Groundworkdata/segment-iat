@@ -27,5 +27,5 @@
     "building_class_size": "small",
     "parcel_baseline_consump_filepath": "./config_files/parcels/energy_consumption/SF_Existing_OIL.csv",
     "load_scaling_factor": 0.857,
-    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_baseline.csv"
+    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_continued_gas.csv"
 }

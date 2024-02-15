@@ -1,13 +1,13 @@
 {
     "sim_start_year": 2020,
-    "sim_end_year": 2050,
+    "sim_end_year": 2066,
     "segment_id": "doer_sf_segment",
-    "sim_name": "doer_sf_segment_baseline",
+    "sim_name": "doer_sf_segment_hybrid_gas",
     "sim_uuid": "doer_sf_segment_retrofit_002",
-    "scenario_name": "baseline",
+    "scenario_name": "hybrid_gas",
     "gas_shutoff_scenario": false,
     "gas_shutoff_year": 2100,
-    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_baseline.csv",
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_hybrid_gas.csv",
     "parcel_retrofit_schedule": [
         {
             "parcel_uuid": "F_714592_2938902",
@@ -29,12 +29,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2031
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -43,12 +43,12 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_sf_electricity_medium",
-                    "install_year": 2040
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_sf_electricity_medium",
-                    "install_year": 2040
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
@@ -57,12 +57,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_fuel_oil_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_npa_medium",
                     "install_year": 2040
                 }
             ],
-            "replacement_fuel": "fuel_oil",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_OIL.csv",
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -85,12 +85,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_small",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_small",
                     "install_year": 2045
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -113,12 +113,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2025
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -141,12 +141,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2048
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -169,12 +169,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_large",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_large",
                     "install_year": 2037
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -197,12 +197,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2036
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -225,12 +225,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_large",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_large",
                     "install_year": 2048
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -253,12 +253,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2035
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -267,12 +267,12 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_sf_electricity_small",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_sf_electricity_small",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
@@ -281,12 +281,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_fuel_oil_small",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_npa_small",
                     "install_year": 2041
                 }
             ],
-            "replacement_fuel": "fuel_oil",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_OIL.csv",
+            "replacement_fuel": "hybrid_npa",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_OIL.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -309,12 +309,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2027
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -337,12 +337,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2028
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -365,12 +365,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_large",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_large",
                     "install_year": 2043
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -393,12 +393,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2042
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -421,12 +421,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2043
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -449,12 +449,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_medium",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_medium",
                     "install_year": 2032
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -477,12 +477,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_large",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_large",
                     "install_year": 2037
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -505,12 +505,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_small",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_small",
                     "install_year": 2045
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         },
         {
@@ -533,12 +533,12 @@
                 },
                 {
                     "asset_type": "hvac",
-                    "replacement_asset_uuid": "hvac_doer_sf_natural_gas_large",
+                    "replacement_asset_uuid": "hvac_doer_sf_hybrid_gas_large",
                     "install_year": 2037
                 }
             ],
-            "replacement_fuel": "natural_gas",
-            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Existing_GAS.csv",
+            "replacement_fuel": "hybrid_gas",
+            "parcel_retrofit_consumption_filepath": "./config_files/parcels/energy_consumption/SF_Hybrid_GAS.csv",
             "additional_retrofit_costs": null
         }
     ],

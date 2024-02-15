@@ -1,13 +1,13 @@
 {
     "sim_start_year": 2020,
-    "sim_end_year": 2050,
+    "sim_end_year": 2066,
     "segment_id": "doer_mf_segment",
-    "sim_name": "doer_mf_segment_hybridgas",
+    "sim_name": "doer_mf_segment_hybrid_gas_immediate",
     "sim_uuid": "doer_mf_segment_retrofit_002",
-    "scenario_name": "hybridgas",
+    "scenario_name": "hybrid_gas_immediate",
     "gas_shutoff_scenario": false,
     "gas_shutoff_year": 2100,
-    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_mf_segment_hybridgas.csv",
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_mf_segment_hybrid_gas_immediate.csv",
     "parcel_retrofit_schedule": [
         {
             "parcel_uuid": "F_753432_2717080",
@@ -15,22 +15,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -43,22 +43,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2032
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2032
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2032
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2032
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -71,22 +71,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -99,22 +99,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2041
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2041
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2041
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2041
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -127,22 +127,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2030
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2030
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2030
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2030
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -155,22 +155,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2028
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2028
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2028
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2028
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -183,22 +183,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2038
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2038
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2038
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2038
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -211,22 +211,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2026
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -239,22 +239,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -267,22 +267,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -295,22 +295,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2043
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -323,22 +323,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2040
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2040
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2040
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2040
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -351,22 +351,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2042
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2042
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2042
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2042
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -379,22 +379,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2037
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2037
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2037
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2037
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -407,22 +407,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2045
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2045
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2045
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2045
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -435,22 +435,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_doer_mf_natural_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_doer_mf_natural_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_doer_mf_natural_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_doer_mf_hybrid_gas_small",
-                    "install_year": 2035
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
