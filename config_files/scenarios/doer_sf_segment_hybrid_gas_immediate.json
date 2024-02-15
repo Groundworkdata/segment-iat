@@ -2,12 +2,12 @@
     "sim_start_year": 2020,
     "sim_end_year": 2066,
     "segment_id": "doer_sf_segment",
-    "sim_name": "doer_sf_segment_hybridgasimmediate",
+    "sim_name": "doer_sf_segment_hybrid_gas_immediate",
     "sim_uuid": "doer_sf_segment_retrofit_002",
-    "scenario_name": "hybridgasimmediate",
+    "scenario_name": "hybrid_gas_immediate",
     "gas_shutoff_scenario": false,
     "gas_shutoff_year": 2100,
-    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_hybridgasimmediate.csv",
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_sf_segment_hybrid_gas_immediate.csv",
     "parcel_retrofit_schedule": [
         {
             "parcel_uuid": "F_714592_2938902",

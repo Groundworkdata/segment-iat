@@ -2,12 +2,12 @@
     "sim_start_year": 2020,
     "sim_end_year": 2066,
     "segment_id": "doer_mf_segment",
-    "sim_name": "doer_mf_segment_baseline",
+    "sim_name": "doer_mf_segment_continued_gas",
     "sim_uuid": "doer_mf_segment_retrofit_002",
-    "scenario_name": "baseline",
+    "scenario_name": "continued_gas",
     "gas_shutoff_scenario": false,
     "gas_shutoff_year": 2100,
-    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_mf_segment_baseline.csv",
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/doer_mf_segment_continued_gas.csv",
     "parcel_retrofit_schedule": [
         {
             "parcel_uuid": "F_753432_2717080",

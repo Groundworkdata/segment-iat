@@ -2,12 +2,12 @@
     "sim_start_year": 2020,
     "sim_end_year": 2066,
     "segment_id": "holyoke_mf_segment",
-    "sim_name": "holyoke_mf_segment_hybridnpa",
+    "sim_name": "holyoke_mf_segment_hybrid_npa",
     "sim_uuid": "holyoke_mf_segment_retrofit_002",
-    "scenario_name": "hybridnpa",
+    "scenario_name": "hybrid_npa",
     "gas_shutoff_scenario": true,
     "gas_shutoff_year": 2025,
-    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_mf_segment_hybridnpa.csv",
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_mf_segment_hybrid_npa.csv",
     "parcel_retrofit_schedule": [
         {
             "parcel_uuid": "F_353059_2906776",

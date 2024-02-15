@@ -2,12 +2,12 @@
     "sim_start_year": 2020,
     "sim_end_year": 2066,
     "segment_id": "holyoke_sf_segment",
-    "sim_name": "holyoke_sf_segment_hybridgas",
+    "sim_name": "holyoke_sf_segment_hybrid_gas_immediate",
     "sim_uuid": "holyoke_sf_segment_retrofit_002",
-    "scenario_name": "hybridgas",
+    "scenario_name": "hybrid_gas_immediate",
     "gas_shutoff_scenario": false,
     "gas_shutoff_year": 2100,
-    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_sf_segment_hybridgas.csv",
+    "retrofit_asset_cost_filepath": "./config_files/parcels/retrofit_costs/holyoke_sf_segment_hybrid_gas_immediate.csv",
     "parcel_retrofit_schedule": [
         {
             "parcel_uuid": "F_350460_2902490",
@@ -15,22 +15,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_natural_gas_medium",
-                    "install_year": 2032
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_natural_gas_medium",
-                    "install_year": 2032
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_natural_gas_medium",
-                    "install_year": 2032
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_gas_medium",
-                    "install_year": 2032
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -43,22 +43,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_natural_gas_medium",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_natural_gas_medium",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_natural_gas_medium",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_gas_medium",
-                    "install_year": 2041
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -71,17 +71,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2044
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2044
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2044
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -99,22 +99,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_natural_gas_medium",
-                    "install_year": 2028
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_natural_gas_medium",
-                    "install_year": 2028
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_natural_gas_medium",
-                    "install_year": 2028
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_gas_medium",
-                    "install_year": 2028
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -127,17 +127,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2047
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2047
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2047
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -155,17 +155,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2041
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -183,22 +183,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_natural_gas_medium",
-                    "install_year": 2035
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_natural_gas_medium",
-                    "install_year": 2035
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_natural_gas_medium",
-                    "install_year": 2035
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_gas_medium",
-                    "install_year": 2035
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -211,22 +211,22 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_natural_gas_medium",
-                    "install_year": 2027
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_natural_gas_medium",
-                    "install_year": 2027
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_natural_gas_medium",
-                    "install_year": 2027
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
                     "replacement_asset_uuid": "hvac_holyoke_sf_hybrid_gas_medium",
-                    "install_year": 2027
+                    "install_year": 2025
                 }
             ],
             "replacement_fuel": "hybrid_gas",
@@ -239,17 +239,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2039
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2039
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2039
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -267,17 +267,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2026
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2026
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2026
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -295,17 +295,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2025
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2025
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2025
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -323,17 +323,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2039
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2039
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2039
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -351,17 +351,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2024
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2024
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2024
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -379,17 +379,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2030
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2030
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2030
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -407,17 +407,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2045
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2045
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2045
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
@@ -435,17 +435,17 @@
                 {
                     "asset_type": "stove",
                     "replacement_asset_uuid": "stove_holyoke_sf_electricity_medium",
-                    "install_year": 2031
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "clothes_dryer",
                     "replacement_asset_uuid": "clothes_dryer_holyoke_sf_electricity_medium",
-                    "install_year": 2031
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "domestic_hot_water",
                     "replacement_asset_uuid": "domestic_hot_water_holyoke_sf_fuel_oil_medium",
-                    "install_year": 2031
+                    "install_year": 2100
                 },
                 {
                     "asset_type": "hvac",
