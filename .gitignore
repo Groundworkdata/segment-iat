@@ -10,11 +10,12 @@
 # pycache
 __pycache__/
 
-# outputs
+# Individual outputs
 outputs*
 
 # Sandbox scripts
 scratch/
+scripts/
 
 # Environments
 venv/

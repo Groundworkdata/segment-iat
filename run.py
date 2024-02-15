@@ -36,7 +36,7 @@ def main():
     parser.add_argument("scenario", nargs="+", help="The scenario(s) you would like to run")
     parser.add_argument(
         "--postprocessing",
-        help="Postprocess outputs across scenarios into condensed files",
+        help="Postprocess outputs across scenarios into condensed files to be tracked by git",
         action="store_true"
     )
     args = parser.parse_args()
@@ -100,7 +100,8 @@ def post_process_outputs(postprocessing: bool, street_segments: List[str]) -> No
             outputs_filepath = os.path.join("./outputs", segment)
             scenario_folders = os.listdir(outputs_filepath)
 
-            combined_outputs_filepath = os.path.join(outputs_filepath, COMBINED_FILES_KEY)
+            # combined_outputs_filepath = os.path.join(outputs_filepath, COMBINED_FILES_KEY)
+            combined_outputs_filepath = f"./results/{segment}"
             if not os.path.exists(combined_outputs_filepath):
                 os.makedirs(combined_outputs_filepath)
 
