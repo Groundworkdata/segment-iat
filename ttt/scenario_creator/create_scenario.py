@@ -238,7 +238,7 @@ class ScenarioCreator:
         # The asset schedules
         for asset in building_params["end_uses"]:
             asset_type = asset["end_use"]
-            asset_id = asset["uuid"]
+            # asset_id = asset["uuid"]
 
             # existing_install_year
             asset["existing_install_year"] = asset["install_year"]

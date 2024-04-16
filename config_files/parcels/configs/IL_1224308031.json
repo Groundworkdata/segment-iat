@@ -1,0 +1,27 @@
+{
+    "parcel_id": "IL_1224308031",
+    "parcel_uuid": "IL_1224308031",
+    "heating_fuel": "natural_gas",
+    "end_uses": [
+        {
+            "end_use": "stove",
+            "install_year": 2000
+        },
+        {
+            "end_use": "clothes_dryer",
+            "install_year": 2000
+        },
+        {
+            "end_use": "domestic_hot_water",
+            "install_year": 2000
+        },
+        {
+            "end_use": "hvac",
+            "install_year": 2000
+        }
+    ],
+    "building_class_size": "",
+    "parcel_baseline_consump_filepath": "./config_files/parcels/energy_consumption/peoples_deep_dive/upgrade0/average_profile_21.csv",
+    "load_scaling_factor": 1,
+    "original_asset_cost_filepath": "./config_files/parcels/retrofit_costs/chicago_osage_continued_gas.csv"
+}

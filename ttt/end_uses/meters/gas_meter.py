@@ -73,6 +73,9 @@ class GasMeter(Meter):
         Building _fuel_type can take values of: [GAS, OIL, ELEC, LPG, HPL, NPH]
         """
         building_fuel = self.building._fuel_type
+        #FIXME: This fails if the building gets off of gas to start the simulation;
+        # if retrofit year (to elec or something else) = sim start year, then "GAS" will not appear
+        # in the _fuel_type list, and this will fail
         final_gas_year = (
             len(building_fuel) - 1 - building_fuel[::-1].index("GAS")
             + self.sim_start_year

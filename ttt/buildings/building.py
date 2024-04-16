@@ -177,8 +177,8 @@ class Building:
     def _load_custom_energy(consump_filepath: str) -> pd.DataFrame:
         consump_df = pd.read_csv(consump_filepath).set_index("timestamp")
         consump_df.index = pd.to_datetime(consump_df.index)
-        consump_df.index = consump_df.index.shift(-1, "15T")
-        consump_df = consump_df.rename(mapper=CUSTOM_RESSTOCK_MAPPING, axis=1)
+        # consump_df.index = consump_df.index.shift(-1, "15T")
+        # consump_df = consump_df.rename(mapper=CUSTOM_RESSTOCK_MAPPING, axis=1)
 
         return consump_df
 
