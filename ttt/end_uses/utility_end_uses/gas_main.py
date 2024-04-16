@@ -144,6 +144,13 @@ class GasMain(Pipeline):
         return self.depreciation
 
     def get_shutoff_year(self) -> List[float]:
+        #FIXME: If there is a connected asset still on gas outside of the simulation timeframe,
+        # this will shutoff the main in the last year of gas usage WITHIN the timeframe
+        # This is because the function does not look at gas usage outside of the sim timeframe;
+        # it only references each connected asset's _retrofit_vec, which is over the timeframe only
+        # For example, if we run a gas shutoff scenario where the sim goes to 2050 (exclusive)
+        # and there is a parcel still on gas in 2053, the model will not account for this and 
+        # shut off the main in the latest year before 2050 that gas usage stops in connected assets
         shutoff_year_vec = [0] * len(self.years_vector)
 
         if self._gas_shutoff:
