@@ -1,7 +1,7 @@
 """
 Creates and run a scenario based on provided configuration files
 """
-import json
+import ast
 import os
 from typing import Dict, List
 
@@ -75,11 +75,13 @@ class ScenarioCreator:
         self.status_logging = status_logging
 
         self._sim_config: dict = {}
-        self._decarb_scenario: str = ""
         self._outputs_path: str = ""
         self._years_vec: List[int] = []
         self._buildings_config: dict = {}
+        self.parcel_table: dict = {}
+        self.parcel_scenario_table: dict = {}
 
+        self.sim_name: str = ""
         self.street_segment: str = ""
         self.buildings: Dict[str, Building] = {}
         self.utility_network: UtilityNetwork = None
@@ -87,10 +89,12 @@ class ScenarioCreator:
     def create_scenario(self):
         self._sim_config = self._get_sim_settings()
         self.street_segment = self._get_street_segment()
-        self._decarb_scenario = self._get_decarb_scenario()
+        self.sim_name = self._get_sim_name()
         self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
         self._status_update("Creating buildings...", 0.25)
+        self.parcel_table = self._get_parcel_table()
+        self.parcel_scenario_table = self._get_parcel_scenario_table()
         self._create_building()
         self._status_update("Creating utility network...", 0.8)
         self._create_utility_network()
@@ -102,32 +106,26 @@ class ScenarioCreator:
         """
         Read in simulation settings
         """
-        with open(self._sim_settings_filepath) as f:
-            data = json.load(f)
-
-        return data
+        settings = pd.read_csv(self._sim_settings_filepath, index_col=0, header=None)
+        settings = settings.iloc[:, 0].to_dict()
+        settings["sim_start_year"] = int(settings["sim_start_year"])
+        settings["sim_end_year"] = int(settings["sim_end_year"])
+        settings["gas_shutoff_year"] = int(settings["gas_shutoff_year"])
+        settings["gas_shutoff_scenario"] = ast.literal_eval(settings["gas_shutoff_scenario"])
+        settings["gas_replacement_year"] = int(settings["gas_replacement_year"])
+        return settings
     
     def _get_street_segment(self) -> str:
         """
         Return the street segment ID
         """
         return self._sim_config.get("segment_id")
-
-    def _get_decarb_scenario(self) -> str:
+    
+    def _get_sim_name(self) -> str:
         """
-        Get the decarb scenario and check that it is valid
+        Return the simulation name
         """
-        input_scenario = self._sim_config.get("scenario_name")
-
-        # if input_scenario not in DECARB_SCENARIOS:
-        #     raise ValueError(
-        #         "Invalid scenario provided. "
-        #         "User provided {0} but allowable values are one of: {1}".format(
-        #             input_scenario, DECARB_SCENARIOS
-        #         )
-        #     )
-        
-        return input_scenario
+        return self._sim_config.get("sim_name")
 
     def _set_outputs_path(self) -> str:
         """
@@ -136,7 +134,7 @@ class ScenarioCreator:
         outputs_filepath = os.path.join(
             OUTPUTS_BASEPATH,
             self.street_segment,
-            self._decarb_scenario
+            self.sim_name
         )
 
         if not os.path.exists(outputs_filepath):
@@ -149,32 +147,25 @@ class ScenarioCreator:
             self._sim_config.get("sim_start_year", DEFAULT_SIM_START_YEAR),
             self._sim_config.get("sim_end_year", DEFAULT_SIM_END_YEAR)
         ))
+    
+    def _get_parcel_table(self) -> dict:
+        """
+        Gets parcel table and returns as dict indexed by parcel_id
+        """
+        parcel_filepath = f"./config_files_csvs/{self.street_segment}/parcels/{self.street_segment}_parcels.csv"
+        parcel_table = pd.read_csv(parcel_filepath).set_index("parcel_id")
+        return parcel_table.to_dict(orient="index")
+    
+    def _get_parcel_scenario_table(self) -> dict:
+        """
+        Get table of parcel data pertinent to the given simulation
+        """
+        filepath = f"./config_files_csvs/{self.street_segment}/parcels/{self.street_segment}_{self.sim_name}_parcel_scenarios.csv"
+        parcel_scenario_table = pd.read_csv(filepath).set_index("parcel_id")
+        return parcel_scenario_table.to_dict(orient="index")
 
     def _create_building(self) -> None:
-        segment_filepath = f"./config_files/segments/{self.street_segment}.json"
-
-        if not os.path.exists(segment_filepath):
-            raise FileNotFoundError(
-                f"Segment configuration file for segment ID '{self.street_segment}' not found!"
-            )
-
-        with open(segment_filepath) as f:
-            segment_data = json.load(f)
-
-        parcels = segment_data.get("parcel_ids")
-
-
-        # building_config_filepath = self._sim_config.get("buildings_config_filepath")
-
-        # if not os.path.exists(building_config_filepath):
-        #     raise ValueError(
-        #         f"Filepath {building_config_filepath} for buildling configuration does not exist!"
-        #     )
-
-        # with open(building_config_filepath) as f:
-        #     data = json.load(f)
-        # self._buildings_config = data
-
+        parcels = self.parcel_table.keys()
         num_buildings = len(parcels)
         building_num = 0
 
@@ -185,21 +176,11 @@ class ScenarioCreator:
                 (building_num / num_buildings) * 0.5 + 0.25
             )
 
-            building_params_filepath = f"./config_files/parcels/configs/{building_id}.json"
-            with open(building_params_filepath) as f:
-                building_params = json.load(f)
+            building_params = self.parcel_table.get(building_id)
+            building_scenario_params = self.parcel_scenario_table.get(building_id)
 
-            building_retrofit_schedule = next(
-                item for item in self._sim_config["parcel_retrofit_schedule"]
-                if item["parcel_uuid"] == building_id
-            )
-
-            # Now for some ugly magic to massage the new config format into the old. This will
-            # minimize the changes for now
-            building_params = self._update_building_params(
-                building_params,
-                building_retrofit_schedule
-            )
+            building_params = {**building_params, **building_scenario_params}
+            building_params["building_id"] = building_id
 
             building = Building(
                 building_params,
@@ -213,83 +194,12 @@ class ScenarioCreator:
 
             self.buildings[building.building_id] = building
 
-    def _update_building_params(self, building_params: dict, building_retrofit_schedule: dict) -> dict:
-        """
-        Update the building parameters dict to conform to expected inputs.
-        Patch as we test new db structure
-
-        Returns:
-            dict: Dict of building params for the Building module
-        """
-        # The building_id
-        building_params["building_id"] = building_params["parcel_id"]
-
-        # resstock overwrite
-        building_params["resstock_overwrite"] = True
-
-        # The overall install and retrofit years
-        asset_replacements = [i["install_year"] for i in building_retrofit_schedule["assets"]]
-        building_params["retrofit_year"] = min(asset_replacements)
-
-        # The overall original and retrofit fuel types
-        building_params["original_fuel_type"] = building_params["heating_fuel"]
-        building_params["retrofit_fuel_type"] = building_retrofit_schedule["replacement_fuel"]
-
-        # The asset schedules
-        for asset in building_params["end_uses"]:
-            asset_type = asset["end_use"]
-            # asset_id = asset["uuid"]
-
-            # existing_install_year
-            asset["existing_install_year"] = asset["install_year"]
-
-            # TODO: Create and incorporate individual asset config files for original and replacement asset
-            # Note that some asset config files are created, but they are not connected!
-            # replacement_cost_dollars_year
-            asset["replacement_cost_dollars_year"] = DEFAULT_REPLACEMENT_COST_DOLLARS_YEAR
-            # lifetime
-            asset["lifetime"] = DEFAULT_ASSET_LIFETIME
-
-            # replacement asset
-            retrofit_assets = building_retrofit_schedule["assets"]
-            retrofit_asset_schedule = next(
-                item for item in retrofit_assets
-                if item["asset_type"] == asset_type
-            )
-
-            # TODO: Create and incorporate individual asset config files for original and replacement asset
-            # Note that some asset config files are created, but they are not connected!
-
-            # replacement_year
-            asset["replacement_year"] = retrofit_asset_schedule["install_year"]
-            # replacement_lifetime
-            asset["replacement_lifetime"] = DEFAULT_ASSET_LIFETIME
-
-        # The extra costs
-        building_params["building_level_costs"] = {
-            "retrofit_adder": {
-                building_params["building_class_size"]: building_retrofit_schedule["additional_retrofit_costs"]
-            }
-        }
-
-        # Consump filepaths
-        building_params["reference_consump_filepath"] = building_params["parcel_baseline_consump_filepath"]
-        building_params["retrofit_consump_filepath"] = building_retrofit_schedule["parcel_retrofit_consumption_filepath"]
-
-        # Consumption cost filepath
-        building_params["consump_costs_filepath"] = self._sim_config["energy_consump_rates_filepath"]
-
-        # Asset cost filepaths
-        building_params["retrofit_asset_cost_filepath"] = self._sim_config["retrofit_asset_cost_filepath"]
-
-        return building_params
-
     def _create_utility_network(self):
         """
         Create the utility network based on the input config
         """
-        utility_segment_id = self._sim_config["util_segment_id"]
-        utility_network_config_filepath = f"./config_files/utility_networks/{utility_segment_id}/config.json"
+        segment_id = self._sim_config["segment_id"]
+        utility_network_config_filepath = f"./config_files_csvs/{segment_id}/utility_network/"
 
         self.utility_network = UtilityNetwork(
             utility_network_config_filepath, self._sim_config, self.buildings
