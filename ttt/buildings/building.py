@@ -31,6 +31,7 @@ EMISSION_FACTORS = { # tCO2 / kWh
 }
 
 
+#FIXME: Update after final edits
 DB_BASEPATH = "./config_files_csvs/"
 
 

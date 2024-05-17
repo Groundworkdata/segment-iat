@@ -152,6 +152,7 @@ class ScenarioCreator:
         """
         Gets parcel table and returns as dict indexed by parcel_id
         """
+        #FIXME
         parcel_filepath = f"./config_files_csvs/{self.street_segment}/parcels/{self.street_segment}_parcels.csv"
         parcel_table = pd.read_csv(parcel_filepath).set_index("parcel_id")
         return parcel_table.to_dict(orient="index")
@@ -160,6 +161,7 @@ class ScenarioCreator:
         """
         Get table of parcel data pertinent to the given simulation
         """
+        #FIXME
         filepath = f"./config_files_csvs/{self.street_segment}/parcels/{self.street_segment}_{self.sim_name}_parcel_scenarios.csv"
         parcel_scenario_table = pd.read_csv(filepath).set_index("parcel_id")
         return parcel_scenario_table.to_dict(orient="index")
@@ -199,6 +201,7 @@ class ScenarioCreator:
         Create the utility network based on the input config
         """
         segment_id = self._sim_config["segment_id"]
+        #FIXME
         utility_network_config_filepath = f"./config_files_csvs/{segment_id}/utility_network/"
 
         self.utility_network = UtilityNetwork(
