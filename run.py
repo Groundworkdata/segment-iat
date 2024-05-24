@@ -49,8 +49,7 @@ def main():
     print("==========Simulation pre-check==========")
     for scenario in scenarios:
 
-        # FIXME: Update after final changes
-        settings_filepath = f"./config_files_csvs/{segment}/scenarios/{segment}_{scenario}.csv"
+        settings_filepath = f"./config_files/{segment}/scenarios/{segment}_{scenario}.csv"
         settings_exist = os.path.exists(settings_filepath)
 
         if not settings_exist:
@@ -63,8 +62,7 @@ def main():
         print(f"==========Scenario: {scenario}==========")
         print("Loading inputs...")
 
-        # FIXME: Update after final changes
-        settings_filepath = f"./config_files_csvs/{segment}/scenarios/{segment}_{scenario}.csv"
+        settings_filepath = f"./config_files/{segment}/scenarios/{segment}_{scenario}.csv"
         scenario_creator = ScenarioCreator(settings_filepath)
 
         scenario_creator.create_scenario()
