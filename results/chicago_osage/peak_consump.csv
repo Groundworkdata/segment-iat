@@ -262,11 +262,11 @@ year,peak_consump,asset_id,energy_type,asset_domain,asset_type,scenario
 2024,23.91143917582417,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
 2025,23.91143917582417,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
 2026,23.495772509157504,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
-2027,25.27407796092796,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
-2028,25.27407796092796,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
-2029,25.27407796092796,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
-2030,25.27407796092796,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
-2031,25.27407796092796,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
+2027,25.274077960927965,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
+2028,25.274077960927965,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
+2029,25.274077960927965,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
+2030,25.274077960927965,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
+2031,25.274077960927965,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
 2032,30.29951282661782,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
 2033,30.29951282661782,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
 2034,30.29951282661782,TB003,electricity,elec_network,elec_xmfr,unmanaged_elec
@@ -294,8 +294,8 @@ year,peak_consump,asset_id,energy_type,asset_domain,asset_type,scenario
 2030,27.598156862108475,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
 2031,27.598156862108475,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
 2032,27.598156862108475,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
-2033,39.72915686210848,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
-2034,39.72915686210848,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
+2033,39.729156862108475,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
+2034,39.729156862108475,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
 2035,56.39689892560054,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
 2036,56.39689892560054,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec
 2037,56.39689892560054,TB004,electricity,elec_network,elec_xmfr,unmanaged_elec

@@ -1,5 +1,0 @@
-﻿gisid,parentid,circuit,phase,oh_ug,sec_wsize,sec_wtype,inst_date,inst_cost,lifetime
-ES001,TB001,999,A,OH,4/0,TRIPLEX,1/10/2000,4000,40
-ES002,ES001,999,A,OH,4/0,TRIPLEX,1/10/2000,4000,40
-ES003,ES002,999,A,OH,4/0,TRIPLEX,1/10/2000,4000,40
-ES004,ES003,999,A,OH,4/0,TRIPLEX,1/10/2000,4000,40

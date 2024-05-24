@@ -1,10 +1,9 @@
 """
 Defines a utility network and instantiates all related classes for utility assets
 """
+import os
 from typing import List, Dict
 import pandas as pd
-
-import json
 
 from ttt.buildings.building import Building
 from ttt.end_uses.utility_end_uses.gas_main import GasMain
@@ -70,25 +69,49 @@ class UtilityNetwork:
         """
         Calls all functions to populate the utility network
         """
-        self._network_config = self._read_json_config(
-            config_file_path=self._network_config_filepath
-        )
+        segment_id = self._sim_settings["segment_id"]
 
-        #TODO: Fix this config later. Fix must include leak factors data as well (currently hard-coded)
         self._network_config = {
             "networks": {
                 "gas": {
-                    "mains_config": self._network_config["gas_mains_config"],
-                    "service_config": self._network_config["gas_services_config"],
-                    "meter_config": self._network_config["gas_meter_config"],
-                    "leakage_factors": self._network_config["util_leakage_factors"]
+                    "mains_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_gas_main.csv"
+                    ),
+                    "service_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_gas_services.csv"
+                    ),
+                    "meter_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_gas_meters.csv"
+                    ),
+                    "leakage_factors": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_leakage_factors.csv"
+                    ),
                 },
                 "elec": {
-                    "primary_config": self._network_config["elec_primary_config"],
-                    "secondary_config": self._network_config["elec_secondary_config"],
-                    "service_config": self._network_config["elec_service_config"],
-                    "meter_config": self._network_config["elec_meter_config"],
-                    "xfmrs_config": self._network_config["elec_xfmrs_config"]
+                    "primary_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_elec_primary.csv"
+                    ),
+                    "secondary_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_elec_secondaries.csv"
+                    ),
+                    "service_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_elec_services.csv"
+                    ),
+                    "meter_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_elec_meters.csv"
+                    ),
+                    "xmfrs_config": os.path.join(
+                        self._network_config_filepath,
+                        f"{segment_id}_elec_xmfrs.csv"
+                    ),
                 }
             }
         }
@@ -111,14 +134,6 @@ class UtilityNetwork:
         Read in the utilty network config file and save to network_config attr
         """
         data = pd.read_csv(config_file_path)
-        return data
-
-    def _read_json_config(self, config_file_path=None) -> None:
-        """
-        Read in the utilty network config file and save to network_config attr
-        """
-        with open(config_file_path) as f:
-            data = json.load(f)
         return data
 
     def _get_years_vec(self) -> None:
@@ -165,19 +180,17 @@ class UtilityNetwork:
         """
         service_config_file = self._network_config["networks"]["gas"]["service_config"]
         service_configs = self._read_csv_config(config_file_path=service_config_file)
+
+        replacement_year = self._sim_settings.get("gas_replacement_year")
+        if replacement_year > self._sim_settings["sim_end_year"]:
+            replacement_year = None
+
         for _, service_config in service_configs.iterrows():
             connected_meters = self._get_children(
                 parent_id=service_config["gisid"], all_children=self.gas_meters
             )
 
-            service_retrofit_params = next(
-                (
-                    item for item in self._sim_settings["util_retrofit_schedule"]
-                    if item.get("asset_id") == service_config["gisid"]
-                    and item.get("asset_type") == "gas_service"
-                ),
-                {}
-            )
+            service_retrofit_params = {"replacement_year": replacement_year}
 
             gas_service = GasService(
                 **service_config,
@@ -195,20 +208,18 @@ class UtilityNetwork:
         """
         main_config_file = self._network_config["networks"]["gas"]["mains_config"]
         main_configs = self._read_csv_config(config_file_path=main_config_file)
+
+        replacement_year = self._sim_settings.get("gas_replacement_year")
+        if replacement_year > self._sim_settings["sim_end_year"]:
+            replacement_year = None
+
         for _, main_config in main_configs.iterrows():
 
             connected_services = self._get_children(
                 parent_id=main_config["gisid"], all_children=self.gas_services
             )
 
-            main_retrofit_params = next(
-                (
-                    item for item in self._sim_settings["util_retrofit_schedule"]
-                    if item.get("asset_id") == main_config["gisid"]
-                    and item.get("asset_type") == "gas_main"
-                ),
-                {}
-            )
+            main_retrofit_params = {"replacement_year": replacement_year}
 
             gas_main = GasMain(
                 **main_config,
@@ -283,21 +294,21 @@ class UtilityNetwork:
         """
         Instantiate all necessary ElecSecondaries instances and save to gas_services list attr
         """
-        xfmrs_config_file = self._network_config["networks"]["elec"]["xfmrs_config"]
-        xfmrs_configs = self._read_csv_config(config_file_path=xfmrs_config_file)
-        for _, xfmr_config in xfmrs_configs.iterrows():
+        xmfrs_config_file = self._network_config["networks"]["elec"]["xmfrs_config"]
+        xmfrs_configs = self._read_csv_config(config_file_path=xmfrs_config_file)
+        for _, xmfr_config in xmfrs_configs.iterrows():
             connected_services = self._get_children(
-                parent_id=xfmr_config["gisid"], all_children=self.elec_services
+                parent_id=xmfr_config["gisid"], all_children=self.elec_services
             )
 
             connected_secondaries = self._get_children(
-                parent_id=xfmr_config["gisid"], all_children=self.elec_secondaries
+                parent_id=xmfr_config["gisid"], all_children=self.elec_secondaries
             )
 
             connected_assets = connected_services + connected_secondaries
 
             elec_xfmr = ElecTransformer(
-                **xfmr_config, **self._sim_settings, connected_assets=connected_assets
+                **xmfr_config, **self._sim_settings, connected_assets=connected_assets
             )
 
             elec_xfmr.initialize_end_use()

@@ -1,8 +1,0 @@
-{
-    "name": "clothes_dryer_001",
-    "uuid": "clothes_dryer_001",
-    "fuel_type": "natural_gas",
-    "install_cost": 1341,
-    "install_cost_dollars": 2022,
-    "lifetime": 30
-}

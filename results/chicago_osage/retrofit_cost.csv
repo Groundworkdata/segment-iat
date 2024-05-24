@@ -6986,7 +6986,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224309002,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224309002,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec
@@ -7038,7 +7038,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224309003,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224309003,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec
@@ -7116,7 +7116,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224308033,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224308033,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec
@@ -7142,7 +7142,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224308028,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224308028,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec
@@ -7220,7 +7220,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224309007,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224309007,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec
@@ -7246,7 +7246,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224308040,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224308040,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec
@@ -7286,7 +7286,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2028,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec
 2029,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec
 2030,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec
-2031,21571.42086363272,IL_1224308039,building,building_aggregate,unmanaged_elec
+2031,21571.420863632717,IL_1224308039,building,building_aggregate,unmanaged_elec
 2032,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec
 2033,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec
 2034,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec
@@ -7418,7 +7418,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2030,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec
 2031,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec
 2032,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec
-2033,22442.906266523474,IL_1224309009,building,building_aggregate,unmanaged_elec
+2033,22442.90626652347,IL_1224309009,building,building_aggregate,unmanaged_elec
 2034,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec
 2035,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec
 2036,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec
@@ -7454,7 +7454,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec
 2041,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec
 2042,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec
-2043,27357.77750735749,IL_1224308026,building,building_aggregate,unmanaged_elec
+2043,27357.777507357492,IL_1224308026,building,building_aggregate,unmanaged_elec
 2044,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec
 2045,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec
 2046,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec
@@ -16736,7 +16736,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224309002,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -16788,7 +16788,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224309003,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -16866,7 +16866,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224308033,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -16892,7 +16892,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224308028,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -16970,7 +16970,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224309007,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -16996,7 +16996,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224308040,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -17036,7 +17036,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2028,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2029,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2030,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2031,21571.42086363272,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2031,21571.420863632717,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2032,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2033,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2034,0.0,IL_1224308039,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -17168,7 +17168,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2030,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2031,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2032,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2033,22442.906266523474,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2033,22442.90626652347,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2034,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2035,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2036,0.0,IL_1224309009,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
@@ -17204,7 +17204,7 @@ year,retrofit_cost,asset_id,asset_domain,asset_type,scenario
 2040,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2041,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2042,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
-2043,27357.77750735749,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
+2043,27357.777507357492,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2044,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2045,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc
 2046,0.0,IL_1224308026,building,building_aggregate,unmanaged_elec_high_eff_basic_enc

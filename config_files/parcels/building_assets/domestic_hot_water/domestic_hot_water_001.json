@@ -1,8 +1,0 @@
-{
-    "name": "domestic_hot_water_001",
-    "uuid": "domestic_hot_water_001",
-    "fuel_type": "natural_gas",
-    "install_cost": 1321,
-    "install_cost_dollars": 2022,
-    "lifetime": 30
-}

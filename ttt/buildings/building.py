@@ -1,6 +1,7 @@
 """
 Object for simulating a single building, accounting for energy, emissions, and costs
 """
+import os
 from typing import Dict, List
 
 import numpy as np
@@ -10,40 +11,6 @@ from ttt.end_uses.building_end_uses.clothes_dryer import ClothesDryer
 from ttt.end_uses.building_end_uses.domestic_hot_water import DHW
 from ttt.end_uses.building_end_uses.hvac import HVAC
 from ttt.end_uses.building_end_uses.stove import Stove
-
-
-CUSTOM_RESSTOCK_MAPPING = {
-    # elec
-    'elec.clothes_dryer': 'out.electricity.clothes_dryer.energy_consumption',
-    'elec.cooking': 'out.electricity.range_oven.energy_consumption',
-    'elec.cooling': 'out.electricity.cooling.energy_consumption',
-    'elec.heating': 'out.electricity.heating.energy_consumption',
-    'elec.heating_backup': 'out.electricity.heating_hp_bkup.energy_consumption',
-    'elec.hot_water': 'out.electricity.hot_water.energy_consumption',
-    "elec.other": "out.electricity.other.energy_consumption",
-    "elec.ev": "out.electricity.ev.energy_consumption",
-    # fuel oil
-    'fuel.clothes_dryer': 'out.fuel_oil.clothes_dryer.energy_consumption',
-    'fuel.cooking': 'out.fuel_oil.range_oven.energy_consumpy',
-    'fuel.heating': 'out.fuel_oil.heating.energy_consumption',
-    'fuel.heating_backup': 'out.fuel_oil.heating_hp_bkup.energy_consumption',
-    'fuel.hot_water': 'out.fuel_oil.hot_water.energy_consumption',
-    'oil.heating': 'out.fuel_oil.heating.energy_consumption',
-    'oil.heating_backup': 'out.fuel_oil.heating_hp_bkup.energy_consumption',
-    'oil.hot_water': 'out.fuel_oil.hot_water.energy_consumption',
-    # nat gas
-    'gas.clothes_dryer': 'out.natural_gas.clothes_dryer.energy_consumption',
-    'gas.cooking': 'out.natural_gas.range_oven.energy_consumption',
-    'gas.heating': 'out.natural_gas.heating.energy_consumption',
-    'gas.heating_backup': 'out.natural_gas.heating_hp_bkup.energy_consumption',
-    'gas.hot_water': 'out.natural_gas.hot_water.energy_consumption',
-    # propane
-    'lpg.clothes_dryer': 'out.propane.clothes_dryer.energy_consumption',
-    'lpg.cooking': 'out.propane.range_oven.energy_consumption',
-    'lpg.heating': 'out.propane.heating.energy_consumption',
-    'lpg.heating_backup': 'out.propane.heating_hp_bkup.energy_consumption',
-    'lpg.hot_water': 'out.propane.hot_water.energy_consumption',
-}
 
 
 METHANE_LEAKS = {
@@ -62,6 +29,9 @@ EMISSION_FACTORS = { # tCO2 / kWh
     "hybrid_gas": (53 / (293 * 907)), # Same as natural_gas
     "hybrid_npa": (61.71 / (293 * 907)), # Same as propane
 }
+
+
+DB_BASEPATH = "./config_files/"
 
 
 class Building:
@@ -95,6 +65,7 @@ class Building:
         self.building_params: dict = building_params
         self._sim_settings: dict = sim_settings
 
+        self._config_filepath: str = ""
         self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: List[int] = []
         self.building_id: str = ""
@@ -119,11 +90,12 @@ class Building:
         Returns:
             None
         """
+        self._config_filepath = self._set_config_filepath()
         self._get_years_vec()
         self._get_building_id()
         self.retrofit_scenario = self._get_retrofit_scenario()
         self._get_building_energies()
-        self._create_end_uses()
+        self.end_uses = self._create_end_uses()
         self._calc_total_energy_baseline()
         self._calc_total_energy_retrofit()
         self._retrofit_vec = self._get_replacement_vec()
@@ -133,6 +105,12 @@ class Building:
         self._fuel_type = self._get_fuel_type_vec()
         self._methane_leaks = self._get_methane_leaks()
         self._combustion_emissions = self._get_combustion_emissions()
+
+    def _set_config_filepath(self) -> None:
+        """
+        Set the _config_filepath attribute
+        """
+        return os.path.join(DB_BASEPATH, self._sim_settings.get("segment_id"))
 
     def _get_years_vec(self) -> None:
         """
@@ -151,18 +129,14 @@ class Building:
         self.building_id = self.building_params.get("building_id")
 
     def _get_retrofit_scenario(self) -> str:
-        return self._sim_settings.get("decarb_scenario")
+        return self._sim_settings.get("sim_name")
 
     def _get_building_energies(self) -> None:
-        if self.building_params.get("resstock_overwrite"):
-            self._get_custom_building_energies()
+        reference_consump_id = self.building_params.get("baseline_consumption_id")
+        retrofit_consump_id = self.building_params.get("retrofit_consumption_id")
 
-    def _get_custom_building_energies(self) -> None:
-        reference_consump_filepath = self.building_params.get("reference_consump_filepath")
-        retrofit_consump_filepath = self.building_params.get("retrofit_consump_filepath")
-
-        self.baseline_consumption = self._load_custom_energy(reference_consump_filepath)
-        self.retrofit_consumption = self._load_custom_energy(retrofit_consump_filepath)
+        self.baseline_consumption = self._load_energy_timeseries(reference_consump_id)
+        self.retrofit_consumption = self._load_energy_timeseries(retrofit_consump_id)
 
         load_scaling_factor = self.building_params.get("load_scaling_factor", 1)
         self.baseline_consumption[
@@ -174,44 +148,59 @@ class Building:
         ] *= load_scaling_factor
 
     @staticmethod
-    def _load_custom_energy(consump_filepath: str) -> pd.DataFrame:
+    def _load_energy_timeseries(consumption_id: str) -> pd.DataFrame:
+        consump_filepath = os.path.join(DB_BASEPATH, "energy_consumption", consumption_id+".csv")
         consump_df = pd.read_csv(consump_filepath).set_index("timestamp")
         consump_df.index = pd.to_datetime(consump_df.index)
-        # consump_df.index = consump_df.index.shift(-1, "15T")
-        # consump_df = consump_df.rename(mapper=CUSTOM_RESSTOCK_MAPPING, axis=1)
 
         return consump_df
 
-    def _create_end_uses(self):
+    def _create_end_uses(self) -> dict:
         """
         Create the end uses for the building
         """
-        end_use_params: List[dict] = self.building_params.get("end_uses", [{}])
+        end_use_instances = {}
+        segment_id = self._sim_settings.get("segment_id")
 
-        #TODO: These costs should be part of asset configs rather than the current format
-        cost_original_filepath = self.building_params.get("original_asset_cost_filepath")
-        cost_retrofit_filepath = self.building_params.get("retrofit_asset_cost_filepath")
+        cost_original_filepath = os.path.join(
+            self._config_filepath,
+            "parcels",
+            f"{segment_id}_{self._sim_settings.get("existing_appliance_costs_id")}_retrofit_costs.csv"
+        )
+
+        cost_retrofit_filepath = os.path.join(
+            self._config_filepath,
+            "parcels",
+            f"{segment_id}_{self._sim_settings.get("retrofit_appliance_costs_id")}_retrofit_costs.csv"
+        )
 
         costs_original = pd.read_csv(
             cost_original_filepath,
-            index_col="building_id"
+            index_col="parcel_id"
         ).to_dict(orient="index")
 
         costs_retrofit = pd.read_csv(
             cost_retrofit_filepath,
-            index_col="building_id"
+            index_col="parcel_id"
         ).to_dict(orient="index")
 
-        building_costs_original = costs_original.get(self.building_id)
-        building_costs_retrofit = costs_retrofit.get(self.building_id)
+        building_costs_original = costs_original.get(self.building_id, {})
+        building_costs_retrofit = costs_retrofit.get(self.building_id, {})
 
-        for end_use in end_use_params:
-            end_use_type = end_use.get("end_use")
+        end_uses = [
+            "stove", "hvac", "clothes_dryer", "domestic_hot_water"
+        ]
 
-            end_use["existing_install_cost"] = building_costs_original.get(end_use_type.upper())
-            end_use["replacement_cost"] = building_costs_retrofit.get(end_use_type.upper())
+        for end_use in end_uses:
+            individual_params = {}
+            individual_params["end_use"] = end_use
+            individual_params["existing_install_cost"] = building_costs_original.get(end_use)
+            individual_params["replacement_cost"] = building_costs_retrofit.get(end_use)
+            individual_params["existing_install_year"] = self.building_params.get("asset_install_year")
+            individual_params["replacement_year"] = self.building_params.get("asset_replacement_year")
+            end_use_instances[end_use] = self._get_single_end_use(individual_params)
 
-            self.end_uses[end_use_type] = self._get_single_end_use(end_use)
+        return end_use_instances
 
     def _get_single_end_use(self, params: dict):
         if params.get("end_use") == "stove":
@@ -269,13 +258,6 @@ class Building:
         Calculate the total baseline consumption for the building. Contains logic for direct
         connection to ResStock or overwrite using locally-provided energy consumption profiles
         """
-        if self.building_params.get("resstock_overwrite"):
-            self._calc_total_custom_baseline()
-
-    def _calc_total_custom_baseline(self) -> None:
-        """
-        Calculate the baseline energy consumption using custom input energy consumption profiles
-        """
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             filter_cols = [
                 col
@@ -292,10 +274,6 @@ class Building:
         ]].sum(axis=1)
     
     def _calc_total_energy_retrofit(self) -> None:
-        if self.building_params.get("resstock_overwrite"):
-            self._calc_total_custom_retrofit()
-
-    def _calc_total_custom_retrofit(self) -> None:
         for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
             filter_cols = [
                 col
@@ -315,18 +293,45 @@ class Building:
         """
         Calculate building-level costs
         """
-        building_level_costs = self.building_params.get("building_level_costs", {})
-        retrofit_adders = building_level_costs.get("retrofit_adder", {})
-        retrofit_size = self.building_params.get("retrofit_size", "")
-        retrofit_adder = retrofit_adders.get(retrofit_size.lower(), 0)
+        other_assets = ["weatherization", "panel_upgrade"]
+        segment_id = self._sim_settings.get("segment_id")
 
-        return np.multiply(retrofit_adder, self._retrofit_vec).tolist()
+        cost_original_filepath = os.path.join(
+            self._config_filepath,
+            "parcels",
+            f"{segment_id}_{self._sim_settings.get("existing_appliance_costs_id")}_retrofit_costs.csv"
+        )
+
+        cost_retrofit_filepath = os.path.join(
+            self._config_filepath,
+            "parcels",
+            f"{segment_id}_{self._sim_settings.get("retrofit_appliance_costs_id")}_retrofit_costs.csv"
+        )
+
+        costs_original = pd.read_csv(
+            cost_original_filepath,
+            index_col="parcel_id"
+        ).to_dict(orient="index")
+
+        costs_retrofit = pd.read_csv(
+            cost_retrofit_filepath,
+            index_col="parcel_id"
+        ).to_dict(orient="index")
+
+        building_costs_original = costs_original.get(self.building_id, {})
+        building_costs_retrofit = costs_retrofit.get(self.building_id, {})
+
+        other_retrofit_cost = 0
+        for asset in other_assets:
+            other_retrofit_cost += building_costs_retrofit.get(asset)
+
+        return np.multiply(other_retrofit_cost, self._retrofit_vec).tolist()
 
     def _get_replacement_vec(self) -> List[bool]:
         """
         The replacement vector is a vector of True when the index is the retrofit year, False o/w
         """
-        replacement_year = self.building_params.get("retrofit_year", self.years_vec[-1])
+        replacement_year = self.building_params.get("asset_replacement_year", self.years_vec[-1])
         return [True if i==replacement_year else False for i in self.years_vec]
     
     def _get_is_retrofit_vec(self) -> List[bool]:
@@ -367,7 +372,13 @@ class Building:
         """
         Calculate the utility billing metrics for the building, based on total energy consumption
         """
-        energy_consump_cost_filepath = self.building_params.get("consump_costs_filepath")
+        segment_id = self._sim_settings.get("segment_id")
+        energy_consump_cost_filepath = os.path.join(
+            DB_BASEPATH,
+            segment_id,
+            "utility_network",
+            f"{segment_id}_consumption_rates.csv"
+        )
         consump_rates = pd.read_csv(energy_consump_cost_filepath, index_col=0)
 
         annual_utility_costs = {
@@ -403,8 +414,10 @@ class Building:
         #TODO: There should be a heirarchy to this, based on the fuel of each asset, to determine these variables
         # OR, we should be more explicit and just call this the heating fuel... as long as that translates
         # properly to the fuel type of the other appliances
-        original_fuel = self.building_params.get("original_fuel_type", None)
-        retrofit_fuel = self.building_params.get("retrofit_fuel_type", None)
+        original_fuel = self.building_params.get("heating_fuel", "")
+        original_fuel = original_fuel.lower().replace(" ", "_")
+        retrofit_fuel = self.building_params.get("retrofit_heating_fuel", "")
+        retrofit_fuel = retrofit_fuel.lower().replace(" ", "_")
 
         fuel_mappings = {
             "natural_gas": "GAS",

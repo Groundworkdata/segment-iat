@@ -15,6 +15,7 @@ ENERGY_KEYS = [
 ]
 
 INFLATION_ESCALATOR = 0.02
+DEFAULT_ASSET_LIFETIME = 30
 
 
 class DHW:
@@ -95,7 +96,7 @@ class DHW:
 
     def _get_existing_book_val(self) -> List[float]:
         existing_install_year = self._kwargs.get("existing_install_year", self._years_vec[0])
-        lifetime = self._kwargs.get("lifetime", 10)
+        lifetime = self._kwargs.get("lifetime", DEFAULT_ASSET_LIFETIME)
         existing_cost_dollars_year = self._kwargs.get("replacement_cost_dollars_year", 2022)
         cost_escalator = self._kwargs.get("escalator", INFLATION_ESCALATOR)
         existing_install_cost = self._kwargs.get("existing_install_cost", 0)
@@ -147,7 +148,7 @@ class DHW:
         replacement_year = self._kwargs.get("replacement_year", self._years_vec[-1])
         replacement_lifetime = self._kwargs.get(
             "replacement_lifetime",
-            self._kwargs.get("lifetime", 10)
+            self._kwargs.get("lifetime", DEFAULT_ASSET_LIFETIME)
         )
         salvage_val = 0
 

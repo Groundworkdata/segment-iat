@@ -69,8 +69,8 @@ class Meter(UtilityEndUse):
         self.meter_type: str = meter_type
 
         # We want to calculate energy consump at the meter based on the asset retrofits
-        if self.building.building_params.get("retrofit_year"):
-            self.replacement_year = self.building.building_params.get("retrofit_year")
+        if self.building.building_params.get("asset_replacement_year"):
+            self.replacement_year = self.building.building_params.get("asset_replacement_year")
 
         self.annual_total_energy_use: dict = {}
         self.annual_peak_energy_use: dict = {}

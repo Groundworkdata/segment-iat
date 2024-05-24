@@ -33,7 +33,8 @@ def main():
         description="Groundwork local energy asset planning model"
     )
 
-    parser.add_argument("scenario", nargs="+", help="The scenario(s) you would like to run")
+    parser.add_argument("segment", help="The street segment to run")
+    parser.add_argument("--scenario", nargs="+", help="The scenario(s) you would like to run")
     parser.add_argument(
         "--postprocessing",
         help="Postprocess outputs across scenarios into condensed files to be tracked by git",
@@ -41,14 +42,14 @@ def main():
     )
     args = parser.parse_args()
 
+    segment = args.segment
     scenarios = args.scenario
     postprocessing = args.postprocessing
 
     print("==========Simulation pre-check==========")
     for scenario in scenarios:
 
-        # FIXME: Update after final changes
-        settings_filepath = f"./config_files/scenarios/{scenario}.json"
+        settings_filepath = f"./config_files/{segment}/scenarios/{segment}_{scenario}.csv"
         settings_exist = os.path.exists(settings_filepath)
 
         if not settings_exist:
@@ -61,8 +62,7 @@ def main():
         print(f"==========Scenario: {scenario}==========")
         print("Loading inputs...")
 
-        # FIXME: Update after final changes
-        settings_filepath = f"./config_files/scenarios/{scenario}.json"
+        settings_filepath = f"./config_files/{segment}/scenarios/{segment}_{scenario}.csv"
         scenario_creator = ScenarioCreator(settings_filepath)
 
         scenario_creator.create_scenario()
@@ -100,7 +100,6 @@ def post_process_outputs(postprocessing: bool, street_segments: List[str]) -> No
             outputs_filepath = os.path.join("./outputs", segment)
             scenario_folders = os.listdir(outputs_filepath)
 
-            # combined_outputs_filepath = os.path.join(outputs_filepath, COMBINED_FILES_KEY)
             combined_outputs_filepath = f"./results/{segment}"
             if not os.path.exists(combined_outputs_filepath):
                 os.makedirs(combined_outputs_filepath)
