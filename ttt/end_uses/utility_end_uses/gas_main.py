@@ -10,8 +10,6 @@ from ttt.end_uses.utility_end_uses.pipeline import Pipeline
 
 
 DEFAULT_SHUTOFF_YEAR = 2100
-#TODO: Make configurable
-ANNUAL_OM_FILEPATH = "./config_files/utility_networks/doer_mf/operating_expenses.csv"
 
 
 class GasMain(Pipeline):
@@ -72,6 +70,7 @@ class GasMain(Pipeline):
             kwargs.get("diameter"),
             kwargs.get("material"),
             kwargs.get("connected_assets"),
+            kwargs.get("segment_id"),
             "gas_main",
         )
 
@@ -174,7 +173,8 @@ class GasMain(Pipeline):
         return (np.array(self.shutoff_year) * self.shutoff_cost).tolist()
 
     def _get_annual_om(self) -> List[float]:
-        om_table = pd.read_csv(ANNUAL_OM_FILEPATH, index_col="material").to_dict(orient="index")
+        om_filepath = f"./config_files/{self._segment_id}/utility_network/{self._segment_id}_operating_expenses.csv"
+        om_table = pd.read_csv(om_filepath, index_col="material").to_dict(orient="index")
 
         if self.material not in om_table.keys():
             warnings.warn(f"Material {self.material} not in O&M table! Using $0 / year.")

@@ -69,6 +69,7 @@ class Pipeline(UtilityEndUse):
         diameter: str,
         material: str,
         connected_assets: list,
+        segment_id: str,
         pipeline_type: str,
     ):
         super().__init__(
@@ -81,6 +82,8 @@ class Pipeline(UtilityEndUse):
             sim_end_year,
             replacement_year,
         )
+
+        self._segment_id: str = segment_id
 
         self.pipeline_type: str = pipeline_type
         self.length: int = length_ft
@@ -125,8 +128,7 @@ class Pipeline(UtilityEndUse):
             self.annual_total_leakage = self.get_annual_total_leakage()
 
     def _load_leakage_factors(self) -> int:
-        #TODO: Make configurable
-        leakage_factor_file = "./config_files/utility_networks/doer_mf/leakage_factors.csv"
+        leakage_factor_file = f"./config_files/{self._segment_id}/utility_network/{self._segment_id}_leakage_factors.csv"
         return self._read_csv_config(config_file_path=leakage_factor_file)
 
     def get_annual_total_energy_use(self) -> dict:
