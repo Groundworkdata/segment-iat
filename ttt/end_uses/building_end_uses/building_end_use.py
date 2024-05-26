@@ -115,7 +115,7 @@ class BuildingEndUse(Asset):
     def get_elec_consump(self) -> list[float]:
         elec_consump = pd.Series(self.elec_consump)
         elec_consump.index = pd.DatetimeIndex(elec_consump.index)
-        elec_consump_annual = elec_consump.sum()
+        elec_consump_annual = elec_consump.sum(axis=0)
         elec_consump_annual = (elec_consump_annual * np.array(self.operational_vector)).tolist()
 
         return elec_consump_annual
@@ -123,7 +123,7 @@ class BuildingEndUse(Asset):
     def get_gas_consump(self) -> list[float]:
         gas_consump = pd.Series(self.gas_consump)
         gas_consump.index = pd.DatetimeIndex(gas_consump.index)
-        gas_consump_annual = gas_consump.sum()
+        gas_consump_annual = gas_consump.sum(axis=0)
         gas_consump_annual = (gas_consump_annual * np.array(self.operational_vector)).tolist()
 
         return gas_consump_annual

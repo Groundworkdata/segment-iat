@@ -147,7 +147,7 @@ class UtilityNetwork:
         self._year_timestamps = pd.date_range(
             start="{}-01-01".format(start_year),
             end="{}-01-01".format(start_year + 1),
-            freq="H",
+            freq="h",
             inclusive="left",
         )
 
