@@ -122,7 +122,7 @@ class Building:
         ))
 
         self._year_timestamps = pd.date_range(
-            start="2018-01-01", end="2019-01-01", freq="H", inclusive="left"
+            start="2018-01-01", end="2019-01-01", freq="h", inclusive="left"
         )
 
     def _get_building_id(self) -> None:
@@ -363,7 +363,7 @@ class Building:
                         "out.{}.total.energy_consumption".format(fuel)
                     ]
 
-                annual_use = annual_use.resample("AS").sum().values[0]
+                annual_use = annual_use.resample("YS").sum().values[0]
                 annual_energy_use[fuel].append(annual_use)
 
         return annual_energy_use
@@ -400,7 +400,7 @@ class Building:
                         "out.{}.total.energy_consumption".format(fuel)
                     ]
 
-                annual_use = annual_use.resample("AS").sum().values[0]
+                annual_use = annual_use.resample("YS").sum().values[0]
 
                 annual_utility_costs[fuel].append(annual_use * rate)
 
@@ -491,11 +491,11 @@ class Building:
 
         resample_string = "{}T".format(freq)
 
-        self.baseline_consumption.resample(resample_string).sum().to_csv(
+        self.baseline_consumption.resample(resample_string).sum(axis=0).to_csv(
             "./outputs/{}_baseline_consump.csv".format(self.building_id)
         )
 
-        self.retrofit_consumption.resample(resample_string).sum().to_csv(
+        self.retrofit_consumption.resample(resample_string).sum(axis=0).to_csv(
             "./outputs/{}_retrofit_consump.csv".format(self.building_id)
         )
 

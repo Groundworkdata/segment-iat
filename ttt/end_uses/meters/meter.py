@@ -95,10 +95,12 @@ class Meter(UtilityEndUse):
         """
         energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
         annual_total_energy_baseline = np.sum(
-            self.building.baseline_consumption[[energy_attr]]
+            self.building.baseline_consumption[[energy_attr]],
+            axis=0
         ).values[0]
         annual_total_energy_retrofit = np.sum(
-            self.building.retrofit_consumption[[energy_attr]]
+            self.building.retrofit_consumption[[energy_attr]],
+            axis=0
         ).values[0]
 
         annual_total_energy = [
@@ -118,10 +120,10 @@ class Meter(UtilityEndUse):
         energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
         hourly_baseline_consump = \
-            self.building.baseline_consumption[energy_attr].resample("H").sum()
-        
+            self.building.baseline_consumption[energy_attr].resample("h").sum()
+
         hourly_retrofit_consump = \
-            self.building.retrofit_consumption[energy_attr].resample("H").sum()
+            self.building.retrofit_consumption[energy_attr].resample("h").sum()
 
         annual_peak_energy_baseline = hourly_baseline_consump.max()
         annual_peak_energy_retrofit = hourly_retrofit_consump.max()
@@ -140,9 +142,10 @@ class Meter(UtilityEndUse):
         energy_attr = "out." + self.meter_type.lower() + ".total.energy_consumption"
 
         annual_energy_use_baseline = \
-            self.building.baseline_consumption[energy_attr].resample("H").sum()
+            self.building.baseline_consumption[energy_attr].resample("h").sum()
+
         annual_energy_use_retrofit = \
-            self.building.retrofit_consumption[energy_attr].resample("H").sum()
+            self.building.retrofit_consumption[energy_attr].resample("h").sum()
 
         annual_energy_use_timeseries = [
             annual_energy_use_baseline if i == 1 else annual_energy_use_retrofit

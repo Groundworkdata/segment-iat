@@ -158,10 +158,10 @@ class Pipeline(UtilityEndUse):
         return dict(tmp_counter)
 
     def get_annual_total_leakage(self) -> list:
-        leakage_factor = float(self.leakage_factors[
+        leakage_factor = self.leakage_factors[
             (self.leakage_factors["asset"] == self.pipeline_type)
             & (self.leakage_factors["code"] == self.material)
-        ].value * self.length)
+        ].loc[:, "value"].iloc[0] * self.length
 
         # TODO: check if the units of length and leakage factor match
 
@@ -169,12 +169,10 @@ class Pipeline(UtilityEndUse):
 
         for idx, retrofit in enumerate(self.retrofit_vector):
             if retrofit:
-                leakage_factor = float(
-                    self.leakage_factors[
-                        (self.leakage_factors["asset"] == self.pipeline_type)
-                        & (self.leakage_factors["code"] == "PL")
-                    ].value
-                )
+                leakage_factor = self.leakage_factors[
+                    (self.leakage_factors["asset"] == self.pipeline_type)
+                    & (self.leakage_factors["code"] == "PL")
+                ].loc[:, "value"].iloc[0]
 
                 annual_leakage[idx] = leakage_factor * self.length
 
