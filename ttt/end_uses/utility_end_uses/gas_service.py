@@ -150,6 +150,7 @@ class GasService(Pipeline):
         return (np.array(self.book_value) * np.array(self.shutoff_year)).tolist()
 
     def _get_annual_om(self) -> List[float]:
+        return (0 * np.array(self.operational_vector)).tolist()
         om_filepath = f"./config_files/{self._segment_id}/utility_network/{self._segment_id}_operating_expenses.csv"
         om_table = pd.read_csv(om_filepath, index_col="material").to_dict(orient="index")
 
