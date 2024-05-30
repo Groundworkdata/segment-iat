@@ -64,6 +64,7 @@ class GasMeter(Meter):
         self._gas_shutoff_year: int = kwargs.get("gas_shutoff_year")
         self._retrofit_cost = kwargs.get("replacement_cost", DEFAULT_RETROFIT_COST)
         self._retrofit_freq = kwargs.get("replacement_freq", DEFAULT_RETROFIT_FREQ)
+        self._gas_replacement_year = kwargs.get("gas_replacement_year", 2100)
 
     def get_operational_vector(self) -> list:
         """
@@ -104,10 +105,18 @@ class GasMeter(Meter):
         sim_length = len(self.years_vector)
         retrofit_cost = np.zeros(sim_length)
 
-        retrofit_years = [
-            self._retrofit_freq*(i+1)-1
-            for i in range(int(sim_length / self._retrofit_freq))
-        ]
+        if self._retrofit_freq == 0:
+            if self._gas_replacement_year < self.sim_end_year:
+                retrofit_index = self._gas_replacement_year - self.sim_start_year
+                retrofit_years = retrofit_index
+            else:
+                retrofit_years = []
+
+        else:
+            retrofit_years = [
+                self._retrofit_freq*(i+1)-1
+                for i in range(int(sim_length / self._retrofit_freq))
+            ]
 
         retrofit_cost[retrofit_years] = self._retrofit_cost
 
