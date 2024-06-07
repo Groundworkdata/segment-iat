@@ -10,6 +10,7 @@ from ttt.end_uses.utility_end_uses.pipeline import Pipeline
 
 
 DEFAULT_SHUTOFF_YEAR = 2100
+DEFAULT_OM_COST = 0
 
 
 class GasMain(Pipeline):
@@ -174,14 +175,17 @@ class GasMain(Pipeline):
 
     def _get_annual_om(self) -> List[float]:
         om_filepath = f"./config_files/{self._segment_id}/utility_network/{self._segment_id}_operating_expenses.csv"
-        om_table = pd.read_csv(om_filepath, index_col="material").to_dict(orient="index")
+        om_table = pd.read_csv(om_filepath)
 
-        if self.material not in om_table.keys():
-            warnings.warn(f"Material {self.material} not in O&M table! Using $0 / year.")
-        
-        annual_operating_expense = om_table.get(self.material, {}).get(
-            "operating_expense_per_mile", 0
-        )
+        annual_operating_expense = om_table[
+            (om_table["type"]==self.pipeline_type)
+            & (om_table["material"]==self.material)
+        ]["operating_expense_per_mile"].to_dict().get(0, DEFAULT_OM_COST)
+
+        if not annual_operating_expense:
+            warnings.warn(
+                f"Material {self.material.upper()} not in O&M table for pipeline type {self.pipeline_type.upper()}! Using default ${DEFAULT_OM_COST} / year."
+            )
 
         # Convert length in feet to miles
         annual_operating_expense = annual_operating_expense * (self.length / 5280)
