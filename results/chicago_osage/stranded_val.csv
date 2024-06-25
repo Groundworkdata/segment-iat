@@ -3164,7 +3164,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3178,7 +3178,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2028,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
-2031,4250.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
+2031,5185.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
 2034,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3201,7 +3201,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2025,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
 2026,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
-2028,4625.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
+2028,5642.5,GS003,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3226,7 +3226,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2024,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
 2025,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
 2026,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
-2027,4750.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
+2027,5795.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3255,7 +3255,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2027,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
-2030,4375.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
+2030,5337.5,GS005,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3295,7 +3295,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2041,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
-2044,2625.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
+2044,3202.5,GS006,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
 2047,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3306,7 +3306,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2026,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
-2029,4500.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
+2029,5490.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3346,7 +3346,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3366,7 +3366,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2034,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
 2035,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
 2036,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
-2037,3500.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
+2037,4270.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3385,7 +3385,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2027,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
-2030,4375.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
+2030,5337.5,GS010,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3421,7 +3421,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2037,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
-2040,3125.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
+2040,3812.5,GS011,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3446,7 +3446,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2036,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
-2039,3250.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
+2039,3965.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3476,7 +3476,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3484,7 +3484,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2048,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2049,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec
 2024,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec
-2025,5000.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec
+2025,6100.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec
 2026,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3528,7 +3528,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3553,7 +3553,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2039,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
-2042,2875.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
+2042,3507.5,GS016,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3577,7 +3577,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2037,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
-2040,3125.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
+2040,3812.5,GS017,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3591,7 +3591,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2025,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
 2026,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
-2028,4625.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
+2028,5642.5,GS018,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3618,7 +3618,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2026,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
-2029,4500.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
+2029,5490.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3659,7 +3659,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2041,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
-2044,2625.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
+2044,3202.5,GS020,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
 2047,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3677,7 +3677,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2033,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
 2034,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
 2035,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
-2036,3625.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
+2036,4422.5,GS021,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3706,7 +3706,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2036,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
-2039,3250.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
+2039,3965.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3731,7 +3731,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2035,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
 2036,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
-2038,3375.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
+2038,4117.5,GS023,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3763,7 +3763,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2041,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
-2044,2625.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
+2044,3202.5,GS024,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
 2047,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3771,7 +3771,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2049,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec
 2024,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec
 2025,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec
-2026,4875.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec
+2026,5947.5,GS025,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3798,7 +3798,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2024,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
 2025,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
 2026,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
-2027,4750.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
+2027,5795.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3835,7 +3835,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2035,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
 2036,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
-2038,3375.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
+2038,4117.5,GS027,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3863,7 +3863,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2037,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
-2040,3125.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
+2040,3812.5,GS028,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3890,7 +3890,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2038,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
 2039,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
-2041,3000.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
+2041,3660.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3907,7 +3907,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2029,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
 2030,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
-2032,4125.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
+2032,5032.5,GS030,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
 2034,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
 2035,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3946,7 +3946,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2042,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
 2043,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
-2045,2500.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
+2045,3050.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
 2047,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
 2048,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3960,7 +3960,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2030,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
-2033,4000.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
+2033,4880.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
 2034,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
 2035,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
 2036,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec
@@ -3992,7 +3992,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2036,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
-2039,3250.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
+2039,3965.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
 2040,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4022,7 +4022,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4030,7 +4030,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2048,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2049,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec
 2024,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec
-2025,5000.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec
+2025,6100.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec
 2026,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec
 2027,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4066,7 +4066,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2032,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
 2034,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
-2035,3750.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
+2035,4575.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
 2036,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4087,7 +4087,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2027,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
 2028,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
 2029,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
-2030,4375.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
+2030,5337.5,GS037,gas_network,gas_service,retrofit,unmanaged_elec
 2031,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
 2032,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4126,7 +4126,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4152,7 +4152,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
 2041,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
 2042,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
-2043,2750.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
+2043,3355.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
 2044,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
 2045,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
 2046,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4170,7 +4170,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2032,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
 2033,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
 2034,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
-2035,3750.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
+2035,4575.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
 2036,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
 2037,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
 2038,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec
@@ -4206,7 +4206,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2042,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
 2043,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
 2044,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
-2045,95000.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
+2045,114000.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
 2046,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
 2047,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
 2048,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec
@@ -5270,7 +5270,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS001,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5284,7 +5284,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2028,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2031,4250.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2031,5185.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2034,0.0,GS002,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5307,7 +5307,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2025,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2026,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2028,4625.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2028,5642.5,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS003,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5332,7 +5332,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2024,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2025,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2026,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2027,4750.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2027,5795.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS004,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5361,7 +5361,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2027,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2030,4375.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2030,5337.5,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS005,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5401,7 +5401,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2041,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2044,2625.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2044,3202.5,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2047,0.0,GS006,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5412,7 +5412,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2026,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2029,4500.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2029,5490.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS007,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5452,7 +5452,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS008,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5472,7 +5472,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2034,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2035,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2036,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2037,3500.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2037,4270.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS009,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5491,7 +5491,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2027,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2030,4375.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2030,5337.5,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS010,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5527,7 +5527,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2037,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2040,3125.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2040,3812.5,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS011,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5552,7 +5552,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2036,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2039,3250.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2039,3965.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS012,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5582,7 +5582,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5590,7 +5590,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2048,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2049,0.0,GS013,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2024,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2025,5000.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2025,6100.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2026,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS014,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5634,7 +5634,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS015,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5659,7 +5659,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2039,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2042,2875.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2042,3507.5,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS016,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5683,7 +5683,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2037,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2040,3125.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2040,3812.5,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS017,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5697,7 +5697,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2025,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2026,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2028,4625.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2028,5642.5,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS018,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5724,7 +5724,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2026,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2029,4500.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2029,5490.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS019,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5765,7 +5765,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2041,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2044,2625.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2044,3202.5,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2047,0.0,GS020,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5783,7 +5783,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2033,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2034,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2035,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2036,3625.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2036,4422.5,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS021,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5812,7 +5812,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2036,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2039,3250.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2039,3965.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS022,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5837,7 +5837,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2035,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2036,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2038,3375.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2038,4117.5,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS023,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5869,7 +5869,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2041,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2044,2625.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2044,3202.5,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2047,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5877,7 +5877,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2049,0.0,GS024,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2024,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2025,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2026,4875.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2026,5947.5,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS025,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5904,7 +5904,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2024,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2025,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2026,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2027,4750.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2027,5795.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS026,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5941,7 +5941,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2035,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2036,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2038,3375.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2038,4117.5,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS027,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5969,7 +5969,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2037,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2040,3125.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2040,3812.5,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS028,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -5996,7 +5996,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2038,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2039,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2041,3000.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2041,3660.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS029,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6013,7 +6013,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2029,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2030,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2032,4125.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2032,5032.5,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2034,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2035,0.0,GS030,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6052,7 +6052,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2042,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2045,2500.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2045,3050.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2047,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2048,0.0,GS031,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6066,7 +6066,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2030,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2033,4000.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2033,4880.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2034,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2035,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2036,0.0,GS032,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6098,7 +6098,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2036,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2039,3250.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2039,3965.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2040,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS033,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6128,7 +6128,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6136,7 +6136,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2048,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2049,0.0,GS034,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2024,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2025,5000.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2025,6100.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2026,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2027,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS035,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6172,7 +6172,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2032,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2034,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2035,3750.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2035,4575.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2036,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS036,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6193,7 +6193,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2027,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2028,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2029,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2030,4375.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2030,5337.5,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2031,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2032,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS037,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6232,7 +6232,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS038,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6258,7 +6258,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2040,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2041,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2042,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2043,2750.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2043,3355.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2045,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GS039,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6276,7 +6276,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2032,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2033,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2034,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
-2035,3750.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
+2035,4575.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2036,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2037,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
 2038,0.0,GS040,gas_network,gas_service,retrofit,unmanaged_elec_upgrade7
@@ -6312,7 +6312,7 @@ year,stranded_val,asset_id,asset_domain,asset_type,existing_or_retrofit,scenario
 2042,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
 2043,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
 2044,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
-2045,95000.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
+2045,114000.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
 2046,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
 2047,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
 2048,0.0,GP001,gas_network,gas_main,retrofit,unmanaged_elec_upgrade7
