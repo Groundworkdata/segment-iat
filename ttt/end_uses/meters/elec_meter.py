@@ -41,7 +41,6 @@ class ElecMeter(Meter):
             kwargs.get("sim_start_year"),
             kwargs.get("sim_end_year"),
             kwargs.get("replacement_year"),
-            kwargs.get("decarb_scenario"),
             kwargs.get("building"),
             "electricity",
         )

@@ -1,9 +1,0 @@
-sim_start_year,2024
-sim_end_year,2050
-segment_id,chicago_osage
-sim_name,managed_elec
-gas_shutoff_scenario,True
-gas_shutoff_year,2025
-gas_replacement_year,2100
-existing_appliance_costs_id,gas_homes
-retrofit_appliance_costs_id,elec_homes

@@ -181,16 +181,16 @@ class UtilityNetwork:
         service_config_file = self._network_config["networks"]["gas"]["service_config"]
         service_configs = self._read_csv_config(config_file_path=service_config_file)
 
-        replacement_year = self._sim_settings.get("gas_replacement_year")
-        if replacement_year > self._sim_settings["sim_end_year"]:
-            replacement_year = None
+        # replacement_year = self._sim_settings.get("gas_replacement_year")
+        # if replacement_year > self._sim_settings["sim_end_year"]:
+        #     replacement_year = None
 
         for _, service_config in service_configs.iterrows():
             connected_meters = self._get_children(
                 parent_id=service_config["gisid"], all_children=self.gas_meters
             )
 
-            service_retrofit_params = {"replacement_year": replacement_year}
+            service_retrofit_params = {"replacement_year": self._sim_settings["gas_pipe_intervention_year"]}
 
             gas_service = GasService(
                 **service_config,
@@ -209,9 +209,9 @@ class UtilityNetwork:
         main_config_file = self._network_config["networks"]["gas"]["mains_config"]
         main_configs = self._read_csv_config(config_file_path=main_config_file)
 
-        replacement_year = self._sim_settings.get("gas_replacement_year")
-        if replacement_year > self._sim_settings["sim_end_year"]:
-            replacement_year = None
+        # replacement_year = self._sim_settings.get("gas_replacement_year")
+        # if replacement_year > self._sim_settings["sim_end_year"]:
+        #     replacement_year = None
 
         for _, main_config in main_configs.iterrows():
 
@@ -219,7 +219,7 @@ class UtilityNetwork:
                 parent_id=main_config["gisid"], all_children=self.gas_services
             )
 
-            main_retrofit_params = {"replacement_year": replacement_year}
+            main_retrofit_params = {"replacement_year": self._sim_settings["gas_pipe_intervention_year"]}
 
             gas_main = GasMain(
                 **main_config,

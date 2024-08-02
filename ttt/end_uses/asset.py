@@ -31,8 +31,8 @@ class Asset:
         years_vector (list): List of all years for the simulation
         year_timestamps (pd.DatetimeIndex): DatetimeIndex of hourly timestamps for a full year
         operational_vector (list): Boolean vals for years of the simulation when asset in operation
-        retrofit_vector (list): Indicates that the asset has been retrofit; 1 for the retrofit year
-            and all following years, 0 o/w
+        retrofit_vector (List[bool]): Indicates that the asset has been retrofit;
+            True for the retrofit year and all following years, False o/w
         replacement_vector (list): Indicates when the asset is retrofit; 1 in the retrofit year, 0 o/w
         install_cost (list): Install cost during the simulation years
         depreciation (list): Depreciated val during the simulation years
@@ -75,7 +75,7 @@ class Asset:
         self.years_vector: list = []
         self.year_timestamps: pd.DatetimeIndex = None
         self.operational_vector: list = []
-        self.retrofit_vector: list = []
+        self.retrofit_vector: List[bool] = []
         self.replacement_vector: list = []
         self.install_cost: List[float] = []
         self.depreciation: list = []
@@ -115,7 +115,7 @@ class Asset:
         ]
     
     def get_retrofit_vector(self) -> list:
-        return [1 - i for i in self.operational_vector]
+        return [bool(1 - i) for i in self.operational_vector]
     
     def _get_replacement_vec(self) -> List[bool]:
         """

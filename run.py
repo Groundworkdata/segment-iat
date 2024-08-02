@@ -7,6 +7,7 @@ from typing import List
 
 import pandas as pd
 
+from ttt.segment_study.segment_study import SegmentStudy
 from ttt.scenario_creator.create_scenario import ScenarioCreator
 
 
@@ -33,7 +34,7 @@ def main():
         description="Groundwork local energy asset planning model"
     )
 
-    parser.add_argument("segment", help="The street segment to run")
+    parser.add_argument("study", help="The study to run")
     parser.add_argument("--scenario", nargs="+", help="The scenario(s) you would like to run")
     parser.add_argument(
         "--postprocessing",
@@ -42,28 +43,49 @@ def main():
     )
     args = parser.parse_args()
 
-    segment = args.segment
+    study = args.study
     scenarios = args.scenario
     postprocessing = args.postprocessing
 
     print("==========Simulation pre-check==========")
-    for scenario in scenarios:
+    study_dir = f"./config_files/{study}/"
+    study_config_filepath = os.path.join(study_dir, f"{study}_config.csv")
+    study_exists = os.path.exists(study_config_filepath)
+    if not study_exists:
+        raise FileNotFoundError(f"Config file does not exist for study {study.upper()}")
 
-        settings_filepath = f"./config_files/{segment}/scenarios/{segment}_{scenario}.csv"
-        settings_exist = os.path.exists(settings_filepath)
+    scenarios_basepath = f"./config_files/{study}/scenarios/"
+    if not scenarios:
+        scenarios = [i.split("_config.csv")[0] for i in os.listdir(scenarios_basepath)]
+    else:
+        scenarios = [i.lower() for i in scenarios]
 
-        if not settings_exist:
-            raise FileNotFoundError(f"Settings files does not exist for scenario {scenario}")
-    
+    for i in scenarios:
+        if not os.path.exists(os.path.join(study_dir, "scenarios", i+"_config.csv")):
+            raise FileNotFoundError(
+                f"File for scenario {i.upper()} does not exist for study {study.upper()}. "
+                f"No file found at {os.path.join(study_dir, i)}"
+            )
+
     print("Check complete!")
+
+    study = create_study(study_config_filepath)
+    study.load_study()
 
     street_segments = []
     for scenario in scenarios:
-        print(f"==========Scenario: {scenario}==========")
+        print(f"==========Scenario file: {scenario}==========")
         print("Loading inputs...")
 
-        settings_filepath = f"./config_files/{segment}/scenarios/{segment}_{scenario}.csv"
-        scenario_creator = ScenarioCreator(settings_filepath)
+        settings_filepath = f"./config_files/{study.segment_name}/scenarios/{scenario}_config.csv"
+        scenario_creator = ScenarioCreator(
+            study.segment_name,
+            study.study_start_year,
+            study.study_end_year,
+            study.gas_pipe_intervention_year,
+            study.parcels_table,
+            settings_filepath
+        )
 
         scenario_creator.create_scenario()
 
@@ -75,6 +97,17 @@ def main():
     print(f"The following scenarios were successfully executed: {scenarios}")
 
     post_process_outputs(postprocessing, street_segments)
+
+
+def create_study(study_filepath: str) -> SegmentStudy:
+    study_inputs = pd.read_csv(study_filepath, index_col=0)
+    study_inputs = study_inputs["value"].to_dict()
+    return SegmentStudy(
+        study_inputs["street_segment"],
+        study_inputs["start_year"],
+        study_inputs["end_year"],
+        study_inputs["gas_pipe_intervention_year"]
+    )
 
 
 def post_process_outputs(postprocessing: bool, street_segments: List[str]) -> None:
