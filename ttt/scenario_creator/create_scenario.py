@@ -66,10 +66,20 @@ class ScenarioCreator:
 
     def __init__(
             self,
+            segment_name: str,
+            study_start_year: int,
+            study_end_year: int,
+            gas_pipe_intervention_year: int,
+            parcels_table: dict,
             sim_settings_filepath: str,
             write_building_energy_timeseries: bool = False,
             status_logging=None
     ):
+        self.segment_name: str = segment_name
+        self.study_start_year: int = study_start_year
+        self.study_end_year: int = study_end_year
+        self.gas_pipe_intervention_year: int = gas_pipe_intervention_year
+        self.parcel_table: dict = parcels_table
         self._sim_settings_filepath: str = sim_settings_filepath
         self.write_building_energy_timeseries: bool = write_building_energy_timeseries
         self.status_logging = status_logging
@@ -78,7 +88,6 @@ class ScenarioCreator:
         self._outputs_path: str = ""
         self._years_vec: List[int] = []
         self._buildings_config: dict = {}
-        self.parcel_table: dict = {}
         self.parcel_scenario_table: dict = {}
 
         self.sim_name: str = ""
@@ -93,7 +102,6 @@ class ScenarioCreator:
         self._outputs_path = self._set_outputs_path()
         self._years_vec = self._get_years_vec()
         self._status_update("Creating buildings...", 0.25)
-        self.parcel_table = self._get_parcel_table()
         self.parcel_scenario_table = self._get_parcel_scenario_table()
         self._create_building()
         self._status_update("Creating utility network...", 0.8)
@@ -108,24 +116,23 @@ class ScenarioCreator:
         """
         settings = pd.read_csv(self._sim_settings_filepath, index_col=0, header=None)
         settings = settings.iloc[:, 0].to_dict()
-        settings["sim_start_year"] = int(settings["sim_start_year"])
-        settings["sim_end_year"] = int(settings["sim_end_year"])
-        settings["gas_shutoff_year"] = int(settings["gas_shutoff_year"])
-        settings["gas_shutoff_scenario"] = ast.literal_eval(settings["gas_shutoff_scenario"])
-        settings["gas_replacement_year"] = int(settings["gas_replacement_year"])
+        settings["sim_start_year"] = self.study_start_year
+        settings["sim_end_year"] = self.study_end_year
+        settings["gas_pipe_intervention_year"] = self.gas_pipe_intervention_year
+        settings["segment_id"] = self.segment_name
         return settings
-    
+
     def _get_street_segment(self) -> str:
         """
         Return the street segment ID
         """
-        return self._sim_config.get("segment_id")
+        return self.segment_name
     
     def _get_sim_name(self) -> str:
         """
         Return the simulation name
         """
-        return self._sim_config.get("sim_name")
+        return self._sim_config.get("scenario_name")
 
     def _set_outputs_path(self) -> str:
         """
@@ -147,20 +154,13 @@ class ScenarioCreator:
             self._sim_config.get("sim_start_year", DEFAULT_SIM_START_YEAR),
             self._sim_config.get("sim_end_year", DEFAULT_SIM_END_YEAR)
         ))
-    
-    def _get_parcel_table(self) -> dict:
-        """
-        Gets parcel table and returns as dict indexed by parcel_id
-        """
-        parcel_filepath = f"./config_files/{self.street_segment}/parcels/{self.street_segment}_parcels.csv"
-        parcel_table = pd.read_csv(parcel_filepath).set_index("parcel_id")
-        return parcel_table.to_dict(orient="index")
-    
+
     def _get_parcel_scenario_table(self) -> dict:
         """
         Get table of parcel data pertinent to the given simulation
         """
-        filepath = f"./config_files/{self.street_segment}/parcels/{self.street_segment}_{self.sim_name}_parcel_scenarios.csv"
+        measures_id = self._sim_config.get("parcel_retrofit_measures_filename")
+        filepath = f"./config_files/{self.street_segment}/parcels/{measures_id}.csv"
         parcel_scenario_table = pd.read_csv(filepath).set_index("parcel_id")
         return parcel_scenario_table.to_dict(orient="index")
 
@@ -179,8 +179,18 @@ class ScenarioCreator:
             building_params = self.parcel_table.get(building_id)
             building_scenario_params = self.parcel_scenario_table.get(building_id)
 
-            building_params = {**building_params, **building_scenario_params}
-            building_params["building_id"] = building_id
+            building_params = {
+                "building_id": building_id,
+                "baseline_consumption_id": building_params.get("baseline_consumption_id"),
+                "retrofit_consumption_id": building_scenario_params.get("energy_profile_id"),
+                "load_scaling_factor": building_params.get("load_scaling_factor"),
+                "asset_install_year": building_params.get("install_year"),
+                "asset_replacement_year": building_scenario_params.get("install_year"),
+                "heating_fuel": building_params.get("heating_fuel"),
+                "retrofit_heating_fuel": building_params.get("heating_fuel"),
+                "existing_measures_cost_id": building_params.get("measure_costs_filename"),
+                "retrofit_measures_cost_id": self._sim_config.get("parcel_retrofit_measure_costs_filename")
+            }
 
             building = Building(
                 building_params,

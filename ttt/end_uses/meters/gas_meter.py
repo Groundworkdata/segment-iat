@@ -32,7 +32,6 @@ class GasMeter(Meter):
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year (exclusive)
         replacement_year (int): The replacement year of the asset
-        decarb_scenario (str): The energy retrofit intervention scenario
         building (Building): Instance of the associated Building object
         replacement_cost (float): The cost of replacing the gas meter
         replacement_freq (int): The annual frequency at which the gas meter is replaced
@@ -55,16 +54,15 @@ class GasMeter(Meter):
             kwargs.get("sim_start_year"),
             kwargs.get("sim_end_year"),
             kwargs.get("replacement_year"),
-            kwargs.get("decarb_scenario"),
             kwargs.get("building"),
             "natural_gas",
         )
 
-        self._gas_shutoff: bool = kwargs.get("gas_shutoff_scenario", False)
-        self._gas_shutoff_year: int = kwargs.get("gas_shutoff_year")
+        self._gas_intervention_year: int = kwargs.get("gas_pipe_intervention_year")
+        self._gas_intervention: str = kwargs.get("gas_intervention")
+        self._gas_shutoff: bool = self._gas_intervention.lower()=="decommission"
         self._retrofit_cost = kwargs.get("replacement_cost", DEFAULT_RETROFIT_COST)
         self._retrofit_freq = kwargs.get("replacement_freq", DEFAULT_RETROFIT_FREQ)
-        self._gas_replacement_year = kwargs.get("gas_replacement_year", 2100)
 
     def get_operational_vector(self) -> list:
         """
@@ -74,23 +72,22 @@ class GasMeter(Meter):
         Building _fuel_type can take values of: [GAS, OIL, ELEC, LPG, HPL, NPH]
         """
         building_fuel = self.building._fuel_type
-        #FIXME: This fails if the building gets off of gas to start the simulation;
-        # if retrofit year (to elec or something else) = sim start year, then "GAS" will not appear
-        # in the _fuel_type list, and this will fail
-        final_gas_year = (
-            len(building_fuel) - 1 - building_fuel[::-1].index("GAS")
-            + self.sim_start_year
-        )
 
-        gas_shutoff_year = min(self._gas_shutoff_year, final_gas_year+1)
+        final_gas_year = self.sim_start_year - 1
+        if "GAS" in building_fuel:
+            final_gas_year = (
+                len(building_fuel) - building_fuel[::-1].index("GAS")
+                + self.sim_start_year
+            )
 
-        if self._gas_shutoff:
-            return [
-                1 if self.install_year <= i and gas_shutoff_year > i else 0
-                for i in self.years_vector
-            ]
+        gas_shutoff_year = self.sim_end_year
+        if final_gas_year < self.sim_end_year or self._gas_shutoff:
+            gas_shutoff_year = min(final_gas_year+1, self._gas_intervention_year)
 
-        return [1] * len(self.years_vector)
+        return [
+            1 if self.install_year <= i and gas_shutoff_year > i else 0
+            for i in self.years_vector
+        ]
     
     def get_depreciation(self) -> list:
         """
@@ -106,8 +103,8 @@ class GasMeter(Meter):
         retrofit_cost = np.zeros(sim_length)
 
         if self._retrofit_freq == 0:
-            if self._gas_replacement_year < self.sim_end_year:
-                retrofit_index = self._gas_replacement_year - self.sim_start_year
+            if not self._gas_shutoff:
+                retrofit_index = self._gas_intervention_year - self.sim_start_year
                 retrofit_years = retrofit_index
             else:
                 retrofit_years = []

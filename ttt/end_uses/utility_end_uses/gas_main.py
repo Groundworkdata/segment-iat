@@ -75,9 +75,10 @@ class GasMain(Pipeline):
             "gas_main",
         )
 
-        self._gas_shutoff: bool = kwargs.get("gas_shutoff_scenario", False)
-        self._gas_shutoff_year: int = kwargs.get("gas_shutoff_year", DEFAULT_SHUTOFF_YEAR)
-        self._gas_replacement_year: bool = kwargs.get("replacement_year")
+        self._gas_intervention_year: int = kwargs.get("gas_pipe_intervention_year")
+        self._gas_intervention: str = kwargs.get("gas_intervention")
+        self._gas_shutoff: bool = self._gas_intervention.lower()=="decommission"
+        self._gas_replacement: bool = self._gas_intervention.lower()=="replace"
         self.replacement_cost = kwargs.get("replacement_cost", 0)
         self.shutoff_cost = kwargs.get("shutoff_cost", 0)
         self.book_value: list = []
@@ -104,41 +105,49 @@ class GasMain(Pipeline):
         return operational_vector.tolist()
 
     def _get_replacement_vec(self) -> List[bool]:
-        # Replacement must be specifically input
         replacement_vec = [False] * len(self.years_vector)
 
-        if self._gas_replacement_year:
-            replacement_vec[self._gas_replacement_year - self.sim_start_year] = True
+        if self._gas_replacement:
+            replacement_vec[self._gas_intervention_year - self.sim_start_year] = True
 
-        return replacement_vec
+        return (np.array(replacement_vec) * np.array(self.operational_vector)).astype(bool).tolist()
 
-    def get_retrofit_vector(self) -> list:
+    def get_retrofit_vector(self) -> List[bool]:
         retrofit_vector = np.zeros(len(self.years_vector))
 
-        if self._gas_replacement_year:
-            retrofit_vector[self._gas_replacement_year - self.sim_start_year:] = 1
+        if self._gas_replacement:
+            retrofit_vector[self._gas_intervention_year - self.sim_start_year:] = 1
 
-        return retrofit_vector.astype(bool).tolist()
+        return (
+            np.array(self.operational_vector)
+            * retrofit_vector
+        ).astype(bool).tolist()
 
     def get_install_cost(self) -> list:
         install_cost = np.zeros(len(self.years_vector))
 
-        if self._gas_replacement_year:
-            install_cost[self._gas_replacement_year - self.sim_start_year] = self.replacement_cost
+        if self._gas_replacement:
+            install_cost[self._gas_intervention_year - self.sim_start_year] = self.replacement_cost
 
-        return install_cost.tolist()
+        return (
+            np.array(self.operational_vector)
+            * install_cost
+        ).tolist()
 
     def get_depreciation(self) -> List[float]:
         depreciation = np.zeros(len(self.years_vector))
 
-        if self._gas_replacement_year:
+        if self._gas_replacement:
             depreciation_rate = self.replacement_cost / self.lifetime
-            depreciation[self._gas_replacement_year - self.sim_start_year:] = [
+            depreciation[self._gas_intervention_year - self.sim_start_year:] = [
                 max(self.replacement_cost - depreciation_rate * i, 0)
-                for i in range(self.sim_end_year - self._gas_replacement_year)
+                for i in range(self.sim_end_year - self._gas_intervention_year)
             ]
 
-        return depreciation.tolist()
+        return (
+            np.array(self.operational_vector)
+            * depreciation
+        ).tolist()
 
     def get_book_value(self) -> List[float]:
         return self.depreciation

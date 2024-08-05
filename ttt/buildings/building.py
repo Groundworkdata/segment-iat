@@ -40,7 +40,25 @@ class Building:
 
     Args:
         building_params (dict): Dict of input parameters for the building
+        {
+            building_id (str): The building/parcel ID
+            baseline_consumption_id (str): The ID of the building's baseline consumption profile
+            retrofit_consumption_id (str): The ID of the building's retrofit consumption profile
+            load_scaling_factor (float): The load scaling factor for the consumption
+            asset_install_year (int): The install year of existing building measures
+            asset_replacement_year (int): The install year of new building measures
+            heating_fuel (str): The existing heating fuel for the building
+            retrofit_heating_fuel (str): The heating fuel post-retrofit of the building
+        }
         sim_settings (dict): Dict of simulation settings
+        {
+            segment_id (str): The ID of the segment
+            sim_start_year (int): Start year of the study
+            sim_end_year (int): End year of the study (exclusive)
+            sim_name (str): The study name
+            existing_appliance_costs_id (str): ID of the costs for existing building measures
+            retrofit_appliance_costs_id (str): ID of the costs for new building measures
+        }
 
     Attributes:
         building_params (dict): Dict of input parameters for the building
@@ -160,18 +178,17 @@ class Building:
         Create the end uses for the building
         """
         end_use_instances = {}
-        segment_id = self._sim_settings.get("segment_id")
 
         cost_original_filepath = os.path.join(
             self._config_filepath,
             "parcels",
-            f"{segment_id}_{self._sim_settings.get("existing_appliance_costs_id")}_retrofit_costs.csv"
+            f"{self.building_params["existing_measures_cost_id"]}.csv"
         )
 
         cost_retrofit_filepath = os.path.join(
             self._config_filepath,
             "parcels",
-            f"{segment_id}_{self._sim_settings.get("retrofit_appliance_costs_id")}_retrofit_costs.csv"
+            f"{self.building_params["retrofit_measures_cost_id"]}.csv"
         )
 
         costs_original = pd.read_csv(
@@ -294,18 +311,17 @@ class Building:
         Calculate building-level costs
         """
         other_assets = ["weatherization", "panel_upgrade"]
-        segment_id = self._sim_settings.get("segment_id")
 
         cost_original_filepath = os.path.join(
             self._config_filepath,
             "parcels",
-            f"{segment_id}_{self._sim_settings.get("existing_appliance_costs_id")}_retrofit_costs.csv"
+            f"{self.building_params["existing_measures_cost_id"]}.csv"
         )
 
         cost_retrofit_filepath = os.path.join(
             self._config_filepath,
             "parcels",
-            f"{segment_id}_{self._sim_settings.get("retrofit_appliance_costs_id")}_retrofit_costs.csv"
+            f"{self.building_params["retrofit_measures_cost_id"]}.csv"
         )
 
         costs_original = pd.read_csv(

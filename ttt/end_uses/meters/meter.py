@@ -22,7 +22,6 @@ class Meter(UtilityEndUse):
         sim_start_year (int): The simulation start year
         sim_end_year (int): The simulation end year (exclusive)
         replacement_year (int): The replacement year of the asset
-        decarb_scenario (str): The energy retrofit intervention scenario
         building (Building): Instance of the associated Building object
         meter_type (str): The type of meter (electricity, natural_gas)
 
@@ -50,7 +49,6 @@ class Meter(UtilityEndUse):
         sim_start_year: int,
         sim_end_year: int,
         replacement_year: int,
-        decarb_scenario: int,
         building: Building,
         meter_type: str,
     ):
