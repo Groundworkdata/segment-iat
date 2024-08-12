@@ -6,7 +6,7 @@ import unittest
 
 import pandas as pd
 
-from ttt.end_uses.building_end_uses.stove import Stove
+from segment_iat.end_uses.building_end_uses.stove import Stove
 
 
 class TestStoveIntegration(unittest.TestCase):

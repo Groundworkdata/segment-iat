@@ -5,16 +5,16 @@ import os
 from typing import List, Dict
 import pandas as pd
 
-from ttt.buildings.building import Building
-from ttt.end_uses.utility_end_uses.gas_main import GasMain
-from ttt.end_uses.utility_end_uses.gas_service import GasService
-from ttt.end_uses.meters.gas_meter import GasMeter
+from segment_iat.buildings.building import Building
+from segment_iat.end_uses.utility_end_uses.gas_main import GasMain
+from segment_iat.end_uses.utility_end_uses.gas_service import GasService
+from segment_iat.end_uses.meters.gas_meter import GasMeter
 
-from ttt.end_uses.utility_end_uses.elec_service import ElecService
-from ttt.end_uses.utility_end_uses.elec_secondary import ElecSecondary
-from ttt.end_uses.utility_end_uses.elec_transformer import ElecTransformer
-from ttt.end_uses.utility_end_uses.elec_primary import ElecPrimary
-from ttt.end_uses.meters.elec_meter import ElecMeter
+from segment_iat.end_uses.utility_end_uses.elec_service import ElecService
+from segment_iat.end_uses.utility_end_uses.elec_secondary import ElecSecondary
+from segment_iat.end_uses.utility_end_uses.elec_transformer import ElecTransformer
+from segment_iat.end_uses.utility_end_uses.elec_primary import ElecPrimary
+from segment_iat.end_uses.meters.elec_meter import ElecMeter
 
 
 class UtilityNetwork:

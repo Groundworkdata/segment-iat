@@ -7,8 +7,8 @@ from typing import List
 
 import pandas as pd
 
-from ttt.segment_study.segment_study import SegmentStudy
-from ttt.scenario_creator.create_scenario import ScenarioCreator
+from segment_iat.segment_study.segment_study import SegmentStudy
+from segment_iat.scenario_creator.create_scenario import ScenarioCreator
 
 
 OUTPUT_FILES = [

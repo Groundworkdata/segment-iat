@@ -1,7 +1,7 @@
 """
 Defines electric secondary end use
 """
-from ttt.end_uses.utility_end_uses.distribution_lines import DistributionLine
+from segment_iat.end_uses.utility_end_uses.distribution_lines import DistributionLine
 
 
 class ElecSecondary(DistributionLine):

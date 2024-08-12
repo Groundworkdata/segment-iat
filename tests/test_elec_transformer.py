@@ -4,7 +4,7 @@ Test the ElecTransformer class
 import unittest
 from unittest.mock import Mock
 
-from ttt.end_uses.utility_end_uses.elec_transformer import ElecTransformer
+from segment_iat.end_uses.utility_end_uses.elec_transformer import ElecTransformer
 
 
 class TestElecTransformer(unittest.TestCase):

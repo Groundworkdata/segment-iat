@@ -5,7 +5,7 @@ import shutil
 import unittest
 from unittest.mock import Mock, patch
 
-from ttt.scenario_creator.create_scenario import ScenarioCreator
+from segment_iat.scenario_creator.create_scenario import ScenarioCreator
 
 
 class TestScenarioCreator(unittest.TestCase):
@@ -15,14 +15,14 @@ class TestScenarioCreator(unittest.TestCase):
             write_building_energy_timeseries=True
         )
 
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._get_utility_network_outputs")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._write_outputs")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._create_utility_network")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._create_building")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._get_years_vec")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._set_outputs_path")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._get_decarb_scenario")
-    @patch("ttt.scenario_creator.create_scenario.ScenarioCreator._get_sim_settings")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._get_utility_network_outputs")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._write_outputs")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._create_utility_network")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._create_building")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._get_years_vec")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._set_outputs_path")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._get_decarb_scenario")
+    @patch("segment-iat.scenario_creator.create_scenario.ScenarioCreator._get_sim_settings")
     def test_create_scenario(
         self,
         mock_get_sim_settings: Mock,
@@ -98,7 +98,7 @@ class TestScenarioCreator(unittest.TestCase):
             self.scenario_creator._get_years_vec()
         )
 
-    @patch("ttt.scenario_creator.create_scenario.Building")
+    @patch("segment-iat.scenario_creator.create_scenario.Building")
     def test_create_building(self, mock_building: Mock):
         mock_building_instance = Mock()
         mock_building_instance.building_id = "b1"
@@ -142,7 +142,7 @@ class TestScenarioCreator(unittest.TestCase):
             {"b1": mock_building_instance}
         )
 
-    @patch("ttt.scenario_creator.create_scenario.UtilityNetwork")
+    @patch("segment-iat.scenario_creator.create_scenario.UtilityNetwork")
     def test_create_utility_network(self, mock_utility_network: Mock):
         self.scenario_creator._sim_config = {
             "utility_network_config_filepath": "path-to-config"

@@ -4,7 +4,7 @@ Unit tests for the GasMeter class
 import unittest
 from unittest.mock import Mock
 
-from ttt.end_uses.meters.gas_meter import GasMeter
+from segment_iat.end_uses.meters.gas_meter import GasMeter
 
 
 class TestGasMeter(unittest.TestCase):
