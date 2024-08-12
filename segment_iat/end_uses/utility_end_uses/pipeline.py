@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from typing import List
 
-from ttt.end_uses.utility_end_uses.utility_end_use import UtilityEndUse
+from segment_iat.end_uses.utility_end_uses.utility_end_use import UtilityEndUse
 from collections import Counter
 
 

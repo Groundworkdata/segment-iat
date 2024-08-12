@@ -7,10 +7,10 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
-from ttt.end_uses.building_end_uses.clothes_dryer import ClothesDryer
-from ttt.end_uses.building_end_uses.domestic_hot_water import DHW
-from ttt.end_uses.building_end_uses.hvac import HVAC
-from ttt.end_uses.building_end_uses.stove import Stove
+from segment_iat.end_uses.building_end_uses.clothes_dryer import ClothesDryer
+from segment_iat.end_uses.building_end_uses.domestic_hot_water import DHW
+from segment_iat.end_uses.building_end_uses.hvac import HVAC
+from segment_iat.end_uses.building_end_uses.stove import Stove
 
 
 METHANE_LEAKS = {

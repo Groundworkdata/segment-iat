@@ -8,7 +8,7 @@ from typing import Dict
 import numpy as np
 import pandas as pd
 
-from ttt.end_uses.asset import Asset
+from segment_iat.end_uses.asset import Asset
 
 
 class BuildingEndUse(Asset):

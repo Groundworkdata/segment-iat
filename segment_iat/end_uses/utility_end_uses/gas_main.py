@@ -1,21 +1,21 @@
 """
-Defines gas service end use
+Defines gas main asset
 """
 import numpy as np
 import pandas as pd
 from typing import List
 import warnings
 
-from ttt.end_uses.utility_end_uses.pipeline import Pipeline
+from segment_iat.end_uses.utility_end_uses.pipeline import Pipeline
 
 
 DEFAULT_SHUTOFF_YEAR = 2100
 DEFAULT_OM_COST = 0
 
 
-class GasService(Pipeline):
+class GasMain(Pipeline):
     """
-    Defines a gas service pipeline, which inherits Pipeline class
+    Defines a gas main pipeline, which inherits Pipeline class
 
     Args:
         None
@@ -37,10 +37,12 @@ class GasService(Pipeline):
         material (str): The pipe material
         connected_assets (list): List of associated downstream assets
         replacement_cost (float): The cost of replacing the gas meter
+        shutoff_cost (float): The cost of pipeline shutoff
 
     Attributes:
-        replacement_cost (float): Cost of gas service replacement
-        book_value (list): Annual book value of the gas service
+        replacement_cost (float): Cost of gas main replacement
+        shutoff_cost (float): Cost of gas main shutoff
+        book_value (list): Annual book value of the gas main
         shutoff_year (list): 1 in the shutoff year, 0 all other years
 
     Methods:
@@ -51,6 +53,7 @@ class GasService(Pipeline):
         get_depreciation (list): Return the list of annual depreciated value for all sim years
         get_book_value (list): Returns annual book value vector
         get_shutoff_year (list): Returns vector with value 1 in shutoff year, 0 o/w
+        get_system_shutoff_cost (list): Returns vector with the system shutoff cost by sim year
     """
     def __init__(self, **kwargs):
         super().__init__(
@@ -69,7 +72,7 @@ class GasService(Pipeline):
             kwargs.get("material"),
             kwargs.get("connected_assets"),
             kwargs.get("segment_id"),
-            "gas_service",
+            "gas_main",
         )
 
         self._gas_intervention_year: int = kwargs.get("gas_pipe_intervention_year")
@@ -77,6 +80,7 @@ class GasService(Pipeline):
         self._gas_shutoff: bool = self._gas_intervention.lower()=="decommission"
         self._gas_replacement: bool = self._gas_intervention.lower()=="replace"
         self.replacement_cost = kwargs.get("replacement_cost", 0)
+        self.shutoff_cost = kwargs.get("shutoff_cost", 0)
         self.book_value: list = []
         self.shutoff_year: list = []
 
@@ -149,15 +153,34 @@ class GasService(Pipeline):
         return self.depreciation
 
     def get_shutoff_year(self) -> List[float]:
+        #FIXME: If there is a connected asset still on gas outside of the simulation timeframe,
+        # this will shutoff the main in the last year of gas usage WITHIN the timeframe
+        # This is because the function does not look at gas usage outside of the sim timeframe;
+        # it only references each connected asset's _retrofit_vec, which is over the timeframe only
+        # For example, if we run a gas shutoff scenario where the sim goes to 2050 (exclusive)
+        # and there is a parcel still on gas in 2053, the model will not account for this and 
+        # shut off the main in the latest year before 2050 that gas usage stops in connected assets
         shutoff_year_vec = [0] * len(self.years_vector)
 
         if self._gas_shutoff:
-            shutoff_year_vec = self.connected_assets[0].building._retrofit_vec
+            shutoff_year = 0
+            for service in self.connected_assets:
+                building = service.connected_assets[0].building
+
+                for idx, retrofit in enumerate(building._retrofit_vec):
+                    if retrofit:
+                        shutoff_year = max(shutoff_year, idx)
+
+            if shutoff_year:
+                shutoff_year_vec[shutoff_year] = 1
 
         return shutoff_year_vec
 
     def _update_stranded_value(self) -> List[float]:
         return (np.array(self.book_value) * np.array(self.shutoff_year)).tolist()
+    
+    def get_system_shutoff_cost(self) -> List[float]:
+        return (np.array(self.shutoff_year) * self.shutoff_cost).tolist()
 
     def _get_annual_om(self) -> List[float]:
         om_filepath = f"./config_files/{self._segment_id}/utility_network/{self._segment_id}_operating_expenses.csv"

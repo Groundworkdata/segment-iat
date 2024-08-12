@@ -4,7 +4,7 @@ Unit tests for GasService class
 import unittest
 from unittest.mock import Mock
 
-from ttt.end_uses.utility_end_uses.gas_service import GasService
+from segment_iat.end_uses.utility_end_uses.gas_service import GasService
 
 
 class TestGasService(unittest.TestCase):

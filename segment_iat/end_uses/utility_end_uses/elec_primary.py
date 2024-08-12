@@ -1,12 +1,12 @@
 """
-Defines electricity service end use
+Defines electric primary end use
 """
-from ttt.end_uses.utility_end_uses.distribution_lines import DistributionLine
+from segment_iat.end_uses.utility_end_uses.distribution_lines import DistributionLine
 
 
-class ElecService(DistributionLine):
+class ElecPrimary(DistributionLine):
     """
-    An electric service line
+    An electric primary line
 
     Args:
         None
@@ -26,15 +26,15 @@ class ElecService(DistributionLine):
         circuit (int): The electric circuit ID
         oh_ug (str): Signifies if overhead (OH) or underground (UG) wire
         phase (str): Phase rotation of the line (ABC or ACB)
-        sec_wsize (int): The wire size
-        sec_wtype (str): Wire type
+        pwire_size (int): The wire size
+        voltage (str): Voltage rating of the line
 
     Attributes:
         circuit (int): The electric circuit ID
         oh_ug (str): Signifies if overhead (OH) or underground (UG) wire
         phase (str): Phase rotation of the line (ABC or ACB)
-        sec_wsize (int): The wire size
-        sec_wtype (str): Wire type
+        pwire_size (int): The wire size
+        voltage (str): Voltage rating of the line
 
     Methods:
         None
@@ -51,11 +51,11 @@ class ElecService(DistributionLine):
             kwargs.get("replacement_year"),
             kwargs.get("decarb_scenario"),
             kwargs.get("connected_assets"),
-            "elec_service",
+            "elec_primary",
         )
 
         self.circuit: int = kwargs.get("circuit")
         self.oh_ug: str = kwargs.get("oh_ug")
         self.phase: str = kwargs.get("phase")
-        self.sec_wsize: int = kwargs.get("sec_wsize")
-        self.sec_wtype: str = kwargs.get("sec_wtype")
+        self.pwire_size: int = kwargs.get("pwire_size")
+        self.voltage: str = kwargs.get("voltage")

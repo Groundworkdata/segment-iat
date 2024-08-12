@@ -10,8 +10,8 @@ from unittest.mock import Mock, patch
 import numpy as np
 import pandas as pd
 
-from ttt.buildings.building import Building
-from ttt.end_uses.building_end_uses.stove import Stove
+from segment_iat.buildings.building import Building
+from segment_iat.end_uses.building_end_uses.stove import Stove
 
 
 class TestBuilding(unittest.TestCase):
@@ -135,7 +135,7 @@ class TestBuilding(unittest.TestCase):
             "replacement_config": "./stoves/elec_stove_config.json"
         })
 
-    @patch("ttt.buildings.building.Stove")
+    @patch("segment-iat.buildings.building.Stove")
     def test_get_single_end_use(self, mock_stove: Mock):
         initialized_stove = Mock()
         mock_stove.return_value = initialized_stove

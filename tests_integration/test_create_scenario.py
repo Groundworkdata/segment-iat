@@ -7,7 +7,7 @@ import unittest
 
 import pandas as pd
 
-from ttt.scenario_creator.create_scenario import ScenarioCreator
+from segment_iat.scenario_creator.create_scenario import ScenarioCreator
 
 
 class TestScenarioCreator(unittest.TestCase):

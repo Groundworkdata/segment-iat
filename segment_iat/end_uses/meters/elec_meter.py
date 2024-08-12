@@ -1,7 +1,7 @@
 """
 Defines an electric meter
 """
-from ttt.end_uses.meters.meter import Meter
+from segment_iat.end_uses.meters.meter import Meter
 
 
 class ElecMeter(Meter):

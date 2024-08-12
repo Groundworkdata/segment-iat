@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="ttt",
+    name="segment-iat",
     version="0.0.0",
-    description="Tactical thermal transition tool",
+    description="Segment intervention analysis tool",
     author="Conor Lyman",
     author_email="conor@groundworkdata.org",
     packages=find_packages(exclude=["tests*"]),

@@ -8,8 +8,8 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
-from ttt.buildings.building import Building
-from ttt.utility_network.utility_network import UtilityNetwork
+from segment_iat.buildings.building import Building
+from segment_iat.utility_network.utility_network import UtilityNetwork
 
 
 DEFAULT_SIM_START_YEAR = 2020
