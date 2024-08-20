@@ -1,0 +1,4 @@
+scenario_name,ex_managed_elec_1
+gas_intervention,decommission
+parcel_retrofit_measures_filename,ex_managed_elec_1_measures
+parcel_retrofit_measure_costs_filename,elec_1_costs

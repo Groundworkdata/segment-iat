@@ -60,5 +60,57 @@ outputs/
 ...
 ```
 
+## Energy modeling
+The tool currently expects energy consumption timeseries profiles provided for an entire year, with timestamps as time-beginning. The energy data is handled as if it has come from ResStock, with some pre-processing. One necessary pre-processing step for ResStock is to shift all timestamps one period *back* so they are time-beginning (ResStock uses time-ending). The tool tracks energy consumption from four different fuels: electricity, natural gas, propane, and fuel oil. The tool also calculates total energy consumption for the entire building. It is expected that all consumption data is provided in kWh.
+
+Energy consumption can be provided one of two ways:
+1. Energy consumption is provided by end use and *does not* include total energy consumption. Total energy consumption is calculated by the tool and including total energy consumption will lead to double counting. This is true both for total building energy consumption and total energy consumption by fuel.
+2. Only total energy consumption by fuel type is provided. Total energy consumption for the building is still calculated as in (1). This is the lower-effort way to set up a new scenario; just pull the desired profiles from ResStock and only keep the following columns: `out.electricity.total.energy_consumption`, `out.natural_gas.total.energy_consumption`, `out.propane.total.energy_consumption`, `out.fuel_oil.total.energy_consumption`.
+
+The original intention was to track energy consumption by end use (HVAC, DHW, clothes dryer, stove), but this is not fully developed at this time. The purpose was to implement advanced logic for energy modeling that is not available in ResStock (for example, converting gas cooking to propane cooking for customers that do not want to ditch "flame" cooking).
+
+Tracking energy consumption by end use will require the following keys in the energy profile (in development). This is inspired by ResStock:
+```python
+# HVAC
+"out.electricity.heating.energy_consumption"
+"out.electricity.heating_hp_bkup.energy_consumption"
+"out.electricity.cooling.energy_consumption"
+"out.natural_gas.heating.energy_consumption"
+"out.natural_gas.heating_hp_bkup.energy_consumption"
+"out.propane.heating.energy_consumption"
+"out.propane.heating_hp_bkup.energy_consumption"
+"out.fuel_oil.heating.energy_consumption"
+"out.fuel_oil.heating_hp_bkup.energy_consumption"
+# Domestic hot water
+"out.electricity.hot_water.energy_consumption"
+"out.natural_gas.hot_water.energy_consumption"
+"out.propane.hot_water.energy_consumption"
+"out.fuel_oil.hot_water.energy_consumption"
+# Clothes dryer
+"out.electricity.clothes_dryer.energy_consumption"
+"out.natural_gas.clothes_dryer.energy_consumption"
+"out.propane.clothes_dryer.energy_consumption"
+# Stove
+"out.electricity.range_oven.energy_consumption"
+"out.natural_gas.range_oven.energy_consumption"
+"out.propane.range_oven.energy_consumption"
+# Other
+"out.electricity.other.energy_consumption"
+"out.natural_gas.other.energy_consumption"
+"out.propane.other.energy_consumption"
+"out.fuel_oil.other.energy_consumption"
+```
+
+Note that energy consumption profiles are purposefully not tracked in git because of their size (they are 8760 rows or larger, times multiple columns). The intention in the future is to not track any model inputs in this repo and instead track those in a separate version controlled environment (a separate Github repo or other location).
+
+## Example Study
+`segment-iat` comes with an example Study named `example_street`. This Study analyzes a hypothetical pipe segment in Westchester County, NY, that serves 20 single family homes from 2025 to 2050. The homes are all of similar square footage, vintage, and materials. The exact building IDs queried from ResStock for this example Study are 16133, 45920, 49049, and 68538. The example Scenarios for the Study are as follows:
+* `ex_gas`: All homes stay on gas and the pipe is replaced in 2025 (ResStock Measure Package Baseline)
+* `ex_managed_elec_1`: All homes electrify w/ ENERGY STAR ASHP and the pipe is decommissioned in 2025 (ResStock Measure Package 11)
+* `ex_managed_elec_2`: All homes electrify w/ maximum efficiency ASHP and the pipe is decommissioned in 2025 (ResStock Measure Package 13)
+* `ex_managed_gshp`: All homes electrify w/ a GSHP as defined in ResStock and the pipe is decommissioned in 2025 (ResStock Measure Package 15)
+
+Cost data for the `example_street` Study come from multiple sources, including electrification cost estimates from Rewiring America and MassCEC whole-home pilot data.
+
 ## Development
 The tool is developed in Python. Development and execution of the tool require an environment with Python >= 3.9 and the packages described in `requirements.txt`.

@@ -1,0 +1,4 @@
+scenario_name,ex_gas
+gas_intervention,replace
+parcel_retrofit_measures_filename,ex_gas_measures
+parcel_retrofit_measure_costs_filename,ex_gas_costs
