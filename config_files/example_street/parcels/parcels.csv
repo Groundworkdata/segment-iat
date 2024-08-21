@@ -1,0 +1,21 @@
+parcel_id,install_year,baseline_consumption_id,load_scaling_factor,uses_piped_gas,heating_fuel,measure_costs_filename
+EX_001,2013,EX_PROFILE_4_baseline,1,1,Natural gas,ex_gas_costs
+EX_002,1992,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_003,1990,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_004,2002,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_005,2001,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_006,1996,EX_PROFILE_4_baseline,1,1,Natural gas,ex_gas_costs
+EX_007,2011,EX_PROFILE_2_baseline,1,1,Natural gas,ex_gas_costs
+EX_008,2001,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_009,2016,EX_PROFILE_2_baseline,1,1,Natural gas,ex_gas_costs
+EX_010,1998,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_011,2006,EX_PROFILE_1_baseline,1,1,Natural gas,ex_gas_costs
+EX_012,1990,EX_PROFILE_2_baseline,1,1,Natural gas,ex_gas_costs
+EX_013,2007,EX_PROFILE_1_baseline,1,1,Natural gas,ex_gas_costs
+EX_014,2010,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_015,1993,EX_PROFILE_4_baseline,1,1,Natural gas,ex_gas_costs
+EX_016,2000,EX_PROFILE_2_baseline,1,1,Natural gas,ex_gas_costs
+EX_017,2005,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
+EX_018,2005,EX_PROFILE_2_baseline,1,1,Natural gas,ex_gas_costs
+EX_019,2020,EX_PROFILE_1_baseline,1,1,Natural gas,ex_gas_costs
+EX_020,2003,EX_PROFILE_3_baseline,1,1,Natural gas,ex_gas_costs
