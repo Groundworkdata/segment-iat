@@ -31,6 +31,16 @@ EMISSION_FACTORS = { # tCO2 / kWh
 }
 
 
+FUELS = [
+    "electricity",
+    "natural_gas",
+    "propane",
+    "fuel_oil",
+    "thermal_cooling",
+    "thermal_heating"
+]
+
+
 DB_BASEPATH = "./config_files/"
 
 
@@ -119,6 +129,7 @@ class Building:
         self._retrofit_vec = self._get_replacement_vec()
         self._is_retrofit_vec = self._get_is_retrofit_vec()
         self._annual_energy_by_fuel = self._calc_annual_energy_consump()
+        #FIXME: Is this being used...?
         self._building_annual_costs_other = self._calc_building_costs()
         self._fuel_type = self._get_fuel_type_vec()
         self._methane_leaks = self._get_methane_leaks()
@@ -275,7 +286,7 @@ class Building:
         Calculate the total baseline consumption for the building. Contains logic for direct
         connection to ResStock or overwrite using locally-provided energy consumption profiles
         """
-        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+        for fuel in FUELS:
             filter_cols = [
                 col
                 for col in self.baseline_consumption
@@ -287,11 +298,11 @@ class Building:
             
         self.baseline_consumption["out.total.energy_consumption"] = self.baseline_consumption[[
             "out.{}.total.energy_consumption".format(i)
-            for i in ["electricity", "natural_gas", "propane", "fuel_oil"]
+            for i in FUELS
         ]].sum(axis=1)
     
     def _calc_total_energy_retrofit(self) -> None:
-        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+        for fuel in FUELS:
             filter_cols = [
                 col
                 for col in self.retrofit_consumption
@@ -303,7 +314,7 @@ class Building:
             
         self.retrofit_consumption["out.total.energy_consumption"] = self.retrofit_consumption[[
             "out.{}.total.energy_consumption".format(i)
-            for i in ["electricity", "natural_gas", "propane", "fuel_oil"]
+            for i in FUELS
         ]].sum(axis=1)
  
     def _calc_building_costs(self) -> List[float]:
@@ -360,14 +371,9 @@ class Building:
         """
         Calculate the total annual energy consumption, by energy type
         """
-        annual_energy_use = {
-            "electricity": [],
-            "natural_gas": [],
-            "propane": [],
-            "fuel_oil": [],
-        }
+        annual_energy_use = {i: [] for i in FUELS}
 
-        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+        for fuel in FUELS:
             for replaced in self._is_retrofit_vec:
                 if replaced:
                     annual_use = self.retrofit_consumption[
@@ -397,14 +403,9 @@ class Building:
         )
         consump_rates = pd.read_csv(energy_consump_cost_filepath, index_col=0)
 
-        annual_utility_costs = {
-            "electricity": [],
-            "natural_gas": [],
-            "propane": [],
-            "fuel_oil": [],
-        }
+        annual_utility_costs = {i: [] for i in FUELS}
 
-        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+        for fuel in FUELS:
             for replaced, rate in zip(self._is_retrofit_vec, consump_rates[fuel].to_list()):
                 if replaced:
                     annual_use = self.retrofit_consumption[
@@ -442,6 +443,7 @@ class Building:
             "propane": "LPG",
             "hybrid_gas": "HPL",
             "hybrid_npa": "NPH",
+            "thermal": "TEN",
         }
 
         return [
@@ -465,7 +467,7 @@ class Building:
         """
         combusion_emissions = {}
 
-        for fuel in ["electricity", "natural_gas", "propane", "fuel_oil"]:
+        for fuel in FUELS:
             annual_fuel_consump = self._annual_energy_by_fuel[fuel]
             emissions_factor = EMISSION_FACTORS.get(fuel, 0)
 

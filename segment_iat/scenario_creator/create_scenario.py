@@ -17,7 +17,7 @@ DEFAULT_SIM_END_YEAR = 2050
 DEFAULT_ASSET_LIFETIME = 30
 DEFAULT_REPLACEMENT_COST_DOLLARS_YEAR = 2022
 
-FUELS = ["electricity", "natural_gas", "propane", "fuel_oil"]
+FUELS = ["electricity", "natural_gas", "propane", "fuel_oil", "thermal_cooling", "thermal_heating"]
 
 OUTPUTS_BASEPATH = "./outputs"
 
@@ -32,6 +32,10 @@ TYPE_GAS_MAIN = "gas_main"
 TYPE_GAS_SERVICE = "gas_service"
 TYPE_GAS_METER = "gas_meter"
 
+DOMAIN_THERMAL = "thermal_network"
+TYPE_THERMAL = "thermal_network"
+
+#TODO: Remove - no longer used
 DECARB_SCENARIOS = [
     "continued_gas",
     "hybrid_npa",
@@ -187,7 +191,7 @@ class ScenarioCreator:
                 "asset_install_year": building_params.get("install_year"),
                 "asset_replacement_year": building_scenario_params.get("install_year"),
                 "heating_fuel": building_params.get("heating_fuel"),
-                "retrofit_heating_fuel": building_params.get("heating_fuel"),
+                "retrofit_heating_fuel": building_scenario_params.get("heating_fuel"),
                 "existing_measures_cost_id": building_params.get("measure_costs_filename"),
                 "retrofit_measures_cost_id": self._sim_config.get("parcel_retrofit_measure_costs_filename")
             }
@@ -486,6 +490,22 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
             all_dfs.append(df)
 
+        thermal_network = self.utility_network.thermal_energy_network
+        if thermal_network:
+            df = pd.DataFrame({"year": years_vec, "consumption": thermal_network.annual_load_cooling})
+            df.loc[:, "asset_id"] = thermal_network.asset_id
+            df.loc[:, "energy_type"] = "thermal_cooling"
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
+            all_dfs.append(df)
+
+            df = pd.DataFrame({"year": years_vec, "consumption": thermal_network.annual_load_heating})
+            df.loc[:, "asset_id"] = thermal_network.asset_id
+            df.loc[:, "energy_type"] = "thermal_heating"
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "energy_consumption.csv"), index=False)
 
@@ -502,6 +522,22 @@ class ScenarioCreator:
             df.loc[:, "energy_type"] = "electricity"
             df.loc[:, "asset_domain"] = DOMAIN_ELEC
             df.loc[:, "asset_type"] = TYPE_ELEC_XMFR
+            all_dfs.append(df)
+
+        thermal_network = self.utility_network.thermal_energy_network
+        if thermal_network:
+            df = pd.DataFrame({"year": years_vec, "peak_consump": thermal_network.annual_peak_cooling})
+            df.loc[:, "asset_id"] = thermal_network.asset_id
+            df.loc[:, "energy_type"] = "thermal_cooling"
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
+            all_dfs.append(df)
+
+            df = pd.DataFrame({"year": years_vec, "peak_consump": thermal_network.annual_peak_heating})
+            df.loc[:, "asset_id"] = thermal_network.asset_id
+            df.loc[:, "energy_type"] = "thermal_heating"
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
