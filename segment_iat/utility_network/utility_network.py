@@ -16,6 +16,8 @@ from segment_iat.end_uses.utility_end_uses.elec_transformer import ElecTransform
 from segment_iat.end_uses.utility_end_uses.elec_primary import ElecPrimary
 from segment_iat.end_uses.meters.elec_meter import ElecMeter
 
+from segment_iat.end_uses.utility_end_uses.thermal_energy_network import ThermalEnergyNetwork
+
 
 class UtilityNetwork:
     """
@@ -24,6 +26,16 @@ class UtilityNetwork:
     Args:
         network_config_filepath (str): Filepath to utility network config file
         sim_settings (dict): Dict of simulation settings
+        {
+            scenario_name (str): The Scenario name
+            gas_intervention (str): The gas intervention, decommission or replace
+            parcel_retrofit_measures_filename (str): Filename of the retrofit measures per parcel
+            parcel_retrofit_measure_costs_filename (str): Filename of the retrofit costs per parcel
+            sim_start_year (int): The Study start year
+            sim_end_year (int): The Study end year
+            gas_pipe_intervention_year (int): The year an intervention is made at the gas pipe
+            segment_id (str): The segment ID
+        }
         buildings (Dict[str, Building]): Dict of Building instances in the scenario, organized by id
 
     Attributes:
@@ -64,6 +76,7 @@ class UtilityNetwork:
         self.elec_secondaries: List[ElecSecondary] = []
         self.elec_transformers: List[ElecTransformer] = []
         self.elec_primaries: List[ElecPrimary] = []
+        self.thermal_energy_network: ThermalEnergyNetwork = None
 
     def populate_utility_network(self) -> None:
         """
@@ -129,6 +142,8 @@ class UtilityNetwork:
         self._create_elec_transformers()
         self._create_elec_primaries()
 
+        self._create_thermal_energy_network()
+
     def _read_csv_config(self, config_file_path=None) -> None:
         """
         Read in the utilty network config file and save to network_config attr
@@ -142,11 +157,13 @@ class UtilityNetwork:
         """
         start_year = self._sim_settings.get("sim_start_year", 2021)
         end_year = self._sim_settings.get("sim_end_year", 2050)
-        self.years_vec = list(range(start_year, end_year + 1))
+        self.years_vec = list(range(start_year, end_year))
 
+        #FIXME: setting to always be 2018 since that is the ResStock year, but will want to
+        # change to be tied to simulation years
         self._year_timestamps = pd.date_range(
-            start="{}-01-01".format(start_year),
-            end="{}-01-01".format(start_year + 1),
+            start="2018-01-01",
+            end="2019-01-01",
             freq="h",
             inclusive="left",
         )
@@ -333,3 +350,21 @@ class UtilityNetwork:
 
             elec_primary.initialize_end_use()
             self.elec_primaries.append(elec_primary)
+
+    def _create_thermal_energy_network(self) -> None:
+        """
+        Creates an instance of the ThermalEnergyNetwork class, if one is being deployed
+        """
+        connected_bldgs = []
+
+        for bldg_id, bldg in self.buildings.items():
+            if "TEN" in bldg._fuel_type:
+                connected_bldgs.append(bldg_id)
+
+        if not connected_bldgs:
+            return
+        
+        thermal_network = ThermalEnergyNetwork(self.years_vec, self._year_timestamps, self.buildings)
+        thermal_network.create_network()
+
+        self.thermal_energy_network = thermal_network
