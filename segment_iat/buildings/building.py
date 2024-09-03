@@ -19,18 +19,6 @@ METHANE_LEAKS = {
 }
 
 
-#TODO: Make configurable for different geographies
-EMISSION_FACTORS = { # tCO2 / kWh
-    # Should be metric tons rather than imperial...
-    "natural_gas": (53 / (293 * 907)), # Input of kgCO2 / MMBtu
-    "electricity": 0.45 / 1000, # Input of tCO2 / MWh
-    "fuel_oil": (73.96 / (293 * 907)), # Input of kgCO2 / MMBtu
-    "propane": (61.71 / (293 * 907)), # Input of kgCO2 / MMBtu
-    "hybrid_gas": (53 / (293 * 907)), # Same as natural_gas
-    "hybrid_npa": (61.71 / (293 * 907)), # Same as propane
-}
-
-
 FUELS = [
     "electricity",
     "natural_gas",
@@ -460,34 +448,30 @@ class Building:
             METHANE_LEAKS.get(i, 0)
             for i in self._fuel_type
         ]
-    
-    def _get_combustion_emissions(self) -> List[str]:
+
+    def _get_combustion_emissions(self) -> Dict[str, List[float]]:
         """
         Combustion emissions from energy consumption
         """
-        combusion_emissions = {}
+        segment_id = self._sim_settings.get("segment_id")
+        emissions_factors_filepath = os.path.join(
+            DB_BASEPATH,
+            segment_id,
+            "utility_network",
+            f"{segment_id}_emission_rates.csv"
+        )
+        emissions_rates = pd.read_csv(emissions_factors_filepath, index_col="Year")
+        # We reindex and use a simple forward fill and back fill for any NaN values
+        # Can expand to more rigorous QA checks in the future
+        emissions_rates = emissions_rates.reindex(self.years_vec).ffill().bfill()
 
+        annual_fuel_consump = pd.DataFrame(self._annual_energy_by_fuel, index=self.years_vec)
+
+        combustion_emissions = {}
         for fuel in FUELS:
-            annual_fuel_consump = self._annual_energy_by_fuel[fuel]
-            emissions_factor = EMISSION_FACTORS.get(fuel, 0)
+            combustion_emissions[fuel] = (emissions_rates[fuel] * annual_fuel_consump[fuel]).to_list()
 
-            #TODO: Make configurable
-            if fuel == "electricity":
-                emissions_factor = np.zeros(len(self.years_vec))
-                for i in range(len(self.years_vec)):
-                    year = self.years_vec[i]
-                    if year < 2024:
-                        emissions_factor[i] = EMISSION_FACTORS.get(fuel, 0)
-
-                    else:
-                        emissions_factor[i] = emissions_factor[i-1] * (1 - 0.03)
-
-            combusion_emissions[fuel] = (
-                np.array(annual_fuel_consump)
-                * emissions_factor
-            ).tolist()
-
-        return combusion_emissions
+        return combustion_emissions
 
     def write_building_energy_info(self, freq: int =60) -> None:
         """
