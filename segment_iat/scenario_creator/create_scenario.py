@@ -35,18 +35,6 @@ TYPE_GAS_METER = "gas_meter"
 DOMAIN_THERMAL = "thermal_network"
 TYPE_THERMAL = "thermal_network"
 
-#TODO: Remove - no longer used
-DECARB_SCENARIOS = [
-    "continued_gas",
-    "hybrid_npa",
-    "hybrid_gas",
-    "natural_elec",
-    "natural_elec_higheff",
-    "accelerated_elec",
-    "accelerated_elec_higheff",
-    "hybrid_gas_immediate"
-]
-
 
 class ScenarioCreator:
     """
@@ -370,6 +358,17 @@ class ScenarioCreator:
             df.loc[:, "asset_type"] = TYPE_GAS_MAIN
             all_dfs.append(df)
 
+        if self.utility_network.thermal_energy_network:
+            ten = self.utility_network.thermal_energy_network
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": ten.install_cost_vec
+            })
+            df.loc[:, "asset_id"] = ten.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
+            all_dfs.append(df)
+
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "retrofit_cost.csv"), index=False)
 
@@ -418,6 +417,19 @@ class ScenarioCreator:
             df.loc[:, "existing_or_retrofit"] = "retrofit"
             df.loc[:, "asset_domain"] = DOMAIN_GAS
             df.loc[:, "asset_type"] = TYPE_GAS_MAIN
+            all_dfs.append(df)
+
+        if self.utility_network.thermal_energy_network:
+            ten = self.utility_network.thermal_energy_network
+            df = pd.DataFrame({
+                "year": years_vec,
+                "book_val": ten.book_value_vec
+            })
+            df.loc[:, "asset_id"] = ten.asset_id
+            # This flag doesn't really apply to TENs, but including for consistency
+            df.loc[:, "existing_or_retrofit"] = "retrofit"
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
@@ -646,6 +658,17 @@ class ScenarioCreator:
             df.loc[:, "asset_id"] = gas_main.asset_id
             df.loc[:, "asset_domain"] = DOMAIN_GAS
             df.loc[:, "asset_type"] = TYPE_GAS_MAIN
+            all_dfs.append(df)
+
+        if self.utility_network.thermal_energy_network:
+            ten = self.utility_network.thermal_energy_network
+            df = pd.DataFrame({
+                "year": years_vec,
+                "annual_operating_costs": ten.annual_om_vec
+            })
+            df.loc[:, "asset_id"] = ten.asset_id
+            df.loc[:, "asset_domain"] = DOMAIN_THERMAL
+            df.loc[:, "asset_type"] = TYPE_THERMAL
             all_dfs.append(df)
 
         all_dfs = pd.concat(all_dfs)
