@@ -364,7 +364,20 @@ class UtilityNetwork:
         if not connected_bldgs:
             return
         
-        thermal_network = ThermalEnergyNetwork(self.years_vec, self._year_timestamps, self.buildings)
+        segment_id = self._sim_settings["segment_id"]
+        ten_config = pd.read_csv(
+            os.path.join(self._network_config_filepath, f"{segment_id}_thrml_net.csv"),
+            index_col=0,
+            header=None
+        )
+        ten_config = ten_config.iloc[:, 0].to_dict()
+
+        thermal_network = ThermalEnergyNetwork(
+            self.years_vec,
+            self._year_timestamps,
+            self.buildings,
+            ten_config
+        )
         thermal_network.create_network()
 
         self.thermal_energy_network = thermal_network
