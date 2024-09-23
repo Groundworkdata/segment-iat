@@ -28,11 +28,13 @@ class SegmentStudy:
     def __init__(
             self,
             segment_name: str,
+            zip_code: str,
             study_start_year: str,
             study_end_year: str,
             gas_pipe_intervention_year: str
     ) -> None:
         self.segment_name: str = segment_name
+        self.zip_code: int = int(zip_code)
         self.study_start_year: int = int(study_start_year)
         self.study_end_year: int = int(study_end_year)
         self.gas_pipe_intervention_year: int = int(gas_pipe_intervention_year)

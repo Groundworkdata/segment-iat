@@ -23,7 +23,8 @@ OUTPUT_FILES = [
     "peak_consump",
     "retrofit_cost",
     "retrofit_year",
-    "stranded_val"
+    "stranded_val",
+    "incentives"
 ]
 
 COMBINED_FILES_KEY = "combined"
@@ -80,6 +81,7 @@ def main():
         settings_filepath = f"./config_files/{study.segment_name}/scenarios/{scenario}_config.csv"
         scenario_creator = ScenarioCreator(
             study.segment_name,
+            study.zip_code,
             study.study_start_year,
             study.study_end_year,
             study.gas_pipe_intervention_year,
@@ -104,6 +106,7 @@ def create_study(study_filepath: str) -> SegmentStudy:
     study_inputs = study_inputs["value"].to_dict()
     return SegmentStudy(
         study_inputs["street_segment"],
+        study_inputs["zip_code"],
         study_inputs["start_year"],
         study_inputs["end_year"],
         study_inputs["gas_pipe_intervention_year"]

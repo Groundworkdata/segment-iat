@@ -1,0 +1,401 @@
+authority_type,program,asset_type,items,upfront_costs,incentive_amount,start_date,end_date,install_year,upfront_cost,asset_id,scenario
+,,,,0.0,0.0,,,,,EX_001,ex_uten
+,,,,0.0,0.0,,,,,EX_001,ex_uten
+,,,,0.0,0.0,,,,,EX_001,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_001,ex_uten
+,,,,0.0,0.0,,,,,EX_002,ex_uten
+,,,,0.0,0.0,,,,,EX_002,ex_uten
+,,,,0.0,0.0,,,,,EX_002,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_002,ex_uten
+,,,,0.0,0.0,,,,,EX_003,ex_uten
+,,,,0.0,0.0,,,,,EX_003,ex_uten
+,,,,0.0,0.0,,,,,EX_003,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_003,ex_uten
+,,,,0.0,0.0,,,,,EX_004,ex_uten
+,,,,0.0,0.0,,,,,EX_004,ex_uten
+,,,,0.0,0.0,,,,,EX_004,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_004,ex_uten
+,,,,0.0,0.0,,,,,EX_005,ex_uten
+,,,,0.0,0.0,,,,,EX_005,ex_uten
+,,,,0.0,0.0,,,,,EX_005,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_005,ex_uten
+,,,,0.0,0.0,,,,,EX_006,ex_uten
+,,,,0.0,0.0,,,,,EX_006,ex_uten
+,,,,0.0,0.0,,,,,EX_006,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_006,ex_uten
+,,,,0.0,0.0,,,,,EX_007,ex_uten
+,,,,0.0,0.0,,,,,EX_007,ex_uten
+,,,,0.0,0.0,,,,,EX_007,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_007,ex_uten
+,,,,0.0,0.0,,,,,EX_008,ex_uten
+,,,,0.0,0.0,,,,,EX_008,ex_uten
+,,,,0.0,0.0,,,,,EX_008,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_008,ex_uten
+,,,,0.0,0.0,,,,,EX_009,ex_uten
+,,,,0.0,0.0,,,,,EX_009,ex_uten
+,,,,0.0,0.0,,,,,EX_009,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_009,ex_uten
+,,,,0.0,0.0,,,,,EX_010,ex_uten
+,,,,0.0,0.0,,,,,EX_010,ex_uten
+,,,,0.0,0.0,,,,,EX_010,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_010,ex_uten
+,,,,0.0,0.0,,,,,EX_011,ex_uten
+,,,,0.0,0.0,,,,,EX_011,ex_uten
+,,,,0.0,0.0,,,,,EX_011,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_011,ex_uten
+,,,,0.0,0.0,,,,,EX_012,ex_uten
+,,,,0.0,0.0,,,,,EX_012,ex_uten
+,,,,0.0,0.0,,,,,EX_012,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_012,ex_uten
+,,,,0.0,0.0,,,,,EX_013,ex_uten
+,,,,0.0,0.0,,,,,EX_013,ex_uten
+,,,,0.0,0.0,,,,,EX_013,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_013,ex_uten
+,,,,0.0,0.0,,,,,EX_014,ex_uten
+,,,,0.0,0.0,,,,,EX_014,ex_uten
+,,,,0.0,0.0,,,,,EX_014,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_014,ex_uten
+,,,,0.0,0.0,,,,,EX_015,ex_uten
+,,,,0.0,0.0,,,,,EX_015,ex_uten
+,,,,0.0,0.0,,,,,EX_015,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_015,ex_uten
+,,,,0.0,0.0,,,,,EX_016,ex_uten
+,,,,0.0,0.0,,,,,EX_016,ex_uten
+,,,,0.0,0.0,,,,,EX_016,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_016,ex_uten
+,,,,0.0,0.0,,,,,EX_017,ex_uten
+,,,,0.0,0.0,,,,,EX_017,ex_uten
+,,,,0.0,0.0,,,,,EX_017,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_017,ex_uten
+,,,,0.0,0.0,,,,,EX_018,ex_uten
+,,,,0.0,0.0,,,,,EX_018,ex_uten
+,,,,0.0,0.0,,,,,EX_018,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_018,ex_uten
+,,,,0.0,0.0,,,,,EX_019,ex_uten
+,,,,0.0,0.0,,,,,EX_019,ex_uten
+,,,,0.0,0.0,,,,,EX_019,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_019,ex_uten
+,,,,0.0,0.0,,,,,EX_020,ex_uten
+,,,,0.0,0.0,,,,,EX_020,ex_uten
+,,,,0.0,0.0,,,,,EX_020,ex_uten
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_020,ex_uten
+,,,,0.0,0.0,,,,,EX_001,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_001,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_001,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_001,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_002,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_002,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_002,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_002,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_003,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_003,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_003,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_003,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_004,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_004,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_004,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_004,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_005,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_005,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_005,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_005,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_006,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_006,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_006,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_006,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_007,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_007,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_007,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_007,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_008,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_008,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_008,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_008,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_009,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_009,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_009,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_009,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_010,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_010,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_010,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_010,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_011,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_011,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_011,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_011,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_012,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_012,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_012,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_012,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_013,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_013,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_013,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_013,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_014,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_014,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_014,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_014,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_015,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_015,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_015,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_015,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_016,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_016,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_016,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_016,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_017,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_017,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_017,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_017,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_018,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_018,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_018,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_018,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_019,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_019,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_019,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_019,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_020,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,20269.707291339197,EX_020,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_020,ex_managed_elec_2
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_020,ex_managed_elec_2
+,,,,0.0,0.0,,,,,EX_001,ex_gas
+,,,,0.0,0.0,,,,,EX_001,ex_gas
+,,,,0.0,0.0,,,,,EX_001,ex_gas
+,,,,0.0,0.0,,,,,EX_001,ex_gas
+,,,,0.0,0.0,,,,,EX_002,ex_gas
+,,,,0.0,0.0,,,,,EX_002,ex_gas
+,,,,0.0,0.0,,,,,EX_002,ex_gas
+,,,,0.0,0.0,,,,,EX_002,ex_gas
+,,,,0.0,0.0,,,,,EX_003,ex_gas
+,,,,0.0,0.0,,,,,EX_003,ex_gas
+,,,,0.0,0.0,,,,,EX_003,ex_gas
+,,,,0.0,0.0,,,,,EX_003,ex_gas
+,,,,0.0,0.0,,,,,EX_004,ex_gas
+,,,,0.0,0.0,,,,,EX_004,ex_gas
+,,,,0.0,0.0,,,,,EX_004,ex_gas
+,,,,0.0,0.0,,,,,EX_004,ex_gas
+,,,,0.0,0.0,,,,,EX_005,ex_gas
+,,,,0.0,0.0,,,,,EX_005,ex_gas
+,,,,0.0,0.0,,,,,EX_005,ex_gas
+,,,,0.0,0.0,,,,,EX_005,ex_gas
+,,,,0.0,0.0,,,,,EX_006,ex_gas
+,,,,0.0,0.0,,,,,EX_006,ex_gas
+,,,,0.0,0.0,,,,,EX_006,ex_gas
+,,,,0.0,0.0,,,,,EX_006,ex_gas
+,,,,0.0,0.0,,,,,EX_007,ex_gas
+,,,,0.0,0.0,,,,,EX_007,ex_gas
+,,,,0.0,0.0,,,,,EX_007,ex_gas
+,,,,0.0,0.0,,,,,EX_007,ex_gas
+,,,,0.0,0.0,,,,,EX_008,ex_gas
+,,,,0.0,0.0,,,,,EX_008,ex_gas
+,,,,0.0,0.0,,,,,EX_008,ex_gas
+,,,,0.0,0.0,,,,,EX_008,ex_gas
+,,,,0.0,0.0,,,,,EX_009,ex_gas
+,,,,0.0,0.0,,,,,EX_009,ex_gas
+,,,,0.0,0.0,,,,,EX_009,ex_gas
+,,,,0.0,0.0,,,,,EX_009,ex_gas
+,,,,0.0,0.0,,,,,EX_010,ex_gas
+,,,,0.0,0.0,,,,,EX_010,ex_gas
+,,,,0.0,0.0,,,,,EX_010,ex_gas
+,,,,0.0,0.0,,,,,EX_010,ex_gas
+,,,,0.0,0.0,,,,,EX_011,ex_gas
+,,,,0.0,0.0,,,,,EX_011,ex_gas
+,,,,0.0,0.0,,,,,EX_011,ex_gas
+,,,,0.0,0.0,,,,,EX_011,ex_gas
+,,,,0.0,0.0,,,,,EX_012,ex_gas
+,,,,0.0,0.0,,,,,EX_012,ex_gas
+,,,,0.0,0.0,,,,,EX_012,ex_gas
+,,,,0.0,0.0,,,,,EX_012,ex_gas
+,,,,0.0,0.0,,,,,EX_013,ex_gas
+,,,,0.0,0.0,,,,,EX_013,ex_gas
+,,,,0.0,0.0,,,,,EX_013,ex_gas
+,,,,0.0,0.0,,,,,EX_013,ex_gas
+,,,,0.0,0.0,,,,,EX_014,ex_gas
+,,,,0.0,0.0,,,,,EX_014,ex_gas
+,,,,0.0,0.0,,,,,EX_014,ex_gas
+,,,,0.0,0.0,,,,,EX_014,ex_gas
+,,,,0.0,0.0,,,,,EX_015,ex_gas
+,,,,0.0,0.0,,,,,EX_015,ex_gas
+,,,,0.0,0.0,,,,,EX_015,ex_gas
+,,,,0.0,0.0,,,,,EX_015,ex_gas
+,,,,0.0,0.0,,,,,EX_016,ex_gas
+,,,,0.0,0.0,,,,,EX_016,ex_gas
+,,,,0.0,0.0,,,,,EX_016,ex_gas
+,,,,0.0,0.0,,,,,EX_016,ex_gas
+,,,,0.0,0.0,,,,,EX_017,ex_gas
+,,,,0.0,0.0,,,,,EX_017,ex_gas
+,,,,0.0,0.0,,,,,EX_017,ex_gas
+,,,,0.0,0.0,,,,,EX_017,ex_gas
+,,,,0.0,0.0,,,,,EX_018,ex_gas
+,,,,0.0,0.0,,,,,EX_018,ex_gas
+,,,,0.0,0.0,,,,,EX_018,ex_gas
+,,,,0.0,0.0,,,,,EX_018,ex_gas
+,,,,0.0,0.0,,,,,EX_019,ex_gas
+,,,,0.0,0.0,,,,,EX_019,ex_gas
+,,,,0.0,0.0,,,,,EX_019,ex_gas
+,,,,0.0,0.0,,,,,EX_019,ex_gas
+,,,,0.0,0.0,,,,,EX_020,ex_gas
+,,,,0.0,0.0,,,,,EX_020,ex_gas
+,,,,0.0,0.0,,,,,EX_020,ex_gas
+,,,,0.0,0.0,,,,,EX_020,ex_gas
+,,,,0.0,0.0,,,,,EX_001,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_001,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_001,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_001,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_002,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_002,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_002,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_002,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_003,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_003,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_003,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_003,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_004,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_004,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_004,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_004,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_005,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_005,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_005,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_005,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_006,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_006,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_006,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_006,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_007,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_007,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_007,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_007,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_008,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_008,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_008,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_008,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_009,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_009,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_009,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_009,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_010,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_010,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_010,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_010,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_011,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_011,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_011,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_011,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_012,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_012,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_012,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_012,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_013,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_013,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_013,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_013,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_014,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_014,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_014,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_014,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_015,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_015,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_015,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_015,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_016,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_016,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_016,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_016,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_017,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_017,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_017,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_017,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_018,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_018,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_018,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_018,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_019,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_019,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_019,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_019,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_020,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),hvac,"['air_to_water_heat_pump', 'ducted_heat_pump', 'ductless_heat_pump']",,2000.0,2023.0,2032.0,2030.0,16871.895086432625,EX_020,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_020,ex_managed_elec_1
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_020,ex_managed_elec_1
+,,,,0.0,0.0,,,,,EX_001,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,18621.29970820711,2022.0,2032.0,2030.0,62070.99902735703,EX_001,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_001,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_001,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_002,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_002,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_002,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_002,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_003,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_003,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_003,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_003,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_004,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_004,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_004,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_004,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_005,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_005,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_005,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_005,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_006,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,18621.29970820711,2022.0,2032.0,2030.0,62070.99902735703,EX_006,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_006,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_006,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_007,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,22232.939750146594,2022.0,2032.0,2030.0,74109.79916715532,EX_007,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_007,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_007,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_008,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_008,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_008,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_008,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_009,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,22232.939750146594,2022.0,2032.0,2030.0,74109.79916715532,EX_009,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_009,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_009,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_010,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_010,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_010,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_010,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_011,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,19762.61311124142,2022.0,2032.0,2030.0,65875.3770374714,EX_011,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_011,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_011,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_012,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,22232.939750146594,2022.0,2032.0,2030.0,74109.79916715532,EX_012,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_012,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_012,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_013,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,19762.61311124142,2022.0,2032.0,2030.0,65875.3770374714,EX_013,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_013,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_013,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_014,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_014,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_014,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_014,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_015,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,18621.29970820711,2022.0,2032.0,2030.0,62070.99902735703,EX_015,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_015,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_015,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_016,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,22232.939750146594,2022.0,2032.0,2030.0,74109.79916715532,EX_016,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_016,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_016,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_017,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_017,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_017,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_017,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_018,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,22232.939750146594,2022.0,2032.0,2030.0,74109.79916715532,EX_018,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_018,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_018,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_019,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,19762.61311124142,2022.0,2032.0,2030.0,65875.3770374714,EX_019,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_019,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_019,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_020,ex_managed_gshp
+federal,Federal Residential Clean Energy Credit (25D),hvac,['geothermal_heating_installation'],,28666.75574310623,2022.0,2032.0,2030.0,95555.8524770208,EX_020,ex_managed_gshp
+,,,,0.0,0.0,,,,,EX_020,ex_managed_gshp
+federal,Federal Energy Efficient Home Improvement Credit (25C),domestic_hot_water,['heat_pump_water_heater'],,2000.0,2023.0,2032.0,2030.0,2753.3995453553243,EX_020,ex_managed_gshp
