@@ -1,7 +1,6 @@
 """
 Creates and run a scenario based on provided configuration files
 """
-import ast
 import os
 from typing import Dict, List
 
@@ -10,6 +9,7 @@ import pandas as pd
 
 from segment_iat.buildings.building import Building
 from segment_iat.utility_network.utility_network import UtilityNetwork
+from segment_iat.utils.incentives import Incentives
 
 
 DEFAULT_SIM_START_YEAR = 2020
@@ -23,6 +23,9 @@ OUTPUTS_BASEPATH = "./outputs"
 
 DOMAIN_BUILDING = "building"
 TYPE_BUILDING_AGGREGATE = "building_aggregate"
+TYPE_BUILDING_GROSS = "building_gross"
+TYPE_BUILDING_NET = "building_net"
+TYPE_BUILDING_INCENTIVE = "building_incentive"
 
 DOMAIN_ELEC = "elec_network"
 TYPE_ELEC_XMFR = "elec_xmfr"
@@ -59,6 +62,7 @@ class ScenarioCreator:
     def __init__(
             self,
             segment_name: str,
+            study_zip: int,
             study_start_year: int,
             study_end_year: int,
             gas_pipe_intervention_year: int,
@@ -68,6 +72,7 @@ class ScenarioCreator:
             status_logging=None
     ):
         self.segment_name: str = segment_name
+        self.study_zip: int = study_zip
         self.study_start_year: int = study_start_year
         self.study_end_year: int = study_end_year
         self.gas_pipe_intervention_year: int = gas_pipe_intervention_year
@@ -84,6 +89,7 @@ class ScenarioCreator:
 
         self.sim_name: str = ""
         self.street_segment: str = ""
+        self.incentives: Incentives = None
         self.buildings: Dict[str, Building] = {}
         self.utility_network: UtilityNetwork = None
 
@@ -95,6 +101,7 @@ class ScenarioCreator:
         self._years_vec = self._get_years_vec()
         self._status_update("Creating buildings...", 0.25)
         self.parcel_scenario_table = self._get_parcel_scenario_table()
+        self.incentives = self._gather_incentives()
         self._create_building()
         self._status_update("Creating utility network...", 0.8)
         self._create_utility_network()
@@ -110,6 +117,7 @@ class ScenarioCreator:
         settings = settings.iloc[:, 0].to_dict()
         settings["sim_start_year"] = self.study_start_year
         settings["sim_end_year"] = self.study_end_year
+        settings["zip_code"] = self.study_zip
         settings["gas_pipe_intervention_year"] = self.gas_pipe_intervention_year
         settings["segment_id"] = self.segment_name
         return settings
@@ -155,6 +163,14 @@ class ScenarioCreator:
         filepath = f"./config_files/{self.street_segment}/parcels/{measures_id}.csv"
         parcel_scenario_table = pd.read_csv(filepath).set_index("parcel_id")
         return parcel_scenario_table.to_dict(orient="index")
+    
+    def _gather_incentives(self) -> Incentives:
+        """
+        Instantiate an instance of the Incentives class and populate the object
+        """
+        incentives = Incentives(self.study_zip)
+        incentives.gather_incentives()
+        return incentives
 
     def _create_building(self) -> None:
         parcels = self.parcel_table.keys()
@@ -181,12 +197,17 @@ class ScenarioCreator:
                 "heating_fuel": building_params.get("heating_fuel"),
                 "retrofit_heating_fuel": building_scenario_params.get("heating_fuel"),
                 "existing_measures_cost_id": building_params.get("measure_costs_filename"),
-                "retrofit_measures_cost_id": self._sim_config.get("parcel_retrofit_measure_costs_filename")
+                "retrofit_measures_cost_id": self._sim_config.get("parcel_retrofit_measure_costs_filename"),
+                "hvac.end_use_retrofit_item": building_scenario_params.get("hvac"),
+                "domestic_hot_water.end_use_retrofit_item": building_scenario_params.get("domestic_hot_water"),
+                "clothes_dryer.end_use_retrofit_item": building_scenario_params.get("clothes_dryer"),
+                "stove.end_use_retrofit_item": building_scenario_params.get("stove"),
             }
 
             building = Building(
                 building_params,
-                self._sim_config
+                self._sim_config,
+                self.incentives.incentives
             )
 
             building.populate_building()
@@ -306,11 +327,29 @@ class ScenarioCreator:
         for building_id, building in self.buildings.items():
             df = pd.DataFrame({
                 "year": years_vec,
-                "retrofit_cost": building._get_retrofit_cost_vec()
+                "retrofit_cost": building.retrofit_cost_gross
             })
             df.loc[:, "asset_id"] = building_id
             df.loc[:, "asset_domain"] = DOMAIN_BUILDING
-            df.loc[:, "asset_type"] = TYPE_BUILDING_AGGREGATE
+            df.loc[:, "asset_type"] = TYPE_BUILDING_GROSS
+            all_dfs.append(df)
+
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": building.retrofit_incentive_vec
+            })
+            df.loc[:, "asset_id"] = building_id
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_INCENTIVE
+            all_dfs.append(df)
+
+            df = pd.DataFrame({
+                "year": years_vec,
+                "retrofit_cost": building.retrofit_cost_net
+            })
+            df.loc[:, "asset_id"] = building_id
+            df.loc[:, "asset_domain"] = DOMAIN_BUILDING
+            df.loc[:, "asset_type"] = TYPE_BUILDING_NET
             all_dfs.append(df)
 
         for xmfr in self.utility_network.elec_transformers:
@@ -472,6 +511,16 @@ class ScenarioCreator:
 
         all_dfs = pd.concat(all_dfs)
         all_dfs.to_csv(os.path.join(self._outputs_path, "stranded_val.csv"), index=False)
+
+        # ---Incentive data---
+        all_dfs = []
+        for bldg_id, bldg in self.buildings.items():
+            df = pd.DataFrame(bldg.calculated_incentives)
+            df.loc[:, "asset_id"] = bldg_id
+            all_dfs.append(df)
+
+        all_dfs = pd.concat(all_dfs)
+        all_dfs.to_csv(os.path.join(self._outputs_path, "incentives.csv"), index=False)
 
         # ---Energy use---
         building_energy_usage = {

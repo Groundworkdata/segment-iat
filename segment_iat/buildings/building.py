@@ -7,6 +7,7 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
+from segment_iat.end_uses.building_end_uses.building_measure import BuildingMeasure
 from segment_iat.end_uses.building_end_uses.clothes_dryer import ClothesDryer
 from segment_iat.end_uses.building_end_uses.domestic_hot_water import DHW
 from segment_iat.end_uses.building_end_uses.hvac import HVAC
@@ -30,6 +31,7 @@ FUELS = [
 
 
 DB_BASEPATH = "./config_files/"
+DEFAULT_INFLATION = 0.02
 
 
 class Building:
@@ -57,13 +59,22 @@ class Building:
             existing_appliance_costs_id (str): ID of the costs for existing building measures
             retrofit_appliance_costs_id (str): ID of the costs for new building measures
         }
+        incentives (List[dict]): Incentive information
+        {
+            authority_type (str): federal, state, or local
+            program (str): Program name
+            items (list): Items eligible for the incentive
+            amount (dict): Dict of incentive amount information
+            start_date (int): Start year
+            end_date (int): End year (exclusive. this is the stop time)
+        }
 
     Attributes:
         building_params (dict): Dict of input parameters for the building
         years_vec (List[int]): List of simulation years
         building_id (str): The building ID, also referred to as parcel ID
         retrofit_scenario (str): The energy intervention scenario
-        end_uses (dict): Dict of building asset objects, organized by asset type
+        end_uses (Dict[str, BuildingMeasure]): Dict of building asset objects, organized by asset type
         baseline_consumption (pd.DataFrame): Baseline energy consumption timeseries for the building
         retrofit_consumption (pd.DataFrame): Retrofit energy consumption timeseries for the buliding
 
@@ -77,22 +88,28 @@ class Building:
             self,
             building_params: dict,
             sim_settings: dict,
+            incentives: dict
     ):
         self.building_params: dict = building_params
         self._sim_settings: dict = sim_settings
+        self._incentives: dict = incentives
 
         self._config_filepath: str = ""
         self._year_timestamps: pd.DatetimeIndex = None
         self.years_vec: List[int] = []
         self.building_id: str = ""
         self.retrofit_scenario: str = ""
-        self.end_uses: dict = {}
+        self.end_uses: Dict[str, BuildingMeasure] = {}
         self.baseline_consumption: pd.DataFrame = pd.DataFrame()
         self.retrofit_consumption: pd.DataFrame = pd.DataFrame()
         self._retrofit_vec: List[bool] = []
         self._is_retrofit_vec: List[bool] = []
         self._annual_energy_by_fuel: Dict[str, List[float]] = {}
         self._building_annual_costs_other: List[float] = []
+        self.retrofit_cost_gross: List[float] = []
+        self.retrofit_incentive_vec: List[float] = []
+        self.retrofit_cost_net: List[float] = []
+        self.calculated_incentives: List[dict] = []
         self._fuel_type: List[str] = []
         self._combustion_emissions: Dict[str, List[float]] = {}
 
@@ -119,6 +136,10 @@ class Building:
         self._annual_energy_by_fuel = self._calc_annual_energy_consump()
         #FIXME: Is this being used...?
         self._building_annual_costs_other = self._calc_building_costs()
+        self.retrofit_cost_gross = self._get_replacement_gross_vec()
+        self.retrofit_incentive_vec = self._get_retrofit_incentive_vec()
+        self.retrofit_cost_net = self._get_replacement_net_vec()
+        self.calculated_incentives = self._get_calculated_incentives()
         self._fuel_type = self._get_fuel_type_vec()
         self._methane_leaks = self._get_methane_leaks()
         self._combustion_emissions = self._get_combustion_emissions()
@@ -172,7 +193,7 @@ class Building:
 
         return consump_df
 
-    def _create_end_uses(self) -> dict:
+    def _create_end_uses(self) -> Dict[str, BuildingMeasure]:
         """
         Create the end uses for the building
         """
@@ -210,10 +231,13 @@ class Building:
         for end_use in end_uses:
             individual_params = {}
             individual_params["end_use"] = end_use
+            individual_params["end_use_retrofit_item"] = self.building_params.get(f"{end_use}.end_use_retrofit_item")
             individual_params["existing_install_cost"] = building_costs_original.get(end_use)
             individual_params["replacement_cost"] = building_costs_retrofit.get(end_use)
             individual_params["existing_install_year"] = self.building_params.get("asset_install_year")
             individual_params["replacement_year"] = self.building_params.get("asset_replacement_year")
+            individual_params["inflation_escalator"] = DEFAULT_INFLATION
+
             end_use_instances[end_use] = self._get_single_end_use(individual_params)
 
         return end_use_instances
@@ -222,6 +246,7 @@ class Building:
         if params.get("end_use") == "stove":
             stove = Stove(
                 self.years_vec,
+                self._incentives,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
                 **params
@@ -234,6 +259,7 @@ class Building:
         if params.get("end_use") == "clothes_dryer":
             dryer = ClothesDryer(
                 self.years_vec,
+                self._incentives,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
                 **params,
@@ -246,6 +272,7 @@ class Building:
         if params.get("end_use") == "domestic_hot_water":
             dhw = DHW(
                 self.years_vec,
+                self._incentives,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
                 **params
@@ -258,11 +285,11 @@ class Building:
         if params.get("end_use") == "hvac":
             hvac = HVAC(
                 self.years_vec,
+                self._incentives,
                 custom_baseline_energy=self.baseline_consumption,
                 custom_retrofit_energy=self.retrofit_consumption,
                 **params
             )
-
             hvac.initialize_end_use()
 
             return hvac
@@ -305,6 +332,7 @@ class Building:
             for i in FUELS
         ]].sum(axis=1)
  
+    #TODO: Confusing - rename
     def _calc_building_costs(self) -> List[float]:
         """
         Calculate building-level costs
@@ -501,6 +529,7 @@ class Building:
             "./outputs/{}_retrofit_consump.csv".format(self.building_id)
         )
 
+    #TODO: Not in use - remove?
     def write_building_cost_info(self) -> None:
         """
         Write calculated building information for total costs to output CSV
@@ -538,6 +567,53 @@ class Building:
 
         return replacement_costs.sum(axis=1).to_list()
     
+    def _get_replacement_gross_vec(self) -> List[float]:
+        """
+        Sum the gross (pre-incentive) replacement cost for building measures
+        """
+        replacement_gross = {
+            i: self.end_uses.get(i).replacement_cost_gross_vec
+            for i in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]
+        }
+
+        replacement_gross = pd.DataFrame(replacement_gross, index=self.years_vec)
+        return replacement_gross.sum(axis=1).to_list()
+    
+    def _get_retrofit_incentive_vec(self) -> List[float]:
+        """
+        Sum incentive vectors for building retrofit measures
+        """
+        retrofit_incentives = {
+            i: self.end_uses[i].total_incentive_vec
+            for i in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]
+        }
+
+        retrofit_incentives = pd.DataFrame(retrofit_incentives, index=self.years_vec)
+        return retrofit_incentives.sum(axis=1).to_list()
+    
+    def _get_replacement_net_vec(self) -> List[float]:
+        """
+        Sum net (post-incentive) replacement cost vecs for building measures
+        """
+        replacment_net = {
+            i: self.end_uses.get(i).replacement_cost_net_vec
+            for i in ["stove", "clothes_dryer", "domestic_hot_water", "hvac"]
+        }
+
+        replacment_net = pd.DataFrame(replacment_net, index=self.years_vec)
+        return replacment_net.sum(axis=1).to_list()
+    
+    def _get_calculated_incentives(self) -> List[dict]:
+        """
+        Get detailed incentive information for all calculated incentives
+        """
+        calculated_incentive_details = []
+
+        for asset in self.end_uses.values():
+            calculated_incentive_details += asset.incentives
+
+        return calculated_incentive_details
+
     def _get_retrofit_book_value_vec(self) -> List[float]:
         """
         Sum replacement_book_val vec

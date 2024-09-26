@@ -3,3 +3,5 @@ street_segment,example_street
 start_year,2025
 end_year,2050
 gas_pipe_intervention_year,2030
+zip_code,10710
+income,156200

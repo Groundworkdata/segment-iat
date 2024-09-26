@@ -20,3 +20,4 @@ scripts/
 # Environments
 venv/
 env/
+.env
