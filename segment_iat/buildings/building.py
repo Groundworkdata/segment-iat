@@ -104,7 +104,7 @@ class Building:
         self.retrofit_consumption: pd.DataFrame = pd.DataFrame()
         self._retrofit_vec: List[bool] = []
         self._is_retrofit_vec: List[bool] = []
-        self._annual_energy_by_fuel: Dict[str, List[float]] = {}
+        self.annual_energy_by_fuel: Dict[str, List[float]] = {}
         self._building_annual_costs_other: List[float] = []
         self.retrofit_cost_gross: List[float] = []
         self.retrofit_incentive_vec: List[float] = []
@@ -133,7 +133,7 @@ class Building:
         self._calc_total_energy_retrofit()
         self._retrofit_vec = self._get_replacement_vec()
         self._is_retrofit_vec = self._get_is_retrofit_vec()
-        self._annual_energy_by_fuel = self._calc_annual_energy_consump()
+        self.annual_energy_by_fuel = self._calc_annual_energy_consump()
         #FIXME: Is this being used...?
         self._building_annual_costs_other = self._calc_building_costs()
         self.retrofit_cost_gross = self._get_replacement_gross_vec()
@@ -418,24 +418,23 @@ class Building:
             f"{segment_id}_consumption_rates.csv"
         )
         consump_rates = pd.read_csv(energy_consump_cost_filepath, index_col=0)
+        consump_rates = consump_rates.loc[self.years_vec, :]
 
         annual_utility_costs = {i: [] for i in FUELS}
 
         for fuel in FUELS:
-            for replaced, rate in zip(self._is_retrofit_vec, consump_rates[fuel].to_list()):
-                if replaced:
-                    annual_use = self.retrofit_consumption[
-                        "out.{}.total.energy_consumption".format(fuel)
-                    ]
+            volumetric_charge = np.multiply(
+                self.annual_energy_by_fuel[fuel],
+                consump_rates[f"{fuel}.volumetric"]
+            )
 
-                else:
-                    annual_use = self.baseline_consumption[
-                        "out.{}.total.energy_consumption".format(fuel)
-                    ]
+            fixed_charge = np.multiply(
+                consump_rates[f"{fuel}.fixed"] * 12,
+                # We only add the fixed charges if the building is consuming that fuel
+                np.array(self.annual_energy_by_fuel[fuel]).astype(bool)
+            )
 
-                annual_use = annual_use.resample("YS").sum().values[0]
-
-                annual_utility_costs[fuel].append(annual_use * rate)
+            annual_utility_costs[fuel] = (volumetric_charge + fixed_charge).tolist()
 
         return annual_utility_costs
     
@@ -493,7 +492,7 @@ class Building:
         # Can expand to more rigorous QA checks in the future
         emissions_rates = emissions_rates.reindex(self.years_vec).ffill().bfill()
 
-        annual_fuel_consump = pd.DataFrame(self._annual_energy_by_fuel, index=self.years_vec)
+        annual_fuel_consump = pd.DataFrame(self.annual_energy_by_fuel, index=self.years_vec)
 
         combustion_emissions = {}
         for fuel in FUELS:

@@ -126,7 +126,7 @@ class ThermalEnergyNetwork:
         annual_load = {}
 
         for bldg_id, bldg in self._buildings.items():
-            annual_ten_load = bldg._annual_energy_by_fuel.get(f"thermal_{heating_cooling}")
+            annual_ten_load = bldg.annual_energy_by_fuel.get(f"thermal_{heating_cooling}")
             annual_load[bldg_id] = annual_ten_load
 
         annual_load = pd.DataFrame(annual_load, index=self._years_vec)

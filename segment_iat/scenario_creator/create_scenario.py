@@ -524,7 +524,7 @@ class ScenarioCreator:
 
         # ---Energy use---
         building_energy_usage = {
-            building_id: building._calc_annual_energy_consump()
+            building_id: building.annual_energy_by_fuel
             for building_id, building in self.buildings.items()
         }
 
