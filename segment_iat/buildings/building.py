@@ -436,7 +436,41 @@ class Building:
 
             annual_utility_costs[fuel] = (volumetric_charge + fixed_charge).tolist()
 
+        alternate_elec_cost = self._calc_elec_alternate_tariff()
+        if alternate_elec_cost:
+            alt_cost_vec = np.multiply(alternate_elec_cost, self._is_retrofit_vec).tolist()
+            retrofit_index = self._retrofit_vec.index(True)
+            annual_utility_costs["electricity"][retrofit_index:] = alt_cost_vec[retrofit_index:]
+
         return annual_utility_costs
+    
+    def _calc_elec_alternate_tariff(self) -> List[float]:
+        """
+        Check if we are using an alternate tariff for electricity
+        """
+        alternate_rate_id = self._sim_settings.get("alternative_electrification_rate")
+        if not alternate_rate_id:
+            return
+        
+        alternate_rate = pd.read_csv(os.path.join(
+            DB_BASEPATH,
+            self._sim_settings.get("segment_id"),
+            "utility_network",
+            f"{alternate_rate_id}.csv"
+        ))
+
+        monthly_retrofit_consump = self.retrofit_consumption[
+            "out.electricity.total.energy_consumption"
+        ].resample("MS").sum()
+
+        monthly_volumetric_charge = np.multiply(
+            monthly_retrofit_consump.values,
+            alternate_rate["volumetric"].values
+        )
+
+        monthly_fixed_charge = alternate_rate["fixed"]
+
+        return (monthly_fixed_charge + monthly_volumetric_charge).sum().item()
     
     def _get_fuel_type_vec(self) -> List[str]:
         """
