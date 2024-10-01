@@ -1,0 +1,5 @@
+scenario_name,ex_managed_elec_1_hp_rate
+gas_intervention,decommission
+parcel_retrofit_measures_filename,ex_managed_elec_1_measures
+parcel_retrofit_measure_costs_filename,elec_1_costs
+alternative_electrification_rate,heat_pump_rate
